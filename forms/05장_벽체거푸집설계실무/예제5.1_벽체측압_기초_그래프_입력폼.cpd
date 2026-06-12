@@ -1,0 +1,38 @@
+"<h1>예제 5.1 일반 벽체 측압 계산 (기초) — 입력폼</h1>
+'<hr/>
+'[입력폼] 입력값을 바꾼 뒤 ▶(Calculate)를 누르세요. 폼↔코드 전환: F4.
+'조건① 측압식 p=Cw·Cc·[7.2+785R/(T+17.8)], 30 ≤ p ≤ γc·h.
+"<h2>1. 조건</h2>
+'단위중량계수 : 'Cw = ? {1.0}
+'시멘트계수 : 'Cc = ? {1.0}
+'타설속도(숫자) : 'R = ? {1.0}
+'온도(숫자) : 'T = ? {20}
+'단위중량 : 'gc = ? {24}kN/m^3
+'벽체 높이 : 'h = ? {3.0}m
+"<h2>2. 측압 계산</h2>
+'KDS 측압 : 'p = Cw*Cc*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+'하한 : 'p_min = 30kN/m^2
+'상한(액압) : 'p_max = gc*h|kN/m^2
+'설계 측압 : 'p_design = min(max(p ; p_min) ; p_max)|kN/m^2
+#if p ≥ p_min
+  '<b style="color:green">계산값 ≥ 30 → 계산값 채택</b>
+#else
+  '<b style="color:red">계산값 < 30 → 최솟값 30 지배</b>
+#end if
+"<h2>3. 측압-타설속도 곡선 [그림]</h2>
+pf(R) = Cw*Cc*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+pmn(R) = 30kN/m^2
+pmx(R) = gc*h
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>측압 p (kN/m²)</b></div>
+'<div>
+$Plot{pf(R) & pmn(R) & pmx(R) @ R = 0 : 3}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>타설속도 R (m/h)</b></p>
+'[그림] 타설속도 R 에 따른 측압과 상·하한 (현재 R=1.0)
+"<h2>결론</h2>
+'설계 측압 30 kN/m² (최솟값 지배). 낮은 벽체·느린 타설은 최솟값 지배.
