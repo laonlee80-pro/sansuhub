@@ -1,0 +1,36 @@
+"<h1>예제 7.3 원형 기둥 거푸집 후프 설계 (기초)</h1>
+'<hr/>
+'후프 장력 T=p·R·s ≤ 허용 → 후프 간격 역산.
+"<h2>1. 조건</h2>
+'단위중량 : 'gc = 24kN/m^3
+'기둥 높이 : 'H = 4.0m
+'반경 : 'R = 0.35m
+'측압 : 'P = gc*H|kN/m^2
+'강재밴드 허용 : 'T_allow = 65kN
+"<h2>2. 최대 후프 간격</h2>
+'허용 간격(T_allow/(p·R)) : 's_max = T_allow/(P*R)|mm
+'채택(90%) : 's = 1500mm
+"<h2>3. 안전 검토</h2>
+'후프 장력 : 'T = P*R*s|kN
+'안전율 : 'SF = T_allow/T
+#if T ≤ T_allow
+  '<b style="color:green">T ≤ 65 kN → 합격 (OK)</b>
+#else
+  '<b style="color:red">초과</b>
+#end if
+"<h2>4. 후프간격-측압 곡선 [그림]</h2>
+'측압 P(숫자, kN/m²)에 따른 허용 후프 간격(mm)
+sf(P) = T_allow/(P*1kN/m^2*R)
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>허용 후프 간격 s (m)</b></div>
+'<div>
+$Plot{sf(P) @ P = 30 : 150}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>측압 P (kN/m²)</b></p>
+'[그림] 측압에 따른 허용 후프 간격(현재 P=96 → 약 1935mm)
+"<h2>결론</h2>
+'후프 간격 1500mm 채택(안전율 1.29). 하단(고측압)은 상단보다 좁게.
