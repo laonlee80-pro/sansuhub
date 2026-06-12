@@ -1,0 +1,50 @@
+"<h1>예제 9.1 단관 강관 비계 수직재 좌굴 검토 (기초) — 입력폼</h1>
+'<hr/>
+'[입력폼] 입력값을 바꾼 뒤 ▶(Calculate)를 누르세요. 폼↔코드 전환: F4.
+'허용응력법과 오일러법 중 작은 허용하중 채택.
+"<h2>1. 조건</h2>
+'단면2차모멘트(Φ48.6×3.2) : 'I = 113500mm^4
+'단면적 : 'A = 457mm^2
+'탄성계수 : 'E = 205000MPa
+'허용 압축응력(SS400) : 'Fa = 155MPa
+'안전율 : 'SF = 2.5
+'수평재 간격 : 'L_0 = ? {1500}mm
+'유효길이계수 : 'K = 0.7
+'수직재 간격 : 'ab = ? {1.5}m
+"<h2>2. 단면2차반경·세장비</h2>
+'단면2차반경 : 'r = sqr(I/A)
+'유효좌굴길이 : 'L_eff = K*L_0
+'세장비 : 'λ = L_eff/r
+#if λ ≤ 200
+  '<b style="color:green">λ ≤ 200 → 합격 (OK)</b>
+#end if
+"<h2>3. 작용 하중</h2>
+'하중(중작업+충격+자중) : 'w = 3.125kN/m^2 + 0.4kN/m^2
+'수직재 1본 하중 : 'P = w*ab*ab|kN
+"<h2>4. 허용하중 (두 방법)</h2>
+'허용응력법 : 'P_a1 = Fa*A/SF|kN
+'오일러 좌굴 : 'P_E = π^2*E*I/L_eff^2|kN
+'오일러 허용 : 'P_a2 = P_E/SF|kN
+'지배 허용하중(작은 값) : 'P_allow = min(P_a1 ; P_a2)|kN
+'안전율 : 'n = P_allow/P
+#if P ≤ P_allow
+  '<b style="color:green">P ≤ 허용 → 합격 (OK)</b>
+#else
+  '<b style="color:red">초과</b>
+#end if
+"<h2>5. 좌굴응력 곡선 [그림]</h2>
+fcr(λ) = π^2*E/λ^2
+fy(λ) = Fa
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>응력 (MPa)</b></div>
+'<div>
+$Plot{fcr(λ) & fy(λ) @ λ = 20 : 200}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>세장비 λ</b></p>
+'[그림] 세장비-오일러좌굴응력과 허용응력 한계(현재 λ=66.6 → 허용응력법 지배)
+"<h2>결론</h2>
+'P 7.93 kN ≤ 허용 28.3 kN (안전율 3.6). 수직재 1.5×1.5m 배치 적합.
