@@ -1,0 +1,36 @@
+"<h1>예제 3.4 기둥 측압 — 지연제 사용 (응용)</h1>
+'<hr/>
+'기둥은 무조건 기둥식 적용. 지연제 → Cc=1.2.
+"<h2>1. 설계 조건</h2>
+'단위중량계수 : 'Cw = 1.0
+'시멘트계수(지연제) : 'Cc = 1.2
+'타설속도(m/h, 숫자) : 'R = 2.0
+'온도(℃, 숫자) : 'T = 15
+'단위중량 : 'γ_c = 24kN/m^3
+'기둥 높이 : 'H = 4.0m
+"<h2>2. 측압 산정</h2>
+'KDS 측압 : 'P = Cw*Cc*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+'지연제 미사용(Cc=1.0) 가정 : 'P_0 = 1.0*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+'지연제 증가분 : 'dP = P - P_0|kN/m^2
+'최댓값(액압) : 'P_max = γ_c*H|kN/m^2
+#if P ≤ P_max
+  '<b style="color:green">P ≤ γc·H = 96 kN/m² → 합격 (OK)</b>
+#else
+  '<b style="color:red">초과</b>
+#end if
+"<h2>3. 측압-타설속도 곡선 (Cc=1.2 vs 1.0) [그림]</h2>
+P12(R) = 1.2*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+P10(R) = 1.0*(7.2 + 785*R/(T + 17.8))*1kN/m^2
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>측압 P (kN/m²)</b></div>
+'<div>
+$Plot{P12(R) & P10(R) @ R = 0 : 4}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>타설속도 R (m/h)</b></p>
+'[그림] 지연제(Cc=1.2)와 미사용(Cc=1.0) 측압 비교
+"<h2>결론</h2>
+'설계 측압 66.08 kN/m² (안전측 67). 지연제로 +20%(약 11 kN/m²).

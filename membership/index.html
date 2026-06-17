@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../assets/logo-symbol.svg">
+<title>멤버십 · 구매 인증 | 산수허브</title>
+<meta name="description" content="산수허브 멤버십 안내와 외부 채널(크몽·유페이퍼) 구매 인증. 단품과 멤버십 권한 비교.">
+<style>
+  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#fff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;--basic:#0f6e56;--basic-bg:#e1f5ee;}
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
+  a{text-decoration:none;color:inherit}
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
+  .gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+  .gnav-in{max-width:1040px;margin:0 auto;padding:0 24px;min-height:52px;display:flex;align-items:center;gap:4px}
+  .gnav .brand{font-weight:800;font-size:17px;margin-right:14px}
+  .brandimg{height:30px;display:block}
+  .gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:40px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:0 9px}.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+  .gitem{position:relative}
+  .gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+  .gitem>a:hover{color:var(--ink)}
+  .gitem.on>a{color:var(--accent);font-weight:700}
+  .caret{font-size:9px;opacity:.55;margin-left:4px}
+  .submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+  .gitem:hover .submenu,.gitem.open .submenu{display:block}
+  .submenu a{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--ink);padding:8px 12px;border-radius:7px;white-space:nowrap}
+  .submenu a:hover{background:var(--soft);color:var(--accent)}
+  .submenu .muted{color:#9aa4ad;font-size:11px;margin-left:14px}
+  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}}
+  header{border-bottom:1px solid var(--line);padding:40px 0 30px}
+  .crumb{font-size:13px;color:var(--sub)}.crumb a{color:var(--accent)}
+  h1{font-size:27px;font-weight:800;margin-top:10px;letter-spacing:-.5px}
+  .lead{color:var(--sub);font-size:15px;margin-top:8px}
+  section{padding:34px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:20px;font-weight:700;margin-bottom:6px}
+  .sublead{color:var(--sub);font-size:14px;margin-bottom:18px}
+  .benefits{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+  .ben{border:1px solid var(--line);border-radius:12px;padding:18px}
+  .ben h3{font-size:15px;font-weight:700;margin-bottom:5px;color:var(--accent)}
+  .ben p{font-size:13.5px;color:var(--sub)}
+  .tbl{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+  .tbl th,.tbl td{border:1px solid var(--line);padding:10px 11px;text-align:left;vertical-align:top}
+  .tbl thead th{background:var(--accent);color:#fff;font-weight:600;font-size:13px}
+  .tbl td:first-child{font-weight:600;background:var(--soft);white-space:nowrap}
+  .tbl .mem{background:#f2f7fb}
+  .tbl tr:last-child td{font-weight:700}
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:6px 0 22px}
+  .step{border:1px solid var(--line);border-radius:10px;padding:14px}
+  .step b{display:block;color:var(--accent);font-size:13px;margin-bottom:4px}
+  .step span{font-size:12.5px;color:var(--sub)}
+  form{max-width:560px}
+  .field{margin-bottom:14px}
+  label{display:block;font-size:13.5px;font-weight:600;margin-bottom:5px}
+  input,select{width:100%;border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-size:14px;font-family:inherit;background:#fff}
+  .req{color:#c0392b}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:9px;padding:12px 22px;font-size:14px;font-weight:700;cursor:pointer}
+  .btn:hover{background:#12293f}
+  .btn-line{background:#fff;color:var(--accent);border:1px solid var(--accent)}
+  .note{font-size:12.5px;color:var(--sub);margin-top:10px;background:var(--soft);padding:12px 14px;border-radius:8px}
+  .pricewrap{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+  .price{border:1px solid var(--line);border-radius:12px;padding:20px}
+  .price.lead{background:var(--accent-soft);border-color:#bcd6f0}
+  .price h3{font-size:16px;font-weight:700}
+  .price .amt{font-size:20px;font-weight:800;color:var(--accent);margin:8px 0}
+  .price p{font-size:13px;color:var(--sub)}
+  .pill{display:inline-block;font-size:11px;background:var(--soft);color:var(--sub);padding:3px 9px;border-radius:6px;margin-top:8px}
+  footer{padding:34px 0 60px;text-align:center;font-size:13px;color:var(--sub)}
+  footer a{color:var(--accent)}
+</style>
+</head>
+<body>
+<nav class="gnav"><div class="gnav-in">
+  <a class="brand" href="../index.html"><img class="brandimg" src="../assets/logo-h.svg" alt="산수허브"></a>
+  <button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu">
+    <div class="gitem"><a href="../index.html">홈</a></div>
+    <div class="gitem has-sub"><a href="../books/">전자책<span class="caret">▾</span></a><div class="submenu">
+      <a href="../books/">6권 시리즈 소개</a>
+    </div></div>
+    <div class="gitem has-sub"><a href="../calc/">계산도구<span class="caret">▾</span></a><div class="submenu">
+      <a href="../calc/">계산도구 전체</a>
+      <a href="../calc/dongbari/">거푸집동바리 설계</a>
+    </div></div>
+    <div class="gitem has-sub"><a href="../forms/">자료실<span class="caret">▾</span></a><div class="submenu">
+      <a href="../forms/">양식·체크리스트</a>
+    </div></div>
+    <div class="gitem has-sub"><a href="../errata/">업데이트<span class="caret">▾</span></a><div class="submenu">
+      <a href="../errata/">법규 개정 공지</a>
+      <a href="../errata/#errata">정오표</a>
+    </div></div>
+    <div class="gitem has-sub on"><a href="index.html">멤버십<span class="caret">▾</span></a><div class="submenu">
+      <a href="index.html">멤버십 안내</a>
+      <a href="index.html#verify">구매 인증</a>
+      <a href="index.html#b2b">B2B 라이선스</a>
+    </div></div>
+    <div class="gitem has-sub"><a href="../about/">소개<span class="caret">▾</span></a><div class="submenu">
+      <a href="../about/">발행처 소개</a>
+      <a href="../about/">문의·피드백</a>
+    </div></div>
+  </div>
+</div></nav>
+
+<header><div class="wrap">
+  <div class="crumb"><a href="../index.html">산수허브 홈</a> › 멤버십</div>
+  <h1>멤버십 · 구매 인증</h1>
+  <p class="lead">단품이 ‘소장’이라면, 멤버십은 ‘전 분야 · 최신 · 지원’이 따라오는 열람권입니다. 외부 채널(크몽·유페이퍼) 구매자도 인증으로 혜택을 받을 수 있습니다.</p>
+</div></header>
+
+<section><div class="wrap">
+  <h2>멤버십 혜택</h2>
+  <p class="sublead">기준(KDS·KCS)이 자주 바뀌는 만큼, ‘개정본 자동 반영’이 멤버십의 핵심 가치입니다.</p>
+  <div class="benefits">
+    <div class="ben"><h3>개정본 자동 반영</h3><p>법규·기준 개정 시 계산예제·해설을 최신본으로 자동 갱신.</p></div>
+    <div class="ben"><h3>전 분야 열람</h3><p>거푸집동바리부터 PSC 거더까지 6개 분야 전체를 열람.</p></div>
+    <div class="ben"><h3>신규 선공개</h3><p>새 분야·예제를 우선 공개, 회원가로 제공.</p></div>
+    <div class="ben"><h3>전체 양식·예제</h3><p>설계·검토 양식, 체크리스트, 계산예제 전체 제공.</p></div>
+    <div class="ben"><h3>작업 편의 도구</h3><p>즐겨찾기·내 계산 저장·통합 검색(준비 중).</p></div>
+    <div class="ben"><h3>Q&amp;A 우선 지원</h3><p>설계·계산 문의에 우선 답변.</p></div>
+  </div>
+</div></section>
+
+<section><div class="wrap">
+  <h2>단품 vs 멤버십 권한 비교</h2>
+  <p class="sublead">단품 구매자에게도 ‘치명적 계산 오류’ 정오표는 무상 제공합니다. 차등은 ‘기준 개정 개정판 · 콘텐츠 폭 · 지원’에 둡니다.</p>
+  <table class="tbl">
+    <thead><tr><th>항목</th><th>전자책·예제 단품</th><th>분야 세트</th><th>멤버십(연)</th></tr></thead>
+    <tbody>
+      <tr><td>콘텐츠 범위</td><td>구매 분야 1종</td><td>구매 분야 풀세트</td><td class="mem">전 6분야 열람</td></tr>
+      <tr><td>보유 형태</td><td>다운로드 소장(영구)</td><td>소장(영구)</td><td class="mem">열람권(구독 기간)</td></tr>
+      <tr><td>계산예제(.cpd)</td><td>구매분 다운로드</td><td>분야 전체</td><td class="mem">전체 + 신규 예제</td></tr>
+      <tr><td>양식·체크리스트</td><td>핵심 일부</td><td>분야분</td><td class="mem">전체 + 추가분</td></tr>
+      <tr><td>기준 개정 반영</td><td>정오표만</td><td>정오표만</td><td class="mem">개정본 자동 갱신</td></tr>
+      <tr><td>신규 분야</td><td>별도 구매</td><td>별도 구매</td><td class="mem">선공개 + 회원가</td></tr>
+      <tr><td>온라인 도구</td><td>기본 실행</td><td>기본 실행</td><td class="mem">저장·즐겨찾기·검색</td></tr>
+      <tr><td>Q&amp;A 지원</td><td>–</td><td>–</td><td class="mem">우선 지원</td></tr>
+      <tr><td>가격(안)</td><td>1.8만~5만원</td><td>분야 4.5만~6만원</td><td class="mem">연 9.9만원 내외</td></tr>
+    </tbody>
+  </table>
+</div></section>
+
+<section id="verify"><div class="wrap">
+  <h2>구매 인증 (크몽 · 유페이퍼 등)</h2>
+  <p class="sublead">외부 채널에서 구매하셨다면 아래로 인증해 주세요. 인증 시 정오표·개정 알림, 멤버십 체험, 멤버십 첫 결제 시 구매액 크레딧을 드립니다.</p>
+  <div class="steps">
+    <div class="step"><b>① 안내</b><span>책 속 QR로 이 페이지 접속</span></div>
+    <div class="step"><b>② 인증</b><span>채널·주문번호·이메일 입력</span></div>
+    <div class="step"><b>③ 검증</b><span>판매 내역과 대조 확인</span></div>
+    <div class="step"><b>④ 혜택</b><span>알림·체험·크레딧 부여</span></div>
+    <div class="step"><b>⑤ 코드</b><span>등록코드로 샘플 즉시 제공</span></div>
+  </div>
+  <form id="verifyForm" onsubmit="return sendVerify(event)">
+    <div class="field">
+      <label>구매 채널 <span class="req">*</span></label>
+      <select id="v_channel" required>
+        <option value="">선택하세요</option>
+        <option>크몽</option>
+        <option>유페이퍼(uPaper)</option>
+        <option>부크크</option>
+        <option>교보·예스24·알라딘</option>
+        <option>기타</option>
+      </select>
+    </div>
+    <div class="field">
+      <label>주문번호 / 영수증 번호 <span class="req">*</span></label>
+      <input id="v_order" placeholder="예: 2026010112345" required>
+    </div>
+    <div class="field">
+      <label>구매하신 상품(분야) <span class="req">*</span></label>
+      <input id="v_product" placeholder="예: 거푸집동바리 설계 / 계산예제팩" required>
+    </div>
+    <div class="field">
+      <label>이메일 <span class="req">*</span></label>
+      <input id="v_email" type="email" placeholder="알림 받을 이메일" required>
+    </div>
+    <button class="btn" type="submit">인증 요청 보내기</button>
+    <p class="note">‘인증 요청 보내기’를 누르면 입력 내용이 담긴 메일 작성 창이 열립니다. 그대로 전송해 주세요. 운영자가 영업일 기준으로 확인 후 혜택 안내 메일을 드립니다. (현재 자동 검증은 준비 중이며 수동 확인으로 운영합니다.)</p>
+  </form>
+</div></section>
+
+<section><div class="wrap">
+  <h2>멤버십 신청</h2>
+  <p class="sublead">멤버십 결제 연동은 준비 중입니다. 아래로 신청·문의하시면 오픈 시 우선 안내드립니다.</p>
+  <div class="pricewrap">
+    <div class="price"><h3>단품 / 세트</h3><div class="amt">1.8만원~</div><p>분야별 전자책·계산예제·세트. 외부 채널(크몽·유페이퍼)에서 구매.</p><span class="pill">소장형</span></div>
+    <div class="price lead"><h3>멤버십(연)</h3><div class="amt">99,000원 내외</div><p>전 분야 열람 + 개정 자동반영 + 전체 양식·예제 + Q&amp;A 우선.</p><span class="pill">구독·준비중</span></div>
+    <div class="price"><h3 id="b2b">B2B 라이선스</h3><div class="amt">100만원~/년</div><p>건설사·교육기관 단체 이용. 인원·기간 협의.</p><span class="pill">문의</span></div>
+  </div>
+  <p style="margin-top:18px"><a class="btn btn-line" href="#" onclick="return inquire('멤버십 오픈 알림 신청')">멤버십 오픈 알림 신청</a>
+  <a class="btn btn-line" style="margin-left:8px" href="#" onclick="return inquire('B2B 라이선스 문의')">B2B 문의하기</a></p>
+</div></section>
+
+<footer><div class="wrap">
+  <p><strong>산수허브 SANSUHUB</strong> · 토목구조물의 설계 · 건설기술 개발</p>
+  <p style="margin-top:6px"><a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a></p>
+</div></footer>
+
+<script>
+  var ADMIN = "laonlee80@naver.com";
+  function mailto(subject, bodyLines){
+    var body = bodyLines.join("\n");
+    window.location.href = "mailto:" + ADMIN +
+      "?subject=" + encodeURIComponent(subject) +
+      "&body=" + encodeURIComponent(body);
+  }
+  function sendVerify(e){
+    e.preventDefault();
+    var ch=document.getElementById('v_channel').value;
+    var ord=document.getElementById('v_order').value.trim();
+    var pr=document.getElementById('v_product').value.trim();
+    var em=document.getElementById('v_email').value.trim();
+    if(!ch||!ord||!pr||!em){ alert('필수 항목을 모두 입력해 주세요.'); return false; }
+    mailto("[산수허브 구매 인증] " + ch + " / " + pr,
+      ["■ 산수허브 구매 인증 요청",
+       "구매 채널: " + ch,
+       "주문번호: " + ord,
+       "구매 상품: " + pr,
+       "이메일: " + em,
+       "",
+       "(위 내용을 그대로 전송해 주세요.)"]);
+    return false;
+  }
+  function inquire(kind){
+    mailto("[산수허브] " + kind,
+      ["■ " + kind,
+       "성함/소속: ",
+       "연락처: ",
+       "문의 내용: "]);
+    return false;
+  }
+  (function(){
+    var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
+    items.forEach(function(a){a.addEventListener('click',function(e){
+      if(a.getAttribute('href') && a.getAttribute('href').indexOf('#')===-1 && a.getAttribute('href')!=='index.html'){return;}
+      e.preventDefault();
+      var li=a.parentNode, was=li.classList.contains('open');
+      document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+      if(!was) li.classList.add('open');
+    });});
+    document.addEventListener('click',function(e){
+      if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+    });
+  })();
+</script>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script></body>
+</html>
+                                                                                                                                                                           

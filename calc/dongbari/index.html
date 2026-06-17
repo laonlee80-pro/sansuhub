@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
+<title>거푸집동바리 설계 예제 45제 · 계산도구 | 산수허브</title>
+<meta name="description" content="거푸집동바리 설계 예제 45제. Calcpad 입력폼으로 현장 수치를 넣어 즉시 계산.">
+<style>
+  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#fff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;--basic:#0f6e56;--basic-bg:#e1f5ee;--applied:#854f0b;--applied-bg:#faeeda;--advanced:#791f1f;--advanced-bg:#fcebeb;}
+  *{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
+  a{text-decoration:none;color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+  header{border-bottom:1px solid var(--line);padding:34px 0 26px}
+  .crumb{font-size:13px;color:var(--sub)}.crumb a{color:var(--accent)}
+  h1{font-size:25px;font-weight:800;margin-top:10px;letter-spacing:-.5px}
+  .lead{color:var(--sub);font-size:15px;margin-top:8px}
+  .howto{background:var(--accent-soft);border:1px solid #bcd6f0;border-radius:12px;padding:16px 20px;margin:20px 0}
+  .howto b{color:var(--accent)}.howto ol{margin:6px 0 0 18px;font-size:13.5px}
+  .howto a.ide{display:inline-block;margin-top:10px;background:var(--accent);color:#fff;padding:8px 15px;border-radius:8px;font-size:13.5px;font-weight:600}
+  .toolbar{position:sticky;top:0;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);z-index:5}
+  .toolbar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+  .filters{display:flex;gap:6px}.fbtn{border:1px solid var(--line);background:var(--bg);padding:6px 13px;border-radius:20px;font-size:13px;cursor:pointer;color:var(--sub)}
+  .fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
+  select,#search{border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:14px;background:#fff}
+  #search{flex:1;min-width:150px}
+  .count-bar{font-size:13px;color:var(--sub);padding:14px 0 6px}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  thead th{text-align:left;font-size:12.5px;color:var(--sub);font-weight:600;border-bottom:2px solid var(--ink);padding:10px 10px}
+  tbody td{border-bottom:1px solid var(--line);padding:11px 10px;vertical-align:middle}
+  tbody tr:hover{background:var(--soft)}
+  .c-no{width:54px;font-weight:800;color:var(--accent);white-space:nowrap}
+  .c-title .t{font-weight:600}
+  .c-ch{width:130px;color:var(--sub);font-size:13px;white-space:nowrap}
+  .c-lvl{width:60px}.c-dl{width:130px;white-space:nowrap;text-align:right}
+  .lvl{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px}
+  .lvl-basic{color:var(--basic);background:var(--basic-bg)}.lvl-applied{color:var(--applied);background:var(--applied-bg)}.lvl-advanced{color:var(--advanced);background:var(--advanced-bg)}
+  .tag{font-size:11px;color:var(--sub);background:var(--soft);padding:1px 7px;border-radius:5px;margin-left:4px}
+  .dl{display:inline-block;font-size:12.5px;font-weight:600;padding:5px 10px;border:1px solid var(--line);border-radius:7px;margin-left:5px}
+  .dl:hover{background:#fff;border-color:var(--accent)}
+  .dl-p{background:var(--accent);color:#fff;border-color:var(--accent)}.dl-p:hover{background:#12293f;color:#fff}
+  .dl-x{color:#b8bcc2;border:none}
+  .empty{display:none;text-align:center;color:var(--sub);padding:40px 0}
+  footer{padding:36px 0 60px;text-align:center;font-size:13px;color:var(--sub)}
+  @media(max-width:680px){.c-ch{display:none}}
+
+  .gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+  .gnav-in{max-width:1040px;margin:0 auto;padding:0 24px;min-height:52px;display:flex;align-items:center;gap:4px}
+  .gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+  .gnav .brand b{color:var(--accent)}
+  .gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:40px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:0 9px}.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+  .gitem{position:relative}
+  .gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+  .gitem>a:hover{color:var(--ink)}
+  .gitem.on>a{color:var(--accent);font-weight:700}
+  .caret{font-size:9px;opacity:.55;margin-left:4px}
+  .submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+  .gitem:hover .submenu,.gitem.open .submenu{display:block}
+  .submenu a{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--ink);padding:8px 12px;border-radius:7px;white-space:nowrap}
+  .submenu a:hover{background:var(--soft);color:var(--accent)}
+  .submenu .muted{color:#9aa4ad;font-size:11px;margin-left:14px}
+  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}}
+  .toolbar{top:53px}
+  .brandimg{height:30px;display:block}
+</style></head><body>
+<nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem has-sub"><a href="../../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../../membership/">멤버십 안내</a><a href="../../membership/#verify">구매 인증</a><a href="../../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
+
+
+<header><div class="wrap">
+  <div class="crumb"><a href="../../index.html">산수허브 홈</a> › <a href="../index.html">계산도구</a> › 거푸집동바리 설계</div>
+  <h1>거푸집동바리 설계 예제 45제</h1>
+  <p class="lead">설계 예제를 Calcpad 입력폼으로 제공합니다. 현장 수치를 넣고 ▶로 즉시 계산하세요.</p>
+  <div class="howto"><b>실행 방법</b>
+    <ol><li>예제의 <b>입력폼</b>(또는 원본) 버튼으로 <code>.cpd</code> 파일을 내려받습니다.</li>
+    <li><b>Calcpad 온라인 IDE</b>를 열고 <b>Open</b>으로 받은 파일을 불러옵니다.</li>
+    <li>현장 수치를 넣고 ▶(Calculate)를 누르면 합격/불합격까지 자동 계산됩니다. 폼↔코드 전환 F4.</li></ol>
+    <a class="ide" href="https://calcpad.eu/Ide" target="_blank" rel="noopener">Calcpad 온라인 IDE 열기 ↗</a>
+  </div>
+</div></header>
+<div class="toolbar"><div class="wrap">
+  <div class="filters"><button class="fbtn active" data-f="all">전체</button><button class="fbtn" data-f="basic">기초</button><button class="fbtn" data-f="applied">응용</button><button class="fbtn" data-f="advanced">심화</button></div>
+  <select id="chsel"><option value="all">전체 장</option><option value="03">03장 하중계산</option><option value="04">04장 부재설계</option><option value="05">05장 벽체거푸집</option><option value="06">06장 슬래브거푸집</option><option value="07">07장 기둥거푸집</option><option value="08">08장 특수구조물</option><option value="09">09장 비계설계</option></select>
+  <input id="search" placeholder="번호·제목 검색 (예: 합판, 측압, 4.1)">
+</div></div>
+<main class="wrap">
+  <div class="count-bar"><b id="cnt">45</b>개 예제</div>
+  <table>
+    <thead><tr><th>번호</th><th>제목</th><th>분류</th><th>난이도</th><th style="text-align:right">자료</th></tr></thead>
+    <tbody>
+        <tr data-level="basic" data-ch="03" data-text="3.1 슬래브연직하중 하중계산">
+          <td class="c-no">3.1</td>
+          <td class="c-title"><span class="t">슬래브연직하중</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="03" data-text="3.2 전이슬래브연직하중 하중계산">
+          <td class="c-no">3.2</td>
+          <td class="c-title"><span class="t">전이슬래브연직하중</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.2_%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.2_%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="03" data-text="3.3 벽체측압 하중계산">
+          <td class="c-no">3.3</td>
+          <td class="c-title"><span class="t">벽체측압</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.3_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.3_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="03" data-text="3.4 기둥측압 지연제 하중계산">
+          <td class="c-no">3.4</td>
+          <td class="c-title"><span class="t">기둥측압 지연제</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.4_%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95_%EC%A7%80%EC%97%B0%EC%A0%9C_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.4_%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95_%EC%A7%80%EC%97%B0%EC%A0%9C_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="03" data-text="3.5 최소수평하중 하중계산">
+          <td class="c-no">3.5</td>
+          <td class="c-title"><span class="t">최소수평하중</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.5_%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.5_%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="03" data-text="3.6 교량동바리풍하중 하중계산">
+          <td class="c-no">3.6</td>
+          <td class="c-title"><span class="t">교량동바리풍하중</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.6_%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.6_%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="03" data-text="3.7 동바리설계하중종합 하중계산">
+          <td class="c-no">3.7</td>
+          <td class="c-title"><span class="t">동바리설계하중종합</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.7_%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.7_%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="03" data-text="3.8 하중계산 오류찾기 하중계산">
+          <td class="c-no">3.8</td>
+          <td class="c-title"><span class="t">하중계산 오류찾기</span> </td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.8_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0_%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.8_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0_%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="03" data-text="3.9 지하주차장종합 하중계산">
+          <td class="c-no">3.9</td>
+          <td class="c-title"><span class="t">지하주차장종합</span> <span class="tag">계산서</span></td>
+          <td class="c-ch">03장 하중계산</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.9_%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9_%EC%8B%AC%ED%99%94_%EA%B3%84%EC%82%B0%EC%84%9C_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.9_%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9_%EC%8B%AC%ED%99%94_%EA%B3%84%EC%82%B0%EC%84%9C.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="04" data-text="4.1 슬래브합판검토 부재설계">
+          <td class="c-no">4.1</td>
+          <td class="c-title"><span class="t">슬래브합판검토</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="04" data-text="4.2 벽체합판검토 허용장선간격 부재설계">
+          <td class="c-no">4.2</td>
+          <td class="c-title"><span class="t">벽체합판검토 허용장선간격</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.2_%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.2_%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="04" data-text="4.3 목재장선50x100 부재설계">
+          <td class="c-no">4.3</td>
+          <td class="c-title"><span class="t">목재장선50x100</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.3_%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.3_%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="04" data-text="4.4 강관장선60x60 부재설계">
+          <td class="c-no">4.4</td>
+          <td class="c-title"><span class="t">강관장선60x60</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.4_%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.4_%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="04" data-text="4.5 h100멍에 동바리간격 부재설계">
+          <td class="c-no">4.5</td>
+          <td class="c-title"><span class="t">H100멍에 동바리간격</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.5_H100%EB%A9%8D%EC%97%90_%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.5_H100%EB%A9%8D%EC%97%90_%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="04" data-text="4.6 목재멍에100x100 부재설계">
+          <td class="c-no">4.6</td>
+          <td class="c-title"><span class="t">목재멍에100x100</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.6_%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.6_%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="04" data-text="4.7 파이프서포트좌굴 허용하중 부재설계">
+          <td class="c-no">4.7</td>
+          <td class="c-title"><span class="t">파이프서포트좌굴 허용하중</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.7_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4_%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.7_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4_%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="04" data-text="4.8 파이프서포트배치간격 부재설계">
+          <td class="c-no">4.8</td>
+          <td class="c-title"><span class="t">파이프서포트배치간격</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.8_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.8_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="04" data-text="4.9 슬래브t200 전체설계 부재설계">
+          <td class="c-no">4.9</td>
+          <td class="c-title"><span class="t">슬래브t200 전체설계</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.9_%EC%8A%AC%EB%9E%98%EB%B8%8Ct200_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.9_%EC%8A%AC%EB%9E%98%EB%B8%8Ct200_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="04" data-text="4.10 고층슬래브t300 설계비교 부재설계">
+          <td class="c-no">4.10</td>
+          <td class="c-title"><span class="t">고층슬래브t300 설계비교</span> </td>
+          <td class="c-ch">04장 부재설계</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.10_%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300_%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.10_%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300_%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="05" data-text="5.1 벽체측압 벽체거푸집">
+          <td class="c-no">5.1</td>
+          <td class="c-title"><span class="t">벽체측압</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.1_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.1_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="05" data-text="5.2 벽체측압 조건2 벽체거푸집">
+          <td class="c-no">5.2</td>
+          <td class="c-title"><span class="t">벽체측압 조건2</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.2_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EC%A1%B0%EA%B1%B42_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.2_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EC%A1%B0%EA%B1%B42_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="05" data-text="5.3 겨울철고측압 벽체거푸집">
+          <td class="c-no">5.3</td>
+          <td class="c-title"><span class="t">겨울철고측압</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.3_%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95_%EC%8B%AC%ED%99%94_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.3_%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95_%EC%8B%AC%ED%99%94_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="" data-ch="05" data-text="5.4 수평멍에 타이볼트수직간격 벽체거푸집">
+          <td class="c-no">5.4</td>
+          <td class="c-title"><span class="t">수평멍에 타이볼트수직간격</span> </td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-"></span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.4_%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.4_%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="05" data-text="5.5 타이볼트간격설계 벽체거푸집">
+          <td class="c-no">5.5</td>
+          <td class="c-title"><span class="t">타이볼트간격설계</span> </td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.5_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EA%B0%84%EA%B2%A9%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.5_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EA%B0%84%EA%B2%A9%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="" data-ch="05" data-text="5.6 버팀대전도검토 벽체거푸집">
+          <td class="c-no">5.6</td>
+          <td class="c-title"><span class="t">버팀대전도검토</span> </td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-"></span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.6_%EB%B2%84%ED%8C%80%EB%8C%80%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.6_%EB%B2%84%ED%8C%80%EB%8C%80%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="05" data-text="5.7 표준벽체종합설계 벽체거푸집">
+          <td class="c-no">5.7</td>
+          <td class="c-title"><span class="t">표준벽체종합설계</span> </td>
+          <td class="c-ch">05장 벽체거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.7_%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.7_%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="06" data-text="6.1 합판장선간격 슬래브거푸집">
+          <td class="c-no">6.1</td>
+          <td class="c-title"><span class="t">합판장선간격</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.1_%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.1_%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="06" data-text="6.2 장선 멍에간격 슬래브거푸집">
+          <td class="c-no">6.2</td>
+          <td class="c-title"><span class="t">장선 멍에간격</span> </td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.2_%EC%9E%A5%EC%84%A0_%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.2_%EC%9E%A5%EC%84%A0_%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="06" data-text="6.3 멍에 서포트간격 슬래브거푸집">
+          <td class="c-no">6.3</td>
+          <td class="c-title"><span class="t">멍에 서포트간격</span> </td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.3_%EB%A9%8D%EC%97%90_%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.3_%EB%A9%8D%EC%97%90_%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="06" data-text="6.4 파이프서포트허용하중 슬래브거푸집">
+          <td class="c-no">6.4</td>
+          <td class="c-title"><span class="t">파이프서포트허용하중</span> </td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.4_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.4_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="06" data-text="6.5 슬래브전체설계 슬래브거푸집">
+          <td class="c-no">6.5</td>
+          <td class="c-title"><span class="t">슬래브전체설계</span> </td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="06" data-text="6.6 고하중슬래브설계 슬래브거푸집">
+          <td class="c-no">6.6</td>
+          <td class="c-title"><span class="t">고하중슬래브설계</span> </td>
+          <td class="c-ch">06장 슬래브거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.6_%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.6_%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="07" data-text="7.1 기둥패널 수직장선간격 기둥거푸집">
+          <td class="c-no">7.1</td>
+          <td class="c-title"><span class="t">기둥패널 수직장선간격</span> </td>
+          <td class="c-ch">07장 기둥거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.1_%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90_%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.1_%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90_%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="07" data-text="7.2 장선 클램프설계 기둥거푸집">
+          <td class="c-no">7.2</td>
+          <td class="c-title"><span class="t">장선 클램프설계</span> </td>
+          <td class="c-ch">07장 기둥거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.2_%EC%9E%A5%EC%84%A0_%ED%81%B4%EB%9E%A8%ED%94%84%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.2_%EC%9E%A5%EC%84%A0_%ED%81%B4%EB%9E%A8%ED%94%84%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="07" data-text="7.3 원형기둥 후프설계 기둥거푸집">
+          <td class="c-no">7.3</td>
+          <td class="c-title"><span class="t">원형기둥 후프설계</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">07장 기둥거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.3_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_%ED%9B%84%ED%94%84%EC%84%A4%EA%B3%84_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.3_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_%ED%9B%84%ED%94%84%EC%84%A4%EA%B3%84_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="07" data-text="7.4 정방형기둥 전체설계 기둥거푸집">
+          <td class="c-no">7.4</td>
+          <td class="c-title"><span class="t">정방형기둥 전체설계</span> </td>
+          <td class="c-ch">07장 기둥거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.4_%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.4_%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="07" data-text="7.5 고측압기둥 설계 기둥거푸집">
+          <td class="c-no">7.5</td>
+          <td class="c-title"><span class="t">고측압기둥 설계</span> </td>
+          <td class="c-ch">07장 기둥거푸집</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.5_%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.5_%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="" data-ch="08" data-text="8.1 아치거푸집 설계 특수구조물">
+          <td class="c-no">8.1</td>
+          <td class="c-title"><span class="t">아치거푸집 설계</span> </td>
+          <td class="c-ch">08장 특수구조물</td>
+          <td class="c-lvl"><span class="lvl lvl-"></span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.1_%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.1_%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91_%EC%84%A4%EA%B3%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="" data-ch="08" data-text="8.2 경사슬래브 설계 특수구조물">
+          <td class="c-no">8.2</td>
+          <td class="c-title"><span class="t">경사슬래브 설계</span> </td>
+          <td class="c-ch">08장 특수구조물</td>
+          <td class="c-lvl"><span class="lvl lvl-"></span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.2_%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.2_%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C_%EC%84%A4%EA%B3%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="08" data-text="8.3 발코니캔틸레버 설계 특수구조물">
+          <td class="c-no">8.3</td>
+          <td class="c-title"><span class="t">발코니캔틸레버 설계</span> </td>
+          <td class="c-ch">08장 특수구조물</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.3_%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.3_%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="08" data-text="8.4 체육관지붕 대공간 특수구조물">
+          <td class="c-no">8.4</td>
+          <td class="c-title"><span class="t">체육관지붕 대공간</span> </td>
+          <td class="c-ch">08장 특수구조물</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.4_%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95_%EB%8C%80%EA%B3%B5%EA%B0%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.4_%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95_%EB%8C%80%EA%B3%B5%EA%B0%84_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="advanced" data-ch="08" data-text="8.5 복합특수구조물 특수구조물">
+          <td class="c-no">8.5</td>
+          <td class="c-title"><span class="t">복합특수구조물</span> </td>
+          <td class="c-ch">08장 특수구조물</td>
+          <td class="c-lvl"><span class="lvl lvl-advanced">심화</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.5_%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.5_%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC_%EC%8B%AC%ED%99%94.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="basic" data-ch="09" data-text="9.1 비계수직재좌굴 비계설계">
+          <td class="c-no">9.1</td>
+          <td class="c-title"><span class="t">비계수직재좌굴</span> <span class="tag">그래프</span></td>
+          <td class="c-ch">09장 비계설계</td>
+          <td class="c-lvl"><span class="lvl lvl-basic">기초</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.1_%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.1_%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="09" data-text="9.2 벽이음설계하중 비계설계">
+          <td class="c-no">9.2</td>
+          <td class="c-title"><span class="t">벽이음설계하중</span> </td>
+          <td class="c-ch">09장 비계설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.2_%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.2_%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+        <tr data-level="applied" data-ch="09" data-text="9.3 이동식비계 전도검토 비계설계">
+          <td class="c-no">9.3</td>
+          <td class="c-title"><span class="t">이동식비계 전도검토</span> </td>
+          <td class="c-ch">09장 비계설계</td>
+          <td class="c-lvl"><span class="lvl lvl-applied">응용</span></td>
+          <td class="c-dl"><a class="dl dl-p" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.3_%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84_%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>입력폼</a><a class="dl" href="files/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.3_%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84_%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9D%91%EC%9A%A9.cpd" download>원본</a></td>
+        </tr>
+    </tbody>
+  </table>
+  <p class="empty" id="empty">조건에 맞는 예제가 없습니다.</p>
+</main>
+<footer><div class="wrap"><p>산수허브 SANSUHUB · 토목구조물의 설계 · 건설기술 개발</p>
+<p style="margin-top:6px;color:#9aa4ad">Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.</p></div></footer>
+<script>
+  var rows=[].slice.call(document.querySelectorAll('tbody tr'));var curF='all',curC='all',curQ='';
+  function apply(){var v=0;rows.forEach(function(r){var okF=curF==='all'||r.dataset.level===curF;var okC=curC==='all'||r.dataset.ch===curC;var okQ=!curQ||r.dataset.text.indexOf(curQ)>-1;var show=okF&&okC&&okQ;r.style.display=show?'':'none';if(show)v++;});
+    document.getElementById('cnt').textContent=v;document.getElementById('empty').style.display=v?'none':'block';}
+  document.querySelectorAll('.fbtn').forEach(function(b){b.addEventListener('click',function(){document.querySelectorAll('.fbtn').forEach(function(x){x.classList.remove('active')});b.classList.add('active');curF=b.dataset.f;apply();});});
+  document.getElementById('chsel').addEventListener('change',function(e){curC=e.target.value;apply();});
+  document.getElementById('search').addEventListener('input',function(e){curQ=e.target.value.toLowerCase().trim();apply();});
+</script>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
+  items.forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var li=a.parentNode, was=li.classList.contains('open');
+      document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+      if(!was) li.classList.add('open');
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+  });
+})();
+</script>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script></body></html>
