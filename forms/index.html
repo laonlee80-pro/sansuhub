@@ -22,7 +22,9 @@
   .tbl thead th{background:var(--accent);color:#fff;font-weight:600;font-size:13px}
   .tbl td:first-child{font-weight:600;background:var(--soft);white-space:nowrap}
   .st{font-size:12px;padding:2px 8px;border-radius:5px}
-  .st.warn{background:var(--warn-bg);color:var(--warn)}.st.soon{background:var(--soft);color:var(--sub)}
+  .st.warn{background:var(--warn-bg);color:var(--warn)}.st.soon{background:var(--soft);color:var(--sub)}.st.ok{background:var(--basic-bg);color:var(--basic)}
+  .pill.ok{background:var(--basic-bg);color:var(--basic)}
+  .dl{color:var(--accent);font-weight:600}.dl:hover{text-decoration:underline}
   .cta{margin-top:18px}
   .btn{display:inline-block;background:var(--accent);color:#fff;border-radius:9px;padding:11px 20px;font-size:14px;font-weight:700;margin-right:8px}
   .btn.line{background:#fff;color:var(--accent);border:1px solid var(--accent)}
@@ -40,7 +42,7 @@
   .submenu a:hover{background:var(--soft);color:var(--accent)}.submenu .muted{color:#9aa4ad;font-size:11px;margin-left:14px}
   @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}}
 </style></head><body>
-<nav class="gnav"><div class="gnav-in"><a class="brand" href="../index.html"><img class="brandimg" src="../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../index.html">홈</a></div><div class="gitem has-sub"><a href="../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub"><a href="../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../calc/">계산도구 전체</a><a href="../calc/dongbari/">동바리 거푸집</a></div></div><div class="gitem has-sub on"><a href="index.html">자료실<span class="caret">▾</span></a><div class="submenu"><a href="index.html">양식·체크리스트</a></div></div><div class="gitem has-sub"><a href="../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../errata/">법규 개정 공지</a><a href="../errata/#errata">정오표</a></div></div><div class="gitem has-sub"><a href="../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../membership/">멤버십 안내</a><a href="../membership/#verify">구매 인증</a><a href="../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../about/">발행처 소개</a><a href="../about/">문의·피드백</a></div></div></div></div></nav>
+<nav class="gnav"><div class="gnav-in"><a class="brand" href="../index.html"><img class="brandimg" src="../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../index.html">홈</a></div><div class="gitem has-sub"><a href="../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub"><a href="../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../calc/">계산도구 전체</a><a href="../calc/dongbari/">동바리 거푸집</a><a href="../calc/rc/">콘크리트구조 설계</a></div></div><div class="gitem has-sub on"><a href="index.html">자료실<span class="caret">▾</span></a><div class="submenu"><a href="index.html">양식·체크리스트</a></div></div><div class="gitem has-sub"><a href="../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../errata/">법규 개정 공지</a><a href="../errata/#errata">정오표</a></div></div><div class="gitem has-sub"><a href="../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../membership/">멤버십 안내</a><a href="../membership/#verify">구매 인증</a><a href="../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../about/">발행처 소개</a><a href="../about/">문의·피드백</a></div></div></div></div></nav>
 
 <header><div class="wrap">
   <div class="crumb"><a href="../index.html">산수허브 홈</a> › 자료실</div>
@@ -53,8 +55,8 @@
     <h2>제공 자료 유형</h2>
     <p class="sublead">분야별 설계 흐름에 맞춰 다음 자료를 제공합니다.</p>
     <div class="grid">
-      <div class="card"><h3>설계·검토 체크리스트</h3><p>분야별 설계·안전성 검토 항목 점검표.</p><span class="pill">준비중</span></div>
-      <div class="card"><h3>계산 양식</h3><p>하중·단면·안정 검토용 양식(Excel/PDF).</p><span class="pill">준비중</span></div>
+      <div class="card"><h3>설계·검토 체크리스트</h3><p>분야별 설계·안전성 검토 항목 점검표.</p><span class="pill ok">동바리 제공</span></div>
+      <div class="card"><h3>계산 양식</h3><p>하중·단면·안정 검토용 양식(Excel/PDF).</p><span class="pill ok">동바리 제공</span></div>
       <div class="card"><h3>법규·기준 요약</h3><p>KDS·KCS·산안법 핵심 조항 요약본.</p><span class="pill">준비중</span></div>
       <div class="card"><h3>표준 상세·서식</h3><p>표준 상세도, 검토의견서 등 서식.</p><span class="pill">준비중</span></div>
     </div>
@@ -65,7 +67,7 @@
     <table class="tbl">
       <thead><tr><th>분야</th><th>제공 자료</th><th>상태</th></tr></thead>
       <tbody>
-        <tr><td>동바리 거푸집</td><td>설계 검토 체크리스트, 하중계산 양식</td><td><span class="st warn">준비중</span></td></tr>
+        <tr><td>동바리 거푸집</td><td><a class="dl" href="files/%EA%B1%B0%ED%91%B8%EC%A7%91%EB%8F%99%EB%B0%94%EB%A6%AC_%EC%84%A4%EA%B3%84%EA%B2%80%ED%86%A0_%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8.xlsx" download>설계검토 체크리스트 (xlsx)</a> · <a class="dl" href="files/%EA%B1%B0%ED%91%B8%EC%A7%91%EB%8F%99%EB%B0%94%EB%A6%AC_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0_%EC%96%91%EC%8B%9D.xlsx" download>하중계산 양식 (xlsx)</a></td><td><span class="st ok">제공중</span></td></tr>
         <tr><td>옹벽</td><td>안정·부재 검토 양식</td><td><span class="st soon">예정</span></td></tr>
         <tr><td>암거</td><td>구조·부력 검토 양식</td><td><span class="st soon">예정</span></td></tr>
         <tr><td>말뚝기초</td><td>지지력·침하 검토 양식</td><td><span class="st soon">예정</span></td></tr>
@@ -77,26 +79,4 @@
       <a class="btn" href="../membership/">멤버십 안내</a>
       <a class="btn line" href="../membership/#verify">구매 인증</a>
     </div>
-  </section>
-</main>
-
-<footer><div class="wrap"><p>산수허브 SANSUHUB · 토목구조물의 설계 · 건설기술 개발</p>
-<p style="margin-top:6px"><a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a></p></div></footer>
-<script>
-(function(){
-  var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
-  items.forEach(function(a){a.addEventListener('click',function(e){
-    var h=a.getAttribute('href');
-    if(h && h.indexOf('#')===-1 && h!=='index.html'){return;}
-    e.preventDefault();
-    var li=a.parentNode, was=li.classList.contains('open');
-    document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
-    if(!was) li.classList.add('open');
-  });});
-  document.addEventListener('click',function(e){
-    if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
-  });
-})();
-</script>
-<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script>
-</body></html>
+  </
