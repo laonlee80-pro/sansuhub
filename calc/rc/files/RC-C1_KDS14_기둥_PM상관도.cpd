@@ -1,0 +1,171 @@
+"<h2>KDS 14 20 20 강도설계법 — 띠철근 기둥 축·휨 설계 (P-M 상관도)</h2>
+"<b>예제 RC-C1</b> : 축력과 휨모멘트를 동시에 받는 띠철근 기둥의 검토
+'적용기준 : KDS 14 20 20 (콘크리트구조 휨 및 압축 설계기준), 강도설계법
+'──────────────────────────────────────────────
+"■ 기둥 단면 · 작용하중 개념도
+'<svg width="440" height="235" viewBox="0 0 440 235" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff">
+'<text x="95" y="24" font-size="11">기둥 단면 (띠철근)</text>
+'<rect x="45" y="55" width="150" height="150" fill="none" stroke="#000000" stroke-width="2"/>
+'<rect x="57" y="67" width="126" height="126" fill="none" stroke="#000000" stroke-width="1.2"/>
+'<circle cx="66" cy="186" r="6" fill="#000000"/>
+'<circle cx="120" cy="186" r="6" fill="#000000"/>
+'<circle cx="174" cy="186" r="6" fill="#000000"/>
+'<circle cx="66" cy="74" r="6" fill="#000000"/>
+'<circle cx="120" cy="74" r="6" fill="#000000"/>
+'<circle cx="174" cy="74" r="6" fill="#000000"/>
+'<line x1="45" y1="216" x2="195" y2="216" stroke="#000000" stroke-width="0.8"/>
+'<text x="116" y="230" font-size="13">b</text>
+'<line x1="206" y1="55" x2="206" y2="205" stroke="#000000" stroke-width="0.8"/>
+'<text x="211" y="135" font-size="13">h</text>
+'<line x1="32" y1="55" x2="32" y2="186" stroke="#000000" stroke-width="0.8" stroke-dasharray="4 2"/>
+'<text x="20" y="125" font-size="12">d</text>
+'<text x="120" y="105" font-size="10" fill="#555555">띠철근</text>
+'<text x="300" y="24" font-size="11">작용 하중 (상단에 P·M 동시 작용)</text>
+'<rect x="305" y="82" width="50" height="108" fill="none" stroke="#000000" stroke-width="1.5"/>
+'<line x1="330" y1="46" x2="330" y2="79" stroke="#000000" stroke-width="2"/>
+'<polygon points="330,82 325,72 335,72" fill="#000000"/>
+'<text x="337" y="64" font-size="13">P</text>
+'<path d="M 308 72 A 24 16 0 0 1 352 72" fill="none" stroke="#000000" stroke-width="1.8"/>
+'<polygon points="352,72 344,68 347,78" fill="#000000"/>
+'<text x="357" y="68" font-size="13">M</text>
+'</svg>
+'──────────────────────────────────────────────
+"1. 설계 입력값 (값을 입력하고 ▶ 계산을 누르세요)
+'계수축력(소요) -'P_u = ? {1500}kN
+'계수휨모멘트(소요) -'M_u = ? {150}kN*m
+'단면 폭 -'b = ? {400}mm
+'단면 높이 -'h = ? {400}mm
+'피복(철근 도심까지) -'d_1 = ? {50}mm
+'콘크리트 기준압축강도 -'f_ck = ? {27}MPa
+'철근 기준항복강도 -'f_y = ? {400}MPa
+'주철근 호칭 — D번호 (19/22/25/29/32) -'D_no = ? {25}
+'인장측 철근 개수 -'n_s = ? {3}
+'압축측 철근 개수 -'n_sp = ? {3}
+#Post
+'──────────── 이하 계산 과정 · 결과 (▶ 계산 시 결과창 표시) ────────────
+'철근 탄성계수 -'E_s = 200000MPa
+'인장측 유효깊이 -'d = h - d_1
+'압축측 철근 깊이 -'dp = d_1
+'선택 주철근 공칭지름 :
+#if D_no ≡ 19
+  '선택 D19 -'d_b = 19.1mm
+#else if D_no ≡ 22
+  '선택 D22 -'d_b = 22.2mm
+#else if D_no ≡ 25
+  '선택 D25 -'d_b = 25.4mm
+#else if D_no ≡ 29
+  '선택 D29 -'d_b = 28.6mm
+#else if D_no ≡ 32
+  '선택 D32 -'d_b = 31.8mm
+#else
+  '미정의 — D25 가정 -'d_b = 25.4mm
+#end if
+'철근 1개 공칭단면적 -'A_b1 = π*d_b^2/4 | mm^2
+'인장측 철근량 -'A_s = n_s*A_b1 | mm^2
+'압축측 철근량 -'A_sp = n_sp*A_b1 | mm^2
+'전체 철근량 -'A_st = A_s + A_sp
+'──────────────────────────────────────────────
+"2. 재료·단면 계수 [KDS 14 20 20]
+'콘크리트 극한변형률 -'epsilon_cu = 0.0033
+'등가응력블록 깊이계수 -'beta_1 = 0.80
+'등가응력블록 응력 -'f_c = 0.85*f_ck
+'띠철근 기둥 강도감소계수(압축지배) -'phi = 0.65
+'철근 항복변형률 -'epsilon_y = f_y/E_s
+'──────────────────────────────────────────────
+"3. 최대 설계축강도 [KDS 14 20 20] (e=0 부근, 띠철근)
+'공칭 순수축강도 -'P_o = f_c*(b*h - A_st) + f_y*A_st | kN
+'최대 설계축강도 -'phiP_n.max = 0.80*phi*P_o | kN
+#if P_u ≤ phiP_n.max
+  "→ 축강도 측면 O.K. (P_u ≤ φP_n,max)
+#else
+  "→ 축강도 부족 — 단면 또는 철근 증대 필요
+#end if
+'──────────────────────────────────────────────
+"4. 균형파괴점 (Balanced) 산정
+'균형 중립축 깊이 -'c_b = epsilon_cu*d/(epsilon_cu + epsilon_y) | mm
+'균형 응력블록 깊이 -'a_b = beta_1*c_b | mm
+'콘크리트 압축합력 -'C_cb = f_c*a_b*b | kN
+'압축철근 변형률 -'epsilon_spb = epsilon_cu*(c_b - dp)/c_b
+'압축철근 응력(≤f_y) -'f_spb = min(E_s*epsilon_spb; f_y) | MPa
+'압축철근 합력(콘크리트 공제) -'F_spb = A_sp*(f_spb - f_c) | kN
+'인장철근 합력(항복) -'F_sb = A_s*f_y | kN
+'균형 축강도 -'P_b = C_cb + F_spb - F_sb | kN
+'균형 휨강도(도심 기준) -'M_b = C_cb*(h/2 - a_b/2) + F_spb*(h/2 - dp) + F_sb*(d - h/2) | kN*m
+'──────────────────────────────────────────────
+"5. 파괴유형 판정 (편심 비교)
+'설계 편심 -'e = M_u/P_u | mm
+'균형 편심 -'e_b = M_b/P_b | mm
+#if e ≤ e_b
+  "→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — P_u가 큰 영역
+#else
+  "→ e > e_b : 인장지배(철근 항복 선행) — M_u가 큰 영역
+#end if
+'설계점 (M_u, P_u)이 아래 P-M 상관도 곡선 안쪽에 있으면 안전하다.
+'──────────────────────────────────────────────
+"6. P-M 상관도 작성
+'아래 함수는 중립축 깊이 c를 변화시키며 공칭 (M_n, P_n)을 계산한다.
+'철근 응력함수(±f_y로 제한) :
+f_s(epsilon) = max(min(E_s*epsilon; f_y); -f_y)
+'응력블록 깊이(≤h) :
+a(c) = min(beta_1*c; h)
+'콘크리트 압축합력 :
+C_c(c) = f_c*a(c)*b
+'압축철근 변형률·합력(압축이면 콘크리트 공제) :
+eps_sp(c) = epsilon_cu*(c - dp)/c
+F_sp(c) = A_sp*(f_s(eps_sp(c)) - f_c*(eps_sp(c) > 0))
+'인장철근 변형률·합력 :
+eps_st(c) = epsilon_cu*(c - d)/c
+F_st(c) = A_s*(f_s(eps_st(c)) - f_c*(eps_st(c) > 0))
+'공칭 축강도·휨강도 :
+P_n(c) = C_c(c) + F_sp(c) + F_st(c)
+M_n(c) = C_c(c)*(h/2 - a(c)/2) + F_sp(c)*(h/2 - dp) + F_st(c)*(h/2 - d)
+'그래프 설정(벡터 SVG, 적응형 메시 끔 — 작은 마커 누락 방지) :
+PlotSVG = 1
+PlotWidth = 500
+PlotHeight = 350
+PlotAdaptive = 0
+'φ 강도감소계수 함수 (인장철근 변형률 ε_t에 따라 압축지배 0.65 ~ 인장지배 0.85) :
+eps_t(c) = epsilon_cu*(d - c)/c
+phi_f(c) = min(max(0.65 + (eps_t(c) - 0.002)/0.003*0.20; 0.65); 0.85)
+'설계강도 곡선 (φ 적용, 최대 설계축강도로 상한) :
+phiP_n(c) = min(phi_f(c)*P_n(c); phiP_n.max)
+phiM_n(c) = phi_f(c)*M_n(c)
+'설계점 (M_u, P_u)을 십자(+) 마커로 표시 (반팔길이: 휨 18kN·m, 축력 350kN) :
+t_m(c) = (c - 40mm)/860mm
+hx(c) = M_u - 18kN*m + 36kN*m*t_m(c)
+hy(c) = P_u
+vx(c) = M_u
+vy(c) = P_u - 350kN + 700kN*t_m(c)
+'그래프 : ① 공칭강도 P_n–M_n (바깥) ② 설계강도 φP_n–φM_n (안쪽) ③ 설계점 +
+'설계점 + 가 φ 곡선(안쪽) 내부에 있으면 안전 :
+$Plot{M_n(c)|P_n(c) & phiM_n(c)|phiP_n(c) & hx(c)|hy(c) & vx(c)|vy(c) @ c = 40mm : 900mm}
+'──────────────────────────────────────────────
+"7. 안전성 검토 (설계 편심 e 기준 — 휨부재 안전율 검토와 동일 개념)
+'설계 편심 e = M_u/P_u 에 대응하는 상관도 위 강도점의 중립축 c를 求根으로 찾는다.
+'求根 구간(압축지배/인장지배에 따라 자동 설정) :
+#if e ≤ e_b
+  c_lo = c_b
+  c_hi = 2000mm
+#else
+  c_lo = 40mm
+  c_hi = c_b
+#end if
+'대응 중립축(求根) -'c_d = $Root{M_n(c) - e*P_n(c) @ c = c_lo : c_hi} | mm
+'그 점의 강도감소계수 -'phi_d = phi_f(c_d)
+'설계 축강도 -'phiP_d = min(phi_d*P_n(c_d); phiP_n.max) | kN
+'설계 휨강도 -'phiM_d = phi_d*M_n(c_d) | kN*m
+'안전율 (= φP_n/P_u = φM_n/M_u, 동일 반경선상) -'SF = phiP_d/P_u
+#if phiP_d ≥ P_u
+  "<b>판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b>
+#else
+  "<b>판정 : N.G.  (단면 또는 철근 증대 필요)</b>
+#end if
+'──────────────────────────────────────────────
+"8. 참고 — 주요 점
+'설계점 -'P_u
+M_u
+'순수압축(공칭) -'P_o
+'균형점 -'P_b
+M_b
+'──────────────────────────────────────────────
+"<i>※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</i>
