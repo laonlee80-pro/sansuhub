@@ -71,6 +71,18 @@
 '철근 재료계수 -'phi_s = 0.90
 '콘크리트 설계압축강도 (= 0.85·φ_c·f_ck = 0.553·f_ck) -'f_cd = 0.85*phi_c*f_ck
 '철근 설계항복강도 -'f_yd = phi_s*f_yk
+'──────────────────────────────────────────────
+"●  축방향 철근비 검토 [KDS 24 14 21 (4.6.6.2)]
+'기둥 단면적 -'A_c = b*h | mm^2
+'최대 철근량 -'A_s.max = 0.04*A_c | mm^2
+'최소 철근량 -'A_s.min = max(0.10*N_Ed/f_yd; 0.002*A_c) | mm^2
+#if A_st > A_s.max
+  '<b style="font-size:calc(1em + 1pt)">→ 철근량 과다 (A_st > 0.04·A_c) — 감소 필요</b>
+#else if A_st < A_s.min
+  '<b style="font-size:calc(1em + 1pt)">→ 철근량 부족 (A_st < A_s,min) — 증대 필요</b>
+#else
+  '<b style="font-size:calc(1em + 1pt)">→ 철근량 O.K. (A_s,min ≤ A_st ≤ A_s,max)</b>
+#end if
 '콘크리트 극한변형률 -'epsilon_cu = 0.0033
 '등가응력블록 깊이계수 -'beta_1 = 0.80
 '철근 설계항복변형률 -'epsilon_yd = f_yd/E_s
@@ -80,17 +92,17 @@
 '최소편심 -'e_min = max(h/30; 20mm) | mm
 '설계편심 -'e = M_Ed/N_Ed | mm
 #if e ≥ e_min
-  "→ e ≥ e_min : 설계편심이 최소편심 이상 (그대로 사용)
+  '<b style="font-size:calc(1em + 1pt)">→ e ≥ e_min : 설계편심이 최소편심 이상 (그대로 사용)</b>
 #else
-  "→ e < e_min : 최소편심으로 설계해야 함 (M_Ed ← N_Ed·e_min)
+  '<b style="font-size:calc(1em + 1pt)">→ e < e_min : 최소편심으로 설계해야 함 (M_Ed ← N_Ed·e_min)</b>
 #end if
 '──────────────────────────────────────────────
 "4. 순수축 설계강도 (참고)
 '순수압축 설계축강도 -'N_Rd.0 = f_cd*(b*h - A_st) + f_yd*A_st | kN
 #if N_Ed ≤ N_Rd.0
-  "→ 순수축강도 측면 여유 있음 (N_Ed ≤ N_Rd,0)
+  '<b style="font-size:calc(1em + 1pt)">→ 순수축강도 측면 여유 있음 (N_Ed ≤ N_Rd,0)</b>
 #else
-  "→ 단면 또는 철근 증대 필요
+  '<b style="font-size:calc(1em + 1pt)">→ 단면 또는 철근 증대 필요</b>
 #end if
 '──────────────────────────────────────────────
 "5. 균형파괴점 (Balanced, 설계강도 기준)
@@ -107,9 +119,9 @@
 "6. 파괴유형 판정 (편심 비교)
 '균형 편심 -'e_b = M_b/N_b | mm
 #if e ≤ e_b
-  "→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — N_Ed가 큰 영역
+  '<b style="font-size:calc(1em + 1pt)">→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — N_Ed가 큰 영역</b>
 #else
-  "→ e > e_b : 인장지배(철근 항복 선행) — M_Ed가 큰 영역
+  '<b style="font-size:calc(1em + 1pt)">→ e > e_b : 인장지배(철근 항복 선행) — M_Ed가 큰 영역</b>
 #end if
 '설계점 (M_Ed, N_Ed)이 아래 P-M 상관도(설계강도) 곡선 안쪽이면 안전하다.
 '──────────────────────────────────────────────
@@ -159,9 +171,9 @@ $Plot{M_Rd(c)|N_Rd(c) & hx(c)|hy(c) & vx(c)|vy(c) @ c = 40mm : 900mm}
 '대응 설계 휨강도 -'M_Rd.d = M_Rd(c_d) | kN*m
 '안전율 (= N_Rd/N_Ed = M_Rd/M_Ed, 동일 반경선상) -'SF = N_Rd.d/N_Ed
 #if N_Rd.d ≥ N_Ed
-  "<b>판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b>
 #else
-  "<b>판정 : N.G.  (단면 또는 철근 증대 필요)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : N.G.  (단면 또는 철근 증대 필요)</b>
 #end if
 '──────────────────────────────────────────────
 "9. 강도설계법(예제 RC-C1)과 비교
@@ -170,4 +182,4 @@ $Plot{M_Rd(c)|N_Rd(c) & hx(c)|hy(c) & vx(c)|vy(c) @ c = 40mm : 900mm}
 '한계상태설계법 균형 설계휨강도 -'M_b
 '강도설계법은 마지막에 φ를, 한계상태설계법은 먼저 재료계수(γ_c, γ_s)를 적용 — 접근만 다르고 안전도는 유사하다.
 '──────────────────────────────────────────────
-"<i>※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</i>
+'<b style="font-size:calc(1em + 1pt)">※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</b>

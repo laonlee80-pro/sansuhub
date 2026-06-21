@@ -1,182 +1,97 @@
 <!DOCTYPE html>
 <html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
-<title>콘크리트구조 설계 예제 8제 · 계산도구 | 산수허브</title>
-<meta name="description" content="철근콘크리트 부재 설계 예제 8제. 보 휨·전단, 기둥 P-M 상관도. KDS 14 강도설계법·KDS 24 한계상태설계법 Calcpad 입력폼.">
+<title>콘크리트 구조부재설계 실무 예제 16제 · 계산도구 | 산수허브</title>
+<meta name="description" content="철근콘크리트 부재 설계 Calcpad 예제 16제. 보·기둥·슬래브·기초·정착·내진. KDS 14 강도설계법·KDS 24 한계상태설계법.">
 <style>
-  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#fff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;--basic:#0f6e56;--basic-bg:#e1f5ee;--applied:#854f0b;--applied-bg:#faeeda;--advanced:#791f1f;--advanced-bg:#fcebeb;}
+  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#fff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;}
   *{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
   a{text-decoration:none;color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
   header{border-bottom:1px solid var(--line);padding:34px 0 26px}
   .crumb{font-size:13px;color:var(--sub)}.crumb a{color:var(--accent)}
-  h1{font-size:25px;font-weight:800;margin-top:10px;letter-spacing:-.5px}
-  .lead{color:var(--sub);font-size:15px;margin-top:8px}
+  h1{font-size:25px;font-weight:800;margin-top:10px;letter-spacing:-.5px}.lead{color:var(--sub);font-size:15px;margin-top:8px}
   .howto{background:var(--accent-soft);border:1px solid #bcd6f0;border-radius:12px;padding:16px 20px;margin:20px 0}
   .howto b{color:var(--accent)}.howto ol{margin:6px 0 0 18px;font-size:13.5px}
   .howto a.ide{display:inline-block;margin-top:10px;background:var(--accent);color:#fff;padding:8px 15px;border-radius:8px;font-size:13.5px;font-weight:600}
-  .toolbar{position:sticky;top:0;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);z-index:5}
+  .toolbar{position:sticky;top:53px;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);z-index:5}
   .toolbar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
   .filters{display:flex;gap:6px}.fbtn{border:1px solid var(--line);background:var(--bg);padding:6px 13px;border-radius:20px;font-size:13px;cursor:pointer;color:var(--sub)}
   .fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-  select,#search{border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:14px;background:#fff}
-  #search{flex:1;min-width:150px}
+  select,#search{border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:14px;background:#fff}#search{flex:1;min-width:150px}
   .count-bar{font-size:13px;color:var(--sub);padding:14px 0 6px}
   table{width:100%;border-collapse:collapse;font-size:14px}
   thead th{text-align:left;font-size:12.5px;color:var(--sub);font-weight:600;border-bottom:2px solid var(--ink);padding:10px 10px}
-  tbody td{border-bottom:1px solid var(--line);padding:11px 10px;vertical-align:middle}
-  tbody tr:hover{background:var(--soft)}
-  .c-no{width:64px;font-weight:800;color:var(--accent);white-space:nowrap}
-  .c-title .t{font-weight:600}
-  .c-mem{width:90px;color:var(--sub);font-size:13px;white-space:nowrap}
-  .c-std{width:120px;color:var(--sub);font-size:12.5px;white-space:nowrap}
-  .c-dl{width:130px;white-space:nowrap;text-align:right}
-  .mth{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px}
-  .mth-14{color:var(--accent);background:var(--accent-soft)}.mth-24{color:#0d6e7d;background:#e1f4f7}
-  .tag{font-size:11px;color:var(--sub);background:var(--soft);padding:1px 7px;border-radius:5px;margin-left:4px}
+  tbody td{border-bottom:1px solid var(--line);padding:11px 10px;vertical-align:middle}tbody tr:hover{background:var(--soft)}
+  .c-no{width:64px;font-weight:800;color:var(--accent);white-space:nowrap}.c-title .t{font-weight:600}
+  .c-mem{width:96px;color:var(--sub);font-size:13px;white-space:nowrap}.c-std{width:118px;color:var(--sub);font-size:12.5px;white-space:nowrap}
+  .c-dl{width:128px;white-space:nowrap;text-align:right}
+  .mth{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px}.mth-14{color:var(--accent);background:var(--accent-soft)}.mth-24{color:#0d6e7d;background:#e1f4f7}
   .dl{display:inline-block;font-size:12.5px;font-weight:600;padding:5px 10px;border:1px solid var(--line);border-radius:7px;margin-left:5px}
-  .dl:hover{background:#fff;border-color:var(--accent)}
   .dl-p{background:var(--accent);color:#fff;border-color:var(--accent)}.dl-p:hover{background:#12293f;color:#fff}
+  .grp{font-size:13px;font-weight:700;color:var(--accent);padding:18px 10px 6px}
   .empty{display:none;text-align:center;color:var(--sub);padding:40px 0}
   footer{padding:36px 0 60px;text-align:center;font-size:13px;color:var(--sub)}
   @media(max-width:680px){.c-std{display:none}}
   .gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
   .gnav-in{max-width:1040px;margin:0 auto;padding:0 24px;min-height:52px;display:flex;align-items:center;gap:4px}
-  .gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+  .gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}.brandimg{height:30px;display:block}
   .gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:40px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:0 9px}.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
-  .gitem{position:relative}
-  .gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
-  .gitem>a:hover{color:var(--ink)}
-  .gitem.on>a{color:var(--accent);font-weight:700}
-  .caret{font-size:9px;opacity:.55;margin-left:4px}
+  .gitem{position:relative}.gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+  .gitem>a:hover{color:var(--ink)}.gitem.on>a{color:var(--accent);font-weight:700}.caret{font-size:9px;opacity:.55;margin-left:4px}
   .submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
   .gitem:hover .submenu,.gitem.open .submenu{display:block}
   .submenu a{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--ink);padding:8px 12px;border-radius:7px;white-space:nowrap}
   .submenu a:hover{background:var(--soft);color:var(--accent)}
-  .submenu .muted{color:#9aa4ad;font-size:11px;margin-left:14px}
-  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}}
-  .toolbar{top:53px}
-  .brandimg{height:30px;display:block}
-  .grp{font-size:13px;font-weight:700;color:var(--accent);padding:18px 10px 6px}
+  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.toolbar{top:0}}
 </style></head><body>
-<nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트구조 설계</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem has-sub"><a href="../../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../../membership/">멤버십 안내</a><a href="../../membership/#verify">구매 인증</a><a href="../../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
-
+<nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트 구조부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a><a href="../../forms/rc-series/">콘크리트 부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem has-sub"><a href="../../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../../membership/">멤버십 안내</a><a href="../../membership/#verify">구매 인증</a><a href="../../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
 <header><div class="wrap">
-  <div class="crumb"><a href="../../index.html">산수허브 홈</a> › <a href="../index.html">계산도구</a> › 콘크리트구조 설계</div>
-  <h1>콘크리트구조 설계 예제 8제</h1>
-  <p class="lead">철근콘크리트 부재(보 휨·전단, 기둥 P-M 상관도) 설계 예제입니다. 같은 단면을 <b>KDS 14 강도설계법</b>과 <b>KDS 24 한계상태설계법</b>으로 각각 검토해 비교할 수 있습니다.</p>
+  <div class="crumb"><a href="../../index.html">산수허브 홈</a> › <a href="../index.html">계산도구</a> › 콘크리트 구조부재설계 실무</div>
+  <h1>콘크리트 구조부재설계 실무 · 예제 16제</h1>
+  <p class="lead">철근콘크리트 부재(보·기둥·슬래브·기초·정착·내진) 설계 예제입니다. 같은 단면을 <b>KDS 14 강도설계법</b>과 <b>KDS 24 한계상태설계법</b>으로 풀어 비교할 수 있으며, 자료실의 <a href="../../forms/rc-series/" style="color:var(--accent)">콘크리트 부재설계 실무(전 7편)</a>과 연동됩니다.</p>
   <div class="howto"><b>실행 방법</b>
-    <ol><li>예제의 <b>Calcpad 파일</b> 버튼으로 <code>.cpd</code> 파일을 내려받습니다.</li>
-    <li><b>Calcpad 온라인 IDE</b>를 열고 <b>Open</b>으로 받은 파일을 불러옵니다.</li>
-    <li>입력값(단면·재료·하중)을 바꾸고 ▶(Calculate)를 누르면 합격/불합격까지 자동 계산됩니다. 폼↔코드 전환 F4.</li></ol>
-    <a class="ide" href="https://calcpad.eu/Ide" target="_blank" rel="noopener">Calcpad 온라인 IDE 열기 ↗</a>
+    <ol><li>무료 <b>CalcpadCE</b>(설치형 프로그램)를 내려받아 설치합니다.</li>
+    <li>예제의 <b>Calcpad 파일</b> 버튼으로 <code>.cpd</code> 파일을 내려받아 CalcpadCE에서 엽니다.</li>
+    <li>입력값을 넣고 ▶(Calculate)로 계산합니다. (코드로 보이면 <b>Form 버튼(F4)</b>으로 입력폼 전환)</li></ol>
+    <a class="ide" href="https://calcpad-ce.org/" target="_blank" rel="noopener">CalcpadCE 내려받기 ↗</a>
   </div>
 </div></header>
 <div class="toolbar"><div class="wrap">
   <div class="filters"><button class="fbtn active" data-f="all">전체</button><button class="fbtn" data-f="kds14">KDS 14 강도설계법</button><button class="fbtn" data-f="kds24">KDS 24 한계상태설계법</button></div>
-  <select id="memsel"><option value="all">전체 부재</option><option value="b">보 휨</option><option value="v">보 전단</option><option value="c">기둥 P-M</option></select>
-  <input id="search" placeholder="번호·제목 검색 (예: 기둥, 전단, B1)">
+  <select id="memsel"><option value="all">전체 부재</option><option value="b">보(휨·전단)</option><option value="c">기둥(P-M·세장)</option><option value="s">슬래브·기초</option><option value="a">정착·이음</option><option value="d">철근상세·내진</option></select>
+  <input id="search" placeholder="번호·제목 검색 (예: 기둥, 전단, 기초, B1)">
 </div></div>
 <main class="wrap">
-  <div class="count-bar"><b id="cnt">8</b>개 예제</div>
-  <table>
-    <thead><tr><th>번호</th><th>제목</th><th>부재</th><th>설계기준</th><th style="text-align:right">자료</th></tr></thead>
+  <div class="count-bar"><b id="cnt">16</b>개 예제</div>
+  <table><thead><tr><th>번호</th><th>제목</th><th>부재</th><th>설계기준</th><th style="text-align:right">자료</th></tr></thead>
     <tbody>
-      <tr class="grprow" data-method="kds14"><td class="grp" colspan="5">KDS 14 강도설계법 (4제)</td></tr>
-      <tr data-method="kds14" data-member="b" data-text="rc-b1 b1 단철근 직사각형 보 휨설계 보 휨">
-        <td class="c-no">RC-B1</td>
-        <td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span></td>
-        <td class="c-mem">보 휨</td>
-        <td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-B1_KDS14_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds14" data-member="v" data-text="rc-v1 v1 직사각형 보 전단설계 스터럽 보 전단">
-        <td class="c-no">RC-V1</td>
-        <td class="c-title"><span class="t">직사각형 보 전단설계</span> <span class="tag">스터럽</span></td>
-        <td class="c-mem">보 전단</td>
-        <td class="c-std"><span class="mth mth-14">KDS 14 20 22</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-V1_KDS14_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds14" data-member="c" data-text="rc-c1 c1 띠철근 기둥 축 휨 p-m 상관도 기둥">
-        <td class="c-no">RC-C1</td>
-        <td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span></td>
-        <td class="c-mem">기둥</td>
-        <td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds14" data-member="c" data-text="rc-c3 c3 원형 나선철근 기둥 p-m 상관도 기둥">
-        <td class="c-no">RC-C3</td>
-        <td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span></td>
-        <td class="c-mem">기둥</td>
-        <td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-C3_KDS14_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr class="grprow" data-method="kds24"><td class="grp" colspan="5">KDS 24 한계상태설계법 (4제)</td></tr>
-      <tr data-method="kds24" data-member="b" data-text="rc-b2 b2 단철근 직사각형 보 휨설계 한계상태 보 휨">
-        <td class="c-no">RC-B2</td>
-        <td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span> <span class="tag">RC-B1 비교</span></td>
-        <td class="c-mem">보 휨</td>
-        <td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-B2_KDS24_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds24" data-member="v" data-text="rc-v2 v2 직사각형 보 전단설계 변각 트러스 한계상태 보 전단">
-        <td class="c-no">RC-V2</td>
-        <td class="c-title"><span class="t">직사각형 보 전단설계</span> <span class="tag">변각 트러스</span></td>
-        <td class="c-mem">보 전단</td>
-        <td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-V2_KDS24_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds24" data-member="c" data-text="rc-c2 c2 띠철근 기둥 축 휨 p-m 상관도 한계상태 기둥">
-        <td class="c-no">RC-C2</td>
-        <td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span> <span class="tag">RC-C1 비교</span></td>
-        <td class="c-mem">기둥</td>
-        <td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-C2_KDS24_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td>
-      </tr>
-      <tr data-method="kds24" data-member="c" data-text="rc-c4 c4 원형 나선철근 기둥 p-m 상관도 한계상태 기둥">
-        <td class="c-no">RC-C4</td>
-        <td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span> <span class="tag">RC-C3 비교</span></td>
-        <td class="c-mem">기둥</td>
-        <td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td>
-        <td class="c-dl"><a class="dl dl-p" href="files/RC-C4_KDS24_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td>
-      </tr>
-    </tbody>
-  </table>
+<tr class="grprow" data-method="kds14"><td class="grp" colspan="5">KDS 14 강도설계법 (9제)</td></tr>
+      <tr data-method="kds14" data-member="b" data-text="rc-b1 보 휨 단철근 직사각형 보 휨설계"><td class="c-no">RC-B1</td><td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span></td><td class="c-mem">보 휨</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-B1_KDS14_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="b" data-text="rc-v1 보 전단 스터럽 직사각형 보 전단설계"><td class="c-no">RC-V1</td><td class="c-title"><span class="t">직사각형 보 전단설계</span></td><td class="c-mem">보 전단</td><td class="c-std"><span class="mth mth-14">KDS 14 20 22</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-V1_KDS14_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="c" data-text="rc-c1 기둥 pm 사각 띠철근 기둥 P-M 상관도"><td class="c-no">RC-C1</td><td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span></td><td class="c-mem">사각기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="c" data-text="rc-c3 원형 기둥 pm 나선 원형 나선철근 기둥 P-M 상관도"><td class="c-no">RC-C3</td><td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span></td><td class="c-mem">원형기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C3_KDS14_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="c" data-text="rc-c5 세장 기둥 모멘트확대 세장기둥 모멘트 확대 (2차효과)"><td class="c-no">RC-C5</td><td class="c-title"><span class="t">세장기둥 모멘트 확대 (2차효과)</span></td><td class="c-mem">세장기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C5_KDS14_%EC%84%B8%EC%9E%A5%EA%B8%B0%EB%91%A5_%EB%AA%A8%EB%A9%98%ED%8A%B8%ED%99%95%EB%8C%80.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="s" data-text="rc-s 슬래브 1방향 휨 1방향 슬래브 휨설계"><td class="c-no">RC-S</td><td class="c-title"><span class="t">1방향 슬래브 휨설계</span></td><td class="c-mem">슬래브</td><td class="c-std"><span class="mth mth-14">KDS 14 20 70</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-S_KDS14_1%EB%B0%A9%ED%96%A5%EC%8A%AC%EB%9E%98%EB%B8%8C_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="s" data-text="rc-f 기초 확대기초 뚫림 독립확대기초 설계 (휨·전단·뚫림)"><td class="c-no">RC-F</td><td class="c-title"><span class="t">독립확대기초 설계 (휨·전단·뚫림)</span></td><td class="c-mem">기초판</td><td class="c-std"><span class="mth mth-14">KDS 14 20 22</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-F_KDS14_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="a" data-text="ld-1 정착 겹침이음 인장 정착길이 · 겹침이음"><td class="c-no">LD-1</td><td class="c-title"><span class="t">인장 정착길이 · 겹침이음</span></td><td class="c-mem">정착·이음</td><td class="c-std"><span class="mth mth-14">KDS 14 20 52</span></td><td class="c-dl"><a class="dl dl-p" href="files/LD-1_KDS14_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4_%EA%B2%B9%EC%B9%A8%EC%9D%B4%EC%9D%8C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds14" data-member="d" data-text="dt-1 내진 횡구속 smf 기둥 SMF 기둥 횡구속철근 (내진)"><td class="c-no">DT-1</td><td class="c-title"><span class="t">SMF 기둥 횡구속철근 (내진)</span></td><td class="c-mem">철근상세·내진</td><td class="c-std"><span class="mth mth-14">KDS 14 20 80</span></td><td class="c-dl"><a class="dl dl-p" href="files/DT-1_KDS14_SMF%EA%B8%B0%EB%91%A5_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>Calcpad 파일</a></td></tr>
+<tr class="grprow" data-method="kds24"><td class="grp" colspan="5">KDS 24 한계상태설계법 (7제)</td></tr>
+      <tr data-method="kds24" data-member="b" data-text="rc-b2 보 휨 한계상태 단철근 직사각형 보 휨설계"><td class="c-no">RC-B2</td><td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span></td><td class="c-mem">보 휨</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-B2_KDS24_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="b" data-text="rc-v2 보 전단 변각 한계상태 직사각형 보 전단설계 (변각 트러스)"><td class="c-no">RC-V2</td><td class="c-title"><span class="t">직사각형 보 전단설계 (변각 트러스)</span></td><td class="c-mem">보 전단</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-V2_KDS24_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="c" data-text="rc-c2 기둥 pm 한계상태 띠철근 기둥 P-M 상관도"><td class="c-no">RC-C2</td><td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span></td><td class="c-mem">사각기둥</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C2_KDS24_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="c" data-text="rc-c4 원형 기둥 pm 한계상태 원형 나선철근 기둥 P-M 상관도"><td class="c-no">RC-C4</td><td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span></td><td class="c-mem">원형기둥</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C4_KDS24_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="s" data-text="rc-f2 기초 확대기초 한계상태 독립확대기초 설계 (뚫림 2d)"><td class="c-no">RC-F2</td><td class="c-title"><span class="t">독립확대기초 설계 (뚫림 2d)</span></td><td class="c-mem">기초판</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-F2_KDS24_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="a" data-text="ld-2 교량 정착 한계상태 교량 주거더 정착길이"><td class="c-no">LD-2</td><td class="c-title"><span class="t">교량 주거더 정착길이</span></td><td class="c-mem">정착·이음</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/LD-2_KDS24_%EA%B5%90%EB%9F%89%EC%A3%BC%EA%B1%B0%EB%8D%94_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4.cpd" download>Calcpad 파일</a></td></tr>
+      <tr data-method="kds24" data-member="d" data-text="dt-2 내진 교각 횡구속 한계상태 사각형 교각 횡구속철근 (내진)"><td class="c-no">DT-2</td><td class="c-title"><span class="t">사각형 교각 횡구속철근 (내진)</span></td><td class="c-mem">철근상세·내진</td><td class="c-std"><span class="mth mth-24">KDS 24 17 11</span></td><td class="c-dl"><a class="dl dl-p" href="files/DT-2_KDS24_%EC%82%AC%EA%B0%81%EA%B5%90%EA%B0%81_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>Calcpad 파일</a></td></tr>
+    </tbody></table>
   <div class="empty" id="empty">조건에 맞는 예제가 없습니다.</div>
 </main>
 <footer><div class="wrap"><p>산수허브 SANSUHUB · 토목구조물의 설계 · 건설기술 개발</p>
-<p style="margin-top:6px;color:#9aa4ad">Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.</p></div></footer>
+<p style="margin-top:6px;color:#9aa4ad">Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다. 설계실무서(전 7편)는 자료실에서 제공합니다.</p></div></footer>
 <script>
-(function(){
-  var rows=[].slice.call(document.querySelectorAll('tbody tr:not(.grprow)'));
-  var grprows=[].slice.call(document.querySelectorAll('tr.grprow'));
-  var fbtns=[].slice.call(document.querySelectorAll('.fbtn'));
-  var memsel=document.getElementById('memsel');
-  var search=document.getElementById('search');
-  var cnt=document.getElementById('cnt');
-  var empty=document.getElementById('empty');
-  var fMethod='all';
-  function apply(){
-    var mem=memsel.value, q=(search.value||'').trim().toLowerCase();
-    var n=0;
-    rows.forEach(function(r){
-      var ok=true;
-      if(fMethod!=='all' && r.dataset.method!==fMethod) ok=false;
-      if(mem!=='all' && r.dataset.member!==mem) ok=false;
-      if(q && (r.dataset.text||'').indexOf(q)<0) ok=false;
-      r.style.display=ok?'':'none';
-      if(ok) n++;
-    });
-    grprows.forEach(function(g){
-      var m=g.dataset.method;
-      var any=rows.some(function(r){return r.style.display!=='none' && r.dataset.method===m;});
-      g.style.display=any?'':'none';
-    });
-    cnt.textContent=n;
-    empty.style.display=n?'none':'block';
-  }
-  fbtns.forEach(function(b){b.addEventListener('click',function(){fbtns.forEach(function(x){x.classList.remove('active');});b.classList.add('active');fMethod=b.dataset.f;apply();});});
-  memsel.addEventListener('change',apply);
-  search.addEventListener('input',apply);
-  var t=document.querySelector(".navtoggle"),nv=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=nv.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});
-})();
+(function(){var rows=[].slice.call(document.querySelectorAll('tbody tr:not(.grprow)')),grprows=[].slice.call(document.querySelectorAll('tr.grprow')),fbtns=[].slice.call(document.querySelectorAll('.fbtn')),memsel=document.getElementById('memsel'),search=document.getElementById('search'),cnt=document.getElementById('cnt'),empty=document.getElementById('empty'),fMethod='all';
+function apply(){var mem=memsel.value,q=(search.value||'').trim().toLowerCase(),n=0;rows.forEach(function(r){var ok=true;if(fMethod!=='all'&&r.dataset.method!==fMethod)ok=false;if(mem!=='all'&&r.dataset.member!==mem)ok=false;if(q&&(r.dataset.text||'').indexOf(q)<0)ok=false;r.style.display=ok?'':'none';if(ok)n++;});grprows.forEach(function(g){var m=g.dataset.method;var any=rows.some(function(r){return r.style.display!=='none'&&r.dataset.method===m;});g.style.display=any?'':'none';});cnt.textContent=n;empty.style.display=n?'none':'block';}
+fbtns.forEach(function(b){b.addEventListener('click',function(){fbtns.forEach(function(x){x.classList.remove('active');});b.classList.add('active');fMethod=b.dataset.f;apply();});});
+memsel.addEventListener('change',apply);search.addEventListener('input',apply);
+var t=document.querySelector(".navtoggle"),nv=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=nv.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();
 </script></body></html>

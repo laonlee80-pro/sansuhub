@@ -75,10 +75,20 @@
 "3. 최대 설계축강도 [KDS 14 20 20] (e=0 부근, 띠철근)
 '공칭 순수축강도 -'P_o = f_c*(b*h - A_st) + f_y*A_st | kN
 '최대 설계축강도 -'phiP_n.max = 0.80*phi*P_o | kN
-#if P_u ≤ phiP_n.max
-  "→ 축강도 측면 O.K. (P_u ≤ φP_n,max)
+'──────────────────────────────────────────────
+"●  축방향 철근비 검토 [KDS 14 20 20 (4.3.2)]
+'축방향 철근비 -'rho_g = A_st/(b*h)
+#if rho_g < 0.01
+  '<b style="font-size:calc(1em + 1pt)">→ 철근비 부족 (ρ_g < 0.01) — 주철근 증대 필요</b>
+#else if rho_g > 0.08
+  '<b style="font-size:calc(1em + 1pt)">→ 철근비 과다 (ρ_g > 0.08) — 주철근 감소</b>
 #else
-  "→ 축강도 부족 — 단면 또는 철근 증대 필요
+  '<b style="font-size:calc(1em + 1pt)">→ 철근비 O.K. (0.01 ≤ ρ_g ≤ 0.08, 겹침이음부 0.04)</b>
+#end if
+#if P_u ≤ phiP_n.max
+  '<b style="font-size:calc(1em + 1pt)">→ 축강도 측면 O.K. (P_u ≤ φP_n,max)</b>
+#else
+  '<b style="font-size:calc(1em + 1pt)">→ 축강도 부족 — 단면 또는 철근 증대 필요</b>
 #end if
 '──────────────────────────────────────────────
 "4. 균형파괴점 (Balanced) 산정
@@ -96,9 +106,9 @@
 '설계 편심 -'e = M_u/P_u | mm
 '균형 편심 -'e_b = M_b/P_b | mm
 #if e ≤ e_b
-  "→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — P_u가 큰 영역
+  '<b style="font-size:calc(1em + 1pt)">→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — P_u가 큰 영역</b>
 #else
-  "→ e > e_b : 인장지배(철근 항복 선행) — M_u가 큰 영역
+  '<b style="font-size:calc(1em + 1pt)">→ e > e_b : 인장지배(철근 항복 선행) — M_u가 큰 영역</b>
 #end if
 '설계점 (M_u, P_u)이 아래 P-M 상관도 곡선 안쪽에 있으면 안전하다.
 '──────────────────────────────────────────────
@@ -156,9 +166,9 @@ $Plot{M_n(c)|P_n(c) & phiM_n(c)|phiP_n(c) & hx(c)|hy(c) & vx(c)|vy(c) @ c = 40mm
 '설계 휨강도 -'phiM_d = phi_d*M_n(c_d) | kN*m
 '안전율 (= φP_n/P_u = φM_n/M_u, 동일 반경선상) -'SF = phiP_d/P_u
 #if phiP_d ≥ P_u
-  "<b>판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b>
 #else
-  "<b>판정 : N.G.  (단면 또는 철근 증대 필요)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : N.G.  (단면 또는 철근 증대 필요)</b>
 #end if
 '──────────────────────────────────────────────
 "8. 참고 — 주요 점
@@ -168,4 +178,4 @@ M_u
 '균형점 -'P_b
 M_b
 '──────────────────────────────────────────────
-"<i>※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</i>
+'<b style="font-size:calc(1em + 1pt)">※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</b>

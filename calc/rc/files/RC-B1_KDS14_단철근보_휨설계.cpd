@@ -18,115 +18,121 @@
 '<text x="210" y="38" font-size="11">변형률</text>
 '<line x1="225" y1="45" x2="225" y2="195" stroke="#000000" stroke-width="1"/>
 '<line x1="225" y1="45" x2="280" y2="45" stroke="#000000" stroke-width="0.8"/>
-'<line x1="280" y1="45" x2="225" y2="118" stroke="#cc0000" stroke-width="1.6"/>
-'<line x1="225" y1="118" x2="268" y2="178" stroke="#cc0000" stroke-width="1.6"/>
+'<line x1="280" y1="45" x2="180" y2="178" stroke="#cc0000" stroke-width="1.8"/>
+'<line x1="180" y1="178" x2="225" y2="178" stroke="#000000" stroke-width="0.8"/>
+'<circle cx="225" cy="118" r="2.5" fill="#cc0000"/>
 '<text x="283" y="49" font-size="11">ε_cu</text>
-'<text x="270" y="190" font-size="11">ε_s</text>
-'<text x="228" y="115" font-size="10">중립축</text>
+'<text x="158" y="190" font-size="11">ε_s</text>
+'<text x="228" y="113" font-size="10">중립축</text>
 '<text x="345" y="38" font-size="11">등가응력</text>
 '<text x="340" y="38" font-size="10"> </text>
 '<rect x="340" y="45" width="72" height="38" fill="#999999" fill-opacity="0.45" stroke="#000000" stroke-width="1"/>
 '<text x="342" y="60" font-size="11">0.85·f_ck</text>
-'<line x1="376" y1="100" x2="332" y2="100" stroke="#000000" stroke-width="1.5"/>
-'<polygon points="330,100 338,96 338,104" fill="#000000"/>
-'<text x="380" y="104" font-size="12">C</text>
-'<text x="416" y="66" font-size="10">a</text>
-'<line x1="345" y1="178" x2="405" y2="178" stroke="#000000" stroke-width="1.5"/>
-'<polygon points="407,178 399,174 399,182" fill="#000000"/>
+'<line x1="330" y1="45" x2="330" y2="83" stroke="#000000" stroke-width="0.8"/>
+'<polygon points="330,45 327,52 333,52" fill="#000000"/>
+'<polygon points="330,83 327,76 333,76" fill="#000000"/>
+'<text x="317" y="68" font-size="11">a</text>
+'<line x1="378" y1="69" x2="340" y2="69" stroke="#000000" stroke-width="1.8"/>
+'<polygon points="338,69 347,65 347,73" fill="#000000"/>
+'<text x="383" y="73" font-size="13" font-weight="bold">C</text>
+'<line x1="345" y1="178" x2="405" y2="178" stroke="#000000" stroke-width="1.8"/>
+'<polygon points="407,178 398,174 398,182" fill="#000000"/>
+'<line x1="427" y1="69" x2="427" y2="178" stroke="#000000" stroke-width="0.9"/>
+'<polygon points="427,69 423,78 431,78" fill="#000000"/>
+'<polygon points="427,178 423,169 431,169" fill="#000000"/>
+'<text x="433" y="127" font-size="11">d − a/2</text>
 '<text x="350" y="193" font-size="11">T = A_s·f_y</text>
 '</svg>
 '──────────────────────────────────────────────
 "1. 설계 입력값 (값을 입력하고 ▶ 계산을 누르세요)
 '계수휨모멘트(소요강도) -'M_u = ? {250}kN*m
-'보의 폭 -'b = ? {300}mm
+'보의 폭 -'b = ? {500}mm
 '보의 전체 높이 -'h = ? {600}mm
 '압축연단 ~ 인장철근 도심 거리 -'d_1 = ? {60}mm
 '콘크리트 기준압축강도 -'f_ck = ? {27}MPa
 '철근 기준항복강도 -'f_y = ? {400}MPa
-'인장철근 호칭 — D번호 (10/13/16/19/22/25/29/32) -'D_no = ? {22}
-'인장철근 개수 -'n_b = ? {5}
+'인장철근 배근간격 CTC (고정값) -'s = ? {100}mm
+'측면 피복(표면~철근 중심) -'c_s = ? {40}mm
 #Post
 '──────────── 이하 계산 과정 · 결과 (▶ 계산 시 결과창 표시) ────────────
+"[1단계] 계수휨모멘트 · 유효깊이 · 기본계수
 '철근 탄성계수 -'E_s = 200000MPa
-'유효깊이 -'d = h - d_1
-'선택 철근 공칭지름 :
-#if D_no ≡ 10
-  '선택 D10 -'d_b = 9.53mm
-#else if D_no ≡ 13
-  '선택 D13 -'d_b = 12.7mm
-#else if D_no ≡ 16
-  '선택 D16 -'d_b = 15.9mm
-#else if D_no ≡ 19
-  '선택 D19 -'d_b = 19.1mm
-#else if D_no ≡ 22
-  '선택 D22 -'d_b = 22.2mm
-#else if D_no ≡ 25
-  '선택 D25 -'d_b = 25.4mm
-#else if D_no ≡ 29
-  '선택 D29 -'d_b = 28.6mm
-#else if D_no ≡ 32
-  '선택 D32 -'d_b = 31.8mm
-#else
-  '미정의 — D22 가정 -'d_b = 22.2mm
-#end if
-'철근 1개 공칭단면적 -'A_b1 = π*d_b^2/4 | mm^2
-'사용 인장철근량 (n_b × A_b1) -'A_s = n_b*A_b1 | mm^2
-'──────────────────────────────────────────────
-"2. 재료·단면 계수 [KDS 14 20 20 (4.1.1)]
 '콘크리트 극한변형률 -'epsilon_cu = 0.0033
 '등가응력블록 깊이계수 (f_ck ≤ 40MPa) -'beta_1 = 0.80
 '인장지배 변형률 한계 (f_y ≤ 400MPa) -'epsilon_t.lim = 0.005
+'가정 강도감소계수(인장지배 가정) -'phi_a = 0.85
+'유효깊이 -'d = h - d_1
 '──────────────────────────────────────────────
-"3. 등가 직사각형 응력블록 깊이 a [힘의 평형 C = T]
-'압축연단 등가응력 = 0.85·f_ck, 평형식 0.85·f_ck·b·a = A_s·f_y
+"[2단계] 계산철근량 A_s,cal 산정
+'인장지배(φ=0.85)를 가정하고 평형·모멘트식으로부터 산정한다.
+'R_n = M_u/(φ·b·d²) ,  ρ_cal = (0.85·f_ck/f_y)·[1 − √(1 − 2·R_n/(0.85·f_ck))]
+'소요강도계수 -'R_n = M_u/(phi_a*b*d^2) | MPa
+'계산철근비 -'rho_cal = 0.85*f_ck/f_y*(1 - sqr(1 - 2*R_n/(0.85*f_ck)))
+'계산철근량 -'A_s.cal = rho_cal*b*d | mm^2
+'──────────────────────────────────────────────
+"[3단계] 사용철근 결정 (배근간격 → 직경)
+'배근간격 s 가 고정값이므로 한 단 철근 개수 n_b 는 정해진다(내림). 필요한 철근량은 직경을 키워 맞춘다.
+'한 단 철근 개수 -'n_b = floor((b - 2*c_s)/s) + 1
+'1본 소요단면적 -'A_bar.req = A_s.cal/n_b | mm^2
+'표준 직경 선택 (1본 소요단면적 이상인 최소 직경) :
+#if A_bar.req ≤ 71.3mm^2
+  '선택 D10 -'d_b = 9.53mm
+#else if A_bar.req ≤ 126.7mm^2
+  '선택 D13 -'d_b = 12.7mm
+#else if A_bar.req ≤ 198.6mm^2
+  '선택 D16 -'d_b = 15.9mm
+#else if A_bar.req ≤ 286.5mm^2
+  '선택 D19 -'d_b = 19.1mm
+#else if A_bar.req ≤ 387.1mm^2
+  '선택 D22 -'d_b = 22.2mm
+#else if A_bar.req ≤ 506.7mm^2
+  '선택 D25 -'d_b = 25.4mm
+#else if A_bar.req ≤ 642.4mm^2
+  '선택 D29 -'d_b = 28.6mm
+#else if A_bar.req ≤ 794.2mm^2
+  '선택 D32 -'d_b = 31.8mm
+#else
+  '<b style="font-size:calc(1em + 1pt)">→ 1본 소요단면적이 D32를 초과 — 배근간격 축소 또는 단면 증대 필요</b>
+  '잠정 D32 -'d_b = 31.8mm
+#end if
+'철근 1본 공칭단면적 -'A_b1 = π*d_b^2/4 | mm^2
+'사용 인장철근량 (n_b × A_b1) -'A_s = n_b*A_b1 | mm^2
+'──────────────────────────────────────────────
+"[4단계] 최소철근비 검토 [KDS 14 20 20 (4.2.2)] — 4/3 예외규정
+'산정식1 -'As_min.1 = 0.25*sqr(f_ck/1MPa)*1MPa/f_y*b*d | mm^2
+'산정식2 -'As_min.2 = 1.4MPa/f_y*b*d | mm^2
+'최소철근량 -'A_s.min = max(As_min.1; As_min.2) | mm^2
+'계산철근량의 4/3 -'A_s.cal43 = 4/3*A_s.cal | mm^2
+'소요 최소철근량 A_s,req = min(4/3·A_s,cal, A_s,min) -'A_s.req = min(A_s.cal43; A_s.min) | mm^2
+#if A_s ≥ A_s.req
+  '<b style="font-size:calc(1em + 1pt)">→ 최소철근량 조건 만족 (A_s ≥ A_s,req)</b>
+#else
+  '<b style="font-size:calc(1em + 1pt)">→ 최소철근량 부족 — 철근 직경 상향 필요</b>
+#end if
+'──────────────────────────────────────────────
+"[5단계] 설계휨강도 확인 [KDS 14 20 20 (4.1)]
 '등가응력블록 깊이 -'a = (A_s*f_y)/(0.85*f_ck*b)
 '중립축 깊이 -'c = a/beta_1
-'──────────────────────────────────────────────
-"4. 단면 거동 판정 (강도감소계수 결정) [KDS 14 20 20 (4.1.2)]
 '최외단 인장철근 변형률 -'epsilon_t = epsilon_cu*(d - c)/c
 #if epsilon_t ≥ epsilon_t.lim
-  "→ 인장지배단면 : φ = 0.85
+  '<b style="font-size:calc(1em + 1pt)">→ 인장지배 단면 : φ = 0.85 (가정 확인)</b>
   phi = 0.85
 #else if epsilon_t ≤ 0.002
-  "→ 압축지배단면 : φ = 0.65 (단면 재검토 필요)
+  '<b style="font-size:calc(1em + 1pt)">→ 압축지배 단면 : φ = 0.65 (단면 재검토 필요)</b>
   phi = 0.65
 #else
-  "→ 변화구간단면 : φ 선형보간
+  '<b style="font-size:calc(1em + 1pt)">→ 변화구간 단면 : φ 선형보간</b>
   phi = 0.65 + (epsilon_t - 0.002)*(0.85 - 0.65)/(epsilon_t.lim - 0.002)
 #end if
 '적용 강도감소계수 -'phi = phi
-'──────────────────────────────────────────────
-"5. 공칭휨강도 및 설계휨강도 [KDS 14 20 20 (4.1.3)]
-'공칭휨강도 -'M_n = A_s*f_y*(d - a/2)
-'설계휨강도 -'phi*M_n
-'──────────────────────────────────────────────
-"6. 안전성 검토 (φ·M_n ≥ M_u)
+'공칭휨강도 -'M_n = A_s*f_y*(d - a/2) | kN*m
+'설계휨강도 -'phi*M_n | kN*m
 '안전율 -'SF = phi*M_n/M_u
 #if phi*M_n ≥ M_u
-  "<b>판정 : O.K.  (설계휨강도 ≥ 소요휨모멘트)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : O.K.  (설계휨강도 ≥ 소요휨모멘트)</b>
 #else
-  "<b>판정 : N.G.  (철근량 또는 단면 증가 필요)</b>
+  '<b style="font-size:calc(1em + 1pt)">판정 : N.G.  (철근 직경 상향 또는 단면 증가 필요)</b>
 #end if
 '──────────────────────────────────────────────
-"7. 최소철근량 검토 [KDS 14 20 20 (4.2.2)]
-'(1) 최소철근량 규정 (두 값 중 큰 값)
-'산정식 1 -'As_min.1 = 0.25*sqr(f_ck/1MPa)*1MPa/f_y*b*d | mm^2
-'산정식 2 -'As_min.2 = 1.4MPa/f_y*b*d | mm^2
-'최소철근량 -'A_s.min = max(As_min.1; As_min.2) | mm^2
-'(2) 예외 규정 : 배치철근이 소요철근의 4/3 이상이면 (1) 적용 제외
-'소요휨모멘트에 대한 소요철근량 산정 (φM_n = M_u 역산) :
-'소요강도계수 -'R_n = M_u/(phi*b*d^2) | MPa
-'소요철근비 -'rho_req = 0.85*f_ck/f_y*(1 - sqr(1 - 2*R_n/(0.85*f_ck)))
-'소요철근량 -'A_s.req = rho_req*b*d | mm^2
-'소요철근량의 4/3 -'A_s.req43 = 4/3*A_s.req | mm^2
-'(3) 종합 판정 : A_s ≥ A_s,min  또는  A_s ≥ 4/3·A_s,req 이면 만족
-#if A_s ≥ A_s.min
-  "<b>→ 최소철근량 조건 만족 (A_s ≥ A_s,min)</b>
-#else if A_s ≥ A_s.req43
-  "<b>→ 최소철근량 조건 만족 (배치철근 ≥ 4/3·소요철근, 예외규정 적용)</b>
-#else
-  "<b>→ 최소철근량 부족 — 철근 증가 필요</b>
-#end if
-'──────────────────────────────────────────────
-"<i>※ 본 스크립트는 게시용 샘플입니다. 값을 수정하면 결과·판정이</i>
-"<i>자동 갱신되며, HTML/PDF 보고서로 출력됩니다.</i>
+'<b style="font-size:calc(1em + 1pt)">※ 산출 절차는 산수허브 「콘크리트구조설계 실무」 제1편 예제 RC-B1과 동일하다:</b>
+'<b style="font-size:calc(1em + 1pt)">계수모멘트 → 계산철근량 A_s,cal → 배근간격으로 직경 결정 → 최소철근비(4/3) → 설계휨강도.</b>
