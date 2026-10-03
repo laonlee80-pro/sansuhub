@@ -5,47 +5,119 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="assets/logo-symbol.svg">
 <title>산수허브 SANSUHUB · 토목구조 설계 실무 플랫폼</title>
-<meta name="description" content="거푸집동바리 등 토목구조 설계 실무 전자책과 Calcpad 계산도구, 양식, 법규 업데이트를 한곳에서 제공하는 통합 허브.">
+<meta name="description" content="토목구조 설계에 필요한 계산과 자료를 한곳에서. 거푸집동바리 45제·콘크리트 구조부재 16제 Calcpad 계산 예제와 설계 실무자료를 제공합니다.">
 <style>
-  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#ffffff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased}
-  a{text-decoration:none;color:inherit}
-  .wrap{max-width:960px;margin:0 auto;padding:0 24px}
-  .gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
-  .gnav-in{max-width:1040px;margin:0 auto;padding:0 24px;min-height:52px;display:flex;align-items:center;gap:4px}
-  .gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
-  .gnav .brand b{color:var(--accent)}
-  .gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:40px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:0 9px}.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
-  .gitem{position:relative}
-  .gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
-  .gitem>a:hover{color:var(--ink)}
-  .gitem.on>a{color:var(--accent);font-weight:700}
-  .caret{font-size:9px;opacity:.55;margin-left:4px}
-  .submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
-  .gitem:hover .submenu,.gitem.open .submenu{display:block}
-  .submenu a{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--ink);padding:8px 12px;border-radius:7px;white-space:nowrap}
-  .submenu a:hover{background:var(--soft);color:var(--accent)}
-  .submenu .muted{color:#9aa4ad;font-size:11px;margin-left:14px}
-  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}}
-  header{border-bottom:1px solid var(--line);padding:56px 0 44px;text-align:center}
-  .logo{font-size:30px;font-weight:800;letter-spacing:-.5px}
-  .logo span{color:var(--accent)}
-  .en{font-size:13px;letter-spacing:3px;color:var(--sub);margin-top:6px}
-  .tag{margin-top:18px;font-size:16px;color:var(--sub)}
-  .badge{display:inline-block;margin-top:20px;font-size:12px;color:var(--accent);background:var(--accent-soft);padding:5px 12px;border-radius:20px}
-  main{padding:48px 0 24px}
-  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
-  .card{border:1px solid var(--line);border-radius:12px;padding:24px;background:var(--bg);transition:border-color .15s,transform .15s}
-  .card:hover{border-color:var(--accent);transform:translateY(-2px)}
-  .card.lead{background:var(--accent-soft);border-color:#bcd6f0}
-  .card h2{font-size:17px;font-weight:700;margin-bottom:6px}
-  .card p{font-size:14px;color:var(--sub)}
-  .card .soon{display:inline-block;margin-top:12px;font-size:12px;color:var(--sub);background:var(--soft);padding:3px 10px;border-radius:6px}
-  footer{border-top:1px solid var(--line);margin-top:48px;padding:32px 0 64px;text-align:center;font-size:13px;color:var(--sub)}
-  footer a{color:var(--accent);text-decoration:none}
-  .brandimg{height:30px;display:block}
-  .herologo{height:64px;display:block;margin:0 auto}
+:root{--navy:#1A3A5C;--navy-d:#12293f;--navy-50:#eef3f8;--teal:#7FC4D4;--ink:#1b2530;--sub:#46525e;--mute:#6b7682;--line:#dfe3e8;--bg:#f4f6f8;--soft:#f4f6f8;--accent:#1A3A5C;
+--ok:#0f6e56;--ok-bg:#e3f4ee;--wip:#8a5a00;--wip-bg:#fdf1d8;--plan:#55606b;--plan-bg:#eceff2;--adv:#8c2a2a;--adv-bg:#fbe9e9;--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-ok{color:var(--ok);background:var(--ok-bg)}.b-wip{color:var(--wip);background:var(--wip-bg)}.b-plan{color:var(--plan);background:var(--plan-bg)}
+.tag{display:inline-block;font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap;line-height:1.5}
+.tag.cd{color:var(--navy);background:var(--navy-50);border-color:#cfdceb;font-weight:600}
+.lv{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.lv-b{color:var(--ok);background:var(--ok-bg)}.lv-a{color:var(--wip);background:var(--wip-bg)}.lv-c{color:var(--adv);background:var(--adv-bg)}
+footer.site{margin-top:60px;background:#fff;border-top:1px solid var(--line);padding:30px 0 46px;font-size:14px;color:var(--sub)}
+footer.site .fi{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
+
+.gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+.gnav-in{max-width:1080px;margin:0 auto;padding:0 20px;min-height:60px;display:flex;align-items:center;gap:4px}
+.gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+.gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}
+.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;padding:0 11px}
+.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+.gitem{position:relative}
+.gitem>a{display:inline-flex;align-items:center;font-size:15px;color:var(--sub);padding:16px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+.gitem>a:hover{color:var(--ink)}
+.gitem.on>a{color:var(--accent);font-weight:700}
+.caret{font-size:9px;opacity:.55;margin-left:4px}
+.submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+.gitem:hover .submenu,.gitem.open .submenu{display:block}
+.submenu a{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink);padding:9px 12px;border-radius:7px;white-space:nowrap}
+.submenu a:hover{background:var(--soft);color:var(--accent)}
+.brandimg{height:32px;display:block}
+@media(max-width:720px){.gnav-in{flex-wrap:wrap;padding:8px 16px}.navtoggle{display:flex;margin-left:auto}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none;padding-bottom:6px}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:12px 8px;justify-content:space-between;font-size:16px}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.submenu a{padding:10px 12px;font-size:15px}}
+
+.hero{background:var(--navy);color:#fff;padding:56px 0 50px;position:relative;overflow:hidden}
+.hero::after{content:"";position:absolute;right:-60px;bottom:-40px;width:420px;height:220px;background:repeating-linear-gradient(90deg,rgba(255,255,255,.05) 0 2px,transparent 2px 46px),repeating-linear-gradient(0deg,rgba(255,255,255,.05) 0 2px,transparent 2px 46px);transform:skewX(-12deg);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{font-size:13px;letter-spacing:.08em;color:var(--teal);font-weight:700}
+.hero h1{font-size:clamp(26px,4.4vw,40px);line-height:1.3;letter-spacing:-.02em;margin:10px 0 14px;font-weight:800}
+.hero p.lead{color:#cfdbe7;max-width:640px;font-size:17px}
+.search{margin-top:26px;max-width:640px;position:relative}
+.search input{width:100%;height:54px;border-radius:12px;border:0;padding:0 18px 0 48px;font:inherit;font-size:16px;color:var(--ink);outline:3px solid transparent}
+.search input:focus{outline-color:var(--teal)}
+.search svg{position:absolute;left:16px;top:17px}
+.results{position:absolute;left:0;right:0;top:60px;background:#fff;border-radius:12px;box-shadow:0 14px 40px rgba(0,0,0,.18);color:var(--ink);display:none;max-height:340px;overflow:auto;z-index:5}
+.results.show{display:block}
+.results a{display:flex;gap:10px;align-items:baseline;padding:11px 16px;border-bottom:1px solid var(--line);font-size:15px}
+.results a:hover,.results a.k{background:var(--navy-50)}
+.results .code{font:600 12px ui-monospace,Consolas,monospace;color:var(--navy);min-width:56px}
+.results .f{margin-left:auto;font-size:12px;color:var(--mute);white-space:nowrap;padding-left:8px}
+.results .none{padding:14px 16px;color:var(--mute);font-size:14px}
+.cta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:46px;padding:0 20px;border-radius:10px;font-weight:700;font-size:15px}
+.btn.primary{background:#fff;color:var(--navy)}.btn.primary:hover{background:var(--navy-50)}
+.btn.ghost{color:#fff;border:1.5px solid rgba(255,255,255,.45)}.btn.ghost:hover{border-color:#fff}
+.stats{display:flex;gap:28px;flex-wrap:wrap;margin-top:34px;padding-top:22px;border-top:1px solid rgba(255,255,255,.14)}
+.stats div{font-size:13px;color:#b8c8d8}
+.stats b{display:block;font-size:24px;color:#fff;letter-spacing:-.02em}
+section.blk{padding:52px 0 8px}
+.sec-h{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:18px}
+.sec-h h2{font-size:22px;letter-spacing:-.02em}
+.sec-h p{color:var(--sub);font-size:15px;margin-top:2px}
+.more{font-size:14px;color:var(--navy);font-weight:700;white-space:nowrap}
+.more:hover{text-decoration:underline}
+.tools{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.tool{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:24px;display:flex;flex-direction:column;gap:12px;transition:border-color .15s,box-shadow .15s}
+.tool:hover{border-color:var(--navy);box-shadow:0 6px 20px rgba(26,58,92,.08)}
+.tool .top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.tool h3{font-size:19px;letter-spacing:-.01em}
+.tool .count{font-size:30px;font-weight:800;color:var(--navy);line-height:1}
+.tool .count small{font-size:15px;font-weight:700;margin-left:2px}
+.tool p{color:var(--sub);font-size:15px}
+.tool .row{display:flex;gap:6px;flex-wrap:wrap}
+.tool .status{font-size:13.5px;color:var(--sub);border-top:1px dashed var(--line);padding-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.tool .go{margin-top:auto;font-weight:700;color:var(--navy);font-size:15px}
+@media(max-width:720px){.tools{grid-template-columns:1fr}}
+.ex-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.ex{background:#fff;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column}
+.ex:hover{border-color:var(--navy)}
+.ex .pv{height:140px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;padding:8px}
+.ex .pv svg{max-height:124px;max-width:100%;width:auto;height:auto}
+.ex .bd{padding:14px 16px 16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.ex .code{font:600 12px ui-monospace,Consolas,monospace;color:var(--navy)}
+.ex h3{font-size:16px;line-height:1.45}
+.ex .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto}
+.pvnote{font-size:13px;color:var(--mute);margin-top:10px}
+@media(max-width:960px){.ex-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.ex-grid{grid-template-columns:1fr}.ex{flex-direction:row}.ex .pv{width:118px;height:auto;border-bottom:0;border-right:1px solid var(--line);flex:none;padding:6px}.ex .pv svg{max-height:96px}}
+.two{display:grid;grid-template-columns:1.1fr .9fr;gap:16px}
+@media(max-width:820px){.two{grid-template-columns:1fr}}
+.panel{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:6px 0}
+.panel .ph{display:flex;justify-content:space-between;align-items:center;padding:14px 20px 8px}
+.panel .ph h2{font-size:18px}
+.li{display:flex;gap:14px;align-items:center;padding:13px 20px;border-top:1px solid var(--line)}
+.li:hover{background:#fafbfc}
+.ico{width:40px;height:40px;border-radius:9px;background:var(--navy-50);color:var(--navy);display:flex;align-items:center;justify-content:center;font:700 11px ui-monospace,Consolas,monospace;flex:none}
+.li .t{font-weight:600;font-size:15px}
+.li .s{font-size:13.5px;color:var(--mute)}
+.li .ar{margin-left:auto;color:var(--mute)}
+.log{list-style:none;padding:0 20px 8px}
+.log li{display:grid;grid-template-columns:96px 1fr;gap:10px;padding:12px 0;border-top:1px solid var(--line);font-size:15px}
+.log time{font:600 13px ui-monospace,Consolas,monospace;color:var(--mute);padding-top:2px}
+.log .k{font-size:12px;font-weight:700;color:var(--navy);margin-right:6px}
+.soon{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px 22px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.soon a{display:block}
+.soon h4{font-size:15px;margin-bottom:6px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.soon p{font-size:14px;color:var(--sub)}
+.soon a:hover h4{color:var(--navy)}
+@media(max-width:720px){.soon{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -78,61 +150,175 @@
     </div></div>
   </div>
 </div></nav>
-
-<header>
+<header class="hero">
   <div class="wrap">
-    <img class="herologo" src="assets/logo-h.svg" alt="산수허브 SANSUHUB">
-    <p class="tag">토목구조 설계 실무 전자책 · 계산도구 · 양식 · 법규를 한곳에서</p>
-    <span class="badge">사이트 준비 중 · 콘텐츠 순차 공개 예정</span>
+    <div class="eyebrow">토목구조 설계 실무 플랫폼</div>
+    <h1>토목구조 설계에 필요한<br>계산과 자료를 한곳에서</h1>
+    <p class="lead">KDS 설계기준에 맞춘 Calcpad 계산 예제와 설계 실무자료를 내려받아 바로 사용할 수 있습니다.</p>
+    <div class="search" role="search">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6b7682" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input id="q" type="search" placeholder="예제 검색 — 보 휨, P-M, 파이프서포트, 측압" autocomplete="off" aria-label="예제 검색">
+      <div class="results" id="results"></div>
+    </div>
+    <div class="cta">
+      <a class="btn primary" href="calc/">계산 예제 찾아보기 →</a>
+      <a class="btn ghost" href="calc/rc/#guide">처음 이용하는 분께</a>
+    </div>
+    <div class="stats">
+      <div><b>61제</b>공개된 계산 예제</div>
+      <div><b>2개 분야</b>동바리 · 콘크리트 부재</div>
+      <div><b>KDS 14 · KDS 24</b>콘크리트 예제 적용기준</div>
+      <div><b>무료</b>CalcpadCE로 실행</div>
+    </div>
   </div>
 </header>
 
-<main>
-  <div class="wrap">
-    <div class="grid">
-      <a class="card lead" id="books" href="books/">
-        <h2>전자책 스토어</h2>
-        <p>거푸집동바리 설계 실무가이드 등 6권 시리즈. 입문부터 예제·양식까지.</p>
-        <span class="soon">준비 중</span>
+<main class="wrap">
+  <section class="blk">
+    <div class="sec-h"><div><h2>지금 이용할 수 있는 계산도구</h2><p>예제 파일을 내려받아 CalcpadCE에서 입력값만 바꿔 계산합니다.</p></div><a class="more" href="calc/">전체 분야 →</a></div>
+    <div class="tools">
+      <a class="tool" href="calc/dongbari/">
+        <div class="top"><h3>거푸집동바리 설계</h3><div class="count">45<small>제</small></div></div>
+        <p>하중 · 부재 · 벽체 · 슬래브 · 기둥 · 특수구조물 · 비계 예제. 현장 수치를 넣으면 검토 계산서가 만들어집니다.</p>
+        <div class="row"><span class="tag">03~09장</span><span class="tag">기초 · 응용 · 심화</span><span class="tag">CalcpadCE 입력폼</span></div>
+        <div class="status"><span class="badge b-ok">예제 공개</span><span class="badge b-wip">해설 도서 교정 중</span></div>
+        <span class="go">예제 45제 보기 →</span>
       </a>
-      <a class="card lead" id="calc" href="calc/">
-        <h2>계산도구 · Calcpad</h2>
-        <p>설계 예제 45제를 입력폼으로 제공. 현장 수치를 넣어 즉시 계산.</p>
-        <span class="soon" style="background:#e1f5ee;color:#0f6e56">예제 45제 공개</span>
-      </a>
-      <a class="card" id="forms" href="forms/">
-        <h2>자료실</h2>
-        <p>설계·검토 체크리스트와 양식 다운로드.</p>
-        <span class="soon">준비 중</span>
-      </a>
-      <a class="card" id="errata" href="errata/">
-        <h2>업데이트 · 정오표</h2>
-        <p>KCS·KDS·산업안전보건법 개정 반영과 도서 정오표.</p>
-        <span class="soon">준비 중</span>
-      </a>
-      <a class="card" id="membership" href="membership/">
-        <h2>멤버십</h2>
-        <p>최신 양식·계산도구·법규 업데이트 구독 및 단체 라이선스.</p>
-        <span class="soon">준비 중</span>
-      </a>
-      <a class="card" id="about" href="about/">
-        <h2>소개 · 문의</h2>
-        <p>발행처 소개와 독자 문의·피드백.</p>
-        <span class="soon">준비 중</span>
+      <a class="tool" href="calc/rc/">
+        <div class="top"><h3>콘크리트 구조부재 설계</h3><div class="count">16<small>제</small></div></div>
+        <p>보 · 기둥 · 슬래브 · 기초 · 정착 · 내진 예제. 같은 단면을 강도설계법과 한계상태설계법으로 풀어 비교합니다.</p>
+        <div class="row"><span class="tag">KDS 14 강도설계법 9제</span><span class="tag">KDS 24 한계상태설계법 7제</span></div>
+        <div class="status"><span class="badge b-ok">예제 공개</span><span>설계실무서(전 7편) 연동</span></div>
+        <span class="go">예제 16제 보기 →</span>
       </a>
     </div>
-  </div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h"><div><h2>대표 예제</h2><p>예제마다 개념도와 기준 조항, 판정 과정을 담은 계산서가 만들어집니다.</p></div><a class="more" href="calc/">예제 목록 →</a></div>
+    <div class="ex-grid">
+      <a class="ex" href="calc/rc/#RC-B1"><div class="pv"><svg role="img" aria-hidden="true" viewBox="0 0 500 245" xmlns="http://www.w3.org/2000/svg">
+<rect x="45" y="45" width="90" height="150" fill="none" stroke="#000000" stroke-width="2"/>
+<circle cx="63" cy="178" r="5" fill="#000000"/>
+<circle cx="90" cy="178" r="5" fill="#000000"/>
+<circle cx="117" cy="178" r="5" fill="#000000"/>
+<line x1="45" y1="212" x2="135" y2="212" stroke="#000000" stroke-width="0.8"/>
+<text x="86" y="226" font-size="13">b</text>
+<line x1="146" y1="45" x2="146" y2="195" stroke="#000000" stroke-width="0.8"/>
+<text x="151" y="125" font-size="13">h</text>
+<line x1="32" y1="45" x2="32" y2="178" stroke="#000000" stroke-width="0.8" stroke-dasharray="4 2"/>
+<text x="20" y="115" font-size="13">d</text>
+<text x="60" y="38" font-size="11">단면</text>
+<text x="210" y="38" font-size="11">변형률</text>
+<line x1="225" y1="45" x2="225" y2="195" stroke="#000000" stroke-width="1"/>
+<line x1="225" y1="45" x2="280" y2="45" stroke="#000000" stroke-width="0.8"/>
+<line x1="280" y1="45" x2="180" y2="178" stroke="#cc0000" stroke-width="1.8"/>
+<line x1="180" y1="178" x2="225" y2="178" stroke="#000000" stroke-width="0.8"/>
+<circle cx="225" cy="118" r="2.5" fill="#cc0000"/>
+<text x="283" y="49" font-size="11">ε_cu</text>
+<text x="158" y="190" font-size="11">ε_s</text>
+<text x="228" y="113" font-size="10">중립축</text>
+<text x="345" y="38" font-size="11">등가응력</text>
+<text x="340" y="38" font-size="10"> </text>
+<rect x="340" y="45" width="72" height="38" fill="#999999" fill-opacity="0.45" stroke="#000000" stroke-width="1"/>
+<text x="342" y="60" font-size="11">0.85·f_ck</text>
+<line x1="330" y1="45" x2="330" y2="83" stroke="#000000" stroke-width="0.8"/>
+<polygon points="330,45 327,52 333,52" fill="#000000"/>
+<polygon points="330,83 327,76 333,76" fill="#000000"/>
+<text x="317" y="68" font-size="11">a</text>
+<line x1="378" y1="69" x2="340" y2="69" stroke="#000000" stroke-width="1.8"/>
+<polygon points="338,69 347,65 347,73" fill="#000000"/>
+<text x="383" y="73" font-size="13" font-weight="bold">C</text>
+<line x1="345" y1="178" x2="405" y2="178" stroke="#000000" stroke-width="1.8"/>
+<polygon points="407,178 398,174 398,182" fill="#000000"/>
+<line x1="427" y1="69" x2="427" y2="178" stroke="#000000" stroke-width="0.9"/>
+<polygon points="427,69 423,78 431,78" fill="#000000"/>
+<polygon points="427,178 423,169 431,169" fill="#000000"/>
+<text x="433" y="127" font-size="11">d − a/2</text>
+<text x="350" y="193" font-size="11">T = A_s·f_y</text>
+</svg></div><div class="bd"><span class="code">RC-B1</span><h3>단철근 직사각형 보 휨설계</h3><div class="meta"><span class=tag>보 휨</span><span class=tag>KDS 14 20 20</span></div></div></a>
+      <a class="ex" href="calc/rc/#RC-C1"><div class="pv"><svg role="img" aria-hidden="true" viewBox="0 0 440 235" xmlns="http://www.w3.org/2000/svg">
+<text x="95" y="24" font-size="11">기둥 단면 (띠철근)</text>
+<rect x="45" y="55" width="150" height="150" fill="none" stroke="#000000" stroke-width="2"/>
+<rect x="57" y="67" width="126" height="126" fill="none" stroke="#000000" stroke-width="1.2"/>
+<circle cx="66" cy="186" r="6" fill="#000000"/>
+<circle cx="120" cy="186" r="6" fill="#000000"/>
+<circle cx="174" cy="186" r="6" fill="#000000"/>
+<circle cx="66" cy="74" r="6" fill="#000000"/>
+<circle cx="120" cy="74" r="6" fill="#000000"/>
+<circle cx="174" cy="74" r="6" fill="#000000"/>
+<line x1="45" y1="216" x2="195" y2="216" stroke="#000000" stroke-width="0.8"/>
+<text x="116" y="230" font-size="13">b</text>
+<line x1="206" y1="55" x2="206" y2="205" stroke="#000000" stroke-width="0.8"/>
+<text x="211" y="135" font-size="13">h</text>
+<line x1="32" y1="55" x2="32" y2="186" stroke="#000000" stroke-width="0.8" stroke-dasharray="4 2"/>
+<text x="20" y="125" font-size="12">d</text>
+<text x="120" y="105" font-size="10" fill="#555555">띠철근</text>
+<text x="300" y="24" font-size="11">작용 하중 (상단에 P·M 동시 작용)</text>
+<rect x="305" y="82" width="50" height="108" fill="none" stroke="#000000" stroke-width="1.5"/>
+<line x1="330" y1="46" x2="330" y2="79" stroke="#000000" stroke-width="2"/>
+<polygon points="330,82 325,72 335,72" fill="#000000"/>
+<text x="337" y="64" font-size="13">P</text>
+<path d="M 308 72 A 24 16 0 0 1 352 72" fill="none" stroke="#000000" stroke-width="1.8"/>
+<polygon points="352,72 344,68 347,78" fill="#000000"/>
+<text x="357" y="68" font-size="13">M</text>
+</svg></div><div class="bd"><span class="code">RC-C1</span><h3>띠철근 기둥 P-M 상관도</h3><div class="meta"><span class=tag>사각기둥</span><span class=tag>KDS 14 20 20</span></div></div></a>
+      <a class="ex" href="calc/dongbari/#ex4.7"><div class="pv"><svg viewBox="0 0 160 130" aria-hidden="true"><rect x="40" y="8" width="80" height="7" fill="none" stroke="#000"/><line x1="80" y1="15" x2="80" y2="112" stroke="#000" stroke-width="2"/><line x1="76" y1="15" x2="76" y2="112" stroke="#000" stroke-width="0.8"/><line x1="84" y1="15" x2="84" y2="112" stroke="#000" stroke-width="0.8"/><line x1="58" y1="116" x2="102" y2="116" stroke="#000" stroke-width="2"/><path d="M92 26 q16 37 0 76" fill="none" stroke="#cc0000" stroke-width="1.6" stroke-dasharray="4 3"/><line x1="80" y1="0" x2="80" y2="8" stroke="#000"/><text x="100" y="66" font-size="11">좌굴</text><line x1="128" y1="15" x2="128" y2="112" stroke="#000" stroke-width="0.8"/><text x="132" y="66" font-size="11">L</text></svg></div><div class="bd"><span class="code">예제 4.7</span><h3>파이프서포트 좌굴 허용하중</h3><div class="meta"><span class=tag>동바리 04장</span><span class=tag>기초</span></div></div></a>
+      <a class="ex" href="calc/dongbari/#ex3.3"><div class="pv"><svg viewBox="0 0 160 130" aria-hidden="true"><rect x="30" y="8" width="12" height="110" fill="none" stroke="#000" stroke-width="1.5"/><path d="M42 8 L100 58 L100 118 L42 118" fill="#999" fill-opacity=".35" stroke="#000" stroke-width="1.2"/><g stroke="#000" stroke-width=".8"><line x1="100" y1="58" x2="46" y2="58"/><line x1="100" y1="78" x2="46" y2="78"/><line x1="100" y1="98" x2="46" y2="98"/><line x1="74" y1="36" x2="46" y2="36"/></g><text x="104" y="62" font-size="11">P_max</text><text x="4" y="66" font-size="11">H</text><line x1="18" y1="8" x2="18" y2="118" stroke="#000" stroke-width=".8"/></svg></div><div class="bd"><span class="code">예제 3.3</span><h3>벽체 측압 (그래프)</h3><div class="meta"><span class=tag>동바리 03장</span><span class=tag>기초</span></div></div></a>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="two">
+      <div class="panel">
+        <div class="ph"><h2>관련 실무자료</h2><a class="more" href="forms/">자료실 →</a></div>
+        <a class="li" href="forms/rc-series/"><span class="ico">PDF</span><div><div class="t">콘크리트 부재설계 실무 (전 7편)</div><div class="s">콘크리트 예제 16제와 연결된 해설</div></div><span class="ar">›</span></a>
+        <a class="li" href="forms/"><span class="ico">XLS</span><div><div class="t">거푸집동바리 설계검토 체크리스트</div><div class="s">설계 · 검토 단계 확인 항목</div></div><span class="ar">›</span></a>
+        <a class="li" href="forms/"><span class="ico">XLS</span><div><div class="t">거푸집동바리 하중계산 양식</div><div class="s">하중 산정 서식</div></div><span class="ar">›</span></a>
+      </div>
+      <div class="panel">
+        <div class="ph"><h2>최근 변경사항</h2><a class="more" href="errata/">업데이트 →</a></div>
+        <ul class="log">
+          <li><time>2026-10-03</time><div><span class="k">개선</span>홈과 계산 예제 목록 화면 개편 — 모바일 카드 목록, 예제별 상세 정보</div></li>
+          <li><time>2026-06-20</time><div><span class="k">추가</span>콘크리트 예제 16제로 확대(세장기둥 · 슬래브 · 기초 · 정착 · 내진) · 자료실에 설계실무서 7편 등록</div></li>
+          <li><time>2026-06-17</time><div><span class="k">신규</span>콘크리트 구조부재 설계 예제 8제 공개 (KDS 14 · KDS 24)</div></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="blk">
+    <div class="sec-h"><div><h2>공개 예정</h2></div></div>
+    <div class="soon">
+      <a href="books/"><h4>전자책 6권 시리즈 <span class="badge b-plan">준비 중</span></h4><p>거푸집동바리 설계 실무가이드부터 순차 출간</p></a>
+      <a href="calc/"><h4>계산 분야 확대 <span class="badge b-plan">예정</span></h4><p>옹벽 · 암거 · 말뚝기초 · 흙막이 가시설</p></a>
+      <a href="membership/"><h4>멤버십 <span class="badge b-plan">예정</span></h4><p>개정 기준 반영본 알림 · 단체 라이선스</p></a>
+    </div>
+  </section>
 </main>
-
-<footer>
-  <div class="wrap">
-    <p><strong>산수허브 SANSUHUB</strong></p>
-    <p style="margin-top:6px">토목구조물의 설계 · 건설기술 개발</p>
-    <p style="margin-top:6px"><a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a></p>
-    <p style="margin-top:14px;color:#9aa4ad">&copy; 2026 SANSUHUB. All rights reserved.</p>
-  </div>
-</footer>
-
+<footer class="site"><div class="wrap fi">
+  <div><b>산수허브 SANSUHUB</b><br>토목구조물의 설계 · 건설기술 개발<br><a href="about/">발행처 소개 · 문의</a></div>
+  <div>문의 · 오류 제보 <a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a><br>Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.<br><span style="color:#8a949e">&copy; 2026 SANSUHUB. All rights reserved.</span></div>
+</div></footer>
+<script>
+(function(){
+  var EX=[["RC-B1", "단철근 직사각형 보 휨설계", "콘크리트 · KDS 14", "calc/rc/#RC-B1", "보 휨 KDS 14 20 20"], ["RC-V1", "직사각형 보 전단설계", "콘크리트 · KDS 14", "calc/rc/#RC-V1", "보 전단 KDS 14 20 22"], ["RC-C1", "띠철근 기둥 P-M 상관도", "콘크리트 · KDS 14", "calc/rc/#RC-C1", "사각기둥 KDS 14 20 20"], ["RC-C3", "원형 나선철근 기둥 P-M 상관도", "콘크리트 · KDS 14", "calc/rc/#RC-C3", "원형기둥 KDS 14 20 20"], ["RC-C5", "세장기둥 모멘트 확대 (2차효과)", "콘크리트 · KDS 14", "calc/rc/#RC-C5", "세장기둥 KDS 14 20 20"], ["RC-S", "1방향 슬래브 휨설계", "콘크리트 · KDS 14", "calc/rc/#RC-S", "슬래브 KDS 14 20 70"], ["RC-F", "독립확대기초 설계 (휨·전단·뚫림)", "콘크리트 · KDS 14", "calc/rc/#RC-F", "기초판 KDS 14 20 22"], ["LD-1", "인장 정착길이 · 겹침이음", "콘크리트 · KDS 14", "calc/rc/#LD-1", "정착·이음 KDS 14 20 52"], ["DT-1", "SMF 기둥 횡구속철근 (내진)", "콘크리트 · KDS 14", "calc/rc/#DT-1", "철근상세·내진 KDS 14 20 80"], ["RC-B2", "단철근 직사각형 보 휨설계", "콘크리트 · KDS 24", "calc/rc/#RC-B2", "보 휨 KDS 24 14 21"], ["RC-V2", "직사각형 보 전단설계 (변각 트러스)", "콘크리트 · KDS 24", "calc/rc/#RC-V2", "보 전단 KDS 24 14 21"], ["RC-C2", "띠철근 기둥 P-M 상관도", "콘크리트 · KDS 24", "calc/rc/#RC-C2", "사각기둥 KDS 24 14 21"], ["RC-C4", "원형 나선철근 기둥 P-M 상관도", "콘크리트 · KDS 24", "calc/rc/#RC-C4", "원형기둥 KDS 24 14 21"], ["RC-F2", "독립확대기초 설계 (뚫림 2d)", "콘크리트 · KDS 24", "calc/rc/#RC-F2", "기초판 KDS 24 14 21"], ["LD-2", "교량 주거더 정착길이", "콘크리트 · KDS 24", "calc/rc/#LD-2", "정착·이음 KDS 24 14 21"], ["DT-2", "사각형 교각 횡구속철근 (내진)", "콘크리트 · KDS 24", "calc/rc/#DT-2", "철근상세·내진 KDS 24 17 11"], ["3.1", "슬래브연직하중", "동바리 · 03장", "calc/dongbari/#ex3.1", "표준 아파트 슬래브 연직하중 "], ["3.2", "전이슬래브연직하중", "동바리 · 03장", "calc/dongbari/#ex3.2", "전이 슬래브 연직하중 "], ["3.3", "벽체측압", "동바리 · 03장", "calc/dongbari/#ex3.3", "일반 벽체 측압 계산 그래프"], ["3.4", "기둥측압 지연제", "동바리 · 03장", "calc/dongbari/#ex3.4", "기둥 측압 — 지연제 사용 그래프"], ["3.5", "최소수평하중", "동바리 · 03장", "calc/dongbari/#ex3.5", "동바리 최소 수평하중 "], ["3.6", "교량동바리풍하중", "동바리 · 03장", "calc/dongbari/#ex3.6", "교량 동바리 풍하중 "], ["3.7", "동바리설계하중종합", "동바리 · 03장", "calc/dongbari/#ex3.7", "슬래브 동바리 설계하중 종합 (LC1) "], ["3.8", "하중계산 오류찾기", "동바리 · 03장", "calc/dongbari/#ex3.8", "오류 찾기 — 슬래브 연직하중 "], ["3.9", "지하주차장종합", "동바리 · 03장", "calc/dongbari/#ex3.9", "지하 주차장 슬래브+벽체 하중 종합 계산서"], ["4.1", "슬래브합판검토", "동바리 · 04장", "calc/dongbari/#ex4.1", "슬래브 거푸집 합판 검토 "], ["4.2", "벽체합판검토 허용장선간격", "동바리 · 04장", "calc/dongbari/#ex4.2", "벽체 거푸집 합판 검토 — 측압 90 kN/m² "], ["4.3", "목재장선50x100", "동바리 · 04장", "calc/dongbari/#ex4.3", "목재 장선 50×100mm 구조 검토 "], ["4.4", "강관장선60x60", "동바리 · 04장", "calc/dongbari/#ex4.4", "강관 장선 □60×60×2.3t 구조 검토 "], ["4.5", "H100멍에 동바리간격", "동바리 · 04장", "calc/dongbari/#ex4.5", "H-100×100 멍에 구조 검토 및 동바리 간격 "], ["4.6", "목재멍에100x100", "동바리 · 04장", "calc/dongbari/#ex4.6", "목재 멍에 100×100mm 구조 검토 "], ["4.7", "파이프서포트좌굴 허용하중", "동바리 · 04장", "calc/dongbari/#ex4.7", "파이프 서포트 Φ60.5×2.3t 허용하중 "], ["4.8", "파이프서포트배치간격", "동바리 · 04장", "calc/dongbari/#ex4.8", "파이프 서포트 배치 간격 산정 "], ["4.9", "슬래브t200 전체설계", "동바리 · 04장", "calc/dongbari/#ex4.9", "일반 슬래브(t=200mm) 거푸집 전체 설계 "], ["4.10", "고층슬래브t300 설계비교", "동바리 · 04장", "calc/dongbari/#ex4.10", "고층 슬래브(t=300mm, 층고 4.0m) 설계 비교 "], ["5.1", "벽체측압", "동바리 · 05장", "calc/dongbari/#ex5.1", "일반 벽체 측압 계산 그래프"], ["5.2", "벽체측압 조건2", "동바리 · 05장", "calc/dongbari/#ex5.2", "표준 벽체 측압 — 조건 ② 그래프"], ["5.3", "겨울철고측압", "동바리 · 05장", "calc/dongbari/#ex5.3", "겨울철 고측압 조건 그래프"], ["5.4", "수평멍에 타이볼트수직간격", "동바리 · 05장", "calc/dongbari/#ex5.4", "수평멍에 허용 타이볼트 수직 간격 "], ["5.5", "타이볼트간격설계", "동바리 · 05장", "calc/dongbari/#ex5.5", "타이볼트 간격 설계 "], ["5.6", "버팀대전도검토", "동바리 · 05장", "calc/dongbari/#ex5.6", "버팀대 전도 안전율 검토 "], ["5.7", "표준벽체종합설계", "동바리 · 05장", "calc/dongbari/#ex5.7", "표준 벽체 거푸집 종합 설계 "], ["6.1", "합판장선간격", "동바리 · 06장", "calc/dongbari/#ex6.1", "합판 장선 간격 결정 그래프"], ["6.2", "장선 멍에간격", "동바리 · 06장", "calc/dongbari/#ex6.2", "장선 설계 — 허용 멍에 간격 "], ["6.3", "멍에 서포트간격", "동바리 · 06장", "calc/dongbari/#ex6.3", "멍에 설계 — 허용 서포트 간격 "], ["6.4", "파이프서포트허용하중", "동바리 · 06장", "calc/dongbari/#ex6.4", "파이프 서포트 허용하중 검토 "], ["6.5", "슬래브전체설계", "동바리 · 06장", "calc/dongbari/#ex6.5", "슬래브 거푸집 전체 설계 "], ["6.6", "고하중슬래브설계", "동바리 · 06장", "calc/dongbari/#ex6.6", "고하중 슬래브 거푸집 설계 (t=300mm) "], ["7.1", "기둥패널 수직장선간격", "동바리 · 07장", "calc/dongbari/#ex7.1", "기둥 폼 패널 수직장선 간격 "], ["7.2", "장선 클램프설계", "동바리 · 07장", "calc/dongbari/#ex7.2", "기둥 수직장선 및 클램프 설계 "], ["7.3", "원형기둥 후프설계", "동바리 · 07장", "calc/dongbari/#ex7.3", "원형 기둥 거푸집 후프 설계 그래프"], ["7.4", "정방형기둥 전체설계", "동바리 · 07장", "calc/dongbari/#ex7.4", "정방형 기둥 거푸집 전체 설계 "], ["7.5", "고측압기둥 설계", "동바리 · 07장", "calc/dongbari/#ex7.5", "고측압 기둥 거푸집 설계 (높이 5.0m) "], ["8.1", "아치거푸집 설계", "동바리 · 08장", "calc/dongbari/#ex8.1", "단곡면 아치 거푸집 설계 (R=8m, 90°) "], ["8.2", "경사슬래브 설계", "동바리 · 08장", "calc/dongbari/#ex8.2", "경사 슬래브 거푸집 설계 (θ=30°) "], ["8.3", "발코니캔틸레버 설계", "동바리 · 08장", "calc/dongbari/#ex8.3", "발코니 캔틸레버 거푸집 설계 (L=3.0m) "], ["8.4", "체육관지붕 대공간", "동바리 · 08장", "calc/dongbari/#ex8.4", "체육관 지붕 슬래브 거푸집 (지간 18m) "], ["8.5", "복합특수구조물", "동바리 · 08장", "calc/dongbari/#ex8.5", "복합 특수 구조물 (곡면벽체 R=12m + 캔틸레버 L=4m) "], ["9.1", "비계수직재좌굴", "동바리 · 09장", "calc/dongbari/#ex9.1", "단관 강관 비계 수직재 좌굴 검토 그래프"], ["9.2", "벽이음설계하중", "동바리 · 09장", "calc/dongbari/#ex9.2", "시스템 비계 벽이음 설계하중 "], ["9.3", "이동식비계 전도검토", "동바리 · 09장", "calc/dongbari/#ex9.3", "이동식 비계 전도 안전율 검토 "]];
+  var q=document.getElementById('q'),r=document.getElementById('results'),k=-1;
+  function norm(s){return s.toLowerCase().replace(/[\s·\-()_.,]/g,'')}
+  function esc(s){return s.replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  q.addEventListener('input',function(){
+    var v=norm(q.value);k=-1;if(!v){r.classList.remove('show');return}
+    var hit=EX.filter(function(e){return norm(e[0]+e[1]+e[2]+e[4]).indexOf(v)>-1}).slice(0,10);
+    r.innerHTML=hit.length?hit.map(function(e){return '<a href="'+e[3]+'"><span class="code">'+esc(e[0])+'</span><span>'+esc(e[1])+'</span><span class="f">'+esc(e[2])+'</span></a>'}).join(''):'<div class="none">일치하는 예제가 없습니다. 다른 낱말로 찾아보세요.</div>';
+    r.classList.add('show');
+  });
+  q.addEventListener('keydown',function(e){var a=r.querySelectorAll('a');if(!a.length)return;
+    if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();k=(k+(e.key==='ArrowDown'?1:-1)+a.length)%a.length;a.forEach(function(x,i){x.classList.toggle('k',i===k)});}
+    else if(e.key==='Enter'){e.preventDefault();location.href=a[Math.max(k,0)].getAttribute('href');}
+    else if(e.key==='Escape'){r.classList.remove('show');}});
+  document.addEventListener('click',function(e){if(!e.target.closest('.search'))r.classList.remove('show')});
+})();
+</script>
 <script>
 (function(){
   var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
@@ -149,6 +335,6 @@
   });
 })();
 </script>
-<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script></body>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
 </html>
-                              

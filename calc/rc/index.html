@@ -1,97 +1,362 @@
 <!DOCTYPE html>
-<html lang="ko"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
-<title>콘크리트 구조부재설계 실무 예제 16제 · 계산도구 | 산수허브</title>
-<meta name="description" content="철근콘크리트 부재 설계 Calcpad 예제 16제. 보·기둥·슬래브·기초·정착·내진. KDS 14 강도설계법·KDS 24 한계상태설계법.">
+<title>콘크리트 구조부재 설계 예제 16제 · 계산도구 | 산수허브</title>
+<meta name="description" content="철근콘크리트 보·기둥·슬래브·기초·정착·내진 설계 예제 16제. KDS 14 강도설계법과 KDS 24 한계상태설계법 비교, CalcpadCE 계산파일 제공.">
 <style>
-  :root{--ink:#1f2933;--sub:#5f6b76;--line:#e2e5e9;--bg:#fff;--soft:#f5f6f8;--accent:#1A3A5C;--accent-soft:#e6f1fb;}
-  *{box-sizing:border-box;margin:0;padding:0}body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic",sans-serif;color:var(--ink);background:var(--bg);line-height:1.6}
-  a{text-decoration:none;color:inherit}.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
-  header{border-bottom:1px solid var(--line);padding:34px 0 26px}
-  .crumb{font-size:13px;color:var(--sub)}.crumb a{color:var(--accent)}
-  h1{font-size:25px;font-weight:800;margin-top:10px;letter-spacing:-.5px}.lead{color:var(--sub);font-size:15px;margin-top:8px}
-  .howto{background:var(--accent-soft);border:1px solid #bcd6f0;border-radius:12px;padding:16px 20px;margin:20px 0}
-  .howto b{color:var(--accent)}.howto ol{margin:6px 0 0 18px;font-size:13.5px}
-  .howto a.ide{display:inline-block;margin-top:10px;background:var(--accent);color:#fff;padding:8px 15px;border-radius:8px;font-size:13.5px;font-weight:600}
-  .toolbar{position:sticky;top:53px;background:var(--bg);padding:12px 0;border-bottom:1px solid var(--line);z-index:5}
-  .toolbar .wrap{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-  .filters{display:flex;gap:6px}.fbtn{border:1px solid var(--line);background:var(--bg);padding:6px 13px;border-radius:20px;font-size:13px;cursor:pointer;color:var(--sub)}
-  .fbtn.active{background:var(--ink);color:#fff;border-color:var(--ink)}
-  select,#search{border:1px solid var(--line);border-radius:8px;padding:8px 11px;font-size:14px;background:#fff}#search{flex:1;min-width:150px}
-  .count-bar{font-size:13px;color:var(--sub);padding:14px 0 6px}
-  table{width:100%;border-collapse:collapse;font-size:14px}
-  thead th{text-align:left;font-size:12.5px;color:var(--sub);font-weight:600;border-bottom:2px solid var(--ink);padding:10px 10px}
-  tbody td{border-bottom:1px solid var(--line);padding:11px 10px;vertical-align:middle}tbody tr:hover{background:var(--soft)}
-  .c-no{width:64px;font-weight:800;color:var(--accent);white-space:nowrap}.c-title .t{font-weight:600}
-  .c-mem{width:96px;color:var(--sub);font-size:13px;white-space:nowrap}.c-std{width:118px;color:var(--sub);font-size:12.5px;white-space:nowrap}
-  .c-dl{width:128px;white-space:nowrap;text-align:right}
-  .mth{font-size:11px;font-weight:700;padding:2px 8px;border-radius:5px}.mth-14{color:var(--accent);background:var(--accent-soft)}.mth-24{color:#0d6e7d;background:#e1f4f7}
-  .dl{display:inline-block;font-size:12.5px;font-weight:600;padding:5px 10px;border:1px solid var(--line);border-radius:7px;margin-left:5px}
-  .dl-p{background:var(--accent);color:#fff;border-color:var(--accent)}.dl-p:hover{background:#12293f;color:#fff}
-  .grp{font-size:13px;font-weight:700;color:var(--accent);padding:18px 10px 6px}
-  .empty{display:none;text-align:center;color:var(--sub);padding:40px 0}
-  footer{padding:36px 0 60px;text-align:center;font-size:13px;color:var(--sub)}
-  @media(max-width:680px){.c-std{display:none}}
-  .gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
-  .gnav-in{max-width:1040px;margin:0 auto;padding:0 24px;min-height:52px;display:flex;align-items:center;gap:4px}
-  .gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}.brandimg{height:30px;display:block}
-  .gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:40px;height:38px;border:1px solid var(--line);border-radius:8px;background:#fff;cursor:pointer;padding:0 9px}.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
-  .gitem{position:relative}.gitem>a{display:inline-flex;align-items:center;font-size:14px;color:var(--sub);padding:14px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
-  .gitem>a:hover{color:var(--ink)}.gitem.on>a{color:var(--accent);font-weight:700}.caret{font-size:9px;opacity:.55;margin-left:4px}
-  .submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
-  .gitem:hover .submenu,.gitem.open .submenu{display:block}
-  .submenu a{display:flex;justify-content:space-between;align-items:center;font-size:13.5px;color:var(--ink);padding:8px 12px;border-radius:7px;white-space:nowrap}
-  .submenu a:hover{background:var(--soft);color:var(--accent)}
-  @media(max-width:720px){.gnav-in{min-height:0;flex-wrap:wrap;padding:8px 14px}.navtoggle{display:flex}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:9px 8px;justify-content:space-between}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.toolbar{top:0}}
-</style></head><body>
+:root{--navy:#1A3A5C;--navy-d:#12293f;--navy-50:#eef3f8;--teal:#7FC4D4;--ink:#1b2530;--sub:#46525e;--mute:#6b7682;--line:#dfe3e8;--bg:#f4f6f8;--soft:#f4f6f8;--accent:#1A3A5C;
+--ok:#0f6e56;--ok-bg:#e3f4ee;--wip:#8a5a00;--wip-bg:#fdf1d8;--plan:#55606b;--plan-bg:#eceff2;--adv:#8c2a2a;--adv-bg:#fbe9e9;--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-ok{color:var(--ok);background:var(--ok-bg)}.b-wip{color:var(--wip);background:var(--wip-bg)}.b-plan{color:var(--plan);background:var(--plan-bg)}
+.tag{display:inline-block;font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap;line-height:1.5}
+.tag.cd{color:var(--navy);background:var(--navy-50);border-color:#cfdceb;font-weight:600}
+.lv{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.lv-b{color:var(--ok);background:var(--ok-bg)}.lv-a{color:var(--wip);background:var(--wip-bg)}.lv-c{color:var(--adv);background:var(--adv-bg)}
+footer.site{margin-top:60px;background:#fff;border-top:1px solid var(--line);padding:30px 0 46px;font-size:14px;color:var(--sub)}
+footer.site .fi{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
+
+.gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+.gnav-in{max-width:1080px;margin:0 auto;padding:0 20px;min-height:60px;display:flex;align-items:center;gap:4px}
+.gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+.gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}
+.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;padding:0 11px}
+.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+.gitem{position:relative}
+.gitem>a{display:inline-flex;align-items:center;font-size:15px;color:var(--sub);padding:16px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+.gitem>a:hover{color:var(--ink)}
+.gitem.on>a{color:var(--accent);font-weight:700}
+.caret{font-size:9px;opacity:.55;margin-left:4px}
+.submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+.gitem:hover .submenu,.gitem.open .submenu{display:block}
+.submenu a{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink);padding:9px 12px;border-radius:7px;white-space:nowrap}
+.submenu a:hover{background:var(--soft);color:var(--accent)}
+.brandimg{height:32px;display:block}
+@media(max-width:720px){.gnav-in{flex-wrap:wrap;padding:8px 16px}.navtoggle{display:flex;margin-left:auto}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none;padding-bottom:6px}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:12px 8px;justify-content:space-between;font-size:16px}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.submenu a{padding:10px 12px;font-size:15px}}
+
+.crumb{font-size:13.5px;color:var(--mute);padding:22px 0 0}
+.crumb a{color:var(--navy)}
+.pagehead{padding:8px 0 18px}
+.pagehead h1{font-size:clamp(23px,3.6vw,30px);letter-spacing:-.02em;line-height:1.35}
+.pagehead p{color:var(--sub);margin-top:6px;max-width:760px}
+.pagehead .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.guide{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;margin-bottom:16px}
+.guide summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px 10px;padding:13px 16px;font-size:15px;flex-wrap:wrap}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary b{color:var(--navy)}
+.guide summary .tg{margin-left:auto;font-size:14px;color:var(--navy);font-weight:700;white-space:nowrap}
+.guide[open] summary .tg::after{content:" ▴"}.guide:not([open]) summary .tg::after{content:" ▾"}
+.guide ol{padding:2px 16px 14px 36px;color:var(--sub);font-size:15px;display:grid;gap:6px}
+.guide ol b{color:var(--ink)}
+.guide .dl{display:inline-block;margin:0 16px 16px;font-size:14px;font-weight:700;color:var(--navy);border:1.5px solid var(--navy);border-radius:8px;padding:8px 14px}
+.guide .dl:hover{background:var(--navy-50)}
+.notice{background:var(--wip-bg);color:#5c3d00;border-radius:10px;padding:11px 16px;font-size:14.5px;margin-bottom:16px}
+.filters{display:flex;flex-direction:column;gap:10px;padding:4px 0 6px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg button{border:0;background:transparent;font:inherit;font-size:14.5px;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar,.seg::-webkit-scrollbar{display:none}
+.chips button{border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;padding:7px 13px;border-radius:999px;color:var(--sub);cursor:pointer;white-space:nowrap;flex:none}
+.chips button.on{border-color:var(--navy);color:var(--navy);font-weight:700;background:var(--navy-50)}
+.frow{display:flex;gap:10px;align-items:center}
+.fsearch{flex:1;min-width:0;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 14px;font:inherit;font-size:16px;background:#fff}
+.fsearch:focus{outline:2px solid var(--navy);border-color:transparent}
+.cnt{font-size:14px;color:var(--sub);white-space:nowrap}.cnt b{color:var(--navy)}
+.group{margin-top:18px}
+.group>h2{font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 2px}
+.group>h2 small{font-size:13px;color:var(--mute);font-weight:400}
+.list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.thead,.item .main{display:grid;grid-template-columns:70px minmax(0,1fr) 150px 120px 252px;align-items:center;gap:14px;padding:0 18px}
+.thead{font-size:13px;color:var(--mute);font-weight:600;background:#fafbfc;border-bottom:1px solid var(--line);height:40px}
+.item{border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.item:last-child{border-bottom:0}
+.item .main{min-height:62px;padding-top:10px;padding-bottom:10px}
+.item:hover .main{background:#fafcfe}
+.item.hl .main{background:#fff9e6}
+.code{font:600 13px ui-monospace,Consolas,monospace;color:var(--navy)}
+.title{font-weight:600;font-size:15.5px;line-height:1.45}
+.title .tag{font-weight:400;margin-left:6px;font-size:12px;padding:1px 7px}
+.c3,.c4{font-size:14px;color:var(--sub)}
+.c4.mono{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.act{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:36px;padding:0 12px;border-radius:8px;font-size:13.5px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:inherit}
+.act.sec{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.act.sec:hover{border-color:var(--navy);color:var(--navy)}
+.act.sec[aria-expanded=true]{background:var(--navy-50);border-color:#cfdceb;color:var(--navy)}
+.act.pri{background:var(--navy);color:#fff;border:0}
+.act.pri:hover{background:var(--navy-d)}
+.mmeta{display:none}
+.detail{display:none;background:#fbfcfd;border-top:1px dashed var(--line);padding:18px 18px 20px 102px}
+.item.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 24px}
+.dgrid dt{font-size:12.5px;color:var(--mute);font-weight:600}
+.dgrid dd{font-size:14.5px;margin-top:2px}
+.dgrid .w3{grid-column:1/-1}.dgrid .w2{grid-column:span 2}
+.dfoot{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:14px;align-items:center}
+.dfoot a{color:var(--navy);font-weight:700}
+.dfoot .fn{color:var(--mute);font-size:13px;word-break:break-all}
+.empty{display:none;padding:28px;text-align:center;color:var(--mute);background:#fff;border:1px dashed var(--line);border-radius:12px;margin-top:18px}
+.empty a{color:var(--navy);font-weight:700}
+@media(max-width:900px){
+  .thead{display:none}
+  .list{background:transparent;border:0;border-radius:0;display:grid;gap:10px;overflow:visible}
+  .item{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .item:last-child{border-bottom:1px solid var(--line)}
+  .item .main{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:16px}
+  .item .main .code,.item .main .c3,.item .main .c4{display:none}
+  .title{font-size:16.5px}
+  .mmeta{display:flex;gap:6px;flex-wrap:wrap}
+  .acts{justify-content:stretch;margin-top:4px}
+  .act{flex:1;height:44px;font-size:14.5px}
+  .detail{padding:16px}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .dgrid .w2{grid-column:1/-1}
+}
+@media(max-width:480px){.seg{width:100%}.seg button{flex:1;padding:8px 6px;font-size:14px}.seg .lg{display:none}}
+@media(max-width:360px){.acts{flex-direction:column}}
+</style>
+</head>
+<body>
 <nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트 구조부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a><a href="../../forms/rc-series/">콘크리트 부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem has-sub"><a href="../../membership/">멤버십<span class="caret">▾</span></a><div class="submenu"><a href="../../membership/">멤버십 안내</a><a href="../../membership/#verify">구매 인증</a><a href="../../membership/#b2b">B2B 라이선스</a></div></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
-<header><div class="wrap">
-  <div class="crumb"><a href="../../index.html">산수허브 홈</a> › <a href="../index.html">계산도구</a> › 콘크리트 구조부재설계 실무</div>
-  <h1>콘크리트 구조부재설계 실무 · 예제 16제</h1>
-  <p class="lead">철근콘크리트 부재(보·기둥·슬래브·기초·정착·내진) 설계 예제입니다. 같은 단면을 <b>KDS 14 강도설계법</b>과 <b>KDS 24 한계상태설계법</b>으로 풀어 비교할 수 있으며, 자료실의 <a href="../../forms/rc-series/" style="color:var(--accent)">콘크리트 부재설계 실무(전 7편)</a>과 연동됩니다.</p>
-  <div class="howto"><b>실행 방법</b>
-    <ol><li>무료 <b>CalcpadCE</b>(설치형 프로그램)를 내려받아 설치합니다.</li>
-    <li>예제의 <b>Calcpad 파일</b> 버튼으로 <code>.cpd</code> 파일을 내려받아 CalcpadCE에서 엽니다.</li>
-    <li>입력값을 넣고 ▶(Calculate)로 계산합니다. (코드로 보이면 <b>Form 버튼(F4)</b>으로 입력폼 전환)</li></ol>
-    <a class="ide" href="https://calcpad-ce.org/" target="_blank" rel="noopener">CalcpadCE 내려받기 ↗</a>
-  </div>
-</div></header>
-<div class="toolbar"><div class="wrap">
-  <div class="filters"><button class="fbtn active" data-f="all">전체</button><button class="fbtn" data-f="kds14">KDS 14 강도설계법</button><button class="fbtn" data-f="kds24">KDS 24 한계상태설계법</button></div>
-  <select id="memsel"><option value="all">전체 부재</option><option value="b">보(휨·전단)</option><option value="c">기둥(P-M·세장)</option><option value="s">슬래브·기초</option><option value="a">정착·이음</option><option value="d">철근상세·내진</option></select>
-  <input id="search" placeholder="번호·제목 검색 (예: 기둥, 전단, 기초, B1)">
-</div></div>
 <main class="wrap">
-  <div class="count-bar"><b id="cnt">16</b>개 예제</div>
-  <table><thead><tr><th>번호</th><th>제목</th><th>부재</th><th>설계기준</th><th style="text-align:right">자료</th></tr></thead>
-    <tbody>
-<tr class="grprow" data-method="kds14"><td class="grp" colspan="5">KDS 14 강도설계법 (9제)</td></tr>
-      <tr data-method="kds14" data-member="b" data-text="rc-b1 보 휨 단철근 직사각형 보 휨설계"><td class="c-no">RC-B1</td><td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span></td><td class="c-mem">보 휨</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-B1_KDS14_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="b" data-text="rc-v1 보 전단 스터럽 직사각형 보 전단설계"><td class="c-no">RC-V1</td><td class="c-title"><span class="t">직사각형 보 전단설계</span></td><td class="c-mem">보 전단</td><td class="c-std"><span class="mth mth-14">KDS 14 20 22</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-V1_KDS14_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="c" data-text="rc-c1 기둥 pm 사각 띠철근 기둥 P-M 상관도"><td class="c-no">RC-C1</td><td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span></td><td class="c-mem">사각기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="c" data-text="rc-c3 원형 기둥 pm 나선 원형 나선철근 기둥 P-M 상관도"><td class="c-no">RC-C3</td><td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span></td><td class="c-mem">원형기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C3_KDS14_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="c" data-text="rc-c5 세장 기둥 모멘트확대 세장기둥 모멘트 확대 (2차효과)"><td class="c-no">RC-C5</td><td class="c-title"><span class="t">세장기둥 모멘트 확대 (2차효과)</span></td><td class="c-mem">세장기둥</td><td class="c-std"><span class="mth mth-14">KDS 14 20 20</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C5_KDS14_%EC%84%B8%EC%9E%A5%EA%B8%B0%EB%91%A5_%EB%AA%A8%EB%A9%98%ED%8A%B8%ED%99%95%EB%8C%80.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="s" data-text="rc-s 슬래브 1방향 휨 1방향 슬래브 휨설계"><td class="c-no">RC-S</td><td class="c-title"><span class="t">1방향 슬래브 휨설계</span></td><td class="c-mem">슬래브</td><td class="c-std"><span class="mth mth-14">KDS 14 20 70</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-S_KDS14_1%EB%B0%A9%ED%96%A5%EC%8A%AC%EB%9E%98%EB%B8%8C_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="s" data-text="rc-f 기초 확대기초 뚫림 독립확대기초 설계 (휨·전단·뚫림)"><td class="c-no">RC-F</td><td class="c-title"><span class="t">독립확대기초 설계 (휨·전단·뚫림)</span></td><td class="c-mem">기초판</td><td class="c-std"><span class="mth mth-14">KDS 14 20 22</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-F_KDS14_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%EC%84%A4%EA%B3%84.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="a" data-text="ld-1 정착 겹침이음 인장 정착길이 · 겹침이음"><td class="c-no">LD-1</td><td class="c-title"><span class="t">인장 정착길이 · 겹침이음</span></td><td class="c-mem">정착·이음</td><td class="c-std"><span class="mth mth-14">KDS 14 20 52</span></td><td class="c-dl"><a class="dl dl-p" href="files/LD-1_KDS14_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4_%EA%B2%B9%EC%B9%A8%EC%9D%B4%EC%9D%8C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds14" data-member="d" data-text="dt-1 내진 횡구속 smf 기둥 SMF 기둥 횡구속철근 (내진)"><td class="c-no">DT-1</td><td class="c-title"><span class="t">SMF 기둥 횡구속철근 (내진)</span></td><td class="c-mem">철근상세·내진</td><td class="c-std"><span class="mth mth-14">KDS 14 20 80</span></td><td class="c-dl"><a class="dl dl-p" href="files/DT-1_KDS14_SMF%EA%B8%B0%EB%91%A5_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>Calcpad 파일</a></td></tr>
-<tr class="grprow" data-method="kds24"><td class="grp" colspan="5">KDS 24 한계상태설계법 (7제)</td></tr>
-      <tr data-method="kds24" data-member="b" data-text="rc-b2 보 휨 한계상태 단철근 직사각형 보 휨설계"><td class="c-no">RC-B2</td><td class="c-title"><span class="t">단철근 직사각형 보 휨설계</span></td><td class="c-mem">보 휨</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-B2_KDS24_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="b" data-text="rc-v2 보 전단 변각 한계상태 직사각형 보 전단설계 (변각 트러스)"><td class="c-no">RC-V2</td><td class="c-title"><span class="t">직사각형 보 전단설계 (변각 트러스)</span></td><td class="c-mem">보 전단</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-V2_KDS24_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="c" data-text="rc-c2 기둥 pm 한계상태 띠철근 기둥 P-M 상관도"><td class="c-no">RC-C2</td><td class="c-title"><span class="t">띠철근 기둥 P-M 상관도</span></td><td class="c-mem">사각기둥</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C2_KDS24_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="c" data-text="rc-c4 원형 기둥 pm 한계상태 원형 나선철근 기둥 P-M 상관도"><td class="c-no">RC-C4</td><td class="c-title"><span class="t">원형 나선철근 기둥 P-M 상관도</span></td><td class="c-mem">원형기둥</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-C4_KDS24_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="s" data-text="rc-f2 기초 확대기초 한계상태 독립확대기초 설계 (뚫림 2d)"><td class="c-no">RC-F2</td><td class="c-title"><span class="t">독립확대기초 설계 (뚫림 2d)</span></td><td class="c-mem">기초판</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/RC-F2_KDS24_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="a" data-text="ld-2 교량 정착 한계상태 교량 주거더 정착길이"><td class="c-no">LD-2</td><td class="c-title"><span class="t">교량 주거더 정착길이</span></td><td class="c-mem">정착·이음</td><td class="c-std"><span class="mth mth-24">KDS 24 14 21</span></td><td class="c-dl"><a class="dl dl-p" href="files/LD-2_KDS24_%EA%B5%90%EB%9F%89%EC%A3%BC%EA%B1%B0%EB%8D%94_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4.cpd" download>Calcpad 파일</a></td></tr>
-      <tr data-method="kds24" data-member="d" data-text="dt-2 내진 교각 횡구속 한계상태 사각형 교각 횡구속철근 (내진)"><td class="c-no">DT-2</td><td class="c-title"><span class="t">사각형 교각 횡구속철근 (내진)</span></td><td class="c-mem">철근상세·내진</td><td class="c-std"><span class="mth mth-24">KDS 24 17 11</span></td><td class="c-dl"><a class="dl dl-p" href="files/DT-2_KDS24_%EC%82%AC%EA%B0%81%EA%B5%90%EA%B0%81_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>Calcpad 파일</a></td></tr>
-    </tbody></table>
-  <div class="empty" id="empty">조건에 맞는 예제가 없습니다.</div>
+  <div class="crumb"><a href="../../index.html">홈</a> › <a href="../index.html">계산도구</a> › 콘크리트 구조부재 설계</div>
+  <div class="pagehead"><h1>콘크리트 구조부재 설계 예제 16제</h1><p>보 · 기둥 · 슬래브 · 기초 · 정착 · 내진 설계 예제입니다. 같은 단면을 KDS 14 강도설계법과 KDS 24 한계상태설계법으로 풀어 비교할 수 있으며, 자료실의 <a href="../../forms/rc-series/" style="color:var(--navy);font-weight:600">콘크리트 부재설계 실무(전 7편)</a>와 연결됩니다.</p><div class="row"><span class="badge b-ok">16제 공개</span><span class="tag">실행: CalcpadCE (무료 · 설치형)</span><span class="tag">KDS 14 9제 · KDS 24 7제</span></div></div>
+  
+  <details class="guide" id="guide">
+    <summary><b>처음 이용하시나요?</b> 무료 프로그램 CalcpadCE를 설치한 뒤 예제 파일을 열면 됩니다. <span class="tg">사용 방법</span></summary>
+    <ol>
+      <li><b>CalcpadCE 설치</b> — 무료 설치형 프로그램을 내려받아 설치합니다. (Windows)</li>
+      <li><b>예제 파일 받기</b> — 목록의 <b>계산파일 받기</b> 버튼으로 <code>.cpd</code> 파일을 내려받습니다.</li>
+      <li><b>계산</b> — CalcpadCE에서 파일을 열고 입력값을 바꾼 뒤 ▶(Calculate)를 누릅니다. 코드로 보이면 F4(Form)로 입력폼으로 바꿉니다.</li>
+    </ol>
+    <a class="dl" href="https://calcpad-ce.org/" target="_blank" rel="noopener">CalcpadCE 내려받기 ↗</a>
+  </details>
+  <div class="filters">
+    <div class="seg" id="fa"><button class="on" data-v="">전체</button><button data-v="14">KDS 14<span class="lg"> 강도설계법</span></button><button data-v="24">KDS 24<span class="lg"> 한계상태설계법</span></button></div>
+    <div class="chips" id="fb"><button class="on" data-v="">전체 부재</button><button data-v="b">보(휨·전단)</button><button data-v="c">기둥(P-M·세장)</button><button data-v="s">슬래브·기초</button><button data-v="a">정착·이음</button><button data-v="d">철근상세·내진</button></div>
+    <div class="frow"><input class="fsearch" id="fq" type="search" placeholder="제목 · 번호 검색 (예: 전단, RC-C, 정착)" aria-label="예제 검색"><span class="cnt"><b id="n">16</b>개 예제</span></div>
+  </div>
+  <section class="group"><h2>KDS 14 강도설계법 <small>9제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>부재</span><span>설계기준</span><span style="text-align:right">자료</span></div><div class="item" id="RC-B1" data-a="14" data-b="b" data-text="RC-B1 단철근 직사각형 보 휨설계 보 휨 KDS 14 20 20">
+  <div class="main"><span class="code">RC-B1</span><span class="title">단철근 직사각형 보 휨설계</span><span class="mmeta"><span class="tag cd">RC-B1</span><span class="tag">보 휨</span><span class="tag">KDS 14 20 20</span></span><span class="c3">보 휨</span><span class="c4 mono">KDS 14 20 20</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-B1_KDS14_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>계수휨모멘트가 작용하는 단철근 직사각형 보의 휨강도 검토</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 20 (콘크리트구조 휨 및 압축 설계기준), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (8개)</dt><dd>계수휨모멘트(소요강도) M<sub>u</sub> · 보의 폭 b · 보의 전체 높이 h · 압축연단 ~ 인장철근 도심 거리 d<sub>1</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>y</sub> · 인장철근 배근간격 CTC (고정값) s · 측면 피복(표면~철근 중심) c<sub>s</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-B2">같은 단면 비교: RC-B2 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-B1%20%EB%8B%A8%EC%B2%A0%EA%B7%BC%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%20%EB%B3%B4%20%ED%9C%A8%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">RC-B1_KDS14_단철근보_휨설계.cpd</span></div></div>
+</div><div class="item" id="RC-V1" data-a="14" data-b="b" data-text="RC-V1 직사각형 보 전단설계 보 전단 KDS 14 20 22">
+  <div class="main"><span class="code">RC-V1</span><span class="title">직사각형 보 전단설계</span><span class="mmeta"><span class="tag cd">RC-V1</span><span class="tag">보 전단</span><span class="tag">KDS 14 20 22</span></span><span class="c3">보 전단</span><span class="c4 mono">KDS 14 20 22</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-V1_KDS14_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>계수전단력이 작용하는 보의 전단보강근(스터럽) 설계</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 22 (콘크리트구조 전단 및 비틀림 설계기준), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (9개)</dt><dd>계수전단력(소요강도) V<sub>u</sub> · 보의 폭 b · 보의 전체 높이 h · 유효깊이 d · 콘크리트 기준압축강도 f<sub>ck</sub> · 전단철근 기준항복강도 f<sub>yt</sub> · 스터럽 호칭 — D번호 (10/13/16) D<sub>no</sub> · 스터럽 가닥수(2-leg 등) n<sub>leg</sub> · 스터럽 배치간격 CTC s</dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-V2">같은 단면 비교: RC-V2 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-V1%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%20%EB%B3%B4%20%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">RC-V1_KDS14_보_전단설계.cpd</span></div></div>
+</div><div class="item" id="RC-C1" data-a="14" data-b="c" data-text="RC-C1 띠철근 기둥 P-M 상관도 사각기둥 KDS 14 20 20">
+  <div class="main"><span class="code">RC-C1</span><span class="title">띠철근 기둥 P-M 상관도</span><span class="mmeta"><span class="tag cd">RC-C1</span><span class="tag">사각기둥</span><span class="tag">KDS 14 20 20</span></span><span class="c3">사각기둥</span><span class="c4 mono">KDS 14 20 20</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>축력과 휨모멘트를 동시에 받는 띠철근 기둥의 검토</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 20 (콘크리트구조 휨 및 압축 설계기준), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>계수축력(소요) P<sub>u</sub> · 계수휨모멘트(소요) M<sub>u</sub> · 단면 폭 b · 단면 높이 h · 피복(철근 도심까지) d<sub>1</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>y</sub> · 주철근 호칭 — D번호 (19/22/25/29/32) D<sub>no</sub> · 인장측 철근 개수 n<sub>s</sub> · 압축측 철근 개수 n<sub>sp</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-C2">같은 단면 비교: RC-C2 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C1%20%EB%9D%A0%EC%B2%A0%EA%B7%BC%20%EA%B8%B0%EB%91%A5%20P-M%20%EC%83%81%EA%B4%80%EB%8F%84">오류 제보</a><span class="fn">RC-C1_KDS14_기둥_PM상관도.cpd</span></div></div>
+</div><div class="item" id="RC-C3" data-a="14" data-b="c" data-text="RC-C3 원형 나선철근 기둥 P-M 상관도 원형기둥 KDS 14 20 20">
+  <div class="main"><span class="code">RC-C3</span><span class="title">원형 나선철근 기둥 P-M 상관도</span><span class="mmeta"><span class="tag cd">RC-C3</span><span class="tag">원형기둥</span><span class="tag">KDS 14 20 20</span></span><span class="c3">원형기둥</span><span class="c4 mono">KDS 14 20 20</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-C3_KDS14_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>축력·휨을 받는 원형 나선철근 기둥 (주철근 8본)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 20 (콘크리트구조 휨 및 압축 설계기준), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (11개)</dt><dd>계수축력(소요) P<sub>u</sub> · 계수휨모멘트(소요) M<sub>u</sub> · 기둥 지름 D · 주철근 도심까지 피복 c<sub>cov</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>y</sub> · 주철근 호칭 — D번호 (19/22/25/29/32, 8본 고정) D<sub>no</sub> · 나선철근 지름 (D10=9.53mm) d<sub>sp</sub> · 나선철근 피치 s<sub>p</sub> · 나선철근 항복강도 f<sub>yt</sub> · 심부 외측 순피복 c<sub>cl</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-C4">같은 단면 비교: RC-C4 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C3%20%EC%9B%90%ED%98%95%20%EB%82%98%EC%84%A0%EC%B2%A0%EA%B7%BC%20%EA%B8%B0%EB%91%A5%20P-M%20%EC%83%81%EA%B4%80%EB%8F%84">오류 제보</a><span class="fn">RC-C3_KDS14_원형기둥_PM상관도.cpd</span></div></div>
+</div><div class="item" id="RC-C5" data-a="14" data-b="c" data-text="RC-C5 세장기둥 모멘트 확대 (2차효과) 세장기둥 KDS 14 20 20">
+  <div class="main"><span class="code">RC-C5</span><span class="title">세장기둥 모멘트 확대 (2차효과)</span><span class="mmeta"><span class="tag cd">RC-C5</span><span class="tag">세장기둥</span><span class="tag">KDS 14 20 20</span></span><span class="c3">세장기둥</span><span class="c4 mono">KDS 14 20 20</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-C5_KDS14_%EC%84%B8%EC%9E%A5%EA%B8%B0%EB%91%A5_%EB%AA%A8%EB%A9%98%ED%8A%B8%ED%99%95%EB%8C%80.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>횡구속 골조 세장기둥의 2차효과(P-Δ)를 모멘트 확대법으로 반영</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 20 (4.4 세장효과), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>계수축력 P<sub>u</sub> · 기둥 양단 큰 계수모멘트 M<sub>2</sub> · 기둥 양단 작은 계수모멘트 (단일곡률 +, 이중곡률 −) M<sub>1</sub> · 단면 폭 b · 단면 높이(좌굴 검토방향) h · 비지지길이 l<sub>u</sub> · 유효길이계수 (횡구속 골조 1.0) k · 콘크리트 기준압축강도 f<sub>ck</sub> · 콘크리트 탄성계수 (KDS 3.1.1, f_ck=30 기준) E<sub>c</sub> · 지속하중비 (계수지속축력/계수축력) beta<sub>dns</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C5%20%EC%84%B8%EC%9E%A5%EA%B8%B0%EB%91%A5%20%EB%AA%A8%EB%A9%98%ED%8A%B8%20%ED%99%95%EB%8C%80%20%282%EC%B0%A8%ED%9A%A8%EA%B3%BC%29">오류 제보</a><span class="fn">RC-C5_KDS14_세장기둥_모멘트확대.cpd</span></div></div>
+</div><div class="item" id="RC-S" data-a="14" data-b="s" data-text="RC-S 1방향 슬래브 휨설계 슬래브 KDS 14 20 70">
+  <div class="main"><span class="code">RC-S</span><span class="title">1방향 슬래브 휨설계</span><span class="mmeta"><span class="tag cd">RC-S</span><span class="tag">슬래브</span><span class="tag">KDS 14 20 70</span></span><span class="c3">슬래브</span><span class="c4 mono">KDS 14 20 70</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-S_KDS14_1%EB%B0%A9%ED%96%A5%EC%8A%AC%EB%9E%98%EB%B8%8C_%ED%9C%A8%EC%84%A4%EA%B3%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>폭 1 m 의 보로 보는 1방향 슬래브의 휨철근·수축온도철근 설계</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 70 (슬래브) · KDS 14 20 20 (휨), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (9개)</dt><dd>슬래브 경간(단변) l · 슬래브 두께 h · 고정 마감하중(자중 외) w<sub>sd</sub> · 활하중 w<sub>L</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>y</sub> · 콘크리트 단위중량 gamma<sub>c</sub> · 피복두께 c<sub>c</sub> · 주철근 호칭지름(D10) d<sub>b</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-S%201%EB%B0%A9%ED%96%A5%20%EC%8A%AC%EB%9E%98%EB%B8%8C%20%ED%9C%A8%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">RC-S_KDS14_1방향슬래브_휨설계.cpd</span></div></div>
+</div><div class="item" id="RC-F" data-a="14" data-b="s" data-text="RC-F 독립확대기초 설계 (휨·전단·뚫림) 기초판 KDS 14 20 22">
+  <div class="main"><span class="code">RC-F</span><span class="title">독립확대기초 설계 (휨·전단·뚫림)</span><span class="mmeta"><span class="tag cd">RC-F</span><span class="tag">기초판</span><span class="tag">KDS 14 20 22</span></span><span class="c3">기초판</span><span class="c4 mono">KDS 14 20 22</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-F_KDS14_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%EC%84%A4%EA%B3%84.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>독립확대기초의 휨 · 1방향 전단 · 2방향(뚫림) 전단 검토</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 22 (전단) · KDS 14 20 70 (기초판), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (8개)</dt><dd>계수 기둥축력 P<sub>u</sub> · 기초판 한 변 길이(정사각) B · 기초판 두께 h · 기둥 한 변(정사각) c · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>y</sub> · 피복두께(흙에 접함) c<sub>c</sub> · 주철근 호칭지름(D19) d<sub>b</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-F2">같은 단면 비교: RC-F2 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-F%20%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88%20%EC%84%A4%EA%B3%84%20%28%ED%9C%A8%C2%B7%EC%A0%84%EB%8B%A8%C2%B7%EB%9A%AB%EB%A6%BC%29">오류 제보</a><span class="fn">RC-F_KDS14_독립확대기초_설계.cpd</span></div></div>
+</div><div class="item" id="LD-1" data-a="14" data-b="a" data-text="LD-1 인장 정착길이 · 겹침이음 정착·이음 KDS 14 20 52">
+  <div class="main"><span class="code">LD-1</span><span class="title">인장 정착길이 · 겹침이음</span><span class="mmeta"><span class="tag cd">LD-1</span><span class="tag">정착·이음</span><span class="tag">KDS 14 20 52</span></span><span class="c3">정착·이음</span><span class="c4 mono">KDS 14 20 52</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/LD-1_KDS14_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4_%EA%B2%B9%EC%B9%A8%EC%9D%B4%EC%9D%8C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>인장 이형철근의 정착길이(방법 A·B)와 겹침이음 등급(A·B급) 판별</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 52 (정착 및 이음) — 강도·한계상태 공통식, 강도설계법 적용</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>철근 호칭지름(D22) d<sub>b</sub> · 철근 1본 공칭단면적(D22) A<sub>b1</sub> · 철근 기준항복강도 f<sub>y</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 경량콘크리트계수(보통중량) lambda · 철근위치계수(하부철근 1.0, 상부 1.3) alpha · 도막계수(무도막 1.0) beta · 배근 철근 본수 n<sub>bar</sub> · 한 위치 이음 비율(%) p<sub>splice</sub> · (방법 B) (c_b + K_tr)/d_b cKd</dd></div>
+  </dl>
+  <div class="dfoot"><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20LD-1%20%EC%9D%B8%EC%9E%A5%20%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4%20%C2%B7%20%EA%B2%B9%EC%B9%A8%EC%9D%B4%EC%9D%8C">오류 제보</a><span class="fn">LD-1_KDS14_정착길이_겹침이음.cpd</span></div></div>
+</div><div class="item" id="DT-1" data-a="14" data-b="d" data-text="DT-1 SMF 기둥 횡구속철근 (내진) 철근상세·내진 KDS 14 20 80">
+  <div class="main"><span class="code">DT-1</span><span class="title">SMF 기둥 횡구속철근 (내진)</span><span class="mmeta"><span class="tag cd">DT-1</span><span class="tag">철근상세·내진</span><span class="tag">KDS 14 20 80</span></span><span class="c3">철근상세·내진</span><span class="c4 mono">KDS 14 20 80</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/DT-1_KDS14_SMF%EA%B8%B0%EB%91%A5_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>SMF 기둥 소성힌지구역의 심부구속 횡철근량 A_sh 산정</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 14 20 80 (내진설계), 강도설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>기둥 단면 폭 b · 기둥 단면 높이 h · 피복두께 c<sub>c</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 횡철근 기준항복강도 f<sub>yh</sub> · 후프 호칭지름(D13) d<sub>h</sub> · 후프 1가닥 단면적(D13) A<sub>h1</sub> · 후프 간격 s · 주철근 호칭지름(D25) d<sub>bl</sub> · 기둥 순경간 l<sub>n</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#DT-2">같은 단면 비교: DT-2 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20DT-1%20SMF%20%EA%B8%B0%EB%91%A5%20%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC%20%28%EB%82%B4%EC%A7%84%29">오류 제보</a><span class="fn">DT-1_KDS14_SMF기둥_횡구속철근.cpd</span></div></div>
+</div></div></section><section class="group"><h2>KDS 24 한계상태설계법 <small>7제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>부재</span><span>설계기준</span><span style="text-align:right">자료</span></div><div class="item" id="RC-B2" data-a="24" data-b="b" data-text="RC-B2 단철근 직사각형 보 휨설계 보 휨 KDS 24 14 21">
+  <div class="main"><span class="code">RC-B2</span><span class="title">단철근 직사각형 보 휨설계</span><span class="mmeta"><span class="tag cd">RC-B2</span><span class="tag">보 휨</span><span class="tag">KDS 24 14 21</span></span><span class="c3">보 휨</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-B2_KDS24_%EB%8B%A8%EC%B2%A0%EA%B7%BC%EB%B3%B4_%ED%9C%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 RC-B1과 같은 단면을 한계상태설계법으로 검토 (강도설계법과 비교)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (콘크리트교 설계기준, 한계상태설계법)</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (8개)</dt><dd>설계휨모멘트(소요강도) M<sub>Ed</sub> · 보의 폭 b · 보의 전체 높이 h · 압축연단 ~ 인장철근 도심 거리 d<sub>1</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>yk</sub> · 인장철근 배근간격 CTC (고정값) s · 측면 피복(표면~철근 중심) c<sub>s</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-B1">같은 단면 비교: RC-B1 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-B2%20%EB%8B%A8%EC%B2%A0%EA%B7%BC%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%20%EB%B3%B4%20%ED%9C%A8%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">RC-B2_KDS24_단철근보_휨설계_한계상태.cpd</span></div></div>
+</div><div class="item" id="RC-V2" data-a="24" data-b="b" data-text="RC-V2 직사각형 보 전단설계 (변각 트러스) 보 전단 KDS 24 14 21">
+  <div class="main"><span class="code">RC-V2</span><span class="title">직사각형 보 전단설계 (변각 트러스)</span><span class="mmeta"><span class="tag cd">RC-V2</span><span class="tag">보 전단</span><span class="tag">KDS 24 14 21</span></span><span class="c3">보 전단</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-V2_KDS24_%EB%B3%B4_%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 RC-V1과 같은 단면을 한계상태설계법으로 검토 (강도설계법과 비교)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (콘크리트교 설계기준, 한계상태설계법)</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>계수전단력(소요강도) V<sub>u</sub> · 보의 폭 b · 보의 전체 높이 h · 유효깊이 d · 콘크리트 기준압축강도 f<sub>ck</sub> · 전단철근 기준항복강도 f<sub>yk</sub> · 스터럽 호칭 — D번호 (10/13/16) D<sub>no</sub> · 스터럽 가닥수(2-leg 등) n<sub>leg</sub> · 스터럽 배치간격 CTC s · 압축 스트럿 경사 cotθ (1.0~2.5) cot<sub>theta</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-V1">같은 단면 비교: RC-V1 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-V2%20%EC%A7%81%EC%82%AC%EA%B0%81%ED%98%95%20%EB%B3%B4%20%EC%A0%84%EB%8B%A8%EC%84%A4%EA%B3%84%20%28%EB%B3%80%EA%B0%81%20%ED%8A%B8%EB%9F%AC%EC%8A%A4%29">오류 제보</a><span class="fn">RC-V2_KDS24_보_전단설계_한계상태.cpd</span></div></div>
+</div><div class="item" id="RC-C2" data-a="24" data-b="c" data-text="RC-C2 띠철근 기둥 P-M 상관도 사각기둥 KDS 24 14 21">
+  <div class="main"><span class="code">RC-C2</span><span class="title">띠철근 기둥 P-M 상관도</span><span class="mmeta"><span class="tag cd">RC-C2</span><span class="tag">사각기둥</span><span class="tag">KDS 24 14 21</span></span><span class="c3">사각기둥</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-C2_KDS24_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 RC-C1과 같은 단면을 한계상태설계법으로 검토 (강도설계법과 비교)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (콘크리트교 설계기준, 한계상태설계법)</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (10개)</dt><dd>계수축력(소요) N<sub>Ed</sub> · 계수휨모멘트(소요) M<sub>Ed</sub> · 단면 폭 b · 단면 높이 h · 피복(철근 도심까지) d<sub>1</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>yk</sub> · 주철근 호칭 — D번호 (19/22/25/29/32) D<sub>no</sub> · 인장측 철근 개수 n<sub>s</sub> · 압축측 철근 개수 n<sub>sp</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-C1">같은 단면 비교: RC-C1 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C2%20%EB%9D%A0%EC%B2%A0%EA%B7%BC%20%EA%B8%B0%EB%91%A5%20P-M%20%EC%83%81%EA%B4%80%EB%8F%84">오류 제보</a><span class="fn">RC-C2_KDS24_기둥_PM상관도_한계상태.cpd</span></div></div>
+</div><div class="item" id="RC-C4" data-a="24" data-b="c" data-text="RC-C4 원형 나선철근 기둥 P-M 상관도 원형기둥 KDS 24 14 21">
+  <div class="main"><span class="code">RC-C4</span><span class="title">원형 나선철근 기둥 P-M 상관도</span><span class="mmeta"><span class="tag cd">RC-C4</span><span class="tag">원형기둥</span><span class="tag">KDS 24 14 21</span></span><span class="c3">원형기둥</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-C4_KDS24_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 RC-C3과 같은 단면을 한계상태설계법으로 검토 (강도설계법과 비교)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (콘크리트교 설계기준, 한계상태설계법)</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-17</dd></div>
+    <div class="w3"><dt>주요 입력값 (11개)</dt><dd>계수축력(소요) N<sub>Ed</sub> · 계수휨모멘트(소요) M<sub>Ed</sub> · 기둥 지름 D · 주철근 도심까지 피복 c<sub>cov</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>yk</sub> · 주철근 호칭 — D번호 (19/22/25/29/32, 8본 고정) D<sub>no</sub> · 나선철근 지름 (D10=9.53mm) d<sub>sp</sub> · 나선철근 피치 s<sub>p</sub> · 나선철근 항복강도 f<sub>yt</sub> · 심부 외측 순피복 c<sub>cl</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-C3">같은 단면 비교: RC-C3 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C4%20%EC%9B%90%ED%98%95%20%EB%82%98%EC%84%A0%EC%B2%A0%EA%B7%BC%20%EA%B8%B0%EB%91%A5%20P-M%20%EC%83%81%EA%B4%80%EB%8F%84">오류 제보</a><span class="fn">RC-C4_KDS24_원형기둥_PM상관도_한계상태.cpd</span></div></div>
+</div><div class="item" id="RC-F2" data-a="24" data-b="s" data-text="RC-F2 독립확대기초 설계 (뚫림 2d) 기초판 KDS 24 14 21">
+  <div class="main"><span class="code">RC-F2</span><span class="title">독립확대기초 설계 (뚫림 2d)</span><span class="mmeta"><span class="tag cd">RC-F2</span><span class="tag">기초판</span><span class="tag">KDS 24 14 21</span></span><span class="c3">기초판</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/RC-F2_KDS24_%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88_%ED%95%9C%EA%B3%84%EC%83%81%ED%83%9C.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 RC-F와 같은 기초판을 한계상태설계법으로 검토 (뚫림 위험단면 2d)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (콘크리트교 설계기준, 한계상태설계법)</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (9개)</dt><dd>설계 기둥축력 N<sub>Ed</sub> · 기초판 한 변 길이(정사각) B · 기초판 두께 h · 기둥 한 변(정사각) c · 콘크리트 기준압축강도 f<sub>ck</sub> · 철근 기준항복강도 f<sub>yk</sub> · 피복두께(흙에 접함) c<sub>c</sub> · 주철근 호칭지름(D19) d<sub>b</sub> · 휨 인장철근비(뚫림 검토용) rho<sub>l</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="#RC-F">같은 단면 비교: RC-F →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-F2%20%EB%8F%85%EB%A6%BD%ED%99%95%EB%8C%80%EA%B8%B0%EC%B4%88%20%EC%84%A4%EA%B3%84%20%28%EB%9A%AB%EB%A6%BC%202d%29">오류 제보</a><span class="fn">RC-F2_KDS24_독립확대기초_한계상태.cpd</span></div></div>
+</div><div class="item" id="LD-2" data-a="24" data-b="a" data-text="LD-2 교량 주거더 정착길이 정착·이음 KDS 24 14 21">
+  <div class="main"><span class="code">LD-2</span><span class="title">교량 주거더 정착길이</span><span class="mmeta"><span class="tag cd">LD-2</span><span class="tag">정착·이음</span><span class="tag">KDS 24 14 21</span></span><span class="c3">정착·이음</span><span class="c4 mono">KDS 24 14 21</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/LD-2_KDS24_%EA%B5%90%EB%9F%89%EC%A3%BC%EA%B1%B0%EB%8D%94_%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>교량 주거더 대구경 철근의 정착길이 — 한계상태설계법(공식은 KDS 14 20 52 공통)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 14 21 (한계상태) · 정착길이 식은 KDS 14 20 52 공통</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (8개)</dt><dd>철근 호칭지름(D32) d<sub>b</sub> · 철근 기준항복강도 f<sub>y</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 경량콘크리트계수 lambda · (방법 B) (c_b + K_tr)/d_b cKd · 철근 재료계수(한계상태) gamma<sub>s</sub> · 강도설계법 강도감소계수(비교용) phi<sub>s</sub> · (예시) 과배근 보정비 k<sub>excess</sub></dd></div>
+  </dl>
+  <div class="dfoot"><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20LD-2%20%EA%B5%90%EB%9F%89%20%EC%A3%BC%EA%B1%B0%EB%8D%94%20%EC%A0%95%EC%B0%A9%EA%B8%B8%EC%9D%B4">오류 제보</a><span class="fn">LD-2_KDS24_교량주거더_정착길이.cpd</span></div></div>
+</div><div class="item" id="DT-2" data-a="24" data-b="d" data-text="DT-2 사각형 교각 횡구속철근 (내진) 철근상세·내진 KDS 24 17 11">
+  <div class="main"><span class="code">DT-2</span><span class="title">사각형 교각 횡구속철근 (내진)</span><span class="mmeta"><span class="tag cd">DT-2</span><span class="tag">철근상세·내진</span><span class="tag">KDS 24 17 11</span></span><span class="c3">철근상세·내진</span><span class="c4 mono">KDS 24 17 11</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="files/DT-2_KDS24_%EC%82%AC%EA%B0%81%EA%B5%90%EA%B0%81_%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 DT-1과 같은 단면을 교량 한계상태설계법으로 검토(식② 계수 0.12)</dd></div>
+    <div class="w2"><dt>적용 설계기준</dt><dd>KDS 24 17 11 (교량내진), 한계상태설계법</dd></div>
+    <div><dt>상태 · 공개일</dt><dd><span class="badge b-ok">공개</span> 2026-06-20</dd></div>
+    <div class="w3"><dt>주요 입력값 (8개)</dt><dd>교각 단면 폭 b · 교각 단면 높이 h · 피복두께 c<sub>c</sub> · 콘크리트 기준압축강도 f<sub>ck</sub> · 횡철근 기준항복강도 f<sub>yh</sub> · 후프 호칭지름(D13) d<sub>h</sub> · 후프 1가닥 단면적(D13) A<sub>h1</sub> · 후프 간격 s</dd></div>
+  </dl>
+  <div class="dfoot"><a href="#DT-1">같은 단면 비교: DT-1 →</a><a href="../../forms/rc-series/">관련 해설 (설계실무서) →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20DT-2%20%EC%82%AC%EA%B0%81%ED%98%95%20%EA%B5%90%EA%B0%81%20%ED%9A%A1%EA%B5%AC%EC%86%8D%EC%B2%A0%EA%B7%BC%20%28%EB%82%B4%EC%A7%84%29">오류 제보</a><span class="fn">DT-2_KDS24_사각교각_횡구속철근.cpd</span></div></div>
+</div></div></section>
+  <div class="empty" id="empty">조건에 맞는 예제가 없습니다. <a href="#" id="reset">필터 초기화</a></div>
 </main>
-<footer><div class="wrap"><p>산수허브 SANSUHUB · 토목구조물의 설계 · 건설기술 개발</p>
-<p style="margin-top:6px;color:#9aa4ad">Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다. 설계실무서(전 7편)는 자료실에서 제공합니다.</p></div></footer>
+<footer class="site"><div class="wrap fi">
+  <div><b>산수허브 SANSUHUB</b><br>토목구조물의 설계 · 건설기술 개발<br><a href="../../about/">발행처 소개 · 문의</a></div>
+  <div>문의 · 오류 제보 <a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a><br>Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.<br><span style="color:#8a949e">&copy; 2026 SANSUHUB. All rights reserved.</span></div>
+</div></footer>
 <script>
-(function(){var rows=[].slice.call(document.querySelectorAll('tbody tr:not(.grprow)')),grprows=[].slice.call(document.querySelectorAll('tr.grprow')),fbtns=[].slice.call(document.querySelectorAll('.fbtn')),memsel=document.getElementById('memsel'),search=document.getElementById('search'),cnt=document.getElementById('cnt'),empty=document.getElementById('empty'),fMethod='all';
-function apply(){var mem=memsel.value,q=(search.value||'').trim().toLowerCase(),n=0;rows.forEach(function(r){var ok=true;if(fMethod!=='all'&&r.dataset.method!==fMethod)ok=false;if(mem!=='all'&&r.dataset.member!==mem)ok=false;if(q&&(r.dataset.text||'').indexOf(q)<0)ok=false;r.style.display=ok?'':'none';if(ok)n++;});grprows.forEach(function(g){var m=g.dataset.method;var any=rows.some(function(r){return r.style.display!=='none'&&r.dataset.method===m;});g.style.display=any?'':'none';});cnt.textContent=n;empty.style.display=n?'none':'block';}
-fbtns.forEach(function(b){b.addEventListener('click',function(){fbtns.forEach(function(x){x.classList.remove('active');});b.classList.add('active');fMethod=b.dataset.f;apply();});});
-memsel.addEventListener('change',apply);search.addEventListener('input',apply);
-var t=document.querySelector(".navtoggle"),nv=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=nv.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();
-</script></body></html>
+(function(){
+  var st={a:'',b:'',q:''},items=[].slice.call(document.querySelectorAll('.item')),groups=[].slice.call(document.querySelectorAll('.group'));
+  function norm(t){return (t||'').toLowerCase().replace(/[\s·\-()_.,]/g,'')}
+  function apply(){
+    var q=norm(st.q),n=0;
+    items.forEach(function(it){var ok=(!st.a||it.dataset.a===st.a)&&(!st.b||it.dataset.b===st.b)&&(!q||norm(it.dataset.text).indexOf(q)>-1);it.hidden=!ok;if(ok)n++;});
+    groups.forEach(function(g){var c=g.querySelectorAll('.item:not([hidden])').length;g.hidden=!c;var s=g.querySelector('h2 small');if(s)s.textContent=c+'제';});
+    document.getElementById('n').textContent=n;document.getElementById('empty').style.display=n?'none':'block';
+  }
+  function bind(id,key){var el=document.getElementById(id);if(!el)return;el.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;
+    el.querySelectorAll('button').forEach(function(x){x.classList.remove('on')});b.classList.add('on');st[key]=b.dataset.v;apply();});}
+  bind('fa','a');bind('fb','b');
+  document.getElementById('fq').addEventListener('input',function(){st.q=this.value;apply();});
+  document.getElementById('reset').addEventListener('click',function(e){e.preventDefault();st={a:'',b:'',q:''};document.getElementById('fq').value='';
+    document.querySelectorAll('#fa button,#fb button').forEach(function(b){b.classList.toggle('on',b.dataset.v==='')});apply();});
+  function toggle(it,open){var b=it.querySelector('.act.sec');it.classList.toggle('open',open);b.setAttribute('aria-expanded',open);b.textContent=open?'설명 닫기':'설명 보기';}
+  document.addEventListener('click',function(e){var b=e.target.closest('.act.sec');if(b){var it=b.closest('.item');toggle(it,!it.classList.contains('open'));}});
+  function fromHash(){
+    var h=decodeURIComponent(location.hash.slice(1));if(!h)return;
+    if(h==='guide'){document.getElementById('guide').open=true;return;}
+    var it=document.getElementById(h);if(!it||!it.classList.contains('item'))return;
+    items.forEach(function(x){x.classList.remove('hl')});it.classList.add('hl');toggle(it,true);
+    setTimeout(function(){it.scrollIntoView({block:'center'})},60);
+  }
+  window.addEventListener('hashchange',fromHash);fromHash();
+})();
+</script>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
+  items.forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var li=a.parentNode, was=li.classList.contains('open');
+      document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+      if(!was) li.classList.add('open');
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+  });
+})();
+</script>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>
