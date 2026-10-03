@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
+<title>RC-C1 띠철근 기둥 P-M 상관도 웹 계산기 · KDS 14 20 20 | 산수허브</title>
+<meta name="description" content="띠철근 사각기둥의 P-M 상관도와 안전성을 브라우저에서 바로 계산. 균형점, 파괴유형, 같은 편심의 설계강도와 판정.">
+<style>
+:root{--navy:#1A3A5C;--navy-d:#12293f;--navy-50:#eef3f8;--teal:#7FC4D4;--ink:#1b2530;--sub:#46525e;--mute:#6b7682;--line:#dfe3e8;--bg:#f4f6f8;--soft:#f4f6f8;--accent:#1A3A5C;
+--ok:#0f6e56;--ok-bg:#e3f4ee;--wip:#8a5a00;--wip-bg:#fdf1d8;--plan:#55606b;--plan-bg:#eceff2;--adv:#8c2a2a;--adv-bg:#fbe9e9;--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-ok{color:var(--ok);background:var(--ok-bg)}.b-wip{color:var(--wip);background:var(--wip-bg)}.b-plan{color:var(--plan);background:var(--plan-bg)}
+.tag{display:inline-block;font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap;line-height:1.5}
+.tag.cd{color:var(--navy);background:var(--navy-50);border-color:#cfdceb;font-weight:600}
+.lv{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.lv-b{color:var(--ok);background:var(--ok-bg)}.lv-a{color:var(--wip);background:var(--wip-bg)}.lv-c{color:var(--adv);background:var(--adv-bg)}
+footer.site{margin-top:60px;background:#fff;border-top:1px solid var(--line);padding:30px 0 46px;font-size:14px;color:var(--sub)}
+footer.site .fi{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
+
+.gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+.gnav-in{max-width:1080px;margin:0 auto;padding:0 20px;min-height:60px;display:flex;align-items:center;gap:4px}
+.gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+.gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}
+.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;padding:0 11px}
+.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+.gitem{position:relative}
+.gitem>a{display:inline-flex;align-items:center;font-size:15px;color:var(--sub);padding:16px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+.gitem>a:hover{color:var(--ink)}
+.gitem.on>a{color:var(--accent);font-weight:700}
+.caret{font-size:9px;opacity:.55;margin-left:4px}
+.submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+.gitem:hover .submenu,.gitem.open .submenu{display:block}
+.submenu a{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink);padding:9px 12px;border-radius:7px;white-space:nowrap}
+.submenu a:hover{background:var(--soft);color:var(--accent)}
+.brandimg{height:32px;display:block}
+@media(max-width:720px){.gnav-in{flex-wrap:wrap;padding:8px 16px}.navtoggle{display:flex;margin-left:auto}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none;padding-bottom:6px}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:12px 8px;justify-content:space-between;font-size:16px}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.submenu a{padding:10px 12px;font-size:15px}}
+
+.crumb{font-size:13.5px;color:var(--mute);padding:22px 0 0}
+.crumb a{color:var(--navy)}
+.pagehead{padding:8px 0 18px}
+.pagehead h1{font-size:clamp(23px,3.6vw,30px);letter-spacing:-.02em;line-height:1.35}
+.pagehead p{color:var(--sub);margin-top:6px;max-width:760px}
+.pagehead .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.guide{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;margin-bottom:16px}
+.guide summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px 10px;padding:13px 16px;font-size:15px;flex-wrap:wrap}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary b{color:var(--navy)}
+.guide summary .tg{margin-left:auto;font-size:14px;color:var(--navy);font-weight:700;white-space:nowrap}
+.guide[open] summary .tg::after{content:" ▴"}.guide:not([open]) summary .tg::after{content:" ▾"}
+.guide ol{padding:2px 16px 14px 36px;color:var(--sub);font-size:15px;display:grid;gap:6px}
+.guide ol b{color:var(--ink)}
+.guide .dl{display:inline-block;margin:0 16px 16px;font-size:14px;font-weight:700;color:var(--navy);border:1.5px solid var(--navy);border-radius:8px;padding:8px 14px}
+.guide .dl:hover{background:var(--navy-50)}
+.notice{background:var(--wip-bg);color:#5c3d00;border-radius:10px;padding:11px 16px;font-size:14.5px;margin-bottom:16px}
+.filters{display:flex;flex-direction:column;gap:10px;padding:4px 0 6px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg button{border:0;background:transparent;font:inherit;font-size:14.5px;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar,.seg::-webkit-scrollbar{display:none}
+.chips button{border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;padding:7px 13px;border-radius:999px;color:var(--sub);cursor:pointer;white-space:nowrap;flex:none}
+.chips button.on{border-color:var(--navy);color:var(--navy);font-weight:700;background:var(--navy-50)}
+.frow{display:flex;gap:10px;align-items:center}
+.fsearch{flex:1;min-width:0;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 14px;font:inherit;font-size:16px;background:#fff}
+.fsearch:focus{outline:2px solid var(--navy);border-color:transparent}
+.cnt{font-size:14px;color:var(--sub);white-space:nowrap}.cnt b{color:var(--navy)}
+.group{margin-top:18px}
+.group>h2{font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 2px}
+.group>h2 small{font-size:13px;color:var(--mute);font-weight:400}
+.list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.thead,.item .main{display:grid;grid-template-columns:70px minmax(0,1fr) 150px 120px 252px;align-items:center;gap:14px;padding:0 18px}
+.thead{font-size:13px;color:var(--mute);font-weight:600;background:#fafbfc;border-bottom:1px solid var(--line);height:40px}
+.item{border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.item:last-child{border-bottom:0}
+.item .main{min-height:62px;padding-top:10px;padding-bottom:10px}
+.item:hover .main{background:#fafcfe}
+.item.hl .main{background:#fff9e6}
+.code{font:600 13px ui-monospace,Consolas,monospace;color:var(--navy)}
+.title{font-weight:600;font-size:15.5px;line-height:1.45}
+.title .tag{font-weight:400;margin-left:6px;font-size:12px;padding:1px 7px}
+.c3,.c4{font-size:14px;color:var(--sub)}
+.c4.mono{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.act{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:36px;padding:0 12px;border-radius:8px;font-size:13.5px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:inherit}
+.act.sec{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.act.sec:hover{border-color:var(--navy);color:var(--navy)}
+.act.sec[aria-expanded=true]{background:var(--navy-50);border-color:#cfdceb;color:var(--navy)}
+.act.pri{background:var(--navy);color:#fff;border:0}
+.act.pri:hover{background:var(--navy-d)}
+.mmeta{display:none}
+.detail{display:none;background:#fbfcfd;border-top:1px dashed var(--line);padding:18px 18px 20px 102px}
+.item.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 24px}
+.dgrid dt{font-size:12.5px;color:var(--mute);font-weight:600}
+.dgrid dd{font-size:14.5px;margin-top:2px}
+.dgrid .w3{grid-column:1/-1}.dgrid .w2{grid-column:span 2}
+.dfoot{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:14px;align-items:center}
+.dfoot a{color:var(--navy);font-weight:700}
+.dfoot .fn{color:var(--mute);font-size:13px;word-break:break-all}
+.empty{display:none;padding:28px;text-align:center;color:var(--mute);background:#fff;border:1px dashed var(--line);border-radius:12px;margin-top:18px}
+.empty a{color:var(--navy);font-weight:700}
+@media(max-width:900px){
+  .thead{display:none}
+  .list{background:transparent;border:0;border-radius:0;display:grid;gap:10px;overflow:visible}
+  .item{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .item:last-child{border-bottom:1px solid var(--line)}
+  .item .main{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:16px}
+  .item .main .code,.item .main .c3,.item .main .c4{display:none}
+  .title{font-size:16.5px}
+  .mmeta{display:flex;gap:6px;flex-wrap:wrap}
+  .acts{justify-content:stretch;margin-top:4px}
+  .act{flex:1;height:44px;font-size:14.5px}
+  .detail{padding:16px}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .dgrid .w2{grid-column:1/-1}
+}
+@media(max-width:480px){.seg{width:100%}.seg button{flex:1;padding:8px 6px;font-size:14px}.seg .lg{display:none}}
+@media(max-width:360px){.acts{flex-direction:column}}
+</style>
+<script src="../../assets/analytics.js" defer></script>
+<style id="mem-off">.gitem.off>span{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:#a3abb3;padding:16px 11px;cursor:default;white-space:nowrap}.gitem.off small{font-size:11px;border:1px solid #d5dae0;border-radius:5px;padding:0 6px}.btn.off,.off-link{opacity:.45;pointer-events:none;cursor:default}@media(max-width:720px){.gitem.off>span{padding:12px 8px;font-size:16px}}</style>
+<link rel="stylesheet" href="../../assets/webcalc.css">
+<script src="../../assets/webcalc.js"></script>
+</head>
+<body>
+<nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트 구조부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a><a href="../../forms/rc-series/">콘크리트 부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem off"><span aria-disabled="true">멤버십 <small>준비 중</small></span></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
+<main class="wrap">
+  <div class="crumb"><a href="../../index.html">홈</a> › <a href="../index.html">계산도구</a> › <a href="../rc/#RC-C1">콘크리트 구조부재 설계</a> › 웹 계산기</div>
+  <div class="wc-head">
+    <h1>RC-C1 띠철근 기둥 P-M 상관도 <span style="font-weight:400;color:var(--mute);font-size:.7em">웹 계산기</span></h1>
+    <p>축력과 휨모멘트를 동시에 받는 띠철근 사각기둥을 검토합니다. 입력값을 바꾸면 P-M 상관도와 판정이 바로 다시 계산됩니다. 계산 절차는 CalcpadCE 예제 파일 RC-C1과 같습니다.</p>
+    <div class="row"><span class="tag cd">KDS 14 20 20</span><span class="tag">강도설계법</span><span class="vtag" title="같은 입력을 CalcpadCE와 웹 계산기에 넣어 결과를 대조했습니다">✓ CalcpadCE 결과와 대조 검증</span></div>
+  </div>
+  <div class="wc">
+    <form class="panel inp" autocomplete="off" onsubmit="return false">
+      <h2>1. 설계 입력값</h2>
+      <div class="fld"><label for="Pu">계수축력<i>P<sub>u</sub></i></label><span class="ib"><input id="Pu" inputmode="decimal" value="1500"><span class="u">kN</span></span></div>
+      <div class="fld"><label for="Mu">계수휨모멘트<i>M<sub>u</sub></i></label><span class="ib"><input id="Mu" inputmode="decimal" value="150"><span class="u">kN·m</span></span></div>
+      <div class="fld"><label for="b">단면 폭<i>b</i></label><span class="ib"><input id="b" inputmode="decimal" value="400"><span class="u">mm</span></span></div>
+      <div class="fld"><label for="h">단면 높이<i>h</i></label><span class="ib"><input id="h" inputmode="decimal" value="400"><span class="u">mm</span></span></div>
+      <div class="fld"><label for="d1">피복(철근 도심까지)<i>d<sub>1</sub></i></label><span class="ib"><input id="d1" inputmode="decimal" value="50"><span class="u">mm</span></span></div>
+      <div class="fld"><label for="fck">콘크리트 기준압축강도<i>f<sub>ck</sub></i></label><span class="ib"><input id="fck" inputmode="decimal" value="27"><span class="u">MPa</span></span></div>
+      <div class="fld"><label for="fy">철근 기준항복강도<i>f<sub>y</sub></i></label><span class="ib"><input id="fy" inputmode="decimal" value="400"><span class="u">MPa</span></span></div>
+      <div class="fld"><label for="Dno">주철근 호칭</label><span class="ib"><select id="Dno"><option value="19">D19</option><option value="22">D22</option><option value="25" selected>D25</option><option value="29">D29</option><option value="32">D32</option></select></span></div>
+      <div class="fld"><label for="ns">인장측 철근 개수<i>n<sub>s</sub></i></label><span class="ib"><input id="ns" inputmode="numeric" value="3"><span class="u">개</span></span></div>
+      <div class="fld"><label for="nsp">압축측 철근 개수<i>n<sub>s'</sub></i></label><span class="ib"><input id="nsp" inputmode="numeric" value="3"><span class="u">개</span></span></div>
+      <div class="ibtns"><button type="button" class="b2" id="reset">기본값</button><button type="button" class="b2" id="share">링크 복사</button><button type="button" class="b2" id="print">인쇄·PDF</button></div>
+      <div class="ibtns" style="margin-top:8px"><a class="b1" href="../rc/files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download data-example="RC-C1">⤓ CalcpadCE 파일 받기</a></div>
+      <div class="fixed">고정값 · <b>E<sub>s</sub></b> 200000 MPa · <b>ε<sub>cu</sub></b> 0.0033 · <b>β<sub>1</sub></b> 0.80 · 띠철근 <b>φ</b> 0.65 (압축지배) — f<sub>ck</sub> ≤ 40 MPa 범위에서 사용하세요. 철근은 인장측·압축측 각 1단 배근입니다.</div>
+    </form>
+    <div>
+      <div id="verdict" class="verdict"></div>
+      <div class="panel plot"><h3>P-M 상관도</h3><div id="pm"></div>
+        <div class="lg"><span><i style="background:#9aa4ad"></i>공칭강도 P<sub>n</sub>–M<sub>n</sub></span><span><i style="background:#1A3A5C"></i>설계강도 φP<sub>n</sub>–φM<sub>n</sub></span><span><i style="background:#c2402f"></i>설계점 (M<sub>u</sub>, P<sub>u</sub>)</span><span><i style="background:#0f6e56"></i>같은 편심의 설계강도점</span></div></div>
+      <div class="panel res" id="steps"></div>
+      <div class="disc"><b>사용 안내</b> · 이 계산기는 설계 검토를 돕는 참고용 도구입니다. 입력값과 결과의 적정성 확인, 최종 설계에 대한 책임은 사용자에게 있습니다. 적용 범위: 띠철근 직사각형 단면, 1축 휨, 단주(세장효과 미고려 — 세장기둥은 RC-C5). 오류를 발견하시면 <a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20RC-C1%20%EC%9B%B9%20%EA%B3%84%EC%82%B0%EA%B8%B0" style="color:var(--navy);font-weight:700">알려 주세요</a>.</div>
+    </div>
+  </div>
+</main>
+<div id="toast"></div>
+
+<script id="calc">
+/* RC-C1 계산 — CalcpadCE 파일 RC-C1_KDS14_기둥_PM상관도.cpd 와 같은 절차 (단위: N, mm, MPa) */
+var RCC1_DB = {19:19.1, 22:22.2, 25:25.4, 29:28.6, 32:31.8};
+function calcRCC1(p){
+  var r = {Es:200000, ecu:0.0033, beta1:0.80, phi:0.65};
+  var Es=r.Es, ecu=r.ecu, b1=r.beta1, b=p.b, h=p.h;
+  r.d = h - p.d1; r.dp = p.d1; var d=r.d, dp=r.dp;
+  r.dbKnown = RCC1_DB.hasOwnProperty(p.Dno); r.db = r.dbKnown ? RCC1_DB[p.Dno] : 25.4;
+  r.Ab1 = Math.PI*r.db*r.db/4; r.As = p.ns*r.Ab1; r.Asp = p.nsp*r.Ab1; r.Ast = r.As + r.Asp;
+  var As=r.As, Asp=r.Asp;
+  r.fc = 0.85*p.fck; r.ey = p.fy/Es; var fc=r.fc, fy=p.fy;
+  r.Po = fc*(b*h - r.Ast) + fy*r.Ast;
+  r.phiPnmax = 0.80*r.phi*r.Po;
+  r.rhog = r.Ast/(b*h);
+  r.rhoChk = r.rhog < 0.01 ? 'low' : (r.rhog > 0.08 ? 'high' : 'ok');
+  r.axialOK = p.Pu*1e3 <= r.phiPnmax;
+  r.cb = ecu*d/(ecu + r.ey); r.ab = b1*r.cb; r.Ccb = fc*r.ab*b;
+  r.espb = ecu*(r.cb - dp)/r.cb; r.fspb = Math.min(Es*r.espb, fy); r.Fspb = Asp*(r.fspb - fc); r.Fsb = As*fy;
+  r.Pb = r.Ccb + r.Fspb - r.Fsb;
+  r.Mb = r.Ccb*(h/2 - r.ab/2) + r.Fspb*(h/2 - dp) + r.Fsb*(d - h/2);
+  r.e = p.Mu*1e6/(p.Pu*1e3); r.eb = r.Mb/r.Pb;
+  r.compression = r.e <= r.eb;
+  function fs(eps){ return Math.max(Math.min(Es*eps, fy), -fy); }
+  function a(c){ return Math.min(b1*c, h); }
+  function Cc(c){ return fc*a(c)*b; }
+  function Fsp(c){ var e=ecu*(c-dp)/c; return Asp*(fs(e) - fc*(e>0?1:0)); }
+  function Fst(c){ var e=ecu*(c-d)/c; return As*(fs(e) - fc*(e>0?1:0)); }
+  function Pn(c){ return Cc(c) + Fsp(c) + Fst(c); }
+  function Mn(c){ return Cc(c)*(h/2 - a(c)/2) + Fsp(c)*(h/2 - dp) + Fst(c)*(h/2 - d); }
+  function phif(c){ var et=ecu*(d-c)/c; return Math.min(Math.max(0.65 + (et-0.002)/0.003*0.20, 0.65), 0.85); }
+  r.fn = {Pn:Pn, Mn:Mn, phif:phif};
+  var lo = r.compression ? r.cb : 40, hi = r.compression ? 2000 : r.cb;
+  var g = function(c){ return Mn(c) - r.e*Pn(c); }, glo = g(lo), ghi = g(hi);
+  if (!(glo*ghi <= 0)) { r.err = 'root'; return r; }
+  for (var i=0; i<200; i++) { var m=(lo+hi)/2, gm=g(m); if (gm===0 || (hi-lo) < 1e-12*Math.max(1,m)) { lo=hi=m; break; } if (glo*gm < 0) { hi=m; } else { lo=m; glo=gm; } }
+  r.cd = (lo+hi)/2;
+  r.phid = phif(r.cd);
+  r.phiPd = Math.min(r.phid*Pn(r.cd), r.phiPnmax);
+  r.phiMd = r.phid*Mn(r.cd);
+  r.SF = r.phiPd/(p.Pu*1e3);
+  r.ok = r.phiPd >= p.Pu*1e3;
+  return r;
+}
+</script>
+<script>
+(function(){
+  var $=WC.$,f=WC.f,v=WC.v,V=WC.V,eq=WC.eq,chk=WC.chk,step=WC.step;
+  function run(p){
+    p.Dno=parseInt($('Dno').value,10);
+    var r=calcRCC1(p), V1=$('verdict');
+    if(r.err){ V1.className='verdict err'; V1.innerHTML='<div class="big">계산 불가</div><div class="msg">설계 편심 e = '+f(r.e,1)+' mm에 대응하는 상관도 위의 점을 찾지 못했습니다 (CalcpadCE 예제 파일도 같은 조건에서 근을 찾지 못합니다). 편심이 매우 작아 순수 압축에 가까운 경우이므로 P<sub>u</sub> ≤ φP<sub>n,max</sub> = '+f(r.phiPnmax/1e3,1)+' kN 으로 검토하세요.</div>'; $('steps').innerHTML=''; $('pm').innerHTML=''; return {verdict:'ERR'}; }
+    V1.className='verdict '+(r.ok?'ok':'ng');
+    V1.innerHTML='<div class="big">'+(r.ok?'O.K.':'N.G.')+'</div><div class="kv"><span>같은 편심의 설계축강도 φP<sub>n</sub><b>'+f(r.phiPd/1e3,1)+' kN</b></span><span>소요 P<sub>u</sub><b>'+f(p.Pu,1)+' kN</b></span><span>안전율<b>'+f(r.SF,3)+'</b></span><span>파괴유형<b>'+(r.compression?'압축지배':'인장지배')+'</b></span></div>'
+      +(r.ok?'':'<div class="msg">설계점이 상관도 바깥에 있습니다. 단면 또는 철근을 늘려야 합니다.</div>')
+      +(r.rhoChk!=='ok'?'<div class="msg">⚠ 축방향 철근비 '+f(r.rhog,4)+' — '+(r.rhoChk==='low'?'0.01 미만 (주철근 증대 필요)':'0.08 초과 (주철근 감소)')+'</div>':'')
+      +(!r.axialOK?'<div class="msg">⚠ 계수축력이 최대 설계축강도 φP<sub>n,max</sub> = '+f(r.phiPnmax/1e3,1)+' kN을 넘습니다.</div>':'');
+    // 상관도
+    var N=[],D=[]; for(var i=0;i<=240;i++){ var c=40+(900-40)*i/240, P=r.fn.Pn(c), M=r.fn.Mn(c), ph=r.fn.phif(c); N.push([M/1e6,P/1e3]); D.push([ph*M/1e6, Math.min(ph*P, r.phiPnmax)/1e3]); }
+    WC.plot($('pm'),{series:[{pts:N,color:'#9aa4ad',width:2,dash:'6 4'},{pts:D,color:'#1A3A5C',width:2.6}],
+      marks:[{x:r.phiMd/1e6,y:r.phiPd/1e3,color:'#0f6e56',fillc:'#0f6e56'},{x:p.Mu,y:p.Pu,color:'#c2402f',shape:'plus',label:'설계점'}],
+      xmin:0,xlabel:'휨모멘트 M (kN·m)',ylabel:'축력 P (kN)',h:420,label:'P-M 상관도'});
+    var h='';
+    h+=step('1. 철근량','',
+       eq('유효깊이',V('d')+' = '+V('h')+' − '+V('d','1')+' = '+v(r.d,1,'mm')+', '+V("d'")+' = '+V('d','1')+' = '+v(r.dp,1,'mm'))
+      +eq('주철근','D'+p.Dno+' ('+V('d','b')+' = '+f(r.db,1)+' mm), '+V('A','b1')+' = π'+V('d','b')+'²/4 = '+v(r.Ab1,1,'mm²'))
+      +eq('인장측 · 압축측',V('A','s')+' = '+p.ns+' × '+f(r.Ab1,1)+' = '+v(r.As,1,'mm²')+', '+V("A",'s\'')+' = '+p.nsp+' × '+f(r.Ab1,1)+' = '+v(r.Asp,1,'mm²'))
+      +eq('전체 철근량',V('A','st')+' = '+v(r.Ast,1,'mm²')));
+    h+=step('2. 재료 · 단면 계수','KDS 14 20 20',
+       eq('등가응력블록 응력',V('f','c')+' = 0.85'+V('f','ck')+' = '+v(r.fc,2,'MPa'))
+      +eq('철근 항복변형률',V('ε','y')+' = '+V('f','y')+'/'+V('E','s')+' = '+v(r.ey,5))
+      +eq('강도감소계수',V('φ')+' = 0.65 (띠철근, 압축지배)'));
+    h+=step('3. 최대 설계축강도 · 철근비','KDS 14 20 20 (4.3.2)',
+       eq('공칭 순수축강도',V('P','o')+' = '+V('f','c')+'('+V('b')+V('h')+' − '+V('A','st')+') + '+V('f','y')+V('A','st')+' = '+v(r.Po/1e3,1,'kN'))
+      +eq('최대 설계축강도',V('φP','n,max')+' = 0.80·'+V('φ')+'·'+V('P','o')+' = '+v(r.phiPnmax/1e3,1,'kN'))
+      +eq('축방향 철근비',V('ρ','g')+' = '+V('A','st')+'/('+V('b')+V('h')+') = '+v(r.rhog,5))
+      +chk(r.rhoChk==='ok','→ '+(r.rhoChk==='ok'?'철근비 O.K. (0.01 ≤ ρ<sub>g</sub> ≤ 0.08, 겹침이음부 0.04)':r.rhoChk==='low'?'철근비 부족 (ρ<sub>g</sub> &lt; 0.01) — 주철근 증대 필요':'철근비 과다 (ρ<sub>g</sub> &gt; 0.08) — 주철근 감소'))
+      +chk(r.axialOK,'→ '+(r.axialOK?'축강도 측면 O.K. (P<sub>u</sub> ≤ φP<sub>n,max</sub>)':'축강도 부족 — 단면 또는 철근 증대 필요')));
+    h+=step('4. 균형파괴점','',
+       eq('균형 중립축 깊이',V('c','b')+' = '+V('ε','cu')+V('d')+'/('+V('ε','cu')+' + '+V('ε','y')+') = '+v(r.cb,2,'mm'))
+      +eq('균형 응력블록 깊이',V('a','b')+' = '+V('β','1')+V('c','b')+' = '+v(r.ab,2,'mm'))
+      +eq('콘크리트 압축합력',V('C','cb')+' = '+V('f','c')+V('a','b')+V('b')+' = '+v(r.Ccb/1e3,1,'kN'))
+      +eq('압축철근 응력',V("f",'s\'b')+' = min('+V('E','s')+V("ε",'s\'b')+', '+V('f','y')+') = '+v(r.fspb,2,'MPa')+' ('+V("ε",'s\'b')+' = '+f(r.espb,5)+')')
+      +eq('압축철근 합력',V("F",'s\'b')+' = '+V("A",'s\'')+'('+V("f",'s\'b')+' − '+V('f','c')+') = '+v(r.Fspb/1e3,1,'kN'))
+      +eq('인장철근 합력',V('F','sb')+' = '+V('A','s')+V('f','y')+' = '+v(r.Fsb/1e3,1,'kN'))
+      +eq('균형 축강도',V('P','b')+' = '+v(r.Pb/1e3,1,'kN'))
+      +eq('균형 휨강도',V('M','b')+' = '+v(r.Mb/1e6,2,'kN·m')));
+    h+=step('5. 파괴유형 판정','편심 비교',
+       eq('설계 편심',V('e')+' = '+V('M','u')+'/'+V('P','u')+' = '+v(r.e,1,'mm'))
+      +eq('균형 편심',V('e','b')+' = '+V('M','b')+'/'+V('P','b')+' = '+v(r.eb,1,'mm'))
+      +chk(true,'→ '+(r.compression?'e ≤ e<sub>b</sub> : 압축지배 (콘크리트 압축파괴 선행)':'e &gt; e<sub>b</sub> : 인장지배 (철근 항복 선행)'),'wip'));
+    h+=step('6. 안전성 검토','설계 편심 e 기준',
+       eq('대응 중립축',V('c','d')+' : '+V('M','n')+'(c) − e·'+V('P','n')+'(c) = 0 의 근 → '+v(r.cd,2,'mm'))
+      +eq('강도감소계수',V('φ','d')+' = '+v(r.phid,4))
+      +eq('설계 축강도',V('φP','d')+' = min('+V('φ','d')+V('P','n')+', '+V('φP','n,max')+') = '+v(r.phiPd/1e3,1,'kN'))
+      +eq('설계 휨강도',V('φM','d')+' = '+V('φ','d')+V('M','n')+' = '+v(r.phiMd/1e6,2,'kN·m'))
+      +eq('안전율','SF = '+V('φP','d')+'/'+V('P','u')+' = '+v(r.SF,4))
+      +chk(r.ok,'판정 : '+(r.ok?'O.K. (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)':'N.G. (단면 또는 철근 증대 필요)')));
+    $('steps').innerHTML=h;
+    return {verdict:r.ok?'OK':'NG'};
+  }
+  WC.init({id:'RC-C1',fields:{Pu:{def:1500},Mu:{def:150},b:{def:400},h:{def:400},d1:{def:50},fck:{def:27},fy:{def:400},Dno:{def:25},ns:{def:3,int:true},nsp:{def:3,int:true}},run:run,inputHint:'0보다 큰 값을 넣어 주세요(M<sub>u</sub> 포함). 철근 개수는 1 이상의 정수입니다.'});
+})();
+</script>
+
+<footer class="site"><div class="wrap fi">
+  <div><b>산수허브 SANSUHUB</b><br>토목구조물의 설계 · 건설기술 개발<br><a href="../../about/">발행처 소개 · 문의</a> · <a href="../../about/#privacy">개인정보 처리 안내</a></div>
+  <div>문의 · 오류 제보 <a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a><br>Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.<br><span style="color:#8a949e">&copy; 2026 SANSUHUB. All rights reserved.</span></div>
+</div></footer>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
+  items.forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var li=a.parentNode, was=li.classList.contains('open');
+      document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+      if(!was) li.classList.add('open');
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+  });
+})();
+</script>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
+<title>벽체 측압 웹 계산기 · 동바리 예제 3.3 | 산수허브</title>
+<meta name="description" content="KDS 측압식으로 콘크리트 벽체 거푸집 측압과 설계 측압을 바로 계산. 타설속도-측압 곡선 포함.">
+<style>
+:root{--navy:#1A3A5C;--navy-d:#12293f;--navy-50:#eef3f8;--teal:#7FC4D4;--ink:#1b2530;--sub:#46525e;--mute:#6b7682;--line:#dfe3e8;--bg:#f4f6f8;--soft:#f4f6f8;--accent:#1A3A5C;
+--ok:#0f6e56;--ok-bg:#e3f4ee;--wip:#8a5a00;--wip-bg:#fdf1d8;--plan:#55606b;--plan-bg:#eceff2;--adv:#8c2a2a;--adv-bg:#fbe9e9;--r:12px}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Malgun Gothic","Apple SD Gothic Neo",sans-serif;font-size:16px;line-height:1.65;color:var(--ink);background:var(--bg);word-break:keep-all;overflow-wrap:break-word;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.badge::before{content:"";width:6px;height:6px;border-radius:50%;background:currentColor}
+.b-ok{color:var(--ok);background:var(--ok-bg)}.b-wip{color:var(--wip);background:var(--wip-bg)}.b-plan{color:var(--plan);background:var(--plan-bg)}
+.tag{display:inline-block;font-size:12.5px;color:var(--sub);background:var(--bg);border:1px solid var(--line);padding:2px 8px;border-radius:6px;white-space:nowrap;line-height:1.5}
+.tag.cd{color:var(--navy);background:var(--navy-50);border-color:#cfdceb;font-weight:600}
+.lv{font-size:12.5px;font-weight:700;padding:2px 9px;border-radius:6px;white-space:nowrap}
+.lv-b{color:var(--ok);background:var(--ok-bg)}.lv-a{color:var(--wip);background:var(--wip-bg)}.lv-c{color:var(--adv);background:var(--adv-bg)}
+footer.site{margin-top:60px;background:#fff;border-top:1px solid var(--line);padding:30px 0 46px;font-size:14px;color:var(--sub)}
+footer.site .fi{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
+
+.gnav{position:sticky;top:0;z-index:30;background:#fff;border-bottom:1px solid var(--line)}
+.gnav-in{max-width:1080px;margin:0 auto;padding:0 20px;min-height:60px;display:flex;align-items:center;gap:4px}
+.gnav .brand{font-weight:800;font-size:17px;letter-spacing:-.3px;margin-right:14px}
+.gmenu{display:flex;gap:0;flex-wrap:wrap;margin-left:auto;align-items:center}
+.navtoggle{display:none;flex-direction:column;justify-content:center;gap:4px;width:44px;height:44px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer;padding:0 11px}
+.navtoggle span{display:block;height:2px;background:var(--ink);border-radius:2px}
+.gitem{position:relative}
+.gitem>a{display:inline-flex;align-items:center;font-size:15px;color:var(--sub);padding:16px 11px;border-radius:7px;white-space:nowrap;cursor:pointer}
+.gitem>a:hover{color:var(--ink)}
+.gitem.on>a{color:var(--accent);font-weight:700}
+.caret{font-size:9px;opacity:.55;margin-left:4px}
+.submenu{position:absolute;top:100%;left:0;min-width:184px;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 22px rgba(20,30,40,.10);padding:6px;display:none;z-index:40}
+.gitem:hover .submenu,.gitem.open .submenu{display:block}
+.submenu a{display:flex;justify-content:space-between;align-items:center;font-size:14px;color:var(--ink);padding:9px 12px;border-radius:7px;white-space:nowrap}
+.submenu a:hover{background:var(--soft);color:var(--accent)}
+.brandimg{height:32px;display:block}
+@media(max-width:720px){.gnav-in{flex-wrap:wrap;padding:8px 16px}.navtoggle{display:flex;margin-left:auto}.gmenu{margin-left:0;width:100%;flex-direction:column;align-items:stretch;display:none;padding-bottom:6px}.gnav.open .gmenu{display:flex}.gitem{position:static}.gitem>a{padding:12px 8px;justify-content:space-between;font-size:16px}.submenu{position:static;box-shadow:none;border:none;border-radius:0;padding:0 0 4px 16px;min-width:0}.submenu a{padding:10px 12px;font-size:15px}}
+
+.crumb{font-size:13.5px;color:var(--mute);padding:22px 0 0}
+.crumb a{color:var(--navy)}
+.pagehead{padding:8px 0 18px}
+.pagehead h1{font-size:clamp(23px,3.6vw,30px);letter-spacing:-.02em;line-height:1.35}
+.pagehead p{color:var(--sub);margin-top:6px;max-width:760px}
+.pagehead .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.guide{background:#fff;border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:10px;margin-bottom:16px}
+.guide summary{list-style:none;cursor:pointer;display:flex;align-items:center;gap:6px 10px;padding:13px 16px;font-size:15px;flex-wrap:wrap}
+.guide summary::-webkit-details-marker{display:none}
+.guide summary b{color:var(--navy)}
+.guide summary .tg{margin-left:auto;font-size:14px;color:var(--navy);font-weight:700;white-space:nowrap}
+.guide[open] summary .tg::after{content:" ▴"}.guide:not([open]) summary .tg::after{content:" ▾"}
+.guide ol{padding:2px 16px 14px 36px;color:var(--sub);font-size:15px;display:grid;gap:6px}
+.guide ol b{color:var(--ink)}
+.guide .dl{display:inline-block;margin:0 16px 16px;font-size:14px;font-weight:700;color:var(--navy);border:1.5px solid var(--navy);border-radius:8px;padding:8px 14px}
+.guide .dl:hover{background:var(--navy-50)}
+.notice{background:var(--wip-bg);color:#5c3d00;border-radius:10px;padding:11px 16px;font-size:14.5px;margin-bottom:16px}
+.filters{display:flex;flex-direction:column;gap:10px;padding:4px 0 6px}
+.seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
+.seg button{border:0;background:transparent;font:inherit;font-size:14.5px;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer;white-space:nowrap}
+.seg button.on{background:var(--navy);color:#fff;font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips::-webkit-scrollbar,.seg::-webkit-scrollbar{display:none}
+.chips button{border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;padding:7px 13px;border-radius:999px;color:var(--sub);cursor:pointer;white-space:nowrap;flex:none}
+.chips button.on{border-color:var(--navy);color:var(--navy);font-weight:700;background:var(--navy-50)}
+.frow{display:flex;gap:10px;align-items:center}
+.fsearch{flex:1;min-width:0;height:44px;border:1px solid var(--line);border-radius:10px;padding:0 14px;font:inherit;font-size:16px;background:#fff}
+.fsearch:focus{outline:2px solid var(--navy);border-color:transparent}
+.cnt{font-size:14px;color:var(--sub);white-space:nowrap}.cnt b{color:var(--navy)}
+.group{margin-top:18px}
+.group>h2{font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 2px}
+.group>h2 small{font-size:13px;color:var(--mute);font-weight:400}
+.list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.thead,.item .main{display:grid;grid-template-columns:70px minmax(0,1fr) 150px 120px 252px;align-items:center;gap:14px;padding:0 18px}
+.thead{font-size:13px;color:var(--mute);font-weight:600;background:#fafbfc;border-bottom:1px solid var(--line);height:40px}
+.item{border-bottom:1px solid var(--line);scroll-margin-top:80px}
+.item:last-child{border-bottom:0}
+.item .main{min-height:62px;padding-top:10px;padding-bottom:10px}
+.item:hover .main{background:#fafcfe}
+.item.hl .main{background:#fff9e6}
+.code{font:600 13px ui-monospace,Consolas,monospace;color:var(--navy)}
+.title{font-weight:600;font-size:15.5px;line-height:1.45}
+.title .tag{font-weight:400;margin-left:6px;font-size:12px;padding:1px 7px}
+.c3,.c4{font-size:14px;color:var(--sub)}
+.c4.mono{font-family:ui-monospace,Consolas,monospace;font-size:13px}
+.acts{display:flex;gap:6px;justify-content:flex-end}
+.act{display:inline-flex;align-items:center;justify-content:center;gap:5px;height:36px;padding:0 12px;border-radius:8px;font-size:13.5px;font-weight:700;white-space:nowrap;cursor:pointer;font-family:inherit}
+.act.sec{border:1px solid var(--line);background:#fff;color:var(--ink)}
+.act.sec:hover{border-color:var(--navy);color:var(--navy)}
+.act.sec[aria-expanded=true]{background:var(--navy-50);border-color:#cfdceb;color:var(--navy)}
+.act.pri{background:var(--navy);color:#fff;border:0}
+.act.pri:hover{background:var(--navy-d)}
+.mmeta{display:none}
+.detail{display:none;background:#fbfcfd;border-top:1px dashed var(--line);padding:18px 18px 20px 102px}
+.item.open .detail{display:block}
+.dgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px 24px}
+.dgrid dt{font-size:12.5px;color:var(--mute);font-weight:600}
+.dgrid dd{font-size:14.5px;margin-top:2px}
+.dgrid .w3{grid-column:1/-1}.dgrid .w2{grid-column:span 2}
+.dfoot{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:14px;align-items:center}
+.dfoot a{color:var(--navy);font-weight:700}
+.dfoot .fn{color:var(--mute);font-size:13px;word-break:break-all}
+.empty{display:none;padding:28px;text-align:center;color:var(--mute);background:#fff;border:1px dashed var(--line);border-radius:12px;margin-top:18px}
+.empty a{color:var(--navy);font-weight:700}
+@media(max-width:900px){
+  .thead{display:none}
+  .list{background:transparent;border:0;border-radius:0;display:grid;gap:10px;overflow:visible}
+  .item{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+  .item:last-child{border-bottom:1px solid var(--line)}
+  .item .main{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:16px}
+  .item .main .code,.item .main .c3,.item .main .c4{display:none}
+  .title{font-size:16.5px}
+  .mmeta{display:flex;gap:6px;flex-wrap:wrap}
+  .acts{justify-content:stretch;margin-top:4px}
+  .act{flex:1;height:44px;font-size:14.5px}
+  .detail{padding:16px}
+  .dgrid{grid-template-columns:1fr 1fr}
+  .dgrid .w2{grid-column:1/-1}
+}
+@media(max-width:480px){.seg{width:100%}.seg button{flex:1;padding:8px 6px;font-size:14px}.seg .lg{display:none}}
+@media(max-width:360px){.acts{flex-direction:column}}
+</style>
+<script src="../../assets/analytics.js" defer></script>
+<style id="mem-off">.gitem.off>span{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:#a3abb3;padding:16px 11px;cursor:default;white-space:nowrap}.gitem.off small{font-size:11px;border:1px solid #d5dae0;border-radius:5px;padding:0 6px}.btn.off,.off-link{opacity:.45;pointer-events:none;cursor:default}@media(max-width:720px){.gitem.off>span{padding:12px 8px;font-size:16px}}</style>
+<link rel="stylesheet" href="../../assets/webcalc.css">
+<script src="../../assets/webcalc.js"></script>
+</head>
+<body>
+<nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트 구조부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a><a href="../../forms/rc-series/">콘크리트 부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem off"><span aria-disabled="true">멤버십 <small>준비 중</small></span></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
+<main class="wrap">
+  <div class="crumb"><a href="../../index.html">홈</a> › <a href="../index.html">계산도구</a> › <a href="../dongbari/#ex3.3">거푸집동바리 설계</a> › 웹 계산기</div>
+  <div class="wc-head">
+    <h1>예제 3.3 일반 벽체 측압 <span style="font-weight:400;color:var(--mute);font-size:.7em">웹 계산기</span></h1>
+    <p>KDS 측압식 P = C<sub>w</sub>·C<sub>c</sub>·[7.2 + 785R/(T + 17.8)]으로 벽체 측압을 구하고, 하한 30 kN/m²와 액압 한계 γ<sub>c</sub>·H로 설계 측압을 정합니다. 계산 절차는 CalcpadCE 예제 파일 3.3과 같습니다.</p>
+    <div class="row"><span class="tag cd">동바리 03장</span><span class="tag">기초</span><span class="vtag" title="같은 입력을 CalcpadCE와 웹 계산기에 넣어 결과를 대조했습니다">✓ CalcpadCE 결과와 대조 검증</span></div>
+  </div>
+  <div class="wc">
+    <form class="panel inp" autocomplete="off" onsubmit="return false">
+      <h2>1. 설계 조건</h2>
+      <div class="fld"><label for="Cw">단위중량계수<i>C<sub>w</sub></i></label><span class="ib"><input id="Cw" inputmode="decimal" value="1.0"><span class="u">–</span></span></div>
+      <div class="fld"><label for="Cc">시멘트계수<i>C<sub>c</sub></i></label><span class="ib"><input id="Cc" inputmode="decimal" value="1.0"><span class="u">–</span></span></div>
+      <div class="fld"><label for="R">타설속도<i>R</i></label><span class="ib"><input id="R" inputmode="decimal" value="1.5"><span class="u">m/h</span></span></div>
+      <div class="fld"><label for="T">콘크리트 온도<i>T</i></label><span class="ib"><input id="T" inputmode="decimal" value="20"><span class="u">℃</span></span></div>
+      <div class="fld"><label for="gc">콘크리트 단위중량<i>γ<sub>c</sub></i></label><span class="ib"><input id="gc" inputmode="decimal" value="24"><span class="u">kN/m³</span></span></div>
+      <div class="fld"><label for="H">벽체 높이<i>H</i></label><span class="ib"><input id="H" inputmode="decimal" value="3.0"><span class="u">m</span></span></div>
+      <div class="ibtns"><button type="button" class="b2" id="reset">기본값</button><button type="button" class="b2" id="share">링크 복사</button><button type="button" class="b2" id="print">인쇄·PDF</button></div>
+      <div class="ibtns" style="margin-top:8px"><a class="b1" href="../dongbari/forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.3_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download data-example="3.3">⤓ CalcpadCE 파일 받기</a></div>
+      <div class="fixed">시멘트계수 C<sub>c</sub>: 지연제 없음 1.0 · 경험식이므로 R, T는 숫자로 넣고 결과에 kN/m²를 붙입니다. 온도 T는 −17.8℃보다 높아야 합니다.</div>
+    </form>
+    <div>
+      <div id="verdict" class="verdict"></div>
+      <div class="panel plot"><h3>측압 – 타설속도 곡선</h3><div id="pl"></div>
+        <div class="lg"><span><i style="background:#c2402f"></i>측압식 P<sub>f</sub>(R)</span><span><i style="background:#0f6e56"></i>하한 30 kN/m²</span><span><i style="background:#1A3A5C"></i>액압 한계 γ<sub>c</sub>·H</span><span><i style="background:#8a5a00"></i>현재 설계 측압</span></div></div>
+      <div class="panel res" id="steps"></div>
+      <div class="disc"><b>사용 안내</b> · 이 계산기는 설계 검토를 돕는 참고용 도구입니다. 입력값과 결과의 적정성 확인, 최종 설계에 대한 책임은 사용자에게 있습니다. 오류를 발견하시면 <a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%203.3%20%EC%9B%B9%20%EA%B3%84%EC%82%B0%EA%B8%B0" style="color:var(--navy);font-weight:700">알려 주세요</a>.</div>
+    </div>
+  </div>
+</main>
+<div id="toast"></div>
+
+<script id="calc">
+/* 예제 3.3 계산 — CalcpadCE 파일 예제3.3_벽체측압_기초_그래프_입력폼.cpd 와 같은 절차 (단위: kN, m) */
+function calcDB33(p){
+  var r = {Pmin:30};
+  r.Pf = function(R){ return p.Cw*p.Cc*(7.2 + 785*R/(p.T + 17.8)); };
+  r.P = r.Pf(p.R);
+  r.Pmax = p.gc*p.H;
+  r.Pd = Math.min(Math.max(r.P, r.Pmin), r.Pmax);
+  r.calcGov = r.P >= r.Pmin;
+  return r;
+}
+</script>
+<script>
+(function(){
+  var $=WC.$,f=WC.f,v=WC.v,V=WC.V,eq=WC.eq,chk=WC.chk,step=WC.step;
+  function run(p){
+    var V1=$('verdict');
+    if(!(p.T > -17.8)){ V1.className='verdict err'; V1.innerHTML='<div class="big">입력 확인</div><div class="msg">온도 T는 −17.8℃보다 높아야 합니다.</div>'; $('steps').innerHTML=''; $('pl').innerHTML=''; return {verdict:'ERR'}; }
+    var r=calcDB33(p);
+    var gov = r.Pd===r.Pmax && r.P>r.Pmax ? '액압 한계 지배' : (r.calcGov ? '계산값 채택' : '최솟값(30) 지배');
+    V1.className='verdict ok';
+    V1.innerHTML='<div class="big">'+f(r.Pd,2)+' kN/m²</div><div class="kv"><span>설계 측압<b>'+gov+'</b></span><span>측압식 계산값<b>'+f(r.P,2)+'</b></span><span>액압 γ<sub>c</sub>·H<b>'+f(r.Pmax,2)+'</b></span>'+(r.Pmax>0?'<span>액압의<b>'+f(r.Pd/r.Pmax*100,1)+'%</b></span>':'')+'</div>';
+    var c=[],lo=[],hi=[]; for(var R=0;R<=4.0001;R+=0.05){ c.push([R,r.Pf(R)]); }
+    WC.plot($('pl'),{series:[{pts:c,color:'#c2402f',width:2.4},{pts:[[0,30],[4,30]],color:'#0f6e56',width:2,dash:'6 4'},{pts:[[0,r.Pmax],[4,r.Pmax]],color:'#1A3A5C',width:2,dash:'6 4'}],
+      marks:[{x:p.R,y:r.Pd,color:'#8a5a00',fillc:'#8a5a00',label:'R = '+f(p.R,2)}],xmin:0,xmax:4,ymin:0,xlabel:'타설속도 R (m/h)',ylabel:'측압 p (kN/m²)',h:340,label:'측압-타설속도 곡선'});
+    var h='';
+    h+=step('2. 측압 산정','',
+       eq('KDS 측압',V('P')+' = '+V('C','w')+V('C','c')+'·[7.2 + 785'+V('R')+'/('+V('T')+' + 17.8)] = '+f(p.Cw,2)+'·'+f(p.Cc,2)+'·[7.2 + 785×'+f(p.R,2)+'/('+f(p.T,1)+' + 17.8)] = '+v(r.P,4,'kN/m²'))
+      +eq('최솟값(하한)',V('P','min')+' = '+v(30,0,'kN/m²'))
+      +eq('최댓값(액압 한계)',V('P','max')+' = '+V('γ','c')+V('H')+' = '+f(p.gc,2)+' × '+f(p.H,2)+' = '+v(r.Pmax,3,'kN/m²')));
+    h+=step('3. 상·하한 검토 → 설계 측압','',
+       eq('설계 측압',V('P','design')+' = min(max('+V('P')+', '+V('P','min')+'), '+V('P','max')+') = '+v(r.Pd,4,'kN/m²'))
+      +chk(r.calcGov,r.calcGov?'계산값 ≥ 30 kN/m² → 계산값 채택':'계산값 &lt; 30 → 최솟값 지배')
+      +(r.P>r.Pmax?chk(true,'계산값이 액압 한계 γ<sub>c</sub>·H를 넘어 액압 한계를 적용','wip'):''));
+    h+=step('결론','',
+       '<p style="font-size:15px">설계 측압 <b>'+f(r.Pd,2)+' kN/m²</b>'+(r.Pmax>0&&r.Pd<r.Pmax?' — 액압 '+f(r.Pmax,1)+' kN/m² 대비 약 '+f((1-r.Pd/r.Pmax)*100,0)+'% 작습니다.':'')+'</p>');
+    $('steps').innerHTML=h;
+    return {verdict:gov};
+  }
+  WC.init({id:'3.3',fields:{Cw:{def:'1.0'},Cc:{def:'1.0'},R:{def:'1.5'},T:{def:'20',any:true,min:-17.5},gc:{def:'24'},H:{def:'3.0'}},run:run});
+})();
+</script>
+
+<footer class="site"><div class="wrap fi">
+  <div><b>산수허브 SANSUHUB</b><br>토목구조물의 설계 · 건설기술 개발<br><a href="../../about/">발행처 소개 · 문의</a> · <a href="../../about/#privacy">개인정보 처리 안내</a></div>
+  <div>문의 · 오류 제보 <a href="mailto:laonlee80@naver.com">laonlee80@naver.com</a><br>Calcpad는 calcpad.eu의 무료 오픈소스 계산 소프트웨어입니다.<br><span style="color:#8a949e">&copy; 2026 SANSUHUB. All rights reserved.</span></div>
+</div></footer>
+<script>
+(function(){
+  var items=[].slice.call(document.querySelectorAll('.gitem.has-sub>a'));
+  items.forEach(function(a){
+    a.addEventListener('click',function(e){
+      e.preventDefault();
+      var li=a.parentNode, was=li.classList.contains('open');
+      document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+      if(!was) li.classList.add('open');
+    });
+  });
+  document.addEventListener('click',function(e){
+    if(!e.target.closest('.gitem')) document.querySelectorAll('.gitem.open').forEach(function(x){x.classList.remove('open')});
+  });
+})();
+</script>
+<script>(function(){var t=document.querySelector(".navtoggle"),n=document.querySelector(".gnav");if(t)t.addEventListener("click",function(){var o=n.classList.toggle("open");t.setAttribute("aria-expanded",o?"true":"false");});})();</script>
+</body>
+</html>
