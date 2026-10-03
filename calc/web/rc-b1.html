@@ -127,6 +127,7 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
 </style>
 <script src="../../assets/analytics.js" defer></script>
 <style id="mem-off">.gitem.off>span{display:inline-flex;align-items:center;gap:6px;font-size:15px;color:#a3abb3;padding:16px 11px;cursor:default;white-space:nowrap}.gitem.off small{font-size:11px;border:1px solid #d5dae0;border-radius:5px;padding:0 6px}.btn.off,.off-link{opacity:.45;pointer-events:none;cursor:default}@media(max-width:720px){.gitem.off>span{padding:12px 8px;font-size:16px}}</style>
+<style id="wcl">.wlink{display:inline-flex;align-items:center;gap:4px;margin-left:8px;font-size:12.5px;font-weight:700;color:#0f6e56;background:#e3f4ee;border:1px solid #bfe3d4;padding:1px 9px;border-radius:999px;white-space:nowrap;vertical-align:middle}.wlink:hover{background:#d3eee3}</style>
 <link rel="stylesheet" href="../../assets/webcalc.css">
 <script src="../../assets/webcalc.js"></script>
 </head>
@@ -150,7 +151,10 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
       <div class="fld"><label for="d1">압축연단~인장철근 도심<i>d<sub>1</sub></i></label><span class="ib"><input id="d1" inputmode="decimal" value="60"><span class="u">mm</span></span></div>
       <div class="fld"><label for="fck">콘크리트 기준압축강도<i>f<sub>ck</sub></i></label><span class="ib"><input id="fck" inputmode="decimal" value="27"><span class="u">MPa</span></span></div>
       <div class="fld"><label for="fy">철근 기준항복강도<i>f<sub>y</sub></i></label><span class="ib"><input id="fy" inputmode="decimal" value="400"><span class="u">MPa</span></span></div>
-      <div class="fld"><label for="s">인장철근 배근간격 CTC<i>s</i></label><span class="ib"><input id="s" inputmode="decimal" value="100"><span class="u">mm</span></span></div>
+      <div class="fld"><label for="mode">사용철근 결정</label><span class="ib"><select id="mode"><option value="0" selected>자동 (배근간격 → 직경)</option><option value="1">직접 지정 (직경·개수)</option></select></span></div>
+      <div class="fld man"><label for="dm">철근 직경</label><span class="ib"><select id="dm"><option value="10">D10</option><option value="13">D13</option><option value="16">D16</option><option value="19" selected>D19</option><option value="22">D22</option><option value="25">D25</option><option value="29">D29</option><option value="32">D32</option></select></span></div>
+      <div class="fld man"><label for="nm">철근 개수 (1단)<i>n</i></label><span class="ib"><input id="nm" inputmode="numeric" value="5"><span class="u">개</span></span></div>
+      <div class="fld auto"><label for="s">인장철근 배근간격 CTC<i>s</i></label><span class="ib"><input id="s" inputmode="decimal" value="100"><span class="u">mm</span></span></div>
       <div class="fld"><label for="cs">측면 피복(철근 중심)<i>c<sub>s</sub></i></label><span class="ib"><input id="cs" inputmode="decimal" value="40"><span class="u">mm</span></span></div>
       <div class="ibtns">
         <button type="button" class="b2" id="reset">기본값</button>
@@ -185,11 +189,27 @@ function calcRCB1(p){
   if (r.disc < 0) { r.err = 'section'; return r; }
   r.rho = 0.85*p.fck/p.fy*(1 - Math.sqrt(r.disc));
   r.Ascal = r.rho*p.b*r.d;
-  r.nb = Math.floor((p.b - 2*p.cs)/p.s) + 1;
-  if (!(r.nb >= 1)) { r.err = 'nb'; return r; }
+  r.manual = p.mode === 1;
+  if (r.manual) {   /* 사용자 지정: 직경·개수를 직접 입력 (이후 검토 절차는 자동과 같음) */
+    r.nb = p.nm;
+    r.sp = r.nb > 1 ? (p.b - 2*p.cs)/(r.nb - 1) : 0;
+    if (!(p.b - 2*p.cs >= 0)) { r.err = 'nb'; return r; }
+  } else {
+    r.nb = Math.floor((p.b - 2*p.cs)/p.s) + 1;
+    r.sp = p.s;
+    if (!(r.nb >= 1)) { r.err = 'nb'; return r; }
+  }
   r.Abreq = r.Ascal/r.nb;
-  r.over = true; r.bar = 'D32'; r.db = 31.8;
-  for (var i = 0; i < RCB1_BARS.length; i++) if (r.Abreq <= RCB1_BARS[i][0]) { r.bar = RCB1_BARS[i][1]; r.db = RCB1_BARS[i][2]; r.over = false; break; }
+  if (r.manual) {
+    r.over = false; r.bar = 'D' + p.dm; r.db = null;
+    for (var j = 0; j < RCB1_BARS.length; j++) if (RCB1_BARS[j][1] === r.bar) r.db = RCB1_BARS[j][2];
+    if (r.db === null) { r.err = 'bar'; return r; }
+    r.clear = r.nb > 1 ? r.sp - r.db : null;               /* 철근 순간격 (참고) */
+    r.clearMin = Math.max(25, r.db);
+  } else {
+    r.over = true; r.bar = 'D32'; r.db = 31.8;
+    for (var i = 0; i < RCB1_BARS.length; i++) if (r.Abreq <= RCB1_BARS[i][0]) { r.bar = RCB1_BARS[i][1]; r.db = RCB1_BARS[i][2]; r.over = false; break; }
+  }
   r.Ab1 = Math.PI*r.db*r.db/4;
   r.As = r.nb*r.Ab1;
   r.Asmin1 = 0.25*Math.sqrt(p.fck)/p.fy*p.b*r.d;
@@ -221,21 +241,21 @@ function calcRCB1(p){
       if(r.a*sc<hh) s+='<rect x="'+x0+'" y="'+y0+'" width="'+bw+'" height="'+(r.a*sc)+'" fill="#1A3A5C" fill-opacity=".14"/>';
       var cy=y0+r.c*sc; if(r.c*sc<hh) s+='<line x1="'+(x0-6)+'" y1="'+cy+'" x2="'+(x0+bw+6)+'" y2="'+cy+'" stroke="#c2402f" stroke-dasharray="4 3"/><text x="'+(x0+bw+8)+'" y="'+(cy+4)+'" font-size="10" fill="#c2402f">c</text>';
       var by=y0+(p.h-p.d1)*sc, rr=Math.max(2.2,r.db/2*sc);
-      for(var i=0;i<r.nb;i++){var bx=x0+(p.cs+i*p.s)*sc; if(bx<=x0+bw) s+='<circle cx="'+bx+'" cy="'+by+'" r="'+rr+'" fill="#1b2530"/>';}
+      for(var i=0;i<r.nb;i++){var bx=x0+(r.nb>1||!r.manual?(p.cs+i*r.sp):p.b/2)*sc; if(bx<=x0+bw) s+='<circle cx="'+bx+'" cy="'+by+'" r="'+rr+'" fill="#1b2530"/>';}
     }
     s+='<text x="'+(W/2)+'" y="'+(y0+hh+16)+'" font-size="11" text-anchor="middle" fill="#46525e">b = '+f(p.b,0)+'</text><text x="'+(x0-6)+'" y="'+(y0+hh/2)+'" font-size="11" text-anchor="end" fill="#46525e">h</text>';
     $('fig').innerHTML=s;
   }
   function run(p){
-    var r=calcRCB1(p), V1=$('verdict'); fig(p,r);
+    var r=calcRCB1(p), V1=$('verdict'); if(!r.err&&!r.manual) window.__rcb1auto=r; fig(p,r);
     if(r.err){
       V1.className='verdict err';
-      var m={section:'단면이 작아 철근비를 구할 수 없습니다 (1 − 2R<sub>n</sub>/(0.85f<sub>ck</sub>) &lt; 0). 단면을 키우거나 f<sub>ck</sub>를 높이세요.', d:'유효깊이 d = h − d<sub>1</sub>가 0 이하입니다.', nb:'배근간격·피복으로 철근 개수를 구할 수 없습니다 (b − 2c<sub>s</sub> &lt; 0).'}[r.err];
+      var m={section:'단면이 작아 철근비를 구할 수 없습니다 (1 − 2R<sub>n</sub>/(0.85f<sub>ck</sub>) &lt; 0). 단면을 키우거나 f<sub>ck</sub>를 높이세요.', d:'유효깊이 d = h − d<sub>1</sub>가 0 이하입니다.', nb:'배근간격·피복으로 철근 개수를 구할 수 없습니다 (b − 2c<sub>s</sub> &lt; 0).', bar:'철근 직경을 확인해 주세요.'}[r.err];
       V1.innerHTML='<div class="big">계산 불가</div><div class="msg">'+m+'</div>'; $('steps').innerHTML=''; $('figcap').innerHTML=''; return {verdict:'ERR'};
     }
     V1.className='verdict '+(r.ok?'ok':'ng');
     V1.innerHTML='<div class="big">'+(r.ok?'O.K.':'N.G.')+'</div><div class="kv"><span>설계휨강도 φM<sub>n</sub><b>'+f(r.phiMn,1)+' kN·m</b></span><span>소요 M<sub>u</sub><b>'+f(p.Mu,1)+' kN·m</b></span><span>안전율<b>'+f(r.SF,3)+'</b></span><span>사용철근<b>'+r.nb+'-'+r.bar+'</b></span></div>'
-      +(r.ok?'':'<div class="msg">설계휨강도가 부족합니다. 철근 직경 상향 또는 단면 증가가 필요합니다.</div>');
+      +(r.ok?'':'<div class="msg">설계휨강도가 부족합니다. 철근 직경 상향 또는 단면 증가가 필요합니다.</div>')+(!r.minOK?'<div class="msg">⚠ 최소철근량 부족 — '+(r.manual?'직경 또는 개수를 늘리세요.':'철근 직경 상향이 필요합니다. ‘사용철근 결정’을 직접 지정으로 바꿔 직경·개수를 조정해 볼 수 있습니다.')+'</div>':'')+(r.manual&&r.clear!==null&&r.clear<r.clearMin?'<div class="msg">⚠ 참고: 철근 순간격 '+f(r.clear,1)+' mm가 '+f(r.clearMin,1)+' mm보다 작습니다.</div>':'');
     $('figcap').innerHTML='<b>'+r.nb+'-'+r.bar+'</b> (A<sub>s</sub> = '+f(r.As,1)+' mm²) · 유효깊이 d = '+f(r.d,0)+' mm<br>등가응력블록 a = '+f(r.a,1)+' mm (음영), 중립축 c = '+f(r.c,1)+' mm (점선)';
     var zone={tension:'인장지배 단면 : φ = 0.85 (가정 확인)',compression:'압축지배 단면 : φ = 0.65 (단면 재검토 필요)',transition:'변화구간 단면 : φ 선형보간'}[r.zone];
     var h='';
@@ -244,12 +264,23 @@ function calcRCB1(p){
        eq('소요강도계수',V('R','n')+' = '+V('M','u')+' / ('+V('φ','a')+'·'+V('b')+'·'+V('d')+'²) = '+f(p.Mu,1)+'×10⁶ / (0.85×'+f(p.b,0)+'×'+f(r.d,1)+'²) = '+v(r.Rn,null,'MPa'))
       +eq('계산철근비',V('ρ','cal')+' = (0.85'+V('f','ck')+'/'+V('f','y')+')·[1 − √(1 − 2'+V('R','n')+'/(0.85'+V('f','ck')+'))] = '+v(r.rho,6))
       +eq('계산철근량',V('A','s,cal')+' = '+V('ρ','cal')+'·'+V('b')+'·'+V('d')+' = '+v(r.Ascal,1,'mm²')));
+    if(r.manual){
+      h+=step('[3단계] 사용철근 (직접 지정)','사용자가 직경·개수 입력',
+         eq('지정 철근','<span class="v">'+r.nb+'-'+r.bar+'</span> ('+V('d','b')+' = '+f(r.db,2)+' mm)')
+        +eq('참고: 1본 소요단면적',V('A','s,cal')+'/'+V('n')+' = '+v(r.Abreq,1,'mm²'))
+        +eq('1본 공칭단면적',V('A','b1')+' = π'+V('d','b')+'²/4 = '+v(r.Ab1,1,'mm²'))
+        +eq('사용 인장철근량',V('A','s')+' = '+V('n')+'·'+V('A','b1')+' = '+r.nb+' × '+f(r.Ab1,1)+' = '+v(r.As,1,'mm²'))
+        +chk(r.As>=r.Ascal,'→ '+(r.As>=r.Ascal?'A<sub>s</sub> ≥ A<sub>s,cal</sub> (계산철근량 확보)':'A<sub>s</sub> &lt; A<sub>s,cal</sub> — 계산철근량보다 적음 (아래 설계휨강도 확인)'),r.As>=r.Ascal?'ok':'wip')
+        +(r.nb>1?eq('참고: 배근간격 · 순간격','('+V('b')+' − 2'+V('c','s')+')/('+V('n')+' − 1) = '+v(r.sp,1,'mm')+', 순간격 = '+v(r.clear,1,'mm'))
+          +chk(r.clear>=r.clearMin,'→ 참고: 순간격 '+(r.clear>=r.clearMin?'≥':'&lt;')+' max(25 mm, d<sub>b</sub>) = '+f(r.clearMin,1)+' mm'+(r.clear>=r.clearMin?'':' — 1단 배근이 어려우니 개수·직경·폭을 조정하세요')+' (굵은골재 조건은 별도 확인)',r.clear>=r.clearMin?'ok':'ng'):''));
+    } else {
     h+=step('[3단계] 사용철근 결정','배근간격 → 직경',
        eq('한 단 철근 개수',V('n','b')+' = ⌊('+V('b')+' − 2'+V('c','s')+')/'+V('s')+'⌋ + 1 = ⌊('+f(p.b,0)+' − 2×'+f(p.cs,0)+')/'+f(p.s,0)+'⌋ + 1 = '+v(r.nb,0,'개'))
       +eq('1본 소요단면적',V('A','bar,req')+' = '+V('A','s,cal')+'/'+V('n','b')+' = '+v(r.Abreq,1,'mm²'))
       +eq('선택 직경','<span class="v">'+r.bar+'</span> ('+V('d','b')+' = '+f(r.db,2)+' mm)'+(r.over?' <b style="color:var(--adv)">— D32 초과: 배근간격 축소 또는 단면 증대 필요 (잠정 D32)</b>':''))
       +eq('1본 공칭단면적',V('A','b1')+' = π'+V('d','b')+'²/4 = '+v(r.Ab1,1,'mm²'))
       +eq('사용 인장철근량',V('A','s')+' = '+V('n','b')+'·'+V('A','b1')+' = '+r.nb+' × '+f(r.Ab1,1)+' = '+v(r.As,1,'mm²')));
+    }
     h+=step('[4단계] 최소철근비 검토','KDS 14 20 20 (4.2.2) — 4/3 예외규정',
        eq('산정식 1','0.25√'+V('f','ck')+'/'+V('f','y')+'·'+V('b')+'·'+V('d')+' = '+v(r.Asmin1,1,'mm²'))
       +eq('산정식 2','1.4/'+V('f','y')+'·'+V('b')+'·'+V('d')+' = '+v(r.Asmin2,1,'mm²'))
@@ -270,7 +301,10 @@ function calcRCB1(p){
     $('steps').innerHTML=h;
     return {verdict:r.ok?'OK':'NG'};
   }
-  WC.init({id:'RC-B1',fields:{Mu:{def:250},b:{def:500},h:{def:600},d1:{def:60},fck:{def:27},fy:{def:400},s:{def:100},cs:{def:40}},run:run});
+  function modeUI(){ var man=$('mode').value==='1'; document.querySelectorAll('.fld.man').forEach(function(e){e.style.display=man?'':'none'}); document.querySelectorAll('.fld.auto').forEach(function(e){e.style.opacity=man?.45:1}); $('s').disabled=man; }
+  $('mode').addEventListener('change',function(){ if($('mode').value==='1'){ var r=window.__rcb1auto; if(r){ $('dm').value=r.bar.slice(1); $('nm').value=r.nb; } } modeUI(); });
+  var _run=run; run=function(p){ modeUI(); var o=_run(p); return o; };
+  WC.init({id:'RC-B1',fields:{Mu:{def:250},b:{def:500},h:{def:600},d1:{def:60},fck:{def:27},fy:{def:400},mode:{def:0,allowZero:true,int:true},dm:{def:19},nm:{def:5,int:true},s:{def:100},cs:{def:40}},run:run,inputHint:'철근 개수는 1 이상의 정수입니다.'});
 })();
 </script>
 
