@@ -1,0 +1,998 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>계산서 미리보기 · RC-C1 띠철근 기둥 P-M 상관도 | 산수허브</title>
+    <meta name="description" content="RC-C1 띠철근 기둥 P-M 상관도 — CalcpadCE 계산서를 기본 입력값으로 미리 보기">
+    <link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
+    <script src="../../assets/analytics.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    
+    <style>
+        body {
+            background-color: white;
+            color: black;
+            font-size: 11pt;
+            font-family: 'Segoe UI', 'Arial Nova', Helvetica, sans-serif;
+            margin-left: 5mm;
+            max-width: 190mm;
+        }
+
+        h1, h2, h3, h4, h5, h6, .errorHeader, .roundBox {
+            font-family: 'Arial Nova', Helvetica, sans-serif;
+            margin: 0.5em 0 0.5em 0;
+            padding: 0;
+            line-height: 150%;
+        }
+
+        h1 {font-size: 2.1em;}
+        h2 {font-size: 1.7em;}
+        h3 {font-size: 1.4em;}
+        h4 {font-size: 1.2em;}
+        h5 {font-size: 1.1em;}
+        h6 {font-size: 1em;}
+
+        p, li {
+            margin: 0.3em 0 0.3em 0;
+            padding: 0;
+            line-height: 150%;
+        }
+
+        select, kbd {
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        a:hover {
+            background-color: #e9f6ff;
+        }
+
+        .eq, input[type="text"], table.matrix {
+            font-family: 'Georgia Pro', 'Century Schoolbook', 'Times New Roman', Times, serif;
+        }
+
+            .eq var {
+                color: #06d;
+                font-size: 105%;
+            }
+
+            .eq i {
+                color: #086;
+                font-style: normal;
+                font-size: 90%;
+            }
+
+            i.unit {
+                color: #043!important;
+                font-size: 90%!important;
+                vertical-align: -1pt;
+            }
+
+            sup.unit {
+                font-family: Calibri, Candara, Corbel, sans-serif;
+                font-size: 70%!important;
+            }
+
+            .eq b {
+                font-weight: 600;
+            }
+
+            .eq sub {
+                font-family: Calibri, Candara, Corbel, sans-serif;
+                font-size: 80%;
+                vertical-align: -18%;
+                margin-left: 1pt;
+            }
+
+            .eq sup {
+                display: inline-block;
+                margin-left: 1pt;
+                margin-top: -3pt;
+                font-size: 75%;
+            }
+
+            .eq small {
+                font-family: Calibri, Candara, Corbel, sans-serif;
+                font-size: 70%;
+            }
+
+                .eq small var {
+                    font-family: 'Georgia Pro', 'Century Schoolbook', 'Times New Roman', Times, serif;
+                    font-size: 8.5pt;
+                }
+
+                .eq small i {
+                    font-family: 'Georgia Pro', 'Century Schoolbook', 'Times New Roman', Times, serif;
+                    font-size: 6pt;
+                }
+
+            .eq u, input, select {
+                background-color: LightYellow;
+            }
+
+                input[type="text"], select {
+                    font-size: 10pt;
+                    padding: 0.2em 0.4em;
+                    border: 0.5pt solid #CCC;
+                    border-radius: 0.35em;
+                    box-shadow: 0.06em 0.06em 0.5em #ddd;
+                    min-width: 3em;
+                }
+
+                input[type="text"] {
+                    text-align: right;
+                }
+
+                input[type="checkbox"],
+                input[type="radio"] {
+                    vertical-align: baseline;
+                    position: relative;
+                    bottom: -1pt;
+                    margin-right: 1pt;
+                }
+
+                    input[type="checkbox"].post:disabled:not(:checked),
+                    input[type="checkbox"].post:disabled:not(:checked) + label,
+                    input[type="radio"].post:disabled:not(:checked),
+                    input[type="radio"].post:disabled:not(:checked) + label {
+                        display: none;
+                    }
+
+                select:disabled {
+                    background: none;
+                    color: #444;
+                }
+
+                select.post:disabled {
+                    font-size: 12pt;
+                    border: none;
+                    box-shadow: none;
+                    color: red;
+                    background: none;
+                    appearance: none;
+                    -webkit-appearance: none;
+                    -moz-appearance: none;
+                }
+
+                select.post:disabled::-ms-expand {
+                    display: none;
+                }
+
+                input[type="text"]:focus {
+                    box-shadow: 0.1em 0.1em 1em #ccc;
+                    color: black;
+                }
+
+        td, th {
+            padding: 2pt 4pt 2pt 4pt;
+            vertical-align: top;
+        }
+
+        small {
+            font-weight: normal;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+            table.bordered {
+                margin-top: 1em;
+            }
+
+                table.bordered th {
+                    background-color: #F0F0F0;
+                    border: solid 1pt #AAAAAA;
+                }
+
+                table.bordered td {
+                    border: solid 1pt #CCCCCC;
+                }
+
+            table.centered td, .matrix .td {
+                text-align: center;
+            }
+
+            table.data td {
+                text-align: right;
+            }
+
+                table.data td:first-child {
+                    text-align: left;
+                    padding-left: 0;
+                }
+
+        .matrix {
+            display: inline-table;
+        }
+
+            .matrix .tr {
+                display: table-row;
+            }
+
+            .matrix .td {
+                white-space: nowrap;
+                padding: 0 2pt 0 2pt;
+                min-width: 10pt;
+                display: table-cell;
+                font-size: 10pt;
+            }
+
+                .matrix .td:first-child,
+                .matrix .td:last-child {
+                    width: 0.75pt;
+                    min-width: 0.75pt;
+                    max-width: 0.75pt;
+                    padding: 0 1pt 0 1pt;
+                }
+
+                .matrix .td:first-child {
+                    border-left: solid 1pt black;
+                }
+
+                .matrix .td:last-child {
+                    border-right: solid 1pt black;
+                }
+
+            .matrix .tr:first-child .td:first-child,
+            .matrix .tr:first-child .td:last-child {
+                border-top: solid 1pt black;
+            }
+
+            .matrix .tr:last-child .td:first-child,
+            .matrix .tr:last-child .td:last-child {
+                border-bottom: solid 1pt black;
+            }
+
+        .block {
+            display: inline-block;
+            vertical-align: middle;
+            padding-left: 4pt;
+            margin-left: -1pt;
+            border-left: solid 1pt #80b0e8;
+            background: linear-gradient(to right, rgba(0, 192, 255, 0.06), rgba(0, 192, 255, 0.03));
+        }
+
+            .block .block {
+                background: linear-gradient(to right, rgba(0, 192, 255, 0.04), rgba(0, 192, 255, 0.02));
+            }
+
+        .dvcs:has(.block):not(.block *) {
+            display: inline-block;
+            border-left: solid 1pt #80b0e8;
+            padding-left: 0;
+            margin-left: 3pt;
+        }
+
+            .dvcs:has(.block):not(.block *)::before {
+                content: " 🞀";
+                font-size: 9pt;
+                color: #90c4f0;
+                margin-left: -4.5pt;
+            }
+
+        .arr {
+            color: #90c4f0;
+        }
+
+        .r0, .r1, .r2, .r3,
+        .o0, .o1, .o2, .o3,
+        .b1, .b2, .b3,
+        .c1, .c2, .c3, .c4,
+        .c5, .c6, .c7, .c8 {
+            display: inline-block;
+        }
+
+        .r0, .r1, .r2, .r3 {
+            margin-top: -1.5pt;
+            margin-right: 1.5pt;
+            vertical-align: top;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: right top;
+        }
+
+        .o0, .o1, .o2, .o3 {
+            border-top: solid 0.75pt;
+            line-height: 130%;
+            vertical-align: middle;
+            margin-top: 0.75pt;
+            padding-top: 1.25pt;
+            padding-left: 1pt;
+            padding-right: 1pt;
+        }
+
+        .r {
+            font-family: 'Times New Roman', Times, serif;
+            font-size: 150%;
+            display: inline-block;
+            vertical-align: top;
+            margin-left: -9.5pt;
+            position: relative;
+            top: 1pt;
+        }
+
+        .r0 {
+            content: "";
+            background-image: url("data: image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDEwIDIwIiBoZWlnaHQ9IjE1cHQiIHdpZHRoPSIxMHB4Ij4NCiAgPHBvbHlsaW5lIHBvaW50cz0iMCwxMyAyLDEyIDUsMTkgOSwwIiBzdHlsZT0ic3Ryb2tlOmJsYWNrOyBzdHJva2Utd2lkdGg6MC42cHQ7IHN0cm9rZS1saW5lam9pbjpyb3VuZDsgc3Ryb2tlLWxpbmVjYXA6cm91bmQ7IGZpbGw6bm9uZSIgLz4NCiAgPGxpbmUgeDE9IjIuMiIgeTE9IjEyLjMiIHgyPSI0LjYiIHkyPSIxOC43IiBzdHlsZT0ic3Ryb2tlOmJsYWNrOyBzdHJva2Utd2lkdGg6MC44cHQ7IHN0cm9rZS1saW5lY2FwOnJvdW5kOyIgLz4NCjwvc3ZnPg==");
+            width: 8pt;
+            height: 16pt;
+            margin-left: -8pt;
+        }
+
+        .r1 {
+            content: "";
+            background-image: url("data: image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDE1IDQwIiBoZWlnaHQ9IjMwcHQiIHdpZHRoPSIxNXB4Ij4NCiAgPHBvbHlsaW5lIHBvaW50cz0iMSwyNiAzLDI0IDgsMzggMTQsMCIgc3R5bGU9InN0cm9rZTpibGFjazsgc3Ryb2tlLXdpZHRoOjAuNnB0OyBzdHJva2UtbGluZWpvaW46cm91bmQ7IHN0cm9rZS1saW5lY2FwOnJvdW5kOyBmaWxsOm5vbmUiIC8+DQogIDxsaW5lIHgxPSIzLjIiIHkxPSIyNC40IiB4Mj0iNy42IiB5Mj0iMzcuNiIgc3R5bGU9InN0cm9rZTpibGFjazsgc3Ryb2tlLXdpZHRoOjFwdDsgc3Ryb2tlLWxpbmVjYXA6cm91bmQ7IiAvPg0KPC9zdmc+");
+            width: 12pt;
+            height: 32pt;
+            margin-left: -12pt;
+        }
+
+        .r2 {
+            content: "";
+            background-image: url("data: image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDIwIDYwIiBoZWlnaHQ9IjQ1cHQiIHdpZHRoPSIyMHB4Ij4NCiAgPHBvbHlsaW5lIHBvaW50cz0iMiwzNyA1LDM0IDExLDU1IDE5LDAiIHN0eWxlPSJzdHJva2U6YmxhY2s7IHN0cm9rZS13aWR0aDowLjZwdDsgc3Ryb2tlLWxpbmVqb2luOnJvdW5kOyBzdHJva2UtbGluZWNhcDpyb3VuZDsgZmlsbDpub25lIiAvPg0KICA8bGluZSB4MT0iNS4xIiB5MT0iMzQuNiIgeDI9IjEwLjYiIHkyPSI1NC40IiBzdHlsZT0ic3Ryb2tlOmJsYWNrOyBzdHJva2Utd2lkdGg6MS4ycHQ7IHN0cm9rZS1saW5lY2FwOnJvdW5kOyIgLz4NCjwvc3ZnPg==");
+            width: 16pt;
+            height: 48pt;
+            margin-left: -16pt;
+        }
+
+        .r3 {
+            content: "";
+            background-image: url("data: image/svg+xml;base64,PHN2ZyB4bWxuczpzdmc9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDI1IDgwIiBoZWlnaHQ9IjYwcHQiIHdpZHRoPSIyNXB4Ij4NCiAgPHBvbHlsaW5lIHBvaW50cz0iMyw1MCA3LDQ2IDE1LDc0IDI0LDAiIHN0eWxlPSJzdHJva2U6YmxhY2s7IHN0cm9rZS13aWR0aDowLjZwdDsgc3Ryb2tlLWxpbmVqb2luOnJvdW5kOyBzdHJva2UtbGluZWNhcDpyb3VuZDsgZmlsbDpub25lIiAvPg0KICA8bGluZSB4MT0iNy4xIiB5MT0iNDYuOCIgeDI9IjE0LjUiIHkyPSI3My4yIiBzdHlsZT0ic3Ryb2tlOmJsYWNrOyBzdHJva2Utd2lkdGg6MS4ycHQ7IHN0cm9rZS1saW5lY2FwOnJvdW5kOyIgLz4NCjwvc3ZnPg==");
+            width: 19pt;
+            height: 62pt;
+            margin-left: -19pt;
+        }
+
+        .nth {
+            position: relative;
+            bottom: 1pt;
+        }
+
+        .eq small.nth {font-size: 70%;}
+        .dvr small {font-size: 70%;}
+        .dvr small var {font-size: 105%;}
+        sup.raised {vertical-align: top;}
+        sup .r0, sup .r1, sup .r2, sup .r3 {
+            zoom: 0.7;
+            -moz-transform: scale(0.7);
+            -webkit-transform: scale(0.7);
+            transform: scale(0.7);
+            transform-origin: top right;
+            max-height: none;
+        }
+
+        sup .r0 { margin-left: -5pt; }
+        sup .r1 { margin-left: -11pt; }
+        sup .r2 { margin-left: -13pt; }
+        sup .r3 { margin-left: -16pt; }
+
+        .b1, .b2, .b3, .c1, .c2, .c3, .c4, .c5, .c6, .c7, .c8 {
+            vertical-align: middle;
+            font-weight: 100;
+            font-stretch: ultra-condensed;
+        }
+
+        .b2, .b3, .c2, .c3, .c4, .c5, .c6, .c7, .c8 {
+            font-family: 'Jost* Hairline', sans-serif;
+        }
+
+        .b0, .b1, .c1 {
+            font-family: 'Jost* Thin', sans-serif;
+        }
+
+        .b0 {
+            font-size: 120%;
+            font-weight: 600;
+            padding: 0 1pt 0 1pt;
+        }
+
+        .b1 {
+            font-size: 240%;
+            margin-top: -3pt;
+            margin-left: -1pt;
+            margin-right: -1pt;
+        }
+
+        .b2 {
+            font-size: 370%;
+            margin-top: -5pt;
+            margin-left: -3pt;
+            margin-right: -3pt;
+        }
+
+        .b3 {
+            font-size: 520%;
+            margin-top: -8pt;
+            margin-left: -5pt;
+            margin-right: -5pt;
+        }
+
+        .c1 {
+            font-size: 240%;
+            margin-top: -4pt;
+        }
+
+        .c2 {
+            font-size: 360%;
+            margin-top: -6pt;
+            margin-left: -2.5pt;
+            margin-right: -0.5pt;
+        }
+
+        .c3 {
+            font-size: 480%;
+            margin-top: -8pt;
+            margin-left: -3pt;
+            margin-right: -1pt;
+        }
+
+        .c4 {
+            font-size: 600%;
+            margin-top: -10pt;
+            margin-left: -4pt;
+            margin-right: -2pt;
+            transform: scaleX(0.9);
+        }
+
+        .c5 {
+            font-size: 710%;
+            margin-top: -11.5pt;
+            margin-left: -6pt;
+            margin-right: -4pt;
+            transform: scaleX(0.8);
+        }
+
+        .c6 {
+            font-size: 820%;
+            margin-top: -13pt;
+            margin-left: -7pt;
+            margin-right: -5pt;
+            transform: scaleX(0.7);
+        }
+
+        .c7 {
+            font-size: 930%;
+            margin-top: -14.5pt;
+            margin-left: -8pt;
+            margin-right: -6pt;
+            transform: scaleX(0.6);
+        }
+
+        .c8 {
+            font-size: 1040%;
+            margin-top: -16pt;
+            margin-left: -9pt;
+            margin-right: -7pt;
+            transform: scaleX(0.5);
+        }
+
+        .dvc, .dvr, .dvs {
+            display: inline-block;
+            vertical-align: middle;
+            white-space: nowrap;
+        }
+
+        .dvc {
+            padding-left: 2pt;
+            padding-right: 2pt;
+            text-align: center;
+            line-height: 110%;
+        }
+
+        .dvr {
+            text-align: center;
+            line-height: 110%;
+            position: relative;
+            top: -3pt;
+        }
+
+        .dvs {
+            text-align: left;
+            line-height: 110%;
+        }
+
+        .dvl {
+            display: block;
+            border-bottom: solid 1pt black;
+            margin-top: 1pt;
+            margin-bottom: 1pt;
+        }
+
+        .nary {
+            color: #C080F0;
+            font-size: 240%;
+            font-family: Georgia Pro Light, serif;
+            font-weight: 200;
+            line-height: 70%;
+            display: block;
+            margin: 0 1pt 2.5pt 1pt;
+        }
+
+            .nary em {
+                display: block;
+                transform: scaleX(0.7) rotate(7deg);
+            }
+
+        .dvc.down {
+            position: relative;
+            top: 0.5em;
+        }
+
+        .dvc.up {
+            position: relative;
+            bottom: 0.6em;
+        }
+
+        .low {
+            font-size: 70%;
+            display: inline-block;
+            position: relative;
+            top: 1.2em;
+        }
+
+        .cond {
+            color: #E000D0;
+        }
+
+        .err {
+            color: Crimson;
+            background-color: #FEE;
+        }
+
+        .ok {
+            color: Green;
+            background-color: #F0FFF0;
+        }
+
+        .ref {
+            float: right;
+            margin-left: 18pt;
+            color: Green;
+            background-color: #F8FFF0;
+            margin-top: 0;
+            margin-bottom: 0;
+        }
+
+        .side {
+            float: right;
+            max-width: 50%;
+        }
+
+        .plot {
+            max-width: 100%
+        }
+
+        .indent {
+            border-left: 0.75pt solid #dddddd;
+            padding-left: 2em;
+        }
+
+        span.indent {
+            display: inline-block;
+        }
+
+        .fold {
+            height: 2.4em;
+            overflow: hidden;
+        }
+
+        .unfold {
+            height: auto;
+            overflow: auto;
+        }
+
+            .fold > :first-child, .unfold > :first-child {
+                cursor: pointer;
+            }
+
+                .fold > :first-child:hover, .unfold > :first-child:hover {
+                    color: #0066bb;
+                    text-decoration: underline;
+                }
+
+                .fold > :first-child::after {
+                    content: " ... ▼";
+                    font-size: 80%;
+                }
+
+                .unfold > :first-child::after {
+                    content: " ▲";
+                    font-size: 80%;
+                }
+
+        .vec {
+            font-family: 'Cambria Math', serif;
+            color: #8af;
+            font-style: normal;
+            display: inline-block;
+            vertical-align: 2pt;
+            margin-left: 3pt;
+            margin-right: -7pt;
+        }
+
+        small .vec, sup .vec {
+            margin-left: 2pt;
+            margin-right: -6pt;
+        }
+
+        #Units {
+            float: right;
+        }
+
+        @media screen {
+            .no-screen {
+                display: none;
+            }
+        }
+
+        @media print {
+            .side {
+                zoom: 0.8;
+                -moz-transform: scale(0.8);
+            }
+
+            body {
+                margin: 0;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            .no-print {
+                display: none;
+            }
+        }
+
+        @page {
+            size: A4 portrait;
+            margin-left: 20mm;
+            margin-right: 10mm;
+            margin-top: 10mm;
+            margin-bottom: 10mm;
+            -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+        }
+
+        .value {
+            position: relative;
+            background-color: #f4fbff;
+            border-radius: 3pt;
+        }
+
+            .value:after {
+                content: "";
+                position: absolute;
+                left: 100%;
+                top: -100%;
+                transform: translateY(-50%);
+                margin-left: 2pt;
+                height: 16pt;
+                line-height: 16pt;
+                vertical-align: middle;
+                width: fit-content;
+                white-space: nowrap;
+                min-width: 10pt;
+                z-index: 1;
+                padding: 0 6pt 0 6pt;
+                border-radius: 6pt 6pt 6pt 0;
+                background: #000;
+                color: #fff;
+                font-family: 'Segoe UI', sans-serif;
+                font-style: normal;
+                font-size: 10pt;
+                text-align: center;
+                display: none;
+                opacity: 0;
+                transition: opacity 2s;
+                user-select: none;
+                -webkit-user-select: none;
+                -ms-user-select: none;
+                -moz-user-select: none;
+            }
+
+            .value:hover:after {
+                content: attr(data-value);
+                display: block;
+                opacity: 1;
+            }
+
+        .errorHeader {
+            color: white;
+            background-color: crimson;
+            font-size: 10pt;
+            position: fixed;
+            top: 0;
+            left: 0;
+            margin-top: 0;
+            width: 100vw;
+            max-width: 100%;
+            height: 1.8em;
+            line-height: 1.2em;
+            padding-left: 6pt;
+            overflow-x: hidden;
+        }
+
+        .roundBox {
+            background-color: #fee;
+            color: crimson;
+            font-size: 9pt;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: center;
+            cursor: pointer;
+            display: inline-block;
+            border-radius: 4pt;
+            min-width: 1.1em;
+            padding-left: 2pt;
+            padding-right: 2pt;
+            margin-top: 2pt;
+        }
+
+            .roundBox:hover {
+                background-color: white;
+            }
+
+        .lineLink {
+            background: none;
+            color: #b0e0ff;
+            font-family: Calibri, sans-serif;
+            font-size: 10pt;
+            font-weight: bold;
+            text-decoration: none;
+            text-align: left;
+            display: inline-block;
+            position: absolute;
+            left: 0;
+            width: 2em;
+            height: 4em;
+            z-index: 1;
+        }
+
+            .lineLink:hover {
+                background: none;
+                color: #09e;
+            }
+    </style>
+<style id="pv">
+html,body{max-width:none!important;margin:0!important;padding:0!important;background:#f4f6f8}
+.pvbar{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid #dfe3e8;font-family:-apple-system,"Segoe UI","Malgun Gothic",sans-serif}
+.pvin{max-width:820px;margin:0 auto;padding:8px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.pvin img{height:30px;display:block}
+.pvt{font-size:14px;color:#46525e;font-weight:600}
+.pvact{margin-left:auto;display:flex;gap:8px}
+.pvact a{display:inline-flex;align-items:center;height:38px;padding:0 14px;border-radius:8px;font-size:14px;font-weight:700;text-decoration:none;border:1px solid #dfe3e8;color:#1b2530;background:#fff;white-space:nowrap}
+.pvact a.pri{background:#1A3A5C;border-color:#1A3A5C;color:#fff}
+.pvnote{max-width:820px;margin:14px auto 0;padding:0 16px;font-family:-apple-system,"Segoe UI","Malgun Gothic",sans-serif;font-size:14px;color:#5c3d00}
+.pvnote div{background:#fdf1d8;border-radius:10px;padding:10px 14px}
+.pvdoc{max-width:820px;margin:14px auto 40px;background:#fff;border:1px solid #dfe3e8;border-radius:12px;padding:20px 24px;box-sizing:border-box;overflow-x:auto}
+.pvdoc p,.pvdoc h1,.pvdoc h2,.pvdoc h3{max-width:100%}
+.pvdoc svg{max-width:100%;height:auto}
+@media(max-width:600px){.pvt{display:none}.pvact a{height:40px;padding:0 12px}.pvdoc{padding:14px 12px;border-radius:0;border-left:0;border-right:0;font-size:10pt}}
+</style>
+</head>
+<body>
+<div class="pvbar"><div class="pvin"><a href="../../index.html"><img src="../../assets/logo-h.svg" alt="산수허브"></a><span class="pvt">계산서 미리보기</span><span class="pvact"><a href="../rc/#RC-C1">← 예제 목록</a><a class="pri" href="../rc/files/RC-C1_KDS14_%EA%B8%B0%EB%91%A5_PM%EC%83%81%EA%B4%80%EB%8F%84.cpd" download data-example="RC-C1">⤓ 계산파일 받기</a></span></div></div>
+<div class="pvnote"><div><b>기본 입력값</b>으로 계산한 결과입니다. 계산파일을 받아 CalcpadCE에서 입력값을 바꾸면 내 조건으로 다시 계산됩니다.</div></div>
+<div class="pvdoc">
+    <h3><h2>KDS 14 20 20 강도설계법 — 띠철근 기둥 축·휨 설계 (P-M 상관도)</h2> </h3>
+<h3><b>예제 RC-C1</b> : 축력과 휨모멘트를 동시에 받는 띠철근 기둥의 검토 </h3>
+<p>적용기준 : KDS 14 20 20 (콘크리트구조 휨 및 압축 설계기준), 강도설계법 </p>
+<p>────────────────────────────────────────────── </p>
+<h3>■ 기둥 단면 · 작용하중 개념도 </h3>
+<svg width="440" height="235" viewBox="0 0 440 235" xmlns="http://www.w3.org/2000/svg" style="background:#ffffff"> 
+<text x="95" y="24" font-size="11">기둥 단면 (띠철근)</text> 
+<rect x="45" y="55" width="150" height="150" fill="none" stroke="#000000" stroke-width="2"/> 
+<rect x="57" y="67" width="126" height="126" fill="none" stroke="#000000" stroke-width="1.2"/> 
+<circle cx="66" cy="186" r="6" fill="#000000"/> 
+<circle cx="120" cy="186" r="6" fill="#000000"/> 
+<circle cx="174" cy="186" r="6" fill="#000000"/> 
+<circle cx="66" cy="74" r="6" fill="#000000"/> 
+<circle cx="120" cy="74" r="6" fill="#000000"/> 
+<circle cx="174" cy="74" r="6" fill="#000000"/> 
+<line x1="45" y1="216" x2="195" y2="216" stroke="#000000" stroke-width="0.8"/> 
+<text x="116" y="230" font-size="13">b</text> 
+<line x1="206" y1="55" x2="206" y2="205" stroke="#000000" stroke-width="0.8"/> 
+<text x="211" y="135" font-size="13">h</text> 
+<line x1="32" y1="55" x2="32" y2="186" stroke="#000000" stroke-width="0.8" stroke-dasharray="4 2"/> 
+<text x="20" y="125" font-size="12">d</text> 
+<text x="120" y="105" font-size="10" fill="#555555">띠철근</text> 
+<text x="300" y="24" font-size="11">작용 하중 (상단에 P·M 동시 작용)</text> 
+<rect x="305" y="82" width="50" height="108" fill="none" stroke="#000000" stroke-width="1.5"/> 
+<line x1="330" y1="46" x2="330" y2="79" stroke="#000000" stroke-width="2"/> 
+<polygon points="330,82 325,72 335,72" fill="#000000"/> 
+<text x="337" y="64" font-size="13">P</text> 
+<path d="M 308 72 A 24 16 0 0 1 352 72" fill="none" stroke="#000000" stroke-width="1.8"/> 
+<polygon points="352,72 344,68 347,78" fill="#000000"/> 
+<text x="357" y="68" font-size="13">M</text> 
+</svg> 
+<p>────────────────────────────────────────────── </p>
+<h3>1. 설계 입력값 (값을 입력하고 ▶ 계산을 누르세요) </h3>
+<p>계수축력(소요) - <span class="eq"><var>P</var><sub>u</sub> = <u class="input-34">1500</u>  <i>kN</i></span></p>
+<p>계수휨모멘트(소요) - <span class="eq"><var>M</var><sub>u</sub> = <u class="input-35">150</u>  <i>kN</i><i> · </i><i>m</i></span></p>
+<p>단면 폭 - <span class="eq"><var>b</var> = <u class="input-36">400</u>  <i>mm</i></span></p>
+<p>단면 높이 - <span class="eq"><var>h</var> = <u class="input-37">400</u>  <i>mm</i></span></p>
+<p>피복(철근 도심까지) - <span class="eq"><var>d</var><sub>1</sub> = <u class="input-38">50</u>  <i>mm</i></span></p>
+<p>콘크리트 기준압축강도 - <span class="eq"><var>f</var><sub>ck</sub> = <u class="input-39">27</u>  <i>MPa</i></span></p>
+<p>철근 기준항복강도 - <span class="eq"><var>f</var><sub>y</sub> = <u class="input-40">400</u>  <i>MPa</i></span></p>
+<p>주철근 호칭 — D번호 (19/22/25/29/32) - <span class="eq"><var>D</var><sub>no</sub> = <u class="input-41">25</u> </span></p>
+<p>인장측 철근 개수 - <span class="eq"><var>n</var><sub>s</sub> = <u class="input-42">3</u> </span></p>
+<p>압축측 철근 개수 - <span class="eq"><var>n</var><sub>sp</sub> = <u class="input-43">3</u> </span></p>
+<p>──────────── 이하 계산 과정 · 결과 (▶ 계산 시 결과창 표시) ──────────── </p>
+<p>철근 탄성계수 - <span class="eq"><var>E</var><sub>s</sub> = 200000 <i>MPa</i></span></p>
+<p>인장측 유효깊이 - <span class="eq"><var>d</var> = <var>h</var> − <var>d</var><sub>1</sub> = 400 <i>mm</i> − 50 <i>mm</i> = 350 <i>mm</i></span></p>
+<p>압축측 철근 깊이 - <span class="eq"><var>dp</var> = <var>d</var><sub>1</sub> = 50 <i>mm</i></span></p>
+<p>선택 주철근 공칭지름 : </p>
+<p>선택 D25 - <span class="eq"><var>d</var><sub>b</sub> = 25.4 <i>mm</i></span></p>
+<p>철근 1개 공칭단면적 - <span class="eq"><var>A</var><sub>b1</sub> = <span class="dvc"><var>π</var> · <var>d</var><sub>b</sub><sup>2</sup><span class="dvl"></span>4</span> = <span class="dvc">3.141593 ·  ( 25.4 <i>mm</i> ) <sup>2</sup><span class="dvl"></span>4</span> = 506.707479 <i>mm</i><sup class="unit">2</sup></span></p>
+<p>인장측 철근량 - <span class="eq"><var>A</var><sub>s</sub> = <var>n</var><sub>s</sub> · <var>A</var><sub>b1</sub> = 3 · 506.707479 <i>mm</i><sup class="unit">2</sup> = 1520.122437 <i>mm</i><sup class="unit">2</sup></span></p>
+<p>압축측 철근량 - <span class="eq"><var>A</var><sub>sp</sub> = <var>n</var><sub>sp</sub> · <var>A</var><sub>b1</sub> = 3 · 506.707479 <i>mm</i><sup class="unit">2</sup> = 1520.122437 <i>mm</i><sup class="unit">2</sup></span></p>
+<p>전체 철근량 - <span class="eq"><var>A</var><sub>st</sub> = <var>A</var><sub>s</sub> + <var>A</var><sub>sp</sub> = 1520.122437 <i>mm</i><sup class="unit">2</sup> + 1520.122437 <i>mm</i><sup class="unit">2</sup> = 3040.244875 <i>mm</i><sup class="unit">2</sup></span></p>
+<p>────────────────────────────────────────────── </p>
+<h3>2. 재료·단면 계수 [KDS 14 20 20] </h3>
+<p>콘크리트 극한변형률 - <span class="eq"><var>epsilon</var><sub>cu</sub> = 0.0033</span></p>
+<p>등가응력블록 깊이계수 - <span class="eq"><var>beta</var><sub>1</sub> = 0.8</span></p>
+<p>등가응력블록 응력 - <span class="eq"><var>f</var><sub>c</sub> = 0.85 · <var>f</var><sub>ck</sub> = 0.85 · 27 <i>MPa</i> = 22.95 <i>MPa</i></span></p>
+<p>띠철근 기둥 강도감소계수(압축지배) - <span class="eq"><var>phi</var> = 0.65</span></p>
+<p>철근 항복변형률 - <span class="eq"><var>epsilon</var><sub>y</sub> = <span class="dvc"><var>f</var><sub>y</sub><span class="dvl"></span><var>E</var><sub>s</sub></span> = <span class="dvc">400 <i>MPa</i><span class="dvl"></span>200000 <i>MPa</i></span> = 0.002</span></p>
+<p>────────────────────────────────────────────── </p>
+<h3>3. 최대 설계축강도 [KDS 14 20 20] (e=0 부근, 띠철근) </h3>
+<p>공칭 순수축강도 - <span class="eq"><var>P</var><sub>o</sub> = <var>f</var><sub>c</sub> ·  ( <var>b</var> · <var>h</var> − <var>A</var><sub>st</sub> )  + <var>f</var><sub>y</sub> · <var>A</var><sub>st</sub> = 22.95 <i>MPa</i> ·  ( 400 <i>mm</i> · 400 <i>mm</i> − 3040.244875 <i>mm</i><sup class="unit">2</sup> )  + 400 <i>MPa</i> · 3040.244875 <i>mm</i><sup class="unit">2</sup> = 4818.32433 <i>kN</i></span></p>
+<p>최대 설계축강도 - <span class="eq"><var>phiP</var><sub>n.max</sub> = 0.8 · <var>phi</var> · <var>P</var><sub>o</sub> = 0.8 · 0.65 · 4818.32433 <i>kN</i> = 2505.528652 <i>kN</i></span></p>
+<p>────────────────────────────────────────────── </p>
+<h3>●  축방향 철근비 검토 [KDS 14 20 20 (4.3.2)] </h3>
+<p>축방향 철근비 - <span class="eq"><var>rho</var><sub>g</sub> = <span class="dvc"><var>A</var><sub>st</sub><span class="dvl"></span><var>b</var> · <var>h</var></span> = <span class="dvc">3040.244875 <i>mm</i><sup class="unit">2</sup><span class="dvl"></span>400 <i>mm</i> · 400 <i>mm</i></span> = 0.01900153</span></p>
+<b style="font-size:calc(1em + 1pt)">→ 철근비 O.K. (0.01 ≤ ρ_g ≤ 0.08, 겹침이음부 0.04)</b> 
+<b style="font-size:calc(1em + 1pt)">→ 축강도 측면 O.K. (P_u ≤ φP_n,max)</b> 
+<p>────────────────────────────────────────────── </p>
+<h3>4. 균형파괴점 (Balanced) 산정 </h3>
+<p>균형 중립축 깊이 - <span class="eq"><var>c</var><sub>b</sub> = <span class="dvc"><var>epsilon</var><sub>cu</sub> · <var>d</var><span class="dvl"></span><var>epsilon</var><sub>cu</sub> + <var>epsilon</var><sub>y</sub></span> = <span class="dvc">0.0033 · 350 <i>mm</i><span class="dvl"></span>0.0033 + 0.002</span> = 217.924528 <i>mm</i></span></p>
+<p>균형 응력블록 깊이 - <span class="eq"><var>a</var><sub>b</sub> = <var>beta</var><sub>1</sub> · <var>c</var><sub>b</sub> = 0.8 · 217.924528 <i>mm</i> = 174.339623 <i>mm</i></span></p>
+<p>콘크리트 압축합력 - <span class="eq"><var>C</var><sub>cb</sub> = <var>f</var><sub>c</sub> · <var>a</var><sub>b</sub> · <var>b</var> = 22.95 <i>MPa</i> · 174.339623 <i>mm</i> · 400 <i>mm</i> = 1600.437736 <i>kN</i></span></p>
+<p>압축철근 변형률 - <span class="eq"><var>epsilon</var><sub>spb</sub> = <span class="dvc"><var>epsilon</var><sub>cu</sub> ·  ( <var>c</var><sub>b</sub> − <var>dp</var> ) <span class="dvl"></span><var>c</var><sub>b</sub></span> = <span class="dvc">0.0033 ·  ( 217.924528 <i>mm</i> − 50 <i>mm</i> ) <span class="dvl"></span>217.924528 <i>mm</i></span> = 0.002542857</span></p>
+<p>압축철근 응력(≤f_y) - <span class="eq"><var>f</var><sub>spb</sub> = <b>min</b> ( <var>E</var><sub>s</sub> · <var>epsilon</var><sub>spb</sub>; <var>f</var><sub>y</sub> )  = <b>min</b> ( 200000 <i>MPa</i> · 0.002542857; 400 <i>MPa</i> )  = 400 <i>MPa</i></span></p>
+<p>압축철근 합력(콘크리트 공제) - <span class="eq"><var>F</var><sub>spb</sub> = <var>A</var><sub>sp</sub> ·  ( <var>f</var><sub>spb</sub> − <var>f</var><sub>c</sub> )  = 1520.122437 <i>mm</i><sup class="unit">2</sup> ·  ( 400 <i>MPa</i> − 22.95 <i>MPa</i> )  = 573.162165 <i>kN</i></span></p>
+<p>인장철근 합력(항복) - <span class="eq"><var>F</var><sub>sb</sub> = <var>A</var><sub>s</sub> · <var>f</var><sub>y</sub> = 1520.122437 <i>mm</i><sup class="unit">2</sup> · 400 <i>MPa</i> = 608.048975 <i>kN</i></span></p>
+<p>균형 축강도 - <span class="eq"><var>P</var><sub>b</sub> = <var>C</var><sub>cb</sub> + <var>F</var><sub>spb</sub> − <var>F</var><sub>sb</sub> = 1600.437736 <i>kN</i> + 573.162165 <i>kN</i> − 608.048975 <i>kN</i> = 1565.550926 <i>kN</i></span></p>
+<p>균형 휨강도(도심 기준) - <span class="eq"><var>M</var><sub>b</sub> = <var>C</var><sub>cb</sub> · <span class="b1">(</span><span class="dvc"><var>h</var><span class="dvl"></span>2</span> − <span class="dvc"><var>a</var><sub>b</sub><span class="dvl"></span>2</span><span class="b1">)</span> + <var>F</var><sub>spb</sub> · <span class="b1">(</span><span class="dvc"><var>h</var><span class="dvl"></span>2</span> − <var>dp</var><span class="b1">)</span> + <var>F</var><sub>sb</sub> · <span class="b1">(</span><var>d</var> − <span class="dvc"><var>h</var><span class="dvl"></span>2</span><span class="b1">)</span> = 1600.437736 <i>kN</i> · <span class="b1">(</span><span class="dvc">400 <i>mm</i><span class="dvl"></span>2</span> − <span class="dvc">174.339623 <i>mm</i><span class="dvl"></span>2</span><span class="b1">)</span> + 573.162165 <i>kN</i> · <span class="b1">(</span><span class="dvc">400 <i>mm</i><span class="dvl"></span>2</span> − 50 <i>mm</i><span class="b1">)</span> + 608.048975 <i>kN</i> · <span class="b1">(</span>350 <i>mm</i> − <span class="dvc">400 <i>mm</i><span class="dvl"></span>2</span><span class="b1">)</span> = 357.759363 <i>kN</i><i> · </i><i>m</i></span></p>
+<p>────────────────────────────────────────────── </p>
+<h3>5. 파괴유형 판정 (편심 비교) </h3>
+<p>설계 편심 - <span class="eq"><var>e</var> = <span class="dvc"><var>M</var><sub>u</sub><span class="dvl"></span><var>P</var><sub>u</sub></span> = <span class="dvc">150 <i>kN</i><i> · </i><i>m</i><span class="dvl"></span>1500 <i>kN</i></span> = 100 <i>mm</i></span></p>
+<p>균형 편심 - <span class="eq"><var>e</var><sub>b</sub> = <span class="dvc"><var>M</var><sub>b</sub><span class="dvl"></span><var>P</var><sub>b</sub></span> = <span class="dvc">357.759363 <i>kN</i><i> · </i><i>m</i><span class="dvl"></span>1565.550926 <i>kN</i></span> = 228.519786 <i>mm</i></span></p>
+<b style="font-size:calc(1em + 1pt)">→ e ≤ e_b : 압축지배(콘크리트 압축파괴 선행) — P_u가 큰 영역</b> 
+<p>설계점 (M_u, P_u)이 아래 P-M 상관도 곡선 안쪽에 있으면 안전하다. </p>
+<p>────────────────────────────────────────────── </p>
+<h3>6. P-M 상관도 작성 </h3>
+<p>아래 함수는 중립축 깊이 c를 변화시키며 공칭 (M_n, P_n)을 계산한다. </p>
+<p>철근 응력함수(±f_y로 제한) : </p>
+<p><span class="eq"><var>f</var><sub>s</sub> ( <var>epsilon</var> )  = <b>max</b> ( <b>min</b> ( <var>E</var><sub>s</sub> · <var>epsilon</var>; <var>f</var><sub>y</sub> ) ; -<var>f</var><sub>y</sub> ) </span></p>
+<p>응력블록 깊이(≤h) : </p>
+<p><span class="eq"><var>a</var> ( <var>c</var> )  = <b>min</b> ( <var>beta</var><sub>1</sub> · <var>c</var>; <var>h</var> ) </span></p>
+<p>콘크리트 압축합력 : </p>
+<p><span class="eq"><var>C</var><sub>c</sub> ( <var>c</var> )  = <var>f</var><sub>c</sub> · <var>a</var>  ( <var>c</var> )  · <var>b</var></span></p>
+<p>압축철근 변형률·합력(압축이면 콘크리트 공제) : </p>
+<p><span class="eq"><var>eps</var><sub>sp</sub> ( <var>c</var> )  = <span class="dvc"><var>epsilon</var><sub>cu</sub> ·  ( <var>c</var> − <var>dp</var> ) <span class="dvl"></span><var>c</var></span></span></p>
+<p><span class="eq"><var>F</var><sub>sp</sub> ( <var>c</var> )  = <var>A</var><sub>sp</sub> ·  ( <var>f</var><sub>s</sub>  ( <var>eps</var><sub>sp</sub>  ( <var>c</var> )  )  − <var>f</var><sub>c</sub> ·  ( <var>eps</var><sub>sp</sub>  ( <var>c</var> )  &gt; 0 )  ) </span></p>
+<p>인장철근 변형률·합력 : </p>
+<p><span class="eq"><var>eps</var><sub>st</sub> ( <var>c</var> )  = <span class="dvc"><var>epsilon</var><sub>cu</sub> ·  ( <var>c</var> − <var>d</var> ) <span class="dvl"></span><var>c</var></span></span></p>
+<p><span class="eq"><var>F</var><sub>st</sub> ( <var>c</var> )  = <var>A</var><sub>s</sub> ·  ( <var>f</var><sub>s</sub>  ( <var>eps</var><sub>st</sub>  ( <var>c</var> )  )  − <var>f</var><sub>c</sub> ·  ( <var>eps</var><sub>st</sub>  ( <var>c</var> )  &gt; 0 )  ) </span></p>
+<p>공칭 축강도·휨강도 : </p>
+<p><span class="eq"><var>P</var><sub>n</sub> ( <var>c</var> )  = <var>C</var><sub>c</sub>  ( <var>c</var> )  + <var>F</var><sub>sp</sub>  ( <var>c</var> )  + <var>F</var><sub>st</sub>  ( <var>c</var> ) </span></p>
+<p><span class="eq"><var>M</var><sub>n</sub> ( <var>c</var> )  = <var>C</var><sub>c</sub>  ( <var>c</var> )  · <span class="b1">(</span><span class="dvc"><var>h</var><span class="dvl"></span>2</span> − <span class="dvc"><var>a</var>  ( <var>c</var> ) <span class="dvl"></span>2</span><span class="b1">)</span> + <var>F</var><sub>sp</sub>  ( <var>c</var> )  · <span class="b1">(</span><span class="dvc"><var>h</var><span class="dvl"></span>2</span> − <var>dp</var><span class="b1">)</span> + <var>F</var><sub>st</sub>  ( <var>c</var> )  · <span class="b1">(</span><span class="dvc"><var>h</var><span class="dvl"></span>2</span> − <var>d</var><span class="b1">)</span></span></p>
+<p>그래프 설정(벡터 SVG, 적응형 메시 끔 — 작은 마커 누락 방지) : </p>
+<p><span class="eq"><var>PlotSVG</var> = 1</span></p>
+<p><span class="eq"><var>PlotWidth</var> = 500</span></p>
+<p><span class="eq"><var>PlotHeight</var> = 350</span></p>
+<p><span class="eq"><var>PlotAdaptive</var> = 0</span></p>
+<p>φ 강도감소계수 함수 (인장철근 변형률 ε_t에 따라 압축지배 0.65 ~ 인장지배 0.85) : </p>
+<p><span class="eq"><var>eps</var><sub>t</sub> ( <var>c</var> )  = <span class="dvc"><var>epsilon</var><sub>cu</sub> ·  ( <var>d</var> − <var>c</var> ) <span class="dvl"></span><var>c</var></span></span></p>
+<p><span class="eq"><var>phi</var><sub>f</sub> ( <var>c</var> )  = <b>min</b><span class="b1">(</span><b>max</b><span class="b1">(</span>0.65 + <span class="dvc"><var>eps</var><sub>t</sub>  ( <var>c</var> )  − 0.002<span class="dvl"></span>0.003</span> · 0.2; 0.65<span class="b1">)</span>; 0.85<span class="b1">)</span></span></p>
+<p>설계강도 곡선 (φ 적용, 최대 설계축강도로 상한) : </p>
+<p><span class="eq"><var>phiP</var><sub>n</sub> ( <var>c</var> )  = <b>min</b> ( <var>phi</var><sub>f</sub>  ( <var>c</var> )  · <var>P</var><sub>n</sub>  ( <var>c</var> ) ; <var>phiP</var><sub>n.max</sub> ) </span></p>
+<p><span class="eq"><var>phiM</var><sub>n</sub> ( <var>c</var> )  = <var>phi</var><sub>f</sub>  ( <var>c</var> )  · <var>M</var><sub>n</sub>  ( <var>c</var> ) </span></p>
+<p>설계점 (M_u, P_u)을 십자(+) 마커로 표시 (반팔길이: 휨 18kN·m, 축력 350kN) : </p>
+<p><span class="eq"><var>t</var><sub>m</sub> ( <var>c</var> )  = <span class="dvc"><var>c</var> − 40 <i>mm</i><span class="dvl"></span>860 <i>mm</i></span></span></p>
+<p><span class="eq"><var>hx</var> ( <var>c</var> )  = <var>M</var><sub>u</sub> − 18 <i>kN</i> · <var>m</var> + 36 <i>kN</i> · <var>m</var> · <var>t</var><sub>m</sub>  ( <var>c</var> ) </span></p>
+<p><span class="eq"><var>hy</var> ( <var>c</var> )  = <var>P</var><sub>u</sub></span></p>
+<p><span class="eq"><var>vx</var> ( <var>c</var> )  = <var>M</var><sub>u</sub></span></p>
+<p><span class="eq"><var>vy</var> ( <var>c</var> )  = <var>P</var><sub>u</sub> − 350 <i>kN</i> + 700 <i>kN</i> · <var>t</var><sub>m</sub>  ( <var>c</var> ) </span></p>
+<p>그래프 : ① 공칭강도 P_n–M_n (바깥) ② 설계강도 φP_n–φM_n (안쪽) ③ 설계점 + </p>
+<p>설계점 + 가 φ 곡선(안쪽) 내부에 있으면 안전 : </p>
+<svg class="plot"  xmlns="http://www.w3.org/2000/svg" version="1.1" viewbox=" 0 0 2270 1640" width="2270px" height="1640px" style="width:420.37pt; height:303.7pt;" >
+<style type="text/css">
+.plot text {fill:Black; font-family:'Segoe UI', Sans; font-size:44px}
+.plot text.left {text-anchor: start;}
+.plot text.sm {font-size:44px}
+.plot text.mid {text-anchor: middle;}
+.plot text.end {text-anchor: end;}
+.plot .Grid, .plot .Frame, .plot .Axis{fill:none; stroke-width:4;}
+.plot .Grid {stroke:rgba(0, 0, 0, 0.08);}
+.plot .Frame {stroke:rgba(0, 0, 0, 0.24);}
+.plot .Axis {stroke: Black;}
+.plot polyline {fill:none; stroke-width:6;}
+.plot [class^="Fill"] {stroke:none;}
+.Series1 {stroke:Tomato;}
+circle.Series1 {fill:Tomato;}
+.Fill1 {fill:Tomato; fill-opacity:0.050;}
+.Series2 {stroke:YellowGreen;}
+circle.Series2 {fill:YellowGreen;}
+.Fill2 {fill:YellowGreen; fill-opacity:0.045;}
+.Series3 {stroke:CornflowerBlue;}
+circle.Series3 {fill:CornflowerBlue;}
+.Fill3 {fill:CornflowerBlue; fill-opacity:0.040;}
+.Series4 {stroke:#f0d000;}
+circle.Series4 {fill:#f0d000;}
+.Fill4 {fill:#f0d000; fill-opacity:0.035;}
+</style><g class="plot">
+<rect x="180" y="120" width="2000" height="1400" class="Frame" />
+<line x1="180" y1="1504.03" x2="2180" y2="1504.03" class="Grid" />
+<text x="161" y="1522.03" class="sm end">-500 </text>
+<line x1="180" y1="1374" x2="2180" y2="1374" class="Grid" />
+<text x="161" y="1392" class="sm end">0 </text>
+<line x1="180" y1="1243.97" x2="2180" y2="1243.97" class="Grid" />
+<text x="161" y="1261.97" class="sm end">500 </text>
+<line x1="180" y1="1113.94" x2="2180" y2="1113.94" class="Grid" />
+<text x="161" y="1131.94" class="sm end">1000 </text>
+<line x1="180" y1="983.91" x2="2180" y2="983.91" class="Grid" />
+<text x="161" y="1001.91" class="sm end">1500 </text>
+<line x1="180" y1="853.89" x2="2180" y2="853.89" class="Grid" />
+<text x="161" y="871.89" class="sm end">2000 </text>
+<line x1="180" y1="723.86" x2="2180" y2="723.86" class="Grid" />
+<text x="161" y="741.86" class="sm end">2500 </text>
+<line x1="180" y1="593.83" x2="2180" y2="593.83" class="Grid" />
+<text x="161" y="611.83" class="sm end">3000 </text>
+<line x1="180" y1="463.8" x2="2180" y2="463.8" class="Grid" />
+<text x="161" y="481.8" class="sm end">3500 </text>
+<line x1="180" y1="333.77" x2="2180" y2="333.77" class="Grid" />
+<text x="161" y="351.77" class="sm end">4000 </text>
+<line x1="180" y1="203.74" x2="2180" y2="203.74" class="Grid" />
+<text x="161" y="221.74" class="sm end">4500 </text>
+<line x1="180" y1="120" x2="180" y2="1520" class="Grid" />
+<text x="180" y="1572" class="sm mid">0 </text>
+<line x1="459.61" y1="120" x2="459.61" y2="1520" class="Grid" />
+<text x="459.61" y="1572" class="sm mid">50 </text>
+<line x1="739.21" y1="120" x2="739.21" y2="1520" class="Grid" />
+<text x="739.21" y="1572" class="sm mid">100 </text>
+<line x1="1018.82" y1="120" x2="1018.82" y2="1520" class="Grid" />
+<text x="1018.82" y="1572" class="sm mid">150 </text>
+<line x1="1298.42" y1="120" x2="1298.42" y2="1520" class="Grid" />
+<text x="1298.42" y="1572" class="sm mid">200 </text>
+<line x1="1578.03" y1="120" x2="1578.03" y2="1520" class="Grid" />
+<text x="1578.03" y="1572" class="sm mid">250 </text>
+<line x1="1857.63" y1="120" x2="1857.63" y2="1520" class="Grid" />
+<text x="1857.63" y="1572" class="sm mid">300 </text>
+<line x1="2137.24" y1="120" x2="2137.24" y2="1520" class="Grid" />
+<text x="2137.24" y="1572" class="sm mid">350 </text>
+<line x1="180" y1="1374" x2="2180" y2="1374" class="Axis" />
+<text x="2202" y="1356">x </text>
+<line x1="180" y1="120" x2="180" y2="1520" class="Axis" />
+<text x="180" y="84" class="mid">y </text>
+<text x="8" y="1623">[0; -565.11] </text>
+<text x="2262" y="44" class="end">[357.65; 4818.32] </text>
+<polyline points="781.91,1520.96 835.85,1504.61 886.41,1489.28 933.96,1474.85 978.81,1461.23 1021.24,1448.33 1032.22,1445.15 1070.48,1433.49 1106.92,1422.36 1141.72,1411.71 1175.01,1401.5 1206.9,1391.7 1237.52,1382.26 1266.95,1373.16 1295.28,1364.37 1322.6,1355.87 1348.96,1347.64 1374.44,1339.65 1399.08,1331.89 1422.95,1324.35 1446.09,1317 1468.53,1309.84 1490.33,1302.85 1511.51,1296.02 1532.12,1289.34 1552.17,1282.8 1571.7,1276.4 1590.72,1270.12 1609.28,1263.97 1627.38,1257.92 1645.05,1251.98 1662.3,1246.14 1679.16,1240.39 1695.64,1234.74 1711.75,1229.16 1727.51,1223.67 1742.93,1218.26 1758.02,1212.91 1772.8,1207.64 1787.27,1202.43 1801.45,1197.28 1815.34,1192.2 1828.95,1187.17 1842.3,1182.2 1855.39,1177.27 1868.22,1172.4 1880.8,1167.58 1893.15,1162.8 1905.26,1158.06 1917.15,1153.37 1928.81,1148.72 1940.25,1144.1 1950.39,1139.86 1957.11,1136.66 1963.74,1133.45 1970.28,1130.24 1976.72,1127.03 1983.07,1123.82 1989.33,1120.62 1995.5,1117.41 2001.57,1114.2 2007.55,1110.99 2013.44,1107.78 2019.24,1104.58 2024.94,1101.37 2030.55,1098.16 2036.07,1094.95 2041.49,1091.74 2046.83,1088.54 2052.06,1085.33 2057.21,1082.12 2062.27,1078.91 2067.23,1075.7 2072.1,1072.5 2076.87,1069.29 2081.55,1066.08 2086.15,1062.87 2090.64,1059.66 2095.05,1056.46 2099.36,1053.25 2103.58,1050.04 2107.71,1046.83 2111.74,1043.62 2115.68,1040.42 2119.53,1037.21 2123.29,1034 2126.95,1030.79 2130.52,1027.59 2134,1024.38 2137.39,1021.17 2140.68,1017.96 2143.88,1014.75 2146.99,1011.55 2150,1008.34 2152.92,1005.13 2155.75,1001.92 2158.49,998.71 2161.13,995.51 2163.69,992.3 2166.14,989.09 2168.51,985.88 2170.78,982.67 2172.96,979.47 2175.05,976.26 2177.05,973.05 2178.95,969.84 2180,966.4 2171.39,959.99 2162.84,953.63 2154.36,947.31 2145.93,941.05 2137.56,934.83 2129.23,928.65 2120.96,922.52 2112.72,916.42 2104.53,910.37 2096.38,904.36 2088.26,898.4 2080.18,892.46 2072.13,886.57 2064.1,880.72 2056.1,874.9 2048.12,869.12 2040.16,863.37 2032.22,857.66 2024.3,851.98 2016.39,846.33 2008.49,840.72 2000.6,835.13 1992.72,829.58 1984.85,824.06 1976.98,818.57 1969.11,813.11 1961.24,807.67 1953.36,802.27 1945.49,796.89 1937.61,791.54 1929.72,786.22 1921.83,780.92 1913.92,775.65 1906,770.4 1898.07,765.18 1890.13,759.99 1882.17,754.81 1874.19,749.66 1866.2,744.53 1858.18,739.43 1850.15,734.35 1842.09,729.29 1834.01,724.25 1825.9,719.23 1817.77,714.23 1809.61,709.26 1801.42,704.3 1793.2,699.36 1784.95,694.44 1776.67,689.55 1768.36,684.67 1760.02,679.8 1751.64,674.96 1743.23,670.13 1734.77,665.33 1726.29,660.54 1717.76,655.76 1709.2,651 1700.59,646.26 1691.95,641.54 1683.26,636.83 1674.53,632.14 1665.76,627.46 1656.95,622.79 1648.09,618.15 1639.18,613.51 1630.23,608.89 1621.23,604.29 1612.19,599.7 1603.09,595.12 1593.95,590.56 1584.76,586.01 1575.52,581.48 1566.23,576.95 1556.88,572.44 1547.49,567.94 1538.04,563.46 1528.54,558.99 1548.25,563.6 1538.64,559.15 1528.98,554.71 1519.26,550.29 1509.49,545.87 1499.66,541.47 1489.77,537.08 1479.82,532.7 1469.82,528.33 1459.76,523.97 1449.64,519.62 1439.46,515.28 1429.22,510.95 1418.93,506.63 1408.57,502.33 1398.15,498.03 1387.67,493.74 1377.12,489.46 1366.52,485.19 1355.85,480.93 1345.12,476.68 1334.32,472.44 1323.46,468.21 1312.54,463.98 1301.56,459.77 1290.5,455.56 1279.39,451.36 1268.2,447.17 1256.95,442.99 1245.64,438.82 1234.26,434.65 1222.81,430.49 1211.29,426.35 1199.71,422.2 1188.06,418.07 1176.34,413.94 1164.55,409.82 1152.69,405.71 1140.77,401.61 1128.77,397.51 1116.71,393.42 1104.57,389.34 1092.37,385.26 1080.09,381.2 1067.75,377.13 1055.33,373.08 1042.84,369.03 1030.28,364.99 1017.65,360.95 1004.94,356.92 992.17,352.9 979.32,348.88 966.4,344.87 953.4,340.87 940.34,336.87 927.2,332.88 913.98,328.89 900.69,324.91 887.33,320.94 873.9,316.97 860.39,313.01 846.8,309.05 833.14,305.1 819.4,301.15 805.59,297.21 791.71,293.27 777.75,289.34 763.71,285.42 749.6,281.5 735.41,277.58 721.14,273.67 706.8,269.77 692.38,265.87 677.88,261.97 663.31,258.08 648.66,254.2 633.93,250.32 619.13,246.44 604.25,242.57 589.29,238.7 574.25,234.84 559.13,230.98 543.94,227.13 528.66,223.28 513.31,219.44 497.88,215.6 482.37,211.76 466.78,207.93 451.12,204.1 437.29,200.73 435.32,200.12 433.37,199.51 431.42,198.91 429.49,198.31 427.57,197.72 425.67,197.12 423.77,196.54 421.89,195.95 420.02,195.37 418.17,194.8 416.32,194.23 414.49,193.66 412.67,193.09 410.86,192.53 409.06,191.98 407.27,191.42 405.5,190.87 403.73,190.32 401.98,189.78 400.24,189.24 398.51,188.7 396.79,188.17 395.08,187.64 393.38,187.12 391.69,186.59 390.02,186.07 388.35,185.55 386.69,185.04 385.05,184.53 383.41,184.02 381.78,183.52 380.16,183.02 378.56,182.52 376.96,182.02 375.37,181.53 373.79,181.04 372.22,180.56 370.67,180.07 369.11,179.59 367.57,179.11 366.04,178.64 364.52,178.17 363,177.7 361.5,177.23 360,176.77 358.51,176.31 357.04,175.85 355.56,175.39 354.1,174.94 352.65,174.49 351.2,174.04 349.77,173.59 348.34,173.15 346.92,172.71 345.5,172.27 344.1,171.84 342.7,171.4 341.31,170.97 339.93,170.54 338.56,170.12 337.19,169.69 335.83,169.27 334.48,168.85 333.14,168.44 331.8,168.02 330.48,167.61 329.15,167.2 327.84,166.8 326.53,166.39 325.23,165.99 323.94,165.59 322.66,165.19 321.38,164.79 320.11,164.4 318.84,164.01 317.58,163.61 316.33,163.23 315.09,162.84 313.85,162.46 312.62,162.08 311.39,161.7 310.17,161.32 308.96,160.94 307.75,160.57 306.55,160.2 305.36,159.83 304.17,159.46 302.99,159.09 301.82,158.73 300.65,158.36 299.48,158 298.33,157.65 297.18,157.29 296.03,156.93 294.89,156.58 293.76,156.23 292.63,155.88 291.51,155.53 290.39,155.19 289.28,154.84 288.18,154.5 287.08,154.16 285.98,153.82 284.89,153.48 283.81,153.14 282.73,152.81 281.66,152.48 280.59,152.15 279.53,151.82 278.47,151.49 277.42,151.16 276.37,150.84 275.33,150.52 274.29,150.19 273.26,149.87 272.24,149.56 271.22,149.24 270.2,148.92 269.19,148.61 268.18,148.3 267.18,147.99 266.18,147.68 265.19,147.37 264.2,147.07 263.22,146.76 262.24,146.46 261.26,146.15 260.29,145.85 259.33,145.56 258.37,145.26 257.41,144.96 256.46,144.67 255.52,144.37 254.57,144.08 253.63,143.79 252.7,143.5 251.77,143.21 250.85,142.92 249.92,142.64 249.01,142.35 248.09,142.07 247.19,141.79 246.28,141.51 245.38,141.23 244.48,140.95 243.59,140.68 242.7,140.4 241.82,140.13 240.94,139.85 240.06,139.58 239.19,139.31 238.32,139.04 237.46,138.77 236.6,138.51 235.74,138.24 234.89,137.98 234.04,137.71 233.19,137.45 232.35,137.19 231.51,136.93 230.67,136.67 229.84,136.41 229.02,136.16 228.19,135.9 227.37,135.65 226.55,135.39 225.74,135.14 224.93,134.89 224.12,134.64 223.32,134.39 222.52,134.14 221.73,133.9 220.93,133.65 220.14,133.41 219.36,133.16 218.57,132.92 217.8,132.68 217.02,132.44 216.25,132.2 215.48,131.96 214.71,131.72 213.95,131.49 213.19,131.25 212.43,131.01 211.68,130.78 210.93,130.55 210.18,130.32 209.43,130.09 208.69,129.86 207.95,129.63 207.22,129.4 206.49,129.17 205.76,128.95 205.03,128.72 204.31,128.5 203.59,128.27 202.87,128.05 202.15,127.83 201.44,127.61 200.73,127.39 200.03,127.17 199.32,126.95 198.62,126.73 197.92,126.52 197.23,126.3 196.54,126.09 195.85,125.87 195.16,125.66 194.48,125.45 193.8,125.24 193.12,125.03 192.44,124.82 191.77,124.61 191.1,124.4 190.43,124.19 189.76,123.99 189.1,123.78 188.44,123.58 187.78,123.37 187.13,123.17 186.47,122.97 185.82,122.77 185.18,122.57 184.53,122.37 183.89,122.17 183.25,121.97 182.61,121.77 181.97,121.57 181.34,121.38 180.71,121.18 180.08,120.99 180,120.96 180,120.96 180,120.96 180,120.96 180,120.96 180,120.96 180,120.96" class="Series1" />
+<polyline points="691.63,1498.92 737.47,1485.02 780.45,1471.98 820.86,1459.72 858.99,1448.14 895.06,1437.18 904.39,1434.48 936.9,1424.57 967.88,1415.1 997.46,1406.05 1025.76,1397.38 1052.87,1389.04 1078.89,1381.02 1103.91,1373.29 1127.99,1365.82 1151.21,1358.59 1173.62,1351.59 1195.27,1344.81 1216.22,1338.21 1236.51,1331.8 1256.17,1325.55 1275.25,1319.46 1293.78,1313.52 1311.79,1307.71 1329.3,1302.04 1346.34,1296.48 1362.94,1291.04 1379.12,1285.71 1394.89,1280.47 1410.27,1275.33 1425.29,1270.28 1439.96,1265.32 1454.29,1260.43 1468.29,1255.63 1481.99,1250.89 1495.38,1246.22 1508.49,1241.62 1521.32,1237.08 1533.88,1232.59 1546.18,1228.17 1558.23,1223.79 1570.04,1219.47 1581.61,1215.19 1592.95,1210.97 1604.08,1206.78 1614.98,1202.64 1625.68,1198.54 1636.18,1194.48 1646.47,1190.45 1656.57,1186.46 1666.49,1182.51 1676.21,1178.59 1684.83,1174.98 1690.54,1172.26 1696.18,1169.53 1701.74,1166.8 1707.21,1164.08 1712.61,1161.35 1717.93,1158.62 1723.17,1155.9 1716.71,1154.83 1709.97,1153.82 1703.35,1152.81 1696.84,1151.8 1690.45,1150.8 1684.17,1149.79 1677.99,1148.79 1671.9,1147.78 1665.91,1146.78 1660.01,1145.78 1654.2,1144.78 1648.47,1143.78 1642.81,1142.79 1637.24,1141.79 1631.73,1140.8 1626.3,1139.8 1620.93,1138.81 1615.63,1137.81 1610.38,1136.82 1605.2,1135.83 1600.07,1134.84 1595,1133.85 1589.97,1132.86 1585,1131.87 1580.07,1130.88 1575.19,1129.9 1570.35,1128.91 1565.55,1127.92 1560.8,1126.94 1556.07,1125.95 1551.39,1124.97 1546.74,1123.99 1542.12,1123 1537.53,1122.02 1532.97,1121.04 1528.44,1120.06 1523.94,1119.08 1519.46,1118.1 1515.01,1117.12 1510.58,1116.14 1506.17,1115.16 1501.78,1114.18 1497.41,1113.2 1493.05,1112.22 1488.72,1111.25 1484.4,1110.27 1480,1109.06 1474.4,1104.89 1468.85,1100.76 1463.33,1096.65 1457.86,1092.58 1452.41,1088.54 1447,1084.52 1441.62,1080.53 1436.27,1076.58 1430.95,1072.64 1425.65,1068.74 1420.37,1064.86 1415.12,1061 1409.88,1057.17 1404.67,1053.37 1399.46,1049.58 1394.28,1045.83 1389.11,1042.09 1383.95,1038.38 1378.8,1034.68 1373.65,1031.01 1368.52,1027.37 1363.39,1023.74 1358.27,1020.13 1353.15,1016.54 1348.03,1012.97 1342.92,1009.42 1337.8,1005.89 1332.69,1002.38 1327.57,998.88 1322.45,995.4 1317.32,991.94 1312.19,988.5 1307.05,985.07 1301.9,981.66 1296.75,978.27 1291.58,974.89 1286.41,971.53 1281.23,968.18 1276.03,964.85 1270.82,961.53 1265.6,958.23 1260.36,954.94 1255.1,951.66 1249.83,948.4 1244.55,945.15 1239.24,941.92 1233.92,938.69 1228.58,935.49 1223.22,932.29 1217.84,929.1 1212.44,925.93 1207.01,922.77 1201.57,919.62 1196.1,916.49 1190.6,913.36 1185.09,910.25 1179.55,907.14 1173.98,904.05 1168.39,900.97 1162.77,897.9 1157.12,894.84 1151.45,891.79 1145.75,888.75 1140.02,885.72 1134.26,882.7 1128.47,879.68 1122.65,876.68 1116.8,873.69 1110.92,870.71 1105.01,867.73 1099.07,864.76 1093.09,861.81 1087.09,858.86 1081.05,855.92 1074.98,852.99 1068.87,850.06 1062.73,847.15 1056.55,844.24 1069.36,847.24 1063.12,844.35 1056.84,841.46 1050.52,838.59 1044.17,835.72 1037.78,832.85 1031.35,830 1024.89,827.15 1018.38,824.31 1011.84,821.48 1005.27,818.65 998.65,815.83 992,813.02 985.3,810.21 978.57,807.41 971.8,804.62 964.98,801.83 958.13,799.05 951.24,796.27 944.3,793.51 937.33,790.74 930.31,787.99 923.25,785.23 916.15,782.49 909.01,779.75 901.83,777.01 894.6,774.29 887.33,771.56 880.02,768.84 872.67,766.13 865.27,763.42 857.83,760.72 850.34,758.02 842.81,755.33 835.24,752.65 827.62,749.96 819.96,747.29 812.25,744.61 804.5,741.95 796.7,739.28 788.86,736.62 780.97,733.97 773.04,731.32 765.06,728.68 757.03,726.04 748.96,723.4 740.85,722.42 732.68,722.42 724.47,722.42 716.21,722.42 707.91,722.42 699.56,722.42 691.16,722.42 682.71,722.42 674.22,722.42 665.68,722.42 657.09,722.42 648.45,722.42 639.77,722.42 631.03,722.42 622.25,722.42 613.42,722.42 604.54,722.42 595.61,722.42 586.64,722.42 577.61,722.42 568.54,722.42 559.41,722.42 550.24,722.42 541.01,722.42 531.74,722.42 522.42,722.42 513.05,722.42 503.62,722.42 494.15,722.42 484.63,722.42 475.06,722.42 465.43,722.42 455.76,722.42 446.04,722.42 436.26,722.42 426.44,722.42 416.56,722.42 406.63,722.42 396.65,722.42 386.62,722.42 376.54,722.42 366.41,722.42 356.23,722.42 347.24,722.42 345.96,722.42 344.69,722.42 343.42,722.42 342.17,722.42 340.92,722.42 339.68,722.42 338.45,722.42 337.23,722.42 336.01,722.42 334.81,722.42 333.61,722.42 332.42,722.42 331.23,722.42 330.06,722.42 328.89,722.42 327.73,722.42 326.57,722.42 325.43,722.42 324.29,722.42 323.16,722.42 322.03,722.42 320.91,722.42 319.8,722.42 318.7,722.42 317.6,722.42 316.51,722.42 315.43,722.42 314.35,722.42 313.28,722.42 312.22,722.42 311.16,722.42 310.11,722.42 309.06,722.42 308.02,722.42 306.99,722.42 305.97,722.42 304.95,722.42 303.93,722.42 302.92,722.42 301.92,722.42 300.93,722.42 299.94,722.42 298.95,722.42 297.97,722.42 297,722.42 296.03,722.42 295.07,722.42 294.12,722.42 293.17,722.42 292.22,722.42 291.28,722.42 290.35,722.42 289.42,722.42 288.5,722.42 287.58,722.42 286.66,722.42 285.76,722.42 284.85,722.42 283.96,722.42 283.06,722.42 282.18,722.42 281.29,722.42 280.41,722.42 279.54,722.42 278.67,722.42 277.81,722.42 276.95,722.42 276.1,722.42 275.25,722.42 274.4,722.42 273.56,722.42 272.73,722.42 271.9,722.42 271.07,722.42 270.25,722.42 269.43,722.42 268.61,722.42 267.81,722.42 267,722.42 266.2,722.42 265.4,722.42 264.61,722.42 263.82,722.42 263.04,722.42 262.26,722.42 261.48,722.42 260.71,722.42 259.94,722.42 259.18,722.42 258.42,722.42 257.66,722.42 256.91,722.42 256.16,722.42 255.42,722.42 254.68,722.42 253.94,722.42 253.21,722.42 252.48,722.42 251.75,722.42 251.03,722.42 250.31,722.42 249.6,722.42 248.89,722.42 248.18,722.42 247.48,722.42 246.78,722.42 246.08,722.42 245.38,722.42 244.69,722.42 244.01,722.42 243.32,722.42 242.64,722.42 241.97,722.42 241.29,722.42 240.62,722.42 239.95,722.42 239.29,722.42 238.63,722.42 237.97,722.42 237.32,722.42 236.67,722.42 236.02,722.42 235.37,722.42 234.73,722.42 234.09,722.42 233.45,722.42 232.82,722.42 232.19,722.42 231.56,722.42 230.94,722.42 230.32,722.42 229.7,722.42 229.08,722.42 228.47,722.42 227.86,722.42 227.26,722.42 226.65,722.42 226.05,722.42 225.45,722.42 224.85,722.42 224.26,722.42 223.67,722.42 223.08,722.42 222.5,722.42 221.91,722.42 221.33,722.42 220.76,722.42 220.18,722.42 219.61,722.42 219.04,722.42 218.47,722.42 217.91,722.42 217.35,722.42 216.79,722.42 216.23,722.42 215.68,722.42 215.12,722.42 214.57,722.42 214.03,722.42 213.48,722.42 212.94,722.42 212.4,722.42 211.86,722.42 211.32,722.42 210.79,722.42 210.26,722.42 209.73,722.42 209.21,722.42 208.68,722.42 208.16,722.42 207.64,722.42 207.12,722.42 206.61,722.42 206.09,722.42 205.58,722.42 205.07,722.42 204.57,722.42 204.06,722.42 203.56,722.42 203.06,722.42 202.56,722.42 202.07,722.42 201.57,722.42 201.08,722.42 200.59,722.42 200.1,722.42 199.62,722.42 199.13,722.42 198.65,722.42 198.17,722.42 197.69,722.42 197.22,722.42 196.74,722.42 196.27,722.42 195.8,722.42 195.33,722.42 194.86,722.42 194.4,722.42 193.94,722.42 193.48,722.42 193.02,722.42 192.56,722.42 192.1,722.42 191.65,722.42 191.2,722.42 190.75,722.42 190.3,722.42 189.85,722.42 189.41,722.42 188.97,722.42 188.53,722.42 188.09,722.42 187.65,722.42 187.21,722.42 186.78,722.42 186.35,722.42 185.91,722.42 185.49,722.42 185.06,722.42 184.63,722.42 184.21,722.42 183.79,722.42 183.36,722.42 182.94,722.42 182.53,722.42 182.11,722.42 181.7,722.42 181.28,722.42 180.87,722.42 180.46,722.42 180.05,722.42 180,722.42 180,722.42 180,722.42 180,722.42 180,722.42 180,722.42 180,722.42" class="Series2" />
+<polyline points="918.16,983.91 918.55,983.91 918.94,983.91 919.34,983.91 919.73,983.91 920.12,983.91 920.52,983.91 920.91,983.91 921.3,983.91 921.7,983.91 922.09,983.91 922.48,983.91 922.88,983.91 923.27,983.91 923.66,983.91 924.06,983.91 924.45,983.91 924.84,983.91 925.24,983.91 925.63,983.91 926.02,983.91 926.42,983.91 926.81,983.91 927.2,983.91 927.6,983.91 927.99,983.91 928.38,983.91 928.77,983.91 929.17,983.91 929.56,983.91 929.95,983.91 930.35,983.91 930.74,983.91 931.13,983.91 931.53,983.91 931.92,983.91 932.31,983.91 932.71,983.91 933.1,983.91 933.49,983.91 933.89,983.91 934.28,983.91 934.67,983.91 935.07,983.91 935.46,983.91 935.85,983.91 936.25,983.91 936.64,983.91 937.03,983.91 937.43,983.91 937.82,983.91 938.21,983.91 938.6,983.91 939,983.91 939.39,983.91 939.78,983.91 940.18,983.91 940.57,983.91 940.96,983.91 941.36,983.91 941.75,983.91 942.14,983.91 942.54,983.91 942.93,983.91 943.32,983.91 943.72,983.91 944.11,983.91 944.5,983.91 944.9,983.91 945.29,983.91 945.68,983.91 946.08,983.91 946.47,983.91 946.86,983.91 947.25,983.91 947.65,983.91 948.04,983.91 948.43,983.91 948.83,983.91 949.22,983.91 949.61,983.91 950.01,983.91 950.4,983.91 950.79,983.91 951.19,983.91 951.58,983.91 951.97,983.91 952.37,983.91 952.76,983.91 953.15,983.91 953.55,983.91 953.94,983.91 954.33,983.91 954.73,983.91 955.12,983.91 955.51,983.91 955.91,983.91 956.3,983.91 956.69,983.91 957.08,983.91 957.48,983.91 957.87,983.91 958.26,983.91 958.66,983.91 959.05,983.91 959.44,983.91 959.84,983.91 960.23,983.91 960.62,983.91 961.02,983.91 961.41,983.91 961.8,983.91 962.2,983.91 962.59,983.91 962.98,983.91 963.38,983.91 963.77,983.91 964.16,983.91 964.56,983.91 964.95,983.91 965.34,983.91 965.74,983.91 966.13,983.91 966.52,983.91 966.91,983.91 967.31,983.91 967.7,983.91 968.09,983.91 968.49,983.91 968.88,983.91 969.27,983.91 969.67,983.91 970.06,983.91 970.45,983.91 970.85,983.91 971.24,983.91 971.63,983.91 972.03,983.91 972.42,983.91 972.81,983.91 973.21,983.91 973.6,983.91 973.99,983.91 974.39,983.91 974.78,983.91 975.17,983.91 975.57,983.91 975.96,983.91 976.35,983.91 976.74,983.91 977.14,983.91 977.53,983.91 977.92,983.91 978.32,983.91 978.71,983.91 979.1,983.91 979.5,983.91 979.89,983.91 980.28,983.91 980.68,983.91 981.07,983.91 981.46,983.91 981.86,983.91 982.25,983.91 982.64,983.91 983.04,983.91 983.43,983.91 983.82,983.91 984.22,983.91 984.61,983.91 985,983.91 985.39,983.91 985.79,983.91 986.18,983.91 986.57,983.91 986.97,983.91 987.36,983.91 987.75,983.91 988.15,983.91 988.54,983.91 988.93,983.91 989.33,983.91 989.72,983.91 990.11,983.91 990.51,983.91 990.9,983.91 991.29,983.91 991.69,983.91 992.08,983.91 992.47,983.91 992.87,983.91 993.26,983.91 993.65,983.91 994.05,983.91 994.44,983.91 994.83,983.91 995.22,983.91 995.62,983.91 996.01,983.91 996.4,983.91 996.8,983.91 997.19,983.91 997.58,983.91 997.98,983.91 998.37,983.91 998.76,983.91 999.16,983.91 999.55,983.91 999.94,983.91 1000.34,983.91 1000.73,983.91 1001.12,983.91 1001.52,983.91 1001.91,983.91 1002.3,983.91 1002.7,983.91 1003.09,983.91 1003.48,983.91 1003.88,983.91 1004.27,983.91 1004.66,983.91 1005.05,983.91 1005.45,983.91 1005.84,983.91 1006.23,983.91 1006.63,983.91 1007.02,983.91 1007.41,983.91 1007.81,983.91 1008.2,983.91 1008.59,983.91 1008.99,983.91 1009.38,983.91 1009.77,983.91 1010.17,983.91 1010.56,983.91 1010.95,983.91 1011.35,983.91 1011.74,983.91 1012.13,983.91 1012.53,983.91 1012.92,983.91 1013.31,983.91 1013.7,983.91 1014.1,983.91 1014.49,983.91 1014.88,983.91 1015.28,983.91 1015.67,983.91 1016.06,983.91 1016.46,983.91 1016.85,983.91 1017.24,983.91 1017.64,983.91 1018.03,983.91 1018.42,983.91 1018.82,983.91 1019.21,983.91 1019.6,983.91 1020,983.91 1020.39,983.91 1020.78,983.91 1021.18,983.91 1021.57,983.91 1021.96,983.91 1022.36,983.91 1022.75,983.91 1023.14,983.91 1023.53,983.91 1023.93,983.91 1024.32,983.91 1024.71,983.91 1025.11,983.91 1025.5,983.91 1025.89,983.91 1026.29,983.91 1026.68,983.91 1027.07,983.91 1027.47,983.91 1027.86,983.91 1028.25,983.91 1028.65,983.91 1029.04,983.91 1029.43,983.91 1029.83,983.91 1030.22,983.91 1030.61,983.91 1031.01,983.91 1031.4,983.91 1031.79,983.91 1032.19,983.91 1032.58,983.91 1032.97,983.91 1033.36,983.91 1033.76,983.91 1034.15,983.91 1034.54,983.91 1034.94,983.91 1035.33,983.91 1035.72,983.91 1036.12,983.91 1036.51,983.91 1036.9,983.91 1037.3,983.91 1037.69,983.91 1038.08,983.91 1038.48,983.91 1038.87,983.91 1039.26,983.91 1039.66,983.91 1040.05,983.91 1040.44,983.91 1040.84,983.91 1041.23,983.91 1041.62,983.91 1042.02,983.91 1042.41,983.91 1042.8,983.91 1043.19,983.91 1043.59,983.91 1043.98,983.91 1044.37,983.91 1044.77,983.91 1045.16,983.91 1045.55,983.91 1045.95,983.91 1046.34,983.91 1046.73,983.91 1047.13,983.91 1047.52,983.91 1047.91,983.91 1048.31,983.91 1048.7,983.91 1049.09,983.91 1049.49,983.91 1049.88,983.91 1050.27,983.91 1050.67,983.91 1051.06,983.91 1051.45,983.91 1051.84,983.91 1052.24,983.91 1052.63,983.91 1053.02,983.91 1053.42,983.91 1053.81,983.91 1054.2,983.91 1054.6,983.91 1054.99,983.91 1055.38,983.91 1055.78,983.91 1056.17,983.91 1056.56,983.91 1056.96,983.91 1057.35,983.91 1057.74,983.91 1058.14,983.91 1058.53,983.91 1058.92,983.91 1059.32,983.91 1059.71,983.91 1060.1,983.91 1060.5,983.91 1060.89,983.91 1061.28,983.91 1061.67,983.91 1062.07,983.91 1062.46,983.91 1062.85,983.91 1063.25,983.91 1063.64,983.91 1064.03,983.91 1064.43,983.91 1064.82,983.91 1065.21,983.91 1065.61,983.91 1066,983.91 1066.39,983.91 1066.79,983.91 1067.18,983.91 1067.57,983.91 1067.97,983.91 1068.36,983.91 1068.75,983.91 1069.15,983.91 1069.54,983.91 1069.93,983.91 1070.33,983.91 1070.72,983.91 1071.11,983.91 1071.5,983.91 1071.9,983.91 1072.29,983.91 1072.68,983.91 1073.08,983.91 1073.47,983.91 1073.86,983.91 1074.26,983.91 1074.65,983.91 1075.04,983.91 1075.44,983.91 1075.83,983.91 1076.22,983.91 1076.62,983.91 1077.01,983.91 1077.4,983.91 1077.8,983.91 1078.19,983.91 1078.58,983.91 1078.98,983.91 1079.37,983.91 1079.76,983.91 1080.15,983.91 1080.55,983.91 1080.94,983.91 1081.33,983.91 1081.73,983.91 1082.12,983.91 1082.51,983.91 1082.91,983.91 1083.3,983.91 1083.69,983.91 1084.09,983.91 1084.48,983.91 1084.87,983.91 1085.27,983.91 1085.66,983.91 1086.05,983.91 1086.45,983.91 1086.84,983.91 1087.23,983.91 1087.63,983.91 1088.02,983.91 1088.41,983.91 1088.81,983.91 1089.2,983.91 1089.59,983.91 1089.98,983.91 1090.38,983.91 1090.77,983.91 1091.16,983.91 1091.56,983.91 1091.95,983.91 1092.34,983.91 1092.74,983.91 1093.13,983.91 1093.52,983.91 1093.92,983.91 1094.31,983.91 1094.7,983.91 1095.1,983.91 1095.49,983.91 1095.88,983.91 1096.28,983.91 1096.67,983.91 1097.06,983.91 1097.46,983.91 1097.85,983.91 1098.24,983.91 1098.64,983.91 1099.03,983.91 1099.42,983.91 1099.81,983.91 1100.21,983.91 1100.6,983.91 1100.99,983.91 1101.39,983.91 1101.78,983.91 1102.17,983.91 1102.57,983.91 1102.96,983.91 1103.35,983.91 1103.75,983.91 1104.14,983.91 1104.53,983.91 1104.93,983.91 1105.32,983.91 1105.71,983.91 1106.11,983.91 1106.5,983.91 1106.89,983.91 1107.29,983.91 1107.68,983.91 1108.07,983.91 1108.47,983.91 1108.86,983.91 1109.25,983.91 1109.64,983.91 1110.04,983.91 1110.43,983.91 1110.82,983.91 1111.22,983.91 1111.61,983.91 1112,983.91 1112.4,983.91 1112.79,983.91 1113.18,983.91 1113.58,983.91 1113.97,983.91 1114.36,983.91 1114.76,983.91 1115.15,983.91 1115.54,983.91 1115.94,983.91 1116.33,983.91 1116.72,983.91 1117.12,983.91 1117.51,983.91 1117.9,983.91 1118.29,983.91 1118.69,983.91 1119.08,983.91 1119.47,983.91" class="Series3" />
+<polyline points="1018.82,1074.93 1018.82,1074.58 1018.82,1074.22 1018.82,1073.87 1018.82,1073.51 1018.82,1073.16 1018.82,1072.8 1018.82,1072.45 1018.82,1072.09 1018.82,1071.73 1018.82,1071.38 1018.82,1071.02 1018.82,1070.67 1018.82,1070.31 1018.82,1069.96 1018.82,1069.6 1018.82,1069.25 1018.82,1068.89 1018.82,1068.53 1018.82,1068.18 1018.82,1067.82 1018.82,1067.47 1018.82,1067.11 1018.82,1066.76 1018.82,1066.4 1018.82,1066.05 1018.82,1065.69 1018.82,1065.33 1018.82,1064.98 1018.82,1064.62 1018.82,1064.27 1018.82,1063.91 1018.82,1063.56 1018.82,1063.2 1018.82,1062.85 1018.82,1062.49 1018.82,1062.13 1018.82,1061.78 1018.82,1061.42 1018.82,1061.07 1018.82,1060.71 1018.82,1060.36 1018.82,1060 1018.82,1059.65 1018.82,1059.29 1018.82,1058.93 1018.82,1058.58 1018.82,1058.22 1018.82,1057.87 1018.82,1057.51 1018.82,1057.16 1018.82,1056.8 1018.82,1056.45 1018.82,1056.09 1018.82,1055.73 1018.82,1055.38 1018.82,1055.02 1018.82,1054.67 1018.82,1054.31 1018.82,1053.96 1018.82,1053.6 1018.82,1053.25 1018.82,1052.89 1018.82,1052.53 1018.82,1052.18 1018.82,1051.82 1018.82,1051.47 1018.82,1051.11 1018.82,1050.76 1018.82,1050.4 1018.82,1050.05 1018.82,1049.69 1018.82,1049.33 1018.82,1048.98 1018.82,1048.62 1018.82,1048.27 1018.82,1047.91 1018.82,1047.56 1018.82,1047.2 1018.82,1046.85 1018.82,1046.49 1018.82,1046.14 1018.82,1045.78 1018.82,1045.42 1018.82,1045.07 1018.82,1044.71 1018.82,1044.36 1018.82,1044 1018.82,1043.65 1018.82,1043.29 1018.82,1042.94 1018.82,1042.58 1018.82,1042.22 1018.82,1041.87 1018.82,1041.51 1018.82,1041.16 1018.82,1040.8 1018.82,1040.45 1018.82,1040.09 1018.82,1039.74 1018.82,1039.38 1018.82,1039.02 1018.82,1038.67 1018.82,1038.31 1018.82,1037.96 1018.82,1037.6 1018.82,1037.25 1018.82,1036.89 1018.82,1036.54 1018.82,1036.18 1018.82,1035.82 1018.82,1035.47 1018.82,1035.11 1018.82,1034.76 1018.82,1034.4 1018.82,1034.05 1018.82,1033.69 1018.82,1033.34 1018.82,1032.98 1018.82,1032.62 1018.82,1032.27 1018.82,1031.91 1018.82,1031.56 1018.82,1031.2 1018.82,1030.85 1018.82,1030.49 1018.82,1030.14 1018.82,1029.78 1018.82,1029.42 1018.82,1029.07 1018.82,1028.71 1018.82,1028.36 1018.82,1028 1018.82,1027.65 1018.82,1027.29 1018.82,1026.94 1018.82,1026.58 1018.82,1026.22 1018.82,1025.87 1018.82,1025.51 1018.82,1025.16 1018.82,1024.8 1018.82,1024.45 1018.82,1024.09 1018.82,1023.74 1018.82,1023.38 1018.82,1023.02 1018.82,1022.67 1018.82,1022.31 1018.82,1021.96 1018.82,1021.6 1018.82,1021.25 1018.82,1020.89 1018.82,1020.54 1018.82,1020.18 1018.82,1019.82 1018.82,1019.47 1018.82,1019.11 1018.82,1018.76 1018.82,1018.4 1018.82,1018.05 1018.82,1017.69 1018.82,1017.34 1018.82,1016.98 1018.82,1016.62 1018.82,1016.27 1018.82,1015.91 1018.82,1015.56 1018.82,1015.2 1018.82,1014.85 1018.82,1014.49 1018.82,1014.14 1018.82,1013.78 1018.82,1013.42 1018.82,1013.07 1018.82,1012.71 1018.82,1012.36 1018.82,1012 1018.82,1011.65 1018.82,1011.29 1018.82,1010.94 1018.82,1010.58 1018.82,1010.22 1018.82,1009.87 1018.82,1009.51 1018.82,1009.16 1018.82,1008.8 1018.82,1008.45 1018.82,1008.09 1018.82,1007.74 1018.82,1007.38 1018.82,1007.02 1018.82,1006.67 1018.82,1006.31 1018.82,1005.96 1018.82,1005.6 1018.82,1005.25 1018.82,1004.89 1018.82,1004.54 1018.82,1004.18 1018.82,1003.82 1018.82,1003.47 1018.82,1003.11 1018.82,1002.76 1018.82,1002.4 1018.82,1002.05 1018.82,1001.69 1018.82,1001.34 1018.82,1000.98 1018.82,1000.63 1018.82,1000.27 1018.82,999.91 1018.82,999.56 1018.82,999.2 1018.82,998.85 1018.82,998.49 1018.82,998.14 1018.82,997.78 1018.82,997.43 1018.82,997.07 1018.82,996.71 1018.82,996.36 1018.82,996 1018.82,995.65 1018.82,995.29 1018.82,994.94 1018.82,994.58 1018.82,994.23 1018.82,993.87 1018.82,993.51 1018.82,993.16 1018.82,992.8 1018.82,992.45 1018.82,992.09 1018.82,991.74 1018.82,991.38 1018.82,991.03 1018.82,990.67 1018.82,990.31 1018.82,989.96 1018.82,989.6 1018.82,989.25 1018.82,988.89 1018.82,988.54 1018.82,988.18 1018.82,987.83 1018.82,987.47 1018.82,987.11 1018.82,986.76 1018.82,986.4 1018.82,986.05 1018.82,985.69 1018.82,985.34 1018.82,984.98 1018.82,984.63 1018.82,984.27 1018.82,983.91 1018.82,983.56 1018.82,983.2 1018.82,982.85 1018.82,982.49 1018.82,982.14 1018.82,981.78 1018.82,981.43 1018.82,981.07 1018.82,980.71 1018.82,980.36 1018.82,980 1018.82,979.65 1018.82,979.29 1018.82,978.94 1018.82,978.58 1018.82,978.23 1018.82,977.87 1018.82,977.51 1018.82,977.16 1018.82,976.8 1018.82,976.45 1018.82,976.09 1018.82,975.74 1018.82,975.38 1018.82,975.03 1018.82,974.67 1018.82,974.31 1018.82,973.96 1018.82,973.6 1018.82,973.25 1018.82,972.89 1018.82,972.54 1018.82,972.18 1018.82,971.83 1018.82,971.47 1018.82,971.11 1018.82,970.76 1018.82,970.4 1018.82,970.05 1018.82,969.69 1018.82,969.34 1018.82,968.98 1018.82,968.63 1018.82,968.27 1018.82,967.91 1018.82,967.56 1018.82,967.2 1018.82,966.85 1018.82,966.49 1018.82,966.14 1018.82,965.78 1018.82,965.43 1018.82,965.07 1018.82,964.71 1018.82,964.36 1018.82,964 1018.82,963.65 1018.82,963.29 1018.82,962.94 1018.82,962.58 1018.82,962.23 1018.82,961.87 1018.82,961.51 1018.82,961.16 1018.82,960.8 1018.82,960.45 1018.82,960.09 1018.82,959.74 1018.82,959.38 1018.82,959.03 1018.82,958.67 1018.82,958.32 1018.82,957.96 1018.82,957.6 1018.82,957.25 1018.82,956.89 1018.82,956.54 1018.82,956.18 1018.82,955.83 1018.82,955.47 1018.82,955.12 1018.82,954.76 1018.82,954.4 1018.82,954.05 1018.82,953.69 1018.82,953.34 1018.82,952.98 1018.82,952.63 1018.82,952.27 1018.82,951.92 1018.82,951.56 1018.82,951.2 1018.82,950.85 1018.82,950.49 1018.82,950.14 1018.82,949.78 1018.82,949.43 1018.82,949.07 1018.82,948.72 1018.82,948.36 1018.82,948 1018.82,947.65 1018.82,947.29 1018.82,946.94 1018.82,946.58 1018.82,946.23 1018.82,945.87 1018.82,945.52 1018.82,945.16 1018.82,944.8 1018.82,944.45 1018.82,944.09 1018.82,943.74 1018.82,943.38 1018.82,943.03 1018.82,942.67 1018.82,942.32 1018.82,941.96 1018.82,941.6 1018.82,941.25 1018.82,940.89 1018.82,940.54 1018.82,940.18 1018.82,939.83 1018.82,939.47 1018.82,939.12 1018.82,938.76 1018.82,938.4 1018.82,938.05 1018.82,937.69 1018.82,937.34 1018.82,936.98 1018.82,936.63 1018.82,936.27 1018.82,935.92 1018.82,935.56 1018.82,935.2 1018.82,934.85 1018.82,934.49 1018.82,934.14 1018.82,933.78 1018.82,933.43 1018.82,933.07 1018.82,932.72 1018.82,932.36 1018.82,932 1018.82,931.65 1018.82,931.29 1018.82,930.94 1018.82,930.58 1018.82,930.23 1018.82,929.87 1018.82,929.52 1018.82,929.16 1018.82,928.8 1018.82,928.45 1018.82,928.09 1018.82,927.74 1018.82,927.38 1018.82,927.03 1018.82,926.67 1018.82,926.32 1018.82,925.96 1018.82,925.6 1018.82,925.25 1018.82,924.89 1018.82,924.54 1018.82,924.18 1018.82,923.83 1018.82,923.47 1018.82,923.12 1018.82,922.76 1018.82,922.4 1018.82,922.05 1018.82,921.69 1018.82,921.34 1018.82,920.98 1018.82,920.63 1018.82,920.27 1018.82,919.92 1018.82,919.56 1018.82,919.2 1018.82,918.85 1018.82,918.49 1018.82,918.14 1018.82,917.78 1018.82,917.43 1018.82,917.07 1018.82,916.72 1018.82,916.36 1018.82,916 1018.82,915.65 1018.82,915.29 1018.82,914.94 1018.82,914.58 1018.82,914.23 1018.82,913.87 1018.82,913.52 1018.82,913.16 1018.82,912.81 1018.82,912.45 1018.82,912.09 1018.82,911.74 1018.82,911.38 1018.82,911.03 1018.82,910.67 1018.82,910.32 1018.82,909.96 1018.82,909.61 1018.82,909.25 1018.82,908.89 1018.82,908.54 1018.82,908.18 1018.82,907.83 1018.82,907.47 1018.82,907.12 1018.82,906.76 1018.82,906.41 1018.82,906.05 1018.82,905.69 1018.82,905.34 1018.82,904.98 1018.82,904.63 1018.82,904.27 1018.82,903.92 1018.82,903.56 1018.82,903.21 1018.82,902.85 1018.82,902.49 1018.82,902.14 1018.82,901.78 1018.82,901.43 1018.82,901.07 1018.82,900.72 1018.82,900.36 1018.82,900.01 1018.82,899.65 1018.82,899.29 1018.82,898.94 1018.82,898.58 1018.82,898.23 1018.82,897.87 1018.82,897.52 1018.82,897.16 1018.82,896.81 1018.82,896.45 1018.82,896.09 1018.82,895.74 1018.82,895.38 1018.82,895.03 1018.82,894.67 1018.82,894.32 1018.82,893.96 1018.82,893.61 1018.82,893.25 1018.82,892.89" class="Series4" />
+</g></svg>
+<p>────────────────────────────────────────────── </p>
+<h3>7. 안전성 검토 (설계 편심 e 기준 — 휨부재 안전율 검토와 동일 개념) </h3>
+<p>설계 편심 e = M_u/P_u 에 대응하는 상관도 위 강도점의 중립축 c를 求根으로 찾는다. </p>
+<p>求根 구간(압축지배/인장지배에 따라 자동 설정) : </p>
+<p><span class="eq"><var>c</var><sub>lo</sub> = <var>c</var><sub>b</sub> = 217.924528 <i>mm</i></span></p>
+<p><span class="eq"><var>c</var><sub>hi</sub> = 2000 <i>mm</i></span></p>
+<p>대응 중립축(求根) - <span class="eq"><var>c</var><sub>d</sub> = <span class="cond">$Root</span>{<var>M</var><sub>n</sub>  ( <var>c</var> )  − <var>e</var> · <var>P</var><sub>n</sub>  ( <var>c</var> )  = 0; <var>c</var> ∈ [<var>c</var><sub>lo</sub>; <var>c</var><sub>hi</sub>]} = 313.190564 <i>mm</i></span></p>
+<p>그 점의 강도감소계수 - <span class="eq"><var>phi</var><sub>d</sub> = <var>phi</var><sub>f</sub>  ( <var>c</var><sub>d</sub> )  = <var>phi</var><sub>f</sub>  ( 313.190564 <i>mm</i> )  = 0.65</span></p>
+<p>설계 축강도 - <span class="eq"><var>phiP</var><sub>d</sub> = <b>min</b> ( <var>phi</var><sub>d</sub> · <var>P</var><sub>n</sub>  ( <var>c</var><sub>d</sub> ) ; <var>phiP</var><sub>n.max</sub> )  = <b>min</b> ( 0.65 · <var>P</var><sub>n</sub>  ( 313.190564 <i>mm</i> ) ; 2505.528652 <i>kN</i> )  = 1790.956437 <i>kN</i></span></p>
+<p>설계 휨강도 - <span class="eq"><var>phiM</var><sub>d</sub> = <var>phi</var><sub>d</sub> · <var>M</var><sub>n</sub>  ( <var>c</var><sub>d</sub> )  = 0.65 · <var>M</var><sub>n</sub>  ( 313.190564 <i>mm</i> )  = 179.095644 <i>kN</i><i> · </i><i>m</i></span></p>
+<p>안전율 (= φP_n/P_u = φM_n/M_u, 동일 반경선상) - <span class="eq"><var>SF</var> = <span class="dvc"><var>phiP</var><sub>d</sub><span class="dvl"></span><var>P</var><sub>u</sub></span> = <span class="dvc">1790.956437 <i>kN</i><span class="dvl"></span>1500 <i>kN</i></span> = 1.193971</span></p>
+<b style="font-size:calc(1em + 1pt)">판정 : O.K.  (같은 편심에서 설계강도 ≥ 소요 — 설계점이 상관도 안쪽)</b> 
+<p>────────────────────────────────────────────── </p>
+<h3>8. 참고 — 주요 점 </h3>
+<p>설계점 - <span class="eq"><var>P</var><sub>u</sub> = 1500 <i>kN</i></span></p>
+<p><span class="eq"><var>M</var><sub>u</sub> = 150 <i>kN</i><i> · </i><i>m</i></span></p>
+<p>순수압축(공칭) - <span class="eq"><var>P</var><sub>o</sub> = 4818.32433 <i>kN</i></span></p>
+<p>균형점 - <span class="eq"><var>P</var><sub>b</sub> = 1565.550926 <i>kN</i></span></p>
+<p><span class="eq"><var>M</var><sub>b</sub> = 357.759363 <i>kN</i><i> · </i><i>m</i></span></p>
+<p>────────────────────────────────────────────── </p>
+<b style="font-size:calc(1em + 1pt)">※ 게시용 샘플. 값을 수정하면 결과·상관도가 자동 갱신됩니다.</b> 
+ </div>
+</body></html>

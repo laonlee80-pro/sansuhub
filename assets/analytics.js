@@ -34,9 +34,9 @@
     if (!m) return;
     var file = decodeURIComponent(href.split('#')[0].split('?')[0].split('/').pop());
     var item = a.closest('.item');
-    var id = item ? item.id.replace(/^ex/, '') : '-';
+    var id = item ? item.id.replace(/^ex/, '') : (a.getAttribute('data-example') || '-');
     var p = location.pathname;
-    var section = /\/calc\/rc\//.test(p) ? '콘크리트' : /\/calc\/dongbari\//.test(p) ? '동바리' : /\/forms\//.test(p) ? '자료실' : '기타';
+    var section = /\/calc\/preview\//.test(p) ? '미리보기' : /\/calc\/rc\//.test(p) ? '콘크리트' : /\/calc\/dongbari\//.test(p) ? '동바리' : /\/forms\//.test(p) ? '자료실' : '기타';
     gtag('event', 'sansuhub_download', {
       example_id: id, file_name: file, file_type: m[1].toLowerCase(), section: section,
       transport_type: 'beacon'
