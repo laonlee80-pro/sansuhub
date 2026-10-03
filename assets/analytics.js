@@ -4,9 +4,9 @@
  * ▶ ID가 G-XXXXXXXXXX 그대로이면 아무것도 보내지 않습니다.
  */
 (function () {
-  var GA_ID = 'G-XXXXXXXXXX';
+  var GA_ID = 'G-ZJ8LQDSKT3';
 
-  if (!/^G-[A-Z0-9]{6,}$/.test(GA_ID) || GA_ID === 'G-ZJ8LQDSKT3') return;
+  if (!/^G-[A-Z0-9]{6,}$/.test(GA_ID) || GA_ID === 'G-XXXXXXXXXX') return;
   if (/^(localhost|127\.|file:)/.test(location.hostname || 'file:')) return; // 내 PC에서 열어 볼 때는 집계하지 않음
 
   var s = document.createElement('script');
