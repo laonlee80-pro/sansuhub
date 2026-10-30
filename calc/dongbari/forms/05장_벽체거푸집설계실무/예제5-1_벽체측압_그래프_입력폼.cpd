@@ -1,0 +1,72 @@
+'<h1>예제 5-1 일반 벽체 측압 계산 — 입력폼</h1>
+'<hr/>
+'[입력폼] 입력값을 바꾼 뒤 ▶(Calculate)를 누르세요. 폼↔코드 전환: F4.
+'원고 절차: 주어진 조건 → 설계 목표 → Step 1 공식 조건 확인 → Step 2 측압 계산 → Step 3 최솟값 및 최댓값 검토 → 최종 결과 → 실무 팁
+'KDS 21 50 00:2024 1.6.3(4) 조건 ① 식 (1.6-3) p = Cw·Cc·[7.2 + 790R/(T+18)], 하한 30·Cw, 상한 γc·h. 경험식은 무차원으로 계산한 뒤 kN/m²를 붙인다.
+#deg
+'<h2>주어진 조건</h2>
+'벽체 높이 : 'h = ? {3.0}m
+'타설 속도(m/h, 숫자) : 'R = ? {1.0}
+'콘크리트 온도(℃, 숫자) : 'T = ? {20}
+'단위중량 : 'gc = ? {24}kN/m^3
+'단위중량계수(γc = 24 kN/m³) : 'Cw = ? {1.0}
+'시멘트계수(1종 보통 포틀랜드, 지연제 미사용) : 'Cc = ? {1.0}
+'슬럼프 : 'S_l = ? {150}mm
+'적용조건: 내부진동다짐(다짐깊이 ≤ 1.2 m), 벽체 장변 ≥ 2 m
+'<h2>목표</h2>
+'• 최대 측압(pmax) 산정
+'• 측압 공식 조건 판별
+'<h2>Step 1: 공식 조건 확인</h2>
+#if S_l ≤ 175mm
+  '<b>슬럼프 ≤ 175 mm, 내부진동다짐, 벽체 장변 ≥ 2 m → 경험식 적용 가능</b>
+#else
+  '<b>슬럼프 > 175 mm → 경험식 적용 범위 밖(정수압 γc·h 검토)</b>
+#end if
+#if R ≤ 2.1
+  '<b>R ≤ 2.1 m/h → 조건 ①</b>
+#else
+  '<b>R > 2.1 m/h → 조건 ① 범위 밖(식 1.6-4 또는 정수압 검토)</b>
+#end if
+#if h < 4.2m
+  '<b>h < 4.2 m → 조건 ①, 식 (1.6-3) 적용</b>
+#else
+  '<b>h ≥ 4.2 m → 식 (1.6-4) 적용 대상(예제 5-2 참조)</b>
+#end if
+'<h2>Step 2: 측압 계산</h2>
+'공통 분모 : 'T + 18
+'KDS 측압(식 1.6-3) : 'p = Cw*Cc*(7.2 + 790*R/(T + 18))*1kN/m^2
+'<h2>Step 3: 최솟값 및 최댓값 검토</h2>
+'하한(30·Cw) : 'p_min = 30*Cw*1kN/m^2
+'최댓값(정수압 γc·h) : 'p_max = gc*h|kN/m^2
+#if p ≥ p_min
+  '<b>계산값 p ≥ 30·Cw → 계산값 채택</b>
+#else
+  '<b>계산값 p < 30·Cw → 최솟값(하한) 적용</b>
+#end if
+'설계 측압 : 'p_design = min(max(p ; p_min) ; p_max)|kN/m^2
+#if p_design ≤ p_max
+  '<b>p_design ≤ γc·h → 정수압 이내</b>
+#end if
+'<h3>참고 그래프 — 측압-타설속도 곡선</h3>
+pf(R) = Cw*Cc*(7.2 + 790*R/(T + 18))*1kN/m^2
+pmn(R) = 30*Cw*1kN/m^2
+pmx(R) = gc*h
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>측압 p (kN/m²)</b></div>
+'<div>
+$Plot{pf(R) & pmn(R) & pmx(R) @ R = 0 : 3}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>타설속도 R (m/h)</b></p>
+'<h2>최종 결과 (원고 조건 기준)</h2>
+'경험식 계산값 27.99 kN/m² < 하한 30 kN/m² → 설계 측압 pmax = 30 kN/m² (최솟값 지배). 정수압 상한 72 kN/m² 이내.
+'<h2>실무 팁</h2>
+'• 벽체 높이가 낮거나 타설 속도가 느리면 최솟값 30 kN/m²이 지배하는 경우가 많다.
+'• 경험식 값과 하한 30·Cw 중 큰 값을 택하고, 정수압 γc·h를 넘지 않게 한다.
+
+'__FOOTER_SANSUHUB__
+'<hr/>
+'<p style="font-size:80%; color:#888">© 2026 산수허브 · <b>sansuhub.com</b> — 본 계산은 교육·검토 보조용이며, 설계 책임은 사용자(기술자)에게 있습니다. 무단 복제·재배포 금지.</p>

@@ -1,0 +1,86 @@
+'<h1>예제 3-3 일반 벽체 측압 계산</h1>
+'<hr/>
+'원고 절차: 주어진 조건 → 목표 → Step 1 공식 선택 → Step 2 수치 대입 → Step 3 하한 검토 → Step 4 상한 검토 → Step 5 설계 측압 확정 → 최종 결과 → 실무 팁
+'KDS 21 50 00:2024 식 (1.6-3) p = Cw·Cc·[7.2 + 790R/(T+18)], 하한 30·Cw, 상한 γc·H. 경험식이라 대괄호는 무차원(R, T 숫자)으로 계산하고 결과에 1 kN/m²를 곱한다.
+#deg
+'<h2>주어진 조건</h2>
+'벽체 두께 : 't_w = 200mm
+'벽체 길이(2 m 이상) : 'L_w = 2.0m
+'타설 높이 : 'H = 3.0m
+'타설 속도(m/h, 숫자) : 'R = 1.5
+'콘크리트 온도(℃, 숫자) : 'T = 20
+'시멘트계수(1종 포틀랜드, 지연제 없음) : 'C_c = 1.0
+'콘크리트 단위중량 : 'γ_c = 24kN/m^3
+'단위중량계수(γc = 24 kN/m³) : 'C_w = 1.0
+'슬럼프 : 'S_l = 150mm
+'다짐깊이(내부진동기) : 'd_v = 1.2m
+'<h2>목표</h2>
+'측압 산정 및 최솟값·최댓값 검토
+'<h2>Step 1: 공식 선택</h2>
+#if S_l ≤ 175mm
+  #if d_v ≤ 1.2m
+    '<b>슬럼프 ≤ 175 mm, 다짐깊이 ≤ 1.2 m → 경험식 적용 조건 충족</b>
+  #else
+    '<b>다짐깊이 > 1.2 m → 액압 p = γc·H (식 1.6-1) 적용 대상</b>
+  #end if
+#else
+  '<b>슬럼프 > 175 mm → 액압 p = γc·H (식 1.6-1) 적용 대상</b>
+#end if
+#if L_w ≥ 2m
+  #if R ≤ 2.1
+    #if H < 4.2m
+      '<b>벽체, R ≤ 2.1 m/h, H < 4.2 m → 식 (1.6-3) 적용</b>
+    #else
+      '<b>H ≥ 4.2 m → 식 (1.6-4) 적용 대상(이 계산서 범위 밖)</b>
+    #end if
+  #else
+    '<b>R > 2.1 m/h → 식 (1.6-4) 또는 액압 적용 대상(이 계산서 범위 밖)</b>
+  #end if
+#else
+  '<b>장변 < 2 m → 기둥 식 (1.6-2) 적용(식 형태 같음)</b>
+#end if
+'<h2>Step 2: 수치 대입</h2>
+'대괄호 항 : 'B_r = 7.2 + 790*R/(T + 18)
+'측압(계산값) : 'P = C_w*C_c*B_r*1kN/m^2
+'<h2>Step 3: 하한 검토</h2>
+'하한(30·Cw) : 'P_min = 30*C_w*1kN/m^2
+#if P ≥ P_min
+  '<b>P ≥ 30·Cw → 하한 충족</b>
+#else
+  '<b>P < 30·Cw → 하한 30·Cw 적용</b>
+#end if
+'<h2>Step 4: 상한 검토</h2>
+'상한(액압 γc·H) : 'P_max = γ_c*H|kN/m^2
+#if P ≤ P_max
+  '<b>P ≤ γc·H → 상한 이내</b>
+#else
+  '<b>P > γc·H → 상한 γc·H 적용</b>
+#end if
+'<h2>Step 5: 설계 측압 확정</h2>
+'설계 측압(상·하한 반영 계산값) : 'P_design = min(max(P ; P_min) ; P_max)|kN/m^2
+'설계 채택값(소수점 둘째 자리에서 반올림) : 'P_a = round(10*P_design/(1kN/m^2))/10*1kN/m^2
+'꺾임 깊이 : 'z_0 = P_a/γ_c|m
+'참고 — 액압 대비 감소율 : 'r_p = 1 - P_a/P_max
+'<h3>참고 그래프 — 측압-타설속도 곡선</h3>
+P_f(R) = C_w*C_c*(7.2 + 790*R/(T + 18))*1kN/m^2
+P_mn(R) = 30*C_w*1kN/m^2
+P_mx(R) = γ_c*H
+PlotWidth = 500
+PlotHeight = 300
+PlotSVG = 1
+'<div style="display:flex; align-items:center">
+'<div style="writing-mode:vertical-rl; text-orientation:mixed; text-align:center"><b>측압 p (kN/m²)</b></div>
+'<div>
+$Plot{P_f(R) & P_mn(R) & P_mx(R) @ R = 0 : 4}
+'</div>
+'</div>
+'<p style="width:540px; text-align:center; margin:0"><b>타설속도 R (m/h)</b></p>
+'<h2>최종 결과 (원고 조건 기준)</h2>
+'설계 채택 측압 38.4 kN/m² (계산값 38.38 kN/m², 꺾임 깊이 z0 = 38.4/24 = 1.600 m).
+'<h2>실무 팁</h2>
+'• 액압으로 계산하면 p = 24 × 3.0 = 72 kN/m²이며, 채택 측압 38.4 kN/m²는 액압보다 약 47% 작다.
+'• 실제 재료량은 부재 규격·간격·처짐 검토로 정해지므로 하중 감소율이 곧 재료비 절감률은 아니다.
+
+'__FOOTER_SANSUHUB__
+'<hr/>
+'<p style="font-size:80%; color:#888">© 2026 산수허브 · <b>sansuhub.com</b> — 본 계산은 교육·검토 보조용이며, 설계 책임은 사용자(기술자)에게 있습니다. 무단 복제·재배포 금지.</p>

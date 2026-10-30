@@ -4,8 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="icon" type="image/svg+xml" href="../../assets/logo-symbol.svg">
-<title>거푸집동바리 설계 예제 45제 · 계산도구 | 산수허브</title>
-<meta name="description" content="거푸집동바리 설계 예제 45제. 하중·부재·벽체·슬래브·기둥·특수구조물·비계 예제를 CalcpadCE 입력폼 파일로 제공.">
+<title>거푸집동바리 설계 예제 47제 · 계산도구 | 산수허브</title>
+<meta name="description" content="거푸집동바리 설계 예제 47제. 하중·부재·벽체·슬래브·기둥·특수구조물·비계 예제를 CalcpadCE 입력폼 파일로 제공.">
 <style>
 :root{--navy:#1A3A5C;--navy-d:#12293f;--navy-50:#eef3f8;--teal:#7FC4D4;--ink:#1b2530;--sub:#46525e;--mute:#6b7682;--line:#dfe3e8;--bg:#f4f6f8;--soft:#f4f6f8;--accent:#1A3A5C;
 --ok:#0f6e56;--ok-bg:#e3f4ee;--wip:#8a5a00;--wip-bg:#fdf1d8;--plan:#55606b;--plan-bg:#eceff2;--adv:#8c2a2a;--adv-bg:#fbe9e9;--r:12px}
@@ -64,7 +64,7 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
 .seg{display:inline-flex;background:#fff;border:1px solid var(--line);border-radius:10px;padding:3px;width:max-content;max-width:100%;overflow-x:auto;scrollbar-width:none}
 .seg button{border:0;background:transparent;font:inherit;font-size:14.5px;padding:8px 14px;border-radius:8px;color:var(--sub);cursor:pointer;white-space:nowrap}
 .seg button.on{background:var(--navy);color:#fff;font-weight:700}
-.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;padding-bottom:2px}@media(min-width:721px){.chips{flex-wrap:wrap}}
 .chips::-webkit-scrollbar,.seg::-webkit-scrollbar{display:none}
 .chips button{border:1px solid var(--line);background:#fff;font:inherit;font-size:14px;padding:7px 13px;border-radius:999px;color:var(--sub);cursor:pointer;white-space:nowrap;flex:none}
 .chips button.on{border-color:var(--navy);color:var(--navy);font-weight:700;background:var(--navy-50)}
@@ -76,7 +76,7 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
 .group>h2{font-size:16px;display:flex;align-items:center;gap:8px;padding:8px 2px}
 .group>h2 small{font-size:13px;color:var(--mute);font-weight:400}
 .list{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
-.thead,.item .main{display:grid;grid-template-columns:70px minmax(0,1fr) 150px 120px 252px;align-items:center;gap:14px;padding:0 18px}
+.thead,.item .main{display:grid;grid-template-columns:70px minmax(0,1fr) 170px 252px;align-items:center;gap:14px;padding:0 18px}
 .thead{font-size:13px;color:var(--mute);font-weight:600;background:#fafbfc;border-bottom:1px solid var(--line);height:40px}
 .item{border-bottom:1px solid var(--line);scroll-margin-top:80px}
 .item:last-child{border-bottom:0}
@@ -133,7 +133,7 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
 <nav class="gnav"><div class="gnav-in"><a class="brand" href="../../index.html"><img class="brandimg" src="../../assets/logo-h.svg" alt="산수허브"></a><button class="navtoggle" type="button" aria-label="메뉴" aria-expanded="false"><span></span><span></span><span></span></button><div class="gmenu"><div class="gitem"><a href="../../index.html">홈</a></div><div class="gitem has-sub"><a href="../../books/">전자책<span class="caret">▾</span></a><div class="submenu"><a href="../../books/">6권 시리즈 소개</a></div></div><div class="gitem has-sub on"><a href="../../calc/">계산도구<span class="caret">▾</span></a><div class="submenu"><a href="../../calc/">계산도구 전체</a><a href="../../calc/dongbari/">거푸집동바리 설계</a><a href="../../calc/rc/">콘크리트 구조부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../forms/">자료실<span class="caret">▾</span></a><div class="submenu"><a href="../../forms/">양식·체크리스트</a><a href="../../forms/rc-series/">콘크리트 부재설계 실무</a></div></div><div class="gitem has-sub"><a href="../../errata/">업데이트<span class="caret">▾</span></a><div class="submenu"><a href="../../errata/">법규 개정 공지</a><a href="../../errata/">정오표</a></div></div><div class="gitem off"><span aria-disabled="true">멤버십 <small>준비 중</small></span></div><div class="gitem has-sub"><a href="../../about/">소개<span class="caret">▾</span></a><div class="submenu"><a href="../../about/">발행처 소개</a><a href="../../about/">문의·피드백</a></div></div></div></div></nav>
 <main class="wrap">
   <div class="crumb"><a href="../../index.html">홈</a> › <a href="../index.html">계산도구</a> › 거푸집동바리 설계</div>
-  <div class="pagehead"><h1>거푸집동바리 설계 예제 45제</h1><p>하중 · 부재 · 벽체 · 슬래브 · 기둥 · 특수구조물 · 비계 설계 예제를 CalcpadCE 입력폼 파일로 제공합니다. 현장 수치를 넣고 ▶(Calculate)를 누르면 계산서가 만들어집니다.</p><div class="row"><span class="badge b-ok">45제 공개</span><span class="badge b-wip">해설 도서 교정 중</span><span class="tag">실행: CalcpadCE (무료 · 설치형)</span></div></div>
+  <div class="pagehead"><h1>거푸집동바리 설계 예제 47제</h1><p>하중 · 부재 · 벽체 · 슬래브 · 시스템 동바리 · 기둥 · 특수구조물 · 비계 설계 예제를 CalcpadCE 입력폼 파일로 제공합니다. 현장 수치를 넣고 ▶(Calculate)를 누르면 계산서가 만들어집니다.</p><div class="row"><span class="badge b-ok">47제 공개</span><span class="badge b-wip">해설 도서 교정 중</span><span class="tag">실행: CalcpadCE (무료 · 설치형)</span></div></div>
   <div class="notice"><b>교정 안내</b> · 해설 도서 「거푸집동바리 설계 실무가이드」 원고를 교정하고 있습니다. 아래 예제 파일은 지금 바로 사용할 수 있으며, 수정 사항은 <a href="../../errata/" style="font-weight:700;text-decoration:underline">업데이트 · 정오표</a>에 공지합니다.</div>
   <details class="guide" id="guide">
     <summary><b>처음 이용하시나요?</b> 무료 프로그램 CalcpadCE를 설치한 뒤 예제 파일을 열면 됩니다. <span class="tg">사용 방법</span></summary>
@@ -145,505 +145,533 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
     <a class="dl" href="https://calcpad-ce.org/" target="_blank" rel="noopener">CalcpadCE 내려받기 ↗</a>
   </details>
   <div class="filters">
-    <div class="seg" id="fa"><button class="on" data-v="">전체</button><button data-v="basic">기초</button><button data-v="applied">응용</button><button data-v="advanced">심화</button></div>
-    <div class="chips" id="fb"><button class="on" data-v="">전체 장</button><button data-v="03">03장 하중계산</button><button data-v="04">04장 부재설계</button><button data-v="05">05장 벽체거푸집</button><button data-v="06">06장 슬래브거푸집</button><button data-v="07">07장 기둥거푸집</button><button data-v="08">08장 특수구조물</button><button data-v="09">09장 비계설계</button></div>
-    <div class="frow"><input class="fsearch" id="fq" type="search" placeholder="번호 · 제목 검색 (예: 합판, 측압, 4.7)" aria-label="예제 검색"><span class="cnt"><b id="n">45</b>개 예제</span></div>
+    <div class="chips" id="fb"><button class="on" data-v="">전체 장</button><button data-v="03">03장 하중계산</button><button data-v="04">04장 부재설계</button><button data-v="05">05장 벽체거푸집</button><button data-v="06">06장 슬래브거푸집</button><button data-v="07">07장 시스템동바리</button><button data-v="08">08장 기둥거푸집</button><button data-v="09">09장 특수구조물</button><button data-v="10">10장 비계설계</button></div>
+    <div class="frow"><input class="fsearch" id="fq" type="search" placeholder="번호 · 제목 검색 (예: 합판, 측압, 4-7)" aria-label="예제 검색"><span class="cnt"><b id="n">47</b>개 예제</span></div>
   </div>
-  <section class="group"><h2>03장 하중계산 <small>9제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex3.1" data-a="basic" data-b="03" data-text="3.1 슬래브연직하중 표준 아파트 슬래브 연직하중 03장 하중계산 ">
-  <div class="main"><span class="code">3.1</span><span class="title">슬래브연직하중</span><span class="mmeta"><span class="tag cd">예제 3.1</span><span class="tag">03장 하중계산</span><span class="lv lv-b">기초</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <section class="group"><h2>03장 하중계산 <small>9제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex3-1" data-b="03" data-text="3-1 슬래브연직하중 표준 아파트 슬래브 고정하중 + 작업하중 계산 03장 하중계산 ">
+  <div class="main"><span class="code">3-1</span><span class="title">슬래브연직하중</span><span class="mmeta"><span class="tag cd">예제 3-1</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-1_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.1 표준 아파트 슬래브 연직하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-1 표준 아파트 슬래브 고정하중 + 작업하중 계산</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 단위중량 · 슬래브 두께 · 거푸집(유로폼) 자중</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 콘크리트 단위중량(보통 콘크리트) · 거푸집(유로폼) 자중(KDS 최솟값)</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.1%20%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3.1_슬래브연직하중_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.2" data-a="applied" data-b="03" data-text="3.2 전이슬래브연직하중 전이 슬래브 연직하중 03장 하중계산 ">
-  <div class="main"><span class="code">3.2</span><span class="title">전이슬래브연직하중</span><span class="mmeta"><span class="tag cd">예제 3.2</span><span class="tag">03장 하중계산</span><span class="lv lv-a">응용</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.2_%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-1%20%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3-1_슬래브연직하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-2" data-b="03" data-text="3-2 전이슬래브연직하중 전이 슬래브 연직하중 계산 03장 하중계산 ">
+  <div class="main"><span class="code">3-2</span><span class="title">전이슬래브연직하중</span><span class="mmeta"><span class="tag cd">예제 3-2</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-2_%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.2 전이 슬래브 연직하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-2 전이 슬래브 연직하중 계산</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 단위중량 · 슬래브 두께 · 거푸집 자중 · 작업하중</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께(전이층) · 콘크리트 단위중량(보통 콘크리트) · 거푸집 자중</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.2%20%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3.2_전이슬래브연직하중_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.3" data-a="basic" data-b="03" data-text="3.3 벽체측압 일반 벽체 측압 계산 03장 하중계산 그래프">
-  <div class="main"><span class="code">3.3</span><span class="title">벽체측압<span class="tag">그래프</span><a class="wlink" href="../web/db-3-3.html">웹 계산기 ▸</a></span><span class="mmeta"><span class="tag cd">예제 3.3</span><span class="tag">03장 하중계산</span><span class="lv lv-b">기초</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.3_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-2%20%EC%A0%84%EC%9D%B4%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%97%B0%EC%A7%81%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3-2_전이슬래브연직하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-3" data-b="03" data-text="3-3 벽체측압 일반 벽체 측압 계산 03장 하중계산 그래프">
+  <div class="main"><span class="code">3-3</span><span class="title">벽체측압<span class="tag">그래프</span><a class="wlink" href="../web/db-3-3.html">웹 계산기 ▸</a></span><span class="mmeta"><span class="tag cd">예제 3-3</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-3_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.3 일반 벽체 측압 계산</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-3 일반 벽체 측압 계산</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수 · 타설속도 · 콘크리트 온도 · 벽체 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 두께 · 벽체 길이(2 m 이상) · 타설 높이 · 타설 속도(m/h, 숫자) · 콘크리트 온도(℃, 숫자) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="../web/db-3-3.html">웹에서 계산하기 →</a><a href="../preview/db-3-3.html">계산서 미리보기 →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.3%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제3.3_벽체측압_기초_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.4" data-a="applied" data-b="03" data-text="3.4 기둥측압 지연제 기둥 측압 — 지연제 사용 03장 하중계산 그래프">
-  <div class="main"><span class="code">3.4</span><span class="title">기둥측압 지연제<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 3.4</span><span class="tag">03장 하중계산</span><span class="lv lv-a">응용</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.4_%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95_%EC%A7%80%EC%97%B0%EC%A0%9C_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="../web/db-3-3.html">웹에서 계산하기 →</a><a href="../preview/db-3-3.html">계산서 미리보기 →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-3%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제3-3_벽체측압_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-4" data-b="03" data-text="3-4 기둥측압 지연제 기둥 측압 계산 — 지연제 사용 조건 03장 하중계산 그래프">
+  <div class="main"><span class="code">3-4</span><span class="title">기둥측압 지연제<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 3-4</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-4_%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95_%EC%A7%80%EC%97%B0%EC%A0%9C_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.4 기둥 측압 — 지연제 사용</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-4 기둥 측압 계산 — 지연제 사용 조건</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수(지연제) · 타설속도 · 온도 · 기둥 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>기둥 타설 높이 · 타설 속도(m/h, 숫자) · 콘크리트 온도(℃, 숫자) · 시멘트계수 · 콘크리트 단위중량 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.4%20%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95%20%EC%A7%80%EC%97%B0%EC%A0%9C">오류 제보</a><span class="fn">예제3.4_기둥측압_지연제_응용_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.5" data-a="basic" data-b="03" data-text="3.5 최소수평하중 동바리 최소 수평하중 03장 하중계산 ">
-  <div class="main"><span class="code">3.5</span><span class="title">최소수평하중</span><span class="mmeta"><span class="tag cd">예제 3.5</span><span class="tag">03장 하중계산</span><span class="lv lv-b">기초</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.5_%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-4%20%EA%B8%B0%EB%91%A5%EC%B8%A1%EC%95%95%20%EC%A7%80%EC%97%B0%EC%A0%9C">오류 제보</a><span class="fn">예제3-4_기둥측압_지연제_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-5" data-b="03" data-text="3-5 최소수평하중 동바리 최소 수평하중 산정 03장 하중계산 ">
+  <div class="main"><span class="code">3-5</span><span class="title">최소수평하중</span><span class="mmeta"><span class="tag cd">예제 3-5</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-5_%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.5 동바리 최소 수평하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-5 동바리 최소 수평하중 산정</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>연직하중 · 배치간격 X · 배치간격 Y</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>고정하중 · 총 연직하중(예제 3-1) · 동바리 배치 간격 X · 동바리 배치 간격 Y · 동바리 설치 높이</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.5%20%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3.5_최소수평하중_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.6" data-a="applied" data-b="03" data-text="3.6 교량동바리풍하중 교량 동바리 풍하중 03장 하중계산 ">
-  <div class="main"><span class="code">3.6</span><span class="title">교량동바리풍하중</span><span class="mmeta"><span class="tag cd">예제 3.6</span><span class="tag">03장 하중계산</span><span class="lv lv-a">응용</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.6_%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-5%20%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3-5_최소수평하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-6" data-b="03" data-text="3-6 교량동바리풍하중 개방형 동바리의 풍하중(KDS 41 12 00)과 최소 수평하중 — 각각 산정하고 검토하기 03장 하중계산 ">
+  <div class="main"><span class="code">3-6</span><span class="title">교량동바리풍하중</span><span class="mmeta"><span class="tag cd">예제 3-6</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-6_%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.6 교량 동바리 풍하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-6 개방형 동바리의 풍하중(KDS 41 12 00)과 최소 수평하중 — 각각 산정하고 검토하기</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>기준 풍속 · 동바리 높이 · 동바리 너비</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>동바리 높이 · 바람을 받는 면의 폭 · 기본풍속(가정) · 지표면조도 C, 평탄지 지형계수 · 풍향계수(풍향 자료 없음) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.6%20%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3.6_교량동바리풍하중_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.7" data-a="applied" data-b="03" data-text="3.7 동바리설계하중종합 슬래브 동바리 설계하중 종합 (LC1) 03장 하중계산 ">
-  <div class="main"><span class="code">3.7</span><span class="title">동바리설계하중종합</span><span class="mmeta"><span class="tag cd">예제 3.7</span><span class="tag">03장 하중계산</span><span class="lv lv-a">응용</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.7_%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-6%20%EA%B5%90%EB%9F%89%EB%8F%99%EB%B0%94%EB%A6%AC%ED%92%8D%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제3-6_교량동바리풍하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-7" data-b="03" data-text="3-7 동바리설계하중종합 슬래브 동바리 설계 연직하중 + 수평하중 종합 정리 03장 하중계산 ">
+  <div class="main"><span class="code">3-7</span><span class="title">동바리설계하중종합</span><span class="mmeta"><span class="tag cd">예제 3-7</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-7_%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.7 슬래브 동바리 설계하중 종합 (LC1)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-7 슬래브 동바리 설계 연직하중 + 수평하중 종합 정리</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 단위중량 · 슬래브 두께 · 배치간격 X · 배치간격 Y · 작업하중</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 층고 · 파이프 서포트 간격 X · 파이프 서포트 간격 Y · 콘크리트 단위중량(보통 콘크리트) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.7%20%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9">오류 제보</a><span class="fn">예제3.7_동바리설계하중종합_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.8" data-a="advanced" data-b="03" data-text="3.8 하중계산 오류찾기 오류 찾기 — 슬래브 연직하중 03장 하중계산 ">
-  <div class="main"><span class="code">3.8</span><span class="title">하중계산 오류찾기</span><span class="mmeta"><span class="tag cd">예제 3.8</span><span class="tag">03장 하중계산</span><span class="lv lv-c">심화</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.8_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0_%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-7%20%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91%EC%A2%85%ED%95%A9">오류 제보</a><span class="fn">예제3-7_동바리설계하중종합_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-8" data-b="03" data-text="3-8 하중계산 오류찾기 오류 찾기 — 다음 계산에서 잘못된 부분을 찾으시오 03장 하중계산 ">
+  <div class="main"><span class="code">3-8</span><span class="title">하중계산 오류찾기</span><span class="mmeta"><span class="tag cd">예제 3-8</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-8_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0_%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.8 오류 찾기 — 슬래브 연직하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-8 오류 찾기 — 다음 계산에서 잘못된 부분을 찾으시오</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께 · 거푸집 자중(누락분) · 작업하중</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 콘크리트 단위중량 · 작업하중 · 거푸집 자중</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.8%20%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%20%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0">오류 제보</a><span class="fn">예제3.8_하중계산_오류찾기_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex3.9" data-a="advanced" data-b="03" data-text="3.9 지하주차장종합 지하 주차장 슬래브+벽체 하중 종합 03장 하중계산 계산서">
-  <div class="main"><span class="code">3.9</span><span class="title">지하주차장종합<span class="tag">계산서</span></span><span class="mmeta"><span class="tag cd">예제 3.9</span><span class="tag">03장 하중계산</span><span class="lv lv-c">심화</span></span><span class="c3">03장 하중계산</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3.9_%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9_%EC%8B%AC%ED%99%94_%EA%B3%84%EC%82%B0%EC%84%9C_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-8%20%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%20%EC%98%A4%EB%A5%98%EC%B0%BE%EA%B8%B0">오류 제보</a><span class="fn">예제3-8_하중계산_오류찾기_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex3-9" data-b="03" data-text="3-9 지하주차장종합 계산서 지하 주차장 슬래브 + 벽체 하중 계산 종합 — 실무 계산서 형식 03장 하중계산 ">
+  <div class="main"><span class="code">3-9</span><span class="title">지하주차장종합 계산서</span><span class="mmeta"><span class="tag cd">예제 3-9</span><span class="tag">03장 하중계산</span></span><span class="c3">03장 하중계산</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/03%EC%9E%A5_%ED%95%98%EC%A4%91%EA%B3%84%EC%82%B0%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C3-9_%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9_%EA%B3%84%EC%82%B0%EC%84%9C_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 3.9 지하 주차장 슬래브+벽체 하중 종합</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>03장 하중계산 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 3-9 지하 주차장 슬래브 + 벽체 하중 계산 종합 — 실무 계산서 형식</dd></div>
+    <div><dt>분류</dt><dd>03장 하중계산</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 계산서</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께 · 작업하중 · 배치간격 X · 배치간격 Y · 단위중량계수 · 시멘트계수(지연제) · 타설속도</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 동바리 간격 X · 동바리 간격 Y · 동바리 설치 구간 · 거푸집 자중(KDS 최솟값) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203.9%20%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9">오류 제보</a><span class="fn">예제3.9_지하주차장종합_심화_계산서_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>04장 부재설계 <small>10제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex4.1" data-a="basic" data-b="04" data-text="4.1 슬래브합판검토 슬래브 거푸집 합판 검토 04장 부재설계 ">
-  <div class="main"><span class="code">4.1</span><span class="title">슬래브합판검토</span><span class="mmeta"><span class="tag cd">예제 4.1</span><span class="tag">04장 부재설계</span><span class="lv lv-b">기초</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.1_%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%203-9%20%EC%A7%80%ED%95%98%EC%A3%BC%EC%B0%A8%EC%9E%A5%EC%A2%85%ED%95%A9%20%EA%B3%84%EC%82%B0%EC%84%9C">오류 제보</a><span class="fn">예제3-9_지하주차장종합_계산서_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>04장 부재설계 <small>10제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex4-1" data-b="04" data-text="4-1 슬래브합판검토 슬래브 거푸집 합판 검토 04장 부재설계 ">
+  <div class="main"><span class="code">4-1</span><span class="title">슬래브합판검토</span><span class="mmeta"><span class="tag cd">예제 4-1</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-1_%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.1 슬래브 거푸집 합판 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-1 슬래브 거푸집 합판 검토</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 합판 두께(KS F 3110) · 장선 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 합판 두께 · 장선 간격(검토 대상) · 재검토 장선 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.1%20%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0">오류 제보</a><span class="fn">예제4.1_슬래브합판검토_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.2" data-a="applied" data-b="04" data-text="4.2 벽체합판검토 허용장선간격 벽체 거푸집 합판 검토 — 측압 90 kN/m² 04장 부재설계 ">
-  <div class="main"><span class="code">4.2</span><span class="title">벽체합판검토 허용장선간격</span><span class="mmeta"><span class="tag cd">예제 4.2</span><span class="tag">04장 부재설계</span><span class="lv lv-a">응용</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.2_%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-1%20%EC%8A%AC%EB%9E%98%EB%B8%8C%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0">오류 제보</a><span class="fn">예제4-1_슬래브합판검토_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-2" data-b="04" data-text="4-2 벽체합판검토 허용장선간격 벽체 거푸집 합판 검토 — 측압 90 kN/m² 04장 부재설계 ">
+  <div class="main"><span class="code">4-2</span><span class="title">벽체합판검토 허용장선간격</span><span class="mmeta"><span class="tag cd">예제 4-2</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-2_%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0_%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.2 벽체 거푸집 합판 검토 — 측압 90 kN/m²</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-2 벽체 거푸집 합판 검토 — 측압 90 kN/m²</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 측압 · 합판 두께</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 측압 · 합판 두께 · 채택 후보 간격 · 비교 간격 · 비교 측압 1 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.2%20%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0%20%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4.2_벽체합판검토_허용장선간격_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.3" data-a="basic" data-b="04" data-text="4.3 목재장선50x100 목재 장선 50×100mm 구조 검토 04장 부재설계 ">
-  <div class="main"><span class="code">4.3</span><span class="title">목재장선50x100</span><span class="mmeta"><span class="tag cd">예제 4.3</span><span class="tag">04장 부재설계</span><span class="lv lv-b">기초</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.3_%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-2%20%EB%B2%BD%EC%B2%B4%ED%95%A9%ED%8C%90%EA%B2%80%ED%86%A0%20%ED%97%88%EC%9A%A9%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4-2_벽체합판검토_허용장선간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-3" data-b="04" data-text="4-3 목재장선50x100 목재 장선 50×100 mm 구조 검토 04장 부재설계 ">
+  <div class="main"><span class="code">4-3</span><span class="title">목재장선50x100</span><span class="mmeta"><span class="tag cd">예제 4-3</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-3_%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.3 목재 장선 50×100mm 구조 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-3 목재 장선 50×100 mm 구조 검토</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 멍에 간격 · 장선 폭 · 장선 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 멍에 간격(검토 대상) · 장선 폭 · 장선 높이</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.3%20%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100">오류 제보</a><span class="fn">예제4.3_목재장선50x100_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.4" data-a="applied" data-b="04" data-text="4.4 강관장선60x60 강관 장선 □60×60×2.3t 구조 검토 04장 부재설계 ">
-  <div class="main"><span class="code">4.4</span><span class="title">강관장선60x60</span><span class="mmeta"><span class="tag cd">예제 4.4</span><span class="tag">04장 부재설계</span><span class="lv lv-a">응용</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.4_%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-3%20%EB%AA%A9%EC%9E%AC%EC%9E%A5%EC%84%A050x100">오류 제보</a><span class="fn">예제4-3_목재장선50x100_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-4" data-b="04" data-text="4-4 강관장선60x60 강관 장선 □60×60×2.3t 구조 검토 04장 부재설계 ">
+  <div class="main"><span class="code">4-4</span><span class="title">강관장선60x60</span><span class="mmeta"><span class="tag cd">예제 4-4</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-4_%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.4 강관 장선 □60×60×2.3t 구조 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-4 강관 장선 □60×60×2.3t 구조 검토</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 멍에 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 멍에 간격 · 바깥치수 · 두께 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.4%20%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60">오류 제보</a><span class="fn">예제4.4_강관장선60x60_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.5" data-a="basic" data-b="04" data-text="4.5 H100멍에 동바리간격 H-100×100 멍에 구조 검토 및 동바리 간격 04장 부재설계 ">
-  <div class="main"><span class="code">4.5</span><span class="title">H100멍에 동바리간격</span><span class="mmeta"><span class="tag cd">예제 4.5</span><span class="tag">04장 부재설계</span><span class="lv lv-b">기초</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.5_H100%EB%A9%8D%EC%97%90_%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-4%20%EA%B0%95%EA%B4%80%EC%9E%A5%EC%84%A060x60">오류 제보</a><span class="fn">예제4-4_강관장선60x60_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-5" data-b="04" data-text="4-5 H100멍에 동바리간격 H-100×100 멍에 구조 검토 및 동바리 간격 산정 04장 부재설계 ">
+  <div class="main"><span class="code">4-5</span><span class="title">H100멍에 동바리간격</span><span class="mmeta"><span class="tag cd">예제 4-5</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-5_H100%EB%A9%8D%EC%97%90_%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.5 H-100×100 멍에 구조 검토 및 동바리 간격</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-5 H-100×100 멍에 구조 검토 및 동바리 간격 산정</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 검토 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 멍에 간격 · 항복강도(SS275) · 검토 서포트 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.5%20H100%EB%A9%8D%EC%97%90%20%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4.5_H100멍에_동바리간격_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.6" data-a="applied" data-b="04" data-text="4.6 목재멍에100x100 목재 멍에 100×100mm 구조 검토 04장 부재설계 ">
-  <div class="main"><span class="code">4.6</span><span class="title">목재멍에100x100</span><span class="mmeta"><span class="tag cd">예제 4.6</span><span class="tag">04장 부재설계</span><span class="lv lv-a">응용</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.6_%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-5%20H100%EB%A9%8D%EC%97%90%20%EB%8F%99%EB%B0%94%EB%A6%AC%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4-5_H100멍에_동바리간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-6" data-b="04" data-text="4-6 목재멍에100x100 목재 멍에 100×100 mm 구조 검토 04장 부재설계 ">
+  <div class="main"><span class="code">4-6</span><span class="title">목재멍에100x100</span><span class="mmeta"><span class="tag cd">예제 4-6</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-6_%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.6 목재 멍에 100×100mm 구조 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-6 목재 멍에 100×100 mm 구조 검토</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 장선 간격 · 동바리 간격 · 멍에 폭 · 멍에 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 멍에 간격(분담폭) · 멍에 폭(미송, 실제 치수) · 멍에 높이(미송, 실제 치수) · 멍에 방향 서포트 간격(검토)</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.6%20%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100">오류 제보</a><span class="fn">예제4.6_목재멍에100x100_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.7" data-a="basic" data-b="04" data-text="4.7 파이프서포트좌굴 허용하중 파이프 서포트 Φ60.5×2.3t 허용하중 04장 부재설계 ">
-  <div class="main"><span class="code">4.7</span><span class="title">파이프서포트좌굴 허용하중<a class="wlink" href="../web/db-4-7.html">웹 계산기 ▸</a></span><span class="mmeta"><span class="tag cd">예제 4.7</span><span class="tag">04장 부재설계</span><span class="lv lv-b">기초</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.7_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4_%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-6%20%EB%AA%A9%EC%9E%AC%EB%A9%8D%EC%97%90100x100">오류 제보</a><span class="fn">예제4-6_목재멍에100x100_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-7" data-b="04" data-text="4-7 파이프서포트좌굴 허용하중 균일 원형강관 Φ60.5×2.3의 이론 좌굴하중과 설계 허용압축력 비교 04장 부재설계 ">
+  <div class="main"><span class="code">4-7</span><span class="title">파이프서포트좌굴 허용하중<a class="wlink" href="../web/db-4-7.html">웹 계산기 ▸</a></span><span class="mmeta"><span class="tag cd">예제 4-7</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-7_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4_%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.7 파이프 서포트 Φ60.5×2.3t 허용하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-7 균일 원형강관 Φ60.5×2.3의 이론 좌굴하중과 설계 허용압축력 비교</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설치 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>두께(외관) · 설치 높이</dd></div>
   </dl>
-  <div class="dfoot"><a href="../web/db-4-7.html">웹에서 계산하기 →</a><a href="../preview/db-4-7.html">계산서 미리보기 →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.7%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4%20%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제4.7_파이프서포트좌굴_허용하중_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.8" data-a="applied" data-b="04" data-text="4.8 파이프서포트배치간격 파이프 서포트 배치 간격 산정 04장 부재설계 ">
-  <div class="main"><span class="code">4.8</span><span class="title">파이프서포트배치간격</span><span class="mmeta"><span class="tag cd">예제 4.8</span><span class="tag">04장 부재설계</span><span class="lv lv-a">응용</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.8_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="../web/db-4-7.html">웹에서 계산하기 →</a><a href="../preview/db-4-7.html">계산서 미리보기 →</a><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-7%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EC%A2%8C%EA%B5%B4%20%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제4-7_파이프서포트좌굴_허용하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-8" data-b="04" data-text="4-8 파이프서포트배치간격 파이프 서포트 배치 간격 산정 04장 부재설계 ">
+  <div class="main"><span class="code">4-8</span><span class="title">파이프서포트배치간격</span><span class="mmeta"><span class="tag cd">예제 4-8</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-8_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.8 파이프 서포트 배치 간격 산정</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-8 파이프 서포트 배치 간격 산정</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 적용 간격 X · 적용 간격 Y</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 총 설계하중 · 설치 높이(층고 3.8 m) · 채택 멍에 간격 · 채택 서포트 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.8%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4.8_파이프서포트배치간격_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.9" data-a="advanced" data-b="04" data-text="4.9 슬래브t200 전체설계 일반 슬래브(t=200mm) 거푸집 전체 설계 04장 부재설계 ">
-  <div class="main"><span class="code">4.9</span><span class="title">슬래브t200 전체설계</span><span class="mmeta"><span class="tag cd">예제 4.9</span><span class="tag">04장 부재설계</span><span class="lv lv-c">심화</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.9_%EC%8A%AC%EB%9E%98%EB%B8%8Ct200_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-8%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%EB%B0%B0%EC%B9%98%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제4-8_파이프서포트배치간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-9" data-b="04" data-text="4-9 슬래브t200 전체설계 일반 슬래브(t = 200 mm) 거푸집 — 연직하중에 대한 주요 부재 설계 04장 부재설계 ">
+  <div class="main"><span class="code">4-9</span><span class="title">슬래브t200 전체설계</span><span class="mmeta"><span class="tag cd">예제 4-9</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-9_%EC%8A%AC%EB%9E%98%EB%B8%8Ct200_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.9 일반 슬래브(t=200mm) 거푸집 전체 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-9 일반 슬래브(t = 200 mm) 거푸집 — 연직하중에 대한 주요 부재 설계</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>고정하중 · 활하중 · 설계하중 · 합판 두께</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께(표준 아파트 거실) · 층고 · 멍에 높이(H-100) · 콘크리트 단위중량 · 거푸집(합판·장선·멍에) 자중 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.9%20%EC%8A%AC%EB%9E%98%EB%B8%8Ct200%20%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제4.9_슬래브t200_전체설계_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex4.10" data-a="advanced" data-b="04" data-text="4.10 고층슬래브t300 설계비교 고층 슬래브(t=300mm, 층고 4.0m) 설계 비교 04장 부재설계 ">
-  <div class="main"><span class="code">4.10</span><span class="title">고층슬래브t300 설계비교</span><span class="mmeta"><span class="tag cd">예제 4.10</span><span class="tag">04장 부재설계</span><span class="lv lv-c">심화</span></span><span class="c3">04장 부재설계</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4.10_%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300_%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-9%20%EC%8A%AC%EB%9E%98%EB%B8%8Ct200%20%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제4-9_슬래브t200_전체설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex4-10" data-b="04" data-text="4-10 고층슬래브t300 설계비교 고층 슬래브 (t = 300 mm, 동바리 사용길이 4.0 m 가정) 설계 비교 04장 부재설계 ">
+  <div class="main"><span class="code">4-10</span><span class="title">고층슬래브t300 설계비교</span><span class="mmeta"><span class="tag cd">예제 4-10</span><span class="tag">04장 부재설계</span></span><span class="c3">04장 부재설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/04%EC%9E%A5_%EB%B6%80%EC%9E%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C4-10_%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300_%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 4.10 고층 슬래브(t=300mm, 층고 4.0m) 설계 비교</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>04장 부재설계 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 4-10 고층 슬래브 (t = 300 mm, 동바리 사용길이 4.0 m 가정) 설계 비교</dd></div>
+    <div><dt>분류</dt><dd>04장 부재설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>총 설계하중 · 좌굴길이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 동바리 사용길이 · 고정하중 · 작업하중 · 제시 배치 멍에 간격 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204.10%20%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300%20%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90">오류 제보</a><span class="fn">예제4.10_고층슬래브t300_설계비교_심화_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>05장 벽체거푸집 <small>7제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex5.1" data-a="basic" data-b="05" data-text="5.1 벽체측압 일반 벽체 측압 계산 05장 벽체거푸집 그래프">
-  <div class="main"><span class="code">5.1</span><span class="title">벽체측압<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5.1</span><span class="tag">05장 벽체거푸집</span><span class="lv lv-b">기초</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.1_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%204-10%20%EA%B3%A0%EC%B8%B5%EC%8A%AC%EB%9E%98%EB%B8%8Ct300%20%EC%84%A4%EA%B3%84%EB%B9%84%EA%B5%90">오류 제보</a><span class="fn">예제4-10_고층슬래브t300_설계비교_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>05장 벽체거푸집 <small>7제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex5-1" data-b="05" data-text="5-1 벽체측압 일반 벽체 측압 계산 05장 벽체거푸집 그래프">
+  <div class="main"><span class="code">5-1</span><span class="title">벽체측압<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5-1</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-1_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.1 일반 벽체 측압 계산</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-1 일반 벽체 측압 계산</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수 · 타설속도 · 온도 · 단위중량 · 벽체 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 높이 · 타설 속도(m/h, 숫자) · 콘크리트 온도(℃, 숫자) · 단위중량 · 단위중량계수 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.1%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제5.1_벽체측압_기초_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.2" data-a="applied" data-b="05" data-text="5.2 벽체측압 조건2 표준 벽체 측압 — 조건 ② 05장 벽체거푸집 그래프">
-  <div class="main"><span class="code">5.2</span><span class="title">벽체측압 조건2<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5.2</span><span class="tag">05장 벽체거푸집</span><span class="lv lv-a">응용</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.2_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EC%A1%B0%EA%B1%B42_%EC%9D%91%EC%9A%A9_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-1%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제5-1_벽체측압_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-2" data-b="05" data-text="5-2 벽체측압 조건2 표준 벽체 측압 계산 — 조건 ② 적용 05장 벽체거푸집 그래프">
+  <div class="main"><span class="code">5-2</span><span class="title">벽체측압 조건2<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5-2</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-2_%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95_%EC%A1%B0%EA%B1%B42_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.2 표준 벽체 측압 — 조건 ②</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-2 표준 벽체 측압 계산 — 조건 ② 적용</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수 · 타설속도 · 온도 · 단위중량 · 벽체 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 높이 · 타설 속도(m/h, 숫자) · 콘크리트 온도(℃, 숫자) · 단위중량 · 단위중량계수(보통콘크리트) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.2%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95%20%EC%A1%B0%EA%B1%B42">오류 제보</a><span class="fn">예제5.2_벽체측압_조건2_응용_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.3" data-a="advanced" data-b="05" data-text="5.3 겨울철고측압 겨울철 고측압 조건 05장 벽체거푸집 그래프">
-  <div class="main"><span class="code">5.3</span><span class="title">겨울철고측압<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5.3</span><span class="tag">05장 벽체거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.3_%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95_%EC%8B%AC%ED%99%94_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-2%20%EB%B2%BD%EC%B2%B4%EC%B8%A1%EC%95%95%20%EC%A1%B0%EA%B1%B42">오류 제보</a><span class="fn">예제5-2_벽체측압_조건2_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-3" data-b="05" data-text="5-3 겨울철고측압 겨울철 고측압 조건 05장 벽체거푸집 그래프">
+  <div class="main"><span class="code">5-3</span><span class="title">겨울철고측압<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 5-3</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-3_%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.3 겨울철 고측압 조건</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-3 겨울철 고측압 조건</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수(지연제) · 타설속도 · 온도 · 단위중량 · 벽체 높이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 높이 · 타설 속도 · 콘크리트 온도 · 단위중량 · 단위중량계수 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.3%20%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제5.3_겨울철고측압_심화_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.4" data-a="" data-b="05" data-text="5.4 수평멍에 타이볼트수직간격 수평멍에 허용 타이볼트 수직 간격 05장 벽체거푸집 ">
-  <div class="main"><span class="code">5.4</span><span class="title">수평멍에 타이볼트수직간격</span><span class="mmeta"><span class="tag cd">예제 5.4</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span style="color:#9aa4ad">–</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.4_%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-3%20%EA%B2%A8%EC%9A%B8%EC%B2%A0%EA%B3%A0%EC%B8%A1%EC%95%95">오류 제보</a><span class="fn">예제5-3_겨울철고측압_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-4" data-b="05" data-text="5-4 수평멍에 타이수평간격 수평멍에 검토 — 허용 타이 수평 간격 c 산정 05장 벽체거푸집 ">
+  <div class="main"><span class="code">5-4</span><span class="title">수평멍에 타이수평간격</span><span class="mmeta"><span class="tag cd">예제 5-4</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-4_%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90_%ED%83%80%EC%9D%B4%EC%88%98%ED%8F%89%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.4 수평멍에 허용 타이볼트 수직 간격</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-4 수평멍에 검토 — 허용 타이 수평 간격 c 산정</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계 측압 · 타이볼트 수평 간격 · 검토 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>설계 측압 · 장선 간격 a · 멍에 간격 b · 검토 타이 수평 간격 c</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.4%20%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90%20%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제5.4_수평멍에_타이볼트수직간격_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.5" data-a="applied" data-b="05" data-text="5.5 타이볼트간격설계 타이볼트 간격 설계 05장 벽체거푸집 ">
-  <div class="main"><span class="code">5.5</span><span class="title">타이볼트간격설계</span><span class="mmeta"><span class="tag cd">예제 5.5</span><span class="tag">05장 벽체거푸집</span><span class="lv lv-a">응용</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.5_%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EA%B0%84%EA%B2%A9%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-4%20%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90%20%ED%83%80%EC%9D%B4%EC%88%98%ED%8F%89%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제5-4_수평멍에_타이수평간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-5" data-b="05" data-text="5-5 타이인장 수직간격 타이 인장 검토와 수직 간격 산정 05장 벽체거푸집 ">
+  <div class="main"><span class="code">5-5</span><span class="title">타이인장 수직간격</span><span class="mmeta"><span class="tag cd">예제 5-5</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-5_%ED%83%80%EC%9D%B4%EC%9D%B8%EC%9E%A5_%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.5 타이볼트 간격 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-5 타이 인장 검토와 수직 간격 산정</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>측압 · 수평 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>설계 측압 · 타이 수평 간격 · 타이 수직 간격 s_v(시공 단위)</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.5%20%ED%83%80%EC%9D%B4%EB%B3%BC%ED%8A%B8%EA%B0%84%EA%B2%A9%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제5.5_타이볼트간격설계_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.6" data-a="" data-b="05" data-text="5.6 버팀대전도검토 버팀대 전도 안전율 검토 05장 벽체거푸집 ">
-  <div class="main"><span class="code">5.6</span><span class="title">버팀대전도검토</span><span class="mmeta"><span class="tag cd">예제 5.6</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span style="color:#9aa4ad">–</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.6_%EB%B2%84%ED%8C%80%EB%8C%80%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-5%20%ED%83%80%EC%9D%B4%EC%9D%B8%EC%9E%A5%20%EC%88%98%EC%A7%81%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제5-5_타이인장_수직간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-6" data-b="05" data-text="5-6 버팀대반력 최소수평하중 버팀대 반력 산정 — 최소 수평하중 (양면 타이식) 05장 벽체거푸집 ">
+  <div class="main"><span class="code">5-6</span><span class="title">버팀대반력 최소수평하중</span><span class="mmeta"><span class="tag cd">예제 5-6</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-6_%EB%B2%84%ED%8C%80%EB%8C%80%EB%B0%98%EB%A0%A5_%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.6 버팀대 전도 안전율 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-6 버팀대 반력 산정 — 최소 수평하중 (양면 타이식)</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>측압 · 벽체 높이 · 버팀대 설치 높이 · 버팀대 수평 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 거푸집 높이 · 버팀대 분담 폭 · 외면 최소 수평하중) · 설계 풍압 · 버팀대 부착 높이 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.6%20%EB%B2%84%ED%8C%80%EB%8C%80%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0">오류 제보</a><span class="fn">예제5.6_버팀대전도검토_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex5.7" data-a="advanced" data-b="05" data-text="5.7 표준벽체종합설계 표준 벽체 거푸집 종합 설계 05장 벽체거푸집 ">
-  <div class="main"><span class="code">5.7</span><span class="title">표준벽체종합설계</span><span class="mmeta"><span class="tag cd">예제 5.7</span><span class="tag">05장 벽체거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">05장 벽체거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5.7_%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-6%20%EB%B2%84%ED%8C%80%EB%8C%80%EB%B0%98%EB%A0%A5%20%EC%B5%9C%EC%86%8C%EC%88%98%ED%8F%89%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제5-6_버팀대반력_최소수평하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex5-7" data-b="05" data-text="5-7 표준벽체종합설계 표준 벽체 거푸집 종합 설계 — 거푸집널·장선·멍에·타이 05장 벽체거푸집 ">
+  <div class="main"><span class="code">5-7</span><span class="title">표준벽체종합설계</span><span class="mmeta"><span class="tag cd">예제 5-7</span><span class="tag">05장 벽체거푸집</span></span><span class="c3">05장 벽체거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/05%EC%9E%A5_%EB%B2%BD%EC%B2%B4%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C5-7_%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 5.7 표준 벽체 거푸집 종합 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>05장 벽체거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 5-7 표준 벽체 거푸집 종합 설계 — 거푸집널·장선·멍에·타이</dd></div>
+    <div><dt>분류</dt><dd>05장 벽체거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량계수 · 시멘트계수 · 타설속도 · 온도 · 단위중량 · 벽체 높이 · 수평 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>벽체 높이 · 단위중량 · 콘크리트 온도(℃, 숫자) · 타설 속도(m/h, 숫자) · 단위중량계수 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205.7%20%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제5.7_표준벽체종합설계_심화_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>06장 슬래브거푸집 <small>6제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex6.1" data-a="basic" data-b="06" data-text="6.1 합판장선간격 합판 장선 간격 결정 06장 슬래브거푸집 그래프">
-  <div class="main"><span class="code">6.1</span><span class="title">합판장선간격<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 6.1</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-b">기초</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.1_%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%205-7%20%ED%91%9C%EC%A4%80%EB%B2%BD%EC%B2%B4%EC%A2%85%ED%95%A9%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제5-7_표준벽체종합설계_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>06장 슬래브거푸집 <small>6제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex6-1" data-b="06" data-text="6-1 합판장선간격 합판 장선 간격 결정 06장 슬래브거푸집 그래프">
+  <div class="main"><span class="code">6-1</span><span class="title">합판장선간격<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 6-1</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-1_%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.1 합판 장선 간격 결정</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-1 합판 장선 간격 결정</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 합판 두께</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 합판 두께 · 채택 장선 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.1%20%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6.1_합판장선간격_기초_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex6.2" data-a="applied" data-b="06" data-text="6.2 장선 멍에간격 장선 설계 — 허용 멍에 간격 06장 슬래브거푸집 ">
-  <div class="main"><span class="code">6.2</span><span class="title">장선 멍에간격</span><span class="mmeta"><span class="tag cd">예제 6.2</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-a">응용</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.2_%EC%9E%A5%EC%84%A0_%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-1%20%ED%95%A9%ED%8C%90%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6-1_합판장선간격_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex6-2" data-b="06" data-text="6-2 장선 멍에간격 장선 설계 — 허용 멍에 간격 산정 06장 슬래브거푸집 ">
+  <div class="main"><span class="code">6-2</span><span class="title">장선 멍에간격</span><span class="mmeta"><span class="tag cd">예제 6-2</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-2_%EC%9E%A5%EC%84%A0_%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.2 장선 설계 — 허용 멍에 간격</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-2 장선 설계 — 허용 멍에 간격 산정</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 장선 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 장선 간격(합판 스팬) · 채택 멍에 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.2%20%EC%9E%A5%EC%84%A0%20%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6.2_장선_멍에간격_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex6.3" data-a="applied" data-b="06" data-text="6.3 멍에 서포트간격 멍에 설계 — 허용 서포트 간격 06장 슬래브거푸집 ">
-  <div class="main"><span class="code">6.3</span><span class="title">멍에 서포트간격</span><span class="mmeta"><span class="tag cd">예제 6.3</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-a">응용</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.3_%EB%A9%8D%EC%97%90_%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-2%20%EC%9E%A5%EC%84%A0%20%EB%A9%8D%EC%97%90%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6-2_장선_멍에간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex6-3" data-b="06" data-text="6-3 멍에 서포트간격 멍에 설계 — 허용 서포트 간격 산정 06장 슬래브거푸집 ">
+  <div class="main"><span class="code">6-3</span><span class="title">멍에 서포트간격</span><span class="mmeta"><span class="tag cd">예제 6-3</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-3_%EB%A9%8D%EC%97%90_%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.3 멍에 설계 — 허용 서포트 간격</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-3 멍에 설계 — 허용 서포트 간격 산정</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 멍에 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 멍에 간격 · 채택 서포트 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.3%20%EB%A9%8D%EC%97%90%20%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6.3_멍에_서포트간격_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex6.4" data-a="basic" data-b="06" data-text="6.4 파이프서포트허용하중 파이프 서포트 허용하중 검토 06장 슬래브거푸집 ">
-  <div class="main"><span class="code">6.4</span><span class="title">파이프서포트허용하중</span><span class="mmeta"><span class="tag cd">예제 6.4</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-b">기초</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.4_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-3%20%EB%A9%8D%EC%97%90%20%EC%84%9C%ED%8F%AC%ED%8A%B8%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제6-3_멍에_서포트간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex6-4" data-b="06" data-text="6-4 파이프서포트허용하중 파이프 서포트 허용하중 검토 06장 슬래브거푸집 ">
+  <div class="main"><span class="code">6-4</span><span class="title">파이프서포트허용하중</span><span class="mmeta"><span class="tag cd">예제 6-4</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-4_%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.4 파이프 서포트 허용하중 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-4 파이프 서포트 허용하중 검토</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계하중 · 멍에 간격 · 서포트 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>층고 · 슬래브 두께 · 합판 두께 · 장선 높이(50×100) · 멍에 높이(100×150) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.4%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제6.4_파이프서포트허용하중_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex6.5" data-a="advanced" data-b="06" data-text="6.5 슬래브전체설계 슬래브 거푸집 전체 설계 06장 슬래브거푸집 ">
-  <div class="main"><span class="code">6.5</span><span class="title">슬래브전체설계</span><span class="mmeta"><span class="tag cd">예제 6.5</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-4%20%ED%8C%8C%EC%9D%B4%ED%94%84%EC%84%9C%ED%8F%AC%ED%8A%B8%ED%97%88%EC%9A%A9%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제6-4_파이프서포트허용하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex6-5" data-b="06" data-text="6-5 슬래브전체설계 슬래브 거푸집 전체 설계 (심화 — 표준 아파트 슬래브) 06장 슬래브거푸집 ">
+  <div class="main"><span class="code">6-5</span><span class="title">슬래브전체설계</span><span class="mmeta"><span class="tag cd">예제 6-5</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.5 슬래브 거푸집 전체 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-5 슬래브 거푸집 전체 설계 (심화 — 표준 아파트 슬래브)</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 층고 · 콘크리트 단위중량(일반 RC) · 거푸집 자중 · 작업하중 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.5%20%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제6.5_슬래브전체설계_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex6.6" data-a="advanced" data-b="06" data-text="6.6 고하중슬래브설계 고하중 슬래브 거푸집 설계 (t=300mm) 06장 슬래브거푸집 ">
-  <div class="main"><span class="code">6.6</span><span class="title">고하중슬래브설계</span><span class="mmeta"><span class="tag cd">예제 6.6</span><span class="tag">06장 슬래브거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">06장 슬래브거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6.6_%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-5%20%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제6-5_슬래브전체설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex6-6" data-b="06" data-text="6-6 고하중슬래브설계 고하중 슬래브 거푸집 설계 (두께 300 mm, 심화) 06장 슬래브거푸집 ">
+  <div class="main"><span class="code">6-6</span><span class="title">고하중슬래브설계</span><span class="mmeta"><span class="tag cd">예제 6-6</span><span class="tag">06장 슬래브거푸집</span></span><span class="c3">06장 슬래브거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/06%EC%9E%A5_%EC%8A%AC%EB%9E%98%EB%B8%8C%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C6-6_%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 6.6 고하중 슬래브 거푸집 설계 (t=300mm)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>06장 슬래브거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 6-6 고하중 슬래브 거푸집 설계 (두께 300 mm, 심화)</dd></div>
+    <div><dt>분류</dt><dd>06장 슬래브거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께 · 멍에 서포트 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>슬래브 두께 · 층고 · 콘크리트 단위중량 · 거푸집 자중 · 작업하중(이 예제의 가정값) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206.6%20%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제6.6_고하중슬래브설계_심화_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>07장 기둥거푸집 <small>5제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex7.1" data-a="basic" data-b="07" data-text="7.1 기둥패널 수직장선간격 기둥 폼 패널 수직장선 간격 07장 기둥거푸집 ">
-  <div class="main"><span class="code">7.1</span><span class="title">기둥패널 수직장선간격</span><span class="mmeta"><span class="tag cd">예제 7.1</span><span class="tag">07장 기둥거푸집</span><span class="lv lv-b">기초</span></span><span class="c3">07장 기둥거푸집</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.1_%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90_%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EA%B8%B0%EC%B4%88_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%206-6%20%EA%B3%A0%ED%95%98%EC%A4%91%EC%8A%AC%EB%9E%98%EB%B8%8C%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제6-6_고하중슬래브설계_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>07장 시스템동바리 <small>2제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex7-1" data-b="07" data-text="7-1 시스템동바리 카탈로그적용 슬래브 거푸집 지지용 시스템 동바리 — 카탈로그 적용 07장 시스템동바리 ">
+  <div class="main"><span class="code">7-1</span><span class="title">시스템동바리 카탈로그적용</span><span class="mmeta"><span class="tag cd">예제 7-1</span><span class="tag">07장 시스템동바리</span></span><span class="c3">07장 시스템동바리</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7-1_%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC_%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%EC%A0%81%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 7.1 기둥 폼 패널 수직장선 간격</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>07장 기둥거푸집 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 7-1 슬래브 거푸집 지지용 시스템 동바리 — 카탈로그 적용</dd></div>
+    <div><dt>분류</dt><dd>07장 시스템동바리</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 기둥 높이 · 두께</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>콘크리트 단위중량 · 슬래브 두께 · 동바리 높이(참고) · 거푸집 자중 · 작업하중 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207.1%20%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90%20%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제7.1_기둥패널_수직장선간격_기초_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex7.2" data-a="applied" data-b="07" data-text="7.2 장선 클램프설계 기둥 수직장선 및 클램프 설계 07장 기둥거푸집 ">
-  <div class="main"><span class="code">7.2</span><span class="title">장선 클램프설계</span><span class="mmeta"><span class="tag cd">예제 7.2</span><span class="tag">07장 기둥거푸집</span><span class="lv lv-a">응용</span></span><span class="c3">07장 기둥거푸집</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.2_%EC%9E%A5%EC%84%A0_%ED%81%B4%EB%9E%A8%ED%94%84%EC%84%A4%EA%B3%84_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207-1%20%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%B9%B4%ED%83%88%EB%A1%9C%EA%B7%B8%EC%A0%81%EC%9A%A9">오류 제보</a><span class="fn">예제7-1_시스템동바리_카탈로그적용_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex7-2" data-b="07" data-text="7-2 보거푸집 시스템동바리 Fa직접계산 보 거푸집 지지 시스템 동바리 — 허용압축응력(Fa) 직접 계산 07장 시스템동바리 ">
+  <div class="main"><span class="code">7-2</span><span class="title">보거푸집 시스템동바리 Fa직접계산</span><span class="mmeta"><span class="tag cd">예제 7-2</span><span class="tag">07장 시스템동바리</span></span><span class="c3">07장 시스템동바리</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7-2_%EB%B3%B4%EA%B1%B0%ED%91%B8%EC%A7%91_%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC_Fa%EC%A7%81%EC%A0%91%EA%B3%84%EC%82%B0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 7.2 기둥 수직장선 및 클램프 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>07장 기둥거푸집 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 7-2 보 거푸집 지지 시스템 동바리 — 허용압축응력(Fa) 직접 계산</dd></div>
+    <div><dt>분류</dt><dd>07장 시스템동바리</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 기둥 높이 · 기둥 폭</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>수평재 간격 · 항복강도 · 축력(구조해석 입력값)</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207.2%20%EC%9E%A5%EC%84%A0%20%ED%81%B4%EB%9E%A8%ED%94%84%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제7.2_장선_클램프설계_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex7.3" data-a="basic" data-b="07" data-text="7.3 원형기둥 후프설계 원형 기둥 거푸집 후프 설계 07장 기둥거푸집 그래프">
-  <div class="main"><span class="code">7.3</span><span class="title">원형기둥 후프설계<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 7.3</span><span class="tag">07장 기둥거푸집</span><span class="lv lv-b">기초</span></span><span class="c3">07장 기둥거푸집</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.3_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_%ED%9B%84%ED%94%84%EC%84%A4%EA%B3%84_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207-2%20%EB%B3%B4%EA%B1%B0%ED%91%B8%EC%A7%91%20%EC%8B%9C%EC%8A%A4%ED%85%9C%EB%8F%99%EB%B0%94%EB%A6%AC%20Fa%EC%A7%81%EC%A0%91%EA%B3%84%EC%82%B0">오류 제보</a><span class="fn">예제7-2_보거푸집_시스템동바리_Fa직접계산_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>08장 기둥거푸집 <small>5제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex8-1" data-b="08" data-text="8-1 기둥패널 수직장선간격 기둥 거푸집널 수직장선 간격 결정 08장 기둥거푸집 ">
+  <div class="main"><span class="code">8-1</span><span class="title">기둥패널 수직장선간격</span><span class="mmeta"><span class="tag cd">예제 8-1</span><span class="tag">08장 기둥거푸집</span></span><span class="c3">08장 기둥거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8-1_%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90_%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 7.3 원형 기둥 거푸집 후프 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>07장 기둥거푸집 · 기초</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 8-1 기둥 거푸집널 수직장선 간격 결정</dd></div>
+    <div><dt>분류</dt><dd>08장 기둥거푸집</dd></div>
+    <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
+    <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>기둥 높이 · 콘크리트 단위중량 · 거푸집널 합판 두께 · 재검토 합판 두께</dd></div>
+  </dl>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208-1%20%EA%B8%B0%EB%91%A5%ED%8C%A8%EB%84%90%20%EC%88%98%EC%A7%81%EC%9E%A5%EC%84%A0%EA%B0%84%EA%B2%A9">오류 제보</a><span class="fn">예제8-1_기둥패널_수직장선간격_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex8-2" data-b="08" data-text="8-2 장선 수평멍에 긴결재 기둥 수직장선·수평멍에·긴결재 설계 08장 기둥거푸집 ">
+  <div class="main"><span class="code">8-2</span><span class="title">장선 수평멍에 긴결재</span><span class="mmeta"><span class="tag cd">예제 8-2</span><span class="tag">08장 기둥거푸집</span></span><span class="c3">08장 기둥거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8-2_%EC%9E%A5%EC%84%A0_%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90_%EA%B8%B4%EA%B2%B0%EC%9E%AC_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 8-2 기둥 수직장선·수평멍에·긴결재 설계</dd></div>
+    <div><dt>분류</dt><dd>08장 기둥거푸집</dd></div>
+    <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
+    <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>기둥 폭(정방형 한 변) · 기둥 높이 · 콘크리트 단위중량 · 거푸집널 합판 두께 · 수직장선 폭 등</dd></div>
+  </dl>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208-2%20%EC%9E%A5%EC%84%A0%20%EC%88%98%ED%8F%89%EB%A9%8D%EC%97%90%20%EA%B8%B4%EA%B2%B0%EC%9E%AC">오류 제보</a><span class="fn">예제8-2_장선_수평멍에_긴결재_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex8-3" data-b="08" data-text="8-3 원형기둥 밴드설계 원형 기둥 거푸집 밴드 간격 설계 08장 기둥거푸집 그래프">
+  <div class="main"><span class="code">8-3</span><span class="title">원형기둥 밴드설계<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 8-3</span><span class="tag">08장 기둥거푸집</span></span><span class="c3">08장 기둥거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8-3_%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5_%EB%B0%B4%EB%93%9C%EC%84%A4%EA%B3%84_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 8-3 원형 기둥 거푸집 밴드 간격 설계</dd></div>
+    <div><dt>분류</dt><dd>08장 기둥거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 기둥 높이 · 반경</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>원형 기둥 직경 · 기둥 높이 · 콘크리트 단위중량 · 채택 밴드 간격</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207.3%20%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5%20%ED%9B%84%ED%94%84%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제7.3_원형기둥_후프설계_기초_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex7.4" data-a="advanced" data-b="07" data-text="7.4 정방형기둥 전체설계 정방형 기둥 거푸집 전체 설계 07장 기둥거푸집 ">
-  <div class="main"><span class="code">7.4</span><span class="title">정방형기둥 전체설계</span><span class="mmeta"><span class="tag cd">예제 7.4</span><span class="tag">07장 기둥거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">07장 기둥거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.4_%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208-3%20%EC%9B%90%ED%98%95%EA%B8%B0%EB%91%A5%20%EB%B0%B4%EB%93%9C%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8-3_원형기둥_밴드설계_그래프_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex8-4" data-b="08" data-text="8-4 정방형기둥 전체설계 정방형 기둥 거푸집 전체 설계 08장 기둥거푸집 ">
+  <div class="main"><span class="code">8-4</span><span class="title">정방형기둥 전체설계</span><span class="mmeta"><span class="tag cd">예제 8-4</span><span class="tag">08장 기둥거푸집</span></span><span class="c3">08장 기둥거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8-4_%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5_%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 7.4 정방형 기둥 거푸집 전체 설계</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>07장 기둥거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 8-4 정방형 기둥 거푸집 전체 설계</dd></div>
+    <div><dt>분류</dt><dd>08장 기둥거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 기둥 높이 · 기둥 폭</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>기둥 폭(정방형 한 변) · 기둥 높이 · 콘크리트 단위중량(Cw = 1.0) · 거푸집널 합판 두께(A급) · 수직장선 폭 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207.4%20%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5%20%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제7.4_정방형기둥_전체설계_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex7.5" data-a="advanced" data-b="07" data-text="7.5 고측압기둥 설계 고측압 기둥 거푸집 설계 (높이 5.0m) 07장 기둥거푸집 ">
-  <div class="main"><span class="code">7.5</span><span class="title">고측압기둥 설계</span><span class="mmeta"><span class="tag cd">예제 7.5</span><span class="tag">07장 기둥거푸집</span><span class="lv lv-c">심화</span></span><span class="c3">07장 기둥거푸집</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/07%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C7.5_%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208-4%20%EC%A0%95%EB%B0%A9%ED%98%95%EA%B8%B0%EB%91%A5%20%EC%A0%84%EC%B2%B4%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8-4_정방형기둥_전체설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex8-5" data-b="08" data-text="8-5 고측압기둥 설계 고측압 기둥 거푸집 설계 — 기둥 높이 5.0 m 08장 기둥거푸집 ">
+  <div class="main"><span class="code">8-5</span><span class="title">고측압기둥 설계</span><span class="mmeta"><span class="tag cd">예제 8-5</span><span class="tag">08장 기둥거푸집</span></span><span class="c3">08장 기둥거푸집</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%EA%B8%B0%EB%91%A5%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8-5_%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 7.5 고측압 기둥 거푸집 설계 (높이 5.0m)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>07장 기둥거푸집 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 8-5 고측압 기둥 거푸집 설계 — 기둥 높이 5.0 m</dd></div>
+    <div><dt>분류</dt><dd>08장 기둥거푸집</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 기둥 높이 · 기둥 폭</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>기둥 폭(정방형 한 변) · 기둥 높이 · 콘크리트 단위중량 · 거푸집널 합판 두께(A급) · 수직장선 폭 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%207.5%20%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제7.5_고측압기둥_설계_심화_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>08장 특수구조물 <small>5제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex8.1" data-a="" data-b="08" data-text="8.1 아치거푸집 설계 단곡면 아치 거푸집 설계 (R=8m, 90°) 08장 특수구조물 ">
-  <div class="main"><span class="code">8.1</span><span class="title">아치거푸집 설계</span><span class="mmeta"><span class="tag cd">예제 8.1</span><span class="tag">08장 특수구조물</span></span><span class="c3">08장 특수구조물</span><span class="c4"><span style="color:#9aa4ad">–</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.1_%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208-5%20%EA%B3%A0%EC%B8%A1%EC%95%95%EA%B8%B0%EB%91%A5%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8-5_고측압기둥_설계_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>09장 특수구조물 <small>5제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex9-1" data-b="09" data-text="9-1 아치거푸집 설계 단곡면 아치 거푸집의 국소 부재 검토 (R = 8 m, 중심각 90°) 09장 특수구조물 ">
+  <div class="main"><span class="code">9-1</span><span class="title">아치거푸집 설계</span><span class="mmeta"><span class="tag cd">예제 9-1</span><span class="tag">09장 특수구조물</span></span><span class="c3">09장 특수구조물</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9-1_%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 8.1 단곡면 아치 거푸집 설계 (R=8m, 90°)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>08장 특수구조물</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 9-1 단곡면 아치 거푸집의 국소 부재 검토 (R = 8 m, 중심각 90°)</dd></div>
+    <div><dt>분류</dt><dd>09장 특수구조물</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>곡률반경 · 아치 폭 · 슬래브 두께 · 단위중량</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>터널 축방향 폭 · 곡률 반경 · 중심각 · 슬래브 두께(곡면 법선 방향) · 콘크리트 단위중량 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208.1%20%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8.1_아치거푸집_설계_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex8.2" data-a="" data-b="08" data-text="8.2 경사슬래브 설계 경사 슬래브 거푸집 설계 (θ=30°) 08장 특수구조물 ">
-  <div class="main"><span class="code">8.2</span><span class="title">경사슬래브 설계</span><span class="mmeta"><span class="tag cd">예제 8.2</span><span class="tag">08장 특수구조물</span></span><span class="c3">08장 특수구조물</span><span class="c4"><span style="color:#9aa4ad">–</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.2_%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209-1%20%EC%95%84%EC%B9%98%EA%B1%B0%ED%91%B8%EC%A7%91%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제9-1_아치거푸집_설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex9-2" data-b="09" data-text="9-2 경사슬래브 설계 경사 슬래브 거푸집 — 동바리 간격과 경사 방향 힘 (θ = 30°) 09장 특수구조물 ">
+  <div class="main"><span class="code">9-2</span><span class="title">경사슬래브 설계</span><span class="mmeta"><span class="tag cd">예제 9-2</span><span class="tag">09장 특수구조물</span></span><span class="c3">09장 특수구조물</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9-2_%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 8.2 경사 슬래브 거푸집 설계 (θ=30°)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>08장 특수구조물</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 9-2 경사 슬래브 거푸집 — 동바리 간격과 경사 방향 힘 (θ = 30°)</dd></div>
+    <div><dt>분류</dt><dd>09장 특수구조물</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>설계하중</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>경사각 · 슬래브 두께(경사면에 수직) · 경사 길이 · 콘크리트 단위중량 · 거푸집 자중(경사면 면적당) 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208.2%20%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8.2_경사슬래브_설계_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex8.3" data-a="advanced" data-b="08" data-text="8.3 발코니캔틸레버 설계 발코니 캔틸레버 거푸집 설계 (L=3.0m) 08장 특수구조물 ">
-  <div class="main"><span class="code">8.3</span><span class="title">발코니캔틸레버 설계</span><span class="mmeta"><span class="tag cd">예제 8.3</span><span class="tag">08장 특수구조물</span><span class="lv lv-c">심화</span></span><span class="c3">08장 특수구조물</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.3_%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84_%EC%84%A4%EA%B3%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209-2%20%EA%B2%BD%EC%82%AC%EC%8A%AC%EB%9E%98%EB%B8%8C%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제9-2_경사슬래브_설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex9-3" data-b="09" data-text="9-3 발코니캔틸레버 설계 발코니 캔틸레버 — 타설 중 지지계와 경화 후 RC 외팔보의 구분 (L = 3.0 m) 09장 특수구조물 ">
+  <div class="main"><span class="code">9-3</span><span class="title">발코니캔틸레버 설계</span><span class="mmeta"><span class="tag cd">예제 9-3</span><span class="tag">09장 특수구조물</span></span><span class="c3">09장 특수구조물</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9-3_%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84_%EC%84%A4%EA%B3%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 8.3 발코니 캔틸레버 거푸집 설계 (L=3.0m)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>08장 특수구조물 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 9-3 발코니 캔틸레버 — 타설 중 지지계와 경화 후 RC 외팔보의 구분 (L = 3.0 m)</dd></div>
+    <div><dt>분류</dt><dd>09장 특수구조물</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께 · 캔틸레버 길이</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>캔틸레버 길이 · 슬래브 두께 · 발코니 폭 · 콘크리트 단위중량 · 거푸집 자중 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208.3%20%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제8.3_발코니캔틸레버_설계_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex8.4" data-a="advanced" data-b="08" data-text="8.4 체육관지붕 대공간 체육관 지붕 슬래브 거푸집 (지간 18m) 08장 특수구조물 ">
-  <div class="main"><span class="code">8.4</span><span class="title">체육관지붕 대공간</span><span class="mmeta"><span class="tag cd">예제 8.4</span><span class="tag">08장 특수구조물</span><span class="lv lv-c">심화</span></span><span class="c3">08장 특수구조물</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.4_%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95_%EB%8C%80%EA%B3%B5%EA%B0%84_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209-3%20%EB%B0%9C%EC%BD%94%EB%8B%88%EC%BA%94%ED%8B%B8%EB%A0%88%EB%B2%84%20%EC%84%A4%EA%B3%84">오류 제보</a><span class="fn">예제9-3_발코니캔틸레버_설계_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex9-4" data-b="09" data-text="9-4 체육관지붕 대공간 체육관 지붕 슬래브 — 트러스 지지의 예비 검토 (지간 18 m) 09장 특수구조물 ">
+  <div class="main"><span class="code">9-4</span><span class="title">체육관지붕 대공간</span><span class="mmeta"><span class="tag cd">예제 9-4</span><span class="tag">09장 특수구조물</span></span><span class="c3">09장 특수구조물</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9-4_%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95_%EB%8C%80%EA%B3%B5%EA%B0%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 8.4 체육관 지붕 슬래브 거푸집 (지간 18m)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>08장 특수구조물 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 9-4 체육관 지붕 슬래브 — 트러스 지지의 예비 검토 (지간 18 m)</dd></div>
+    <div><dt>분류</dt><dd>09장 특수구조물</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 두께 · 지간 · 트러스 간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>지간(트러스 양단 지지) · 슬래브 두께 · 층고 · 콘크리트 단위중량 · 거푸집 자중 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208.4%20%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95%20%EB%8C%80%EA%B3%B5%EA%B0%84">오류 제보</a><span class="fn">예제8.4_체육관지붕_대공간_심화_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex8.5" data-a="advanced" data-b="08" data-text="8.5 복합특수구조물 복합 특수 구조물 (곡면벽체 R=12m + 캔틸레버 L=4m) 08장 특수구조물 ">
-  <div class="main"><span class="code">8.5</span><span class="title">복합특수구조물</span><span class="mmeta"><span class="tag cd">예제 8.5</span><span class="tag">08장 특수구조물</span><span class="lv lv-c">심화</span></span><span class="c3">08장 특수구조물</span><span class="c4"><span class="lv lv-c">심화</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/08%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C8.5_%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC_%EC%8B%AC%ED%99%94_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209-4%20%EC%B2%B4%EC%9C%A1%EA%B4%80%EC%A7%80%EB%B6%95%20%EB%8C%80%EA%B3%B5%EA%B0%84">오류 제보</a><span class="fn">예제9-4_체육관지붕_대공간_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex9-5" data-b="09" data-text="9-5 복합특수구조물 복합 특수 구조물의 개념 검토 (곡면 벽체 R = 12 m + 캔틸레버 지붕 L = 4 m) 09장 특수구조물 ">
+  <div class="main"><span class="code">9-5</span><span class="title">복합특수구조물</span><span class="mmeta"><span class="tag cd">예제 9-5</span><span class="tag">09장 특수구조물</span></span><span class="c3">09장 특수구조물</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC%EA%B1%B0%ED%91%B8%EC%A7%91%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9-5_%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 8.5 복합 특수 구조물 (곡면벽체 R=12m + 캔틸레버 L=4m)</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>08장 특수구조물 · 심화</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 9-5 복합 특수 구조물의 개념 검토 (곡면 벽체 R = 12 m + 캔틸레버 지붕 L = 4 m)</dd></div>
+    <div><dt>분류</dt><dd>09장 특수구조물</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>단위중량 · 캔틸레버 두께 · 캔틸레버 길이 · 곡면 벽체 반경</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>곡면 벽체 반경 · 곡면 벽체 높이(일반 상부 타설) · 콘크리트 단위중량 · 반례 거푸집널 두께(합판) · 반례 장선 간격 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%208.5%20%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC">오류 제보</a><span class="fn">예제8.5_복합특수구조물_심화_입력폼.cpd</span></div></div>
-</div></div></section><section class="group"><h2>09장 비계설계 <small>3제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span>난이도</span><span style="text-align:right">자료</span></div><div class="item" id="ex9.1" data-a="basic" data-b="09" data-text="9.1 비계수직재좌굴 단관 강관 비계 수직재 좌굴 검토 09장 비계설계 그래프">
-  <div class="main"><span class="code">9.1</span><span class="title">비계수직재좌굴<span class="tag">그래프</span></span><span class="mmeta"><span class="tag cd">예제 9.1</span><span class="tag">09장 비계설계</span><span class="lv lv-b">기초</span></span><span class="c3">09장 비계설계</span><span class="c4"><span class="lv lv-b">기초</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.1_%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4_%EA%B8%B0%EC%B4%88_%EA%B7%B8%EB%9E%98%ED%94%84_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209-5%20%EB%B3%B5%ED%95%A9%ED%8A%B9%EC%88%98%EA%B5%AC%EC%A1%B0%EB%AC%BC">오류 제보</a><span class="fn">예제9-5_복합특수구조물_입력폼.cpd</span></div></div>
+</div></div></section>
+  <section class="group"><h2>10장 비계설계 <small>3제</small></h2><div class="list"><div class="thead" aria-hidden="true"><span>번호</span><span>제목</span><span>분류</span><span style="text-align:right">자료</span></div><div class="item" id="ex10-1" data-b="10" data-text="10-1 비계수직재좌굴 단관 강관 비계 수직재 축압축과 경간 적재 검토 10장 비계설계 ">
+  <div class="main"><span class="code">10-1</span><span class="title">비계수직재좌굴</span><span class="mmeta"><span class="tag cd">예제 10-1</span><span class="tag">10장 비계설계</span></span><span class="c3">10장 비계설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/10%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C10-1_%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 9.1 단관 강관 비계 수직재 좌굴 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>09장 비계설계 · 기초</dd></div>
-    <div><dt>결과 형식</dt><dd>입력폼 계산 · 그래프</dd></div>
-    <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>수평재 간격 · 수직재 간격</dd></div>
-  </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209.1%20%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4">오류 제보</a><span class="fn">예제9.1_비계수직재좌굴_기초_그래프_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex9.2" data-a="applied" data-b="09" data-text="9.2 벽이음설계하중 시스템 비계 벽이음 설계하중 09장 비계설계 ">
-  <div class="main"><span class="code">9.2</span><span class="title">벽이음설계하중</span><span class="mmeta"><span class="tag cd">예제 9.2</span><span class="tag">09장 비계설계</span><span class="lv lv-a">응용</span></span><span class="c3">09장 비계설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.2_%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
-  <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 9.2 시스템 비계 벽이음 설계하중</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>09장 비계설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 10-1 단관 강관 비계 수직재 축압축과 경간 적재 검토</dd></div>
+    <div><dt>분류</dt><dd>10장 비계설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>기본풍속 · 풍압계수(메쉬) · 벽이음 수직간격 · 벽이음 수평간격</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>비계 높이(쌍줄비계) · 작업발판 단수(층마다 1단) · 작업하중, 가장 불리한 1단) · 기둥 간격(띠장 방향) · 기둥 간격 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209.2%20%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제9.2_벽이음설계하중_응용_입력폼.cpd</span></div></div>
-</div><div class="item" id="ex9.3" data-a="applied" data-b="09" data-text="9.3 이동식비계 전도검토 이동식 비계 전도 안전율 검토 09장 비계설계 ">
-  <div class="main"><span class="code">9.3</span><span class="title">이동식비계 전도검토</span><span class="mmeta"><span class="tag cd">예제 9.3</span><span class="tag">09장 비계설계</span><span class="lv lv-a">응용</span></span><span class="c3">09장 비계설계</span><span class="c4"><span class="lv lv-a">응용</span></span>
-  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/09%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C9.3_%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84_%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9D%91%EC%9A%A9_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%2010-1%20%EB%B9%84%EA%B3%84%EC%88%98%EC%A7%81%EC%9E%AC%EC%A2%8C%EA%B5%B4">오류 제보</a><span class="fn">예제10-1_비계수직재좌굴_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex10-2" data-b="10" data-text="10-2 벽이음설계하중 벽이음 1개소의 반력 — 가정 풍압에 대한 간이 계산 10장 비계설계 ">
+  <div class="main"><span class="code">10-2</span><span class="title">벽이음설계하중</span><span class="mmeta"><span class="tag cd">예제 10-2</span><span class="tag">10장 비계설계</span></span><span class="c3">10장 비계설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/10%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C10-2_%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
   <div class="detail"><dl class="dgrid">
-    <div class="w3"><dt>예제 내용</dt><dd>예제 9.3 이동식 비계 전도 안전율 검토</dd></div>
-    <div><dt>분류 · 난이도</dt><dd>09장 비계설계 · 응용</dd></div>
+    <div class="w3"><dt>예제 내용</dt><dd>예제 10-2 벽이음 1개소의 반력 — 가정 풍압에 대한 간이 계산</dd></div>
+    <div><dt>분류</dt><dd>10장 비계설계</dd></div>
     <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
     <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
-    <div class="w3"><dt>주요 입력값</dt><dd>작업하중 작용높이 · 비계 자중 · 작업하중 · 자중 작용점→전도엣지 · 아웃리거 거리</dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>풍속(예제 가정) · 풍력계수(예제 가정) · 벽이음 수직 간격 · 벽이음 수평 간격 · 벽연결용 철물 성능 등</dd></div>
   </dl>
-  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%209.3%20%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84%20%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0">오류 제보</a><span class="fn">예제9.3_이동식비계_전도검토_응용_입력폼.cpd</span></div></div>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%2010-2%20%EB%B2%BD%EC%9D%B4%EC%9D%8C%EC%84%A4%EA%B3%84%ED%95%98%EC%A4%91">오류 제보</a><span class="fn">예제10-2_벽이음설계하중_입력폼.cpd</span></div></div>
+</div><div class="item" id="ex10-3" data-b="10" data-text="10-3 이동식비계 전도검토 이동식 비계 전도 안전율 검토 10장 비계설계 ">
+  <div class="main"><span class="code">10-3</span><span class="title">이동식비계 전도검토</span><span class="mmeta"><span class="tag cd">예제 10-3</span><span class="tag">10장 비계설계</span></span><span class="c3">10장 비계설계</span>
+  <span class="acts"><button type="button" class="act sec" aria-expanded="false">설명 보기</button><a class="act pri" href="forms/10%EC%9E%A5_%EB%B9%84%EA%B3%84%EC%84%A4%EA%B3%84%EC%8B%A4%EB%AC%B4/%EC%98%88%EC%A0%9C10-3_%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84_%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0_%EC%9E%85%EB%A0%A5%ED%8F%BC.cpd" download>⤓ 계산파일 받기</a></span></div>
+  <div class="detail"><dl class="dgrid">
+    <div class="w3"><dt>예제 내용</dt><dd>예제 10-3 이동식 비계 전도 안전율 검토</dd></div>
+    <div><dt>분류</dt><dd>10장 비계설계</dd></div>
+    <div><dt>결과 형식</dt><dd>입력폼 계산</dd></div>
+    <div><dt>상태</dt><dd><span class="badge b-ok">공개</span></dd></div>
+    <div class="w3"><dt>주요 입력값</dt><dd>비계 높이 · 밑면 폭(정방형) · 비계 자중 · 최상단 작업발판 수평하중(X·Y 각 방향) · 수평하중 작용 높이 등</dd></div>
+  </dl>
+  <div class="dfoot"><a href="mailto:laonlee80@naver.com?subject=%5B%EC%98%A4%EB%A5%98%20%EC%A0%9C%EB%B3%B4%5D%20%EB%8F%99%EB%B0%94%EB%A6%AC%20%EC%98%88%EC%A0%9C%2010-3%20%EC%9D%B4%EB%8F%99%EC%8B%9D%EB%B9%84%EA%B3%84%20%EC%A0%84%EB%8F%84%EA%B2%80%ED%86%A0">오류 제보</a><span class="fn">예제10-3_이동식비계_전도검토_입력폼.cpd</span></div></div>
 </div></div></section>
   <div class="empty" id="empty">조건에 맞는 예제가 없습니다. <a href="#" id="reset">필터 초기화</a></div>
 </main>
@@ -657,7 +685,7 @@ footer.site b{color:var(--ink)} footer.site a{color:var(--navy)}
   function norm(t){return (t||'').toLowerCase().replace(/[\s·\-()_.,]/g,'')}
   function apply(){
     var q=norm(st.q),n=0;
-    items.forEach(function(it){var ok=(!st.a||it.dataset.a===st.a)&&(!st.b||it.dataset.b===st.b)&&(!q||norm(it.dataset.text).indexOf(q)>-1);it.hidden=!ok;if(ok)n++;});
+    items.forEach(function(it){var ok=(!st.b||it.dataset.b===st.b)&&(!q||norm(it.dataset.text).indexOf(q)>-1);it.hidden=!ok;if(ok)n++;});
     groups.forEach(function(g){var c=g.querySelectorAll('.item:not([hidden])').length;g.hidden=!c;var s=g.querySelector('h2 small');if(s)s.textContent=c+'제';});
     document.getElementById('n').textContent=n;document.getElementById('empty').style.display=n?'none':'block';
   }
